@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const passport = require('passport');
+const tasks = require("./routes/api/tasks");
+
+//add tasks router to router
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
@@ -22,5 +25,6 @@ require('./config/passport')(passport);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use("/api/users", users);
+app.use("/api/tasks", tasks);
 
 // hi
