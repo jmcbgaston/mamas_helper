@@ -22,14 +22,11 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) =
         } else {
           const newTask = new Task({
           title: req.body.title,
-          requirements: req.body.requirements,          
-          //HELP: request has a user associated with it
           owner_id: req.user._id
           });
-
-        newTask.save()
-        .then(task => res.json(task));
-        }
+          newTask.save()
+          .then(task => res.json(task));
+          }
       });
 });
 
