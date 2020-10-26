@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); 
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
+const passport = require('passport');
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
@@ -16,6 +17,8 @@ mongoose
     .then(() => console.log("Mongo Working!! =)"))
     .catch(err => console.log(err));
 
+app.use(passport.initialize());
+require('./config/passport')(passport);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use("/api/users", users);
