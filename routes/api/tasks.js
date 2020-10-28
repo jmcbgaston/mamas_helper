@@ -3,7 +3,6 @@ const router = express.Router();
 const Task = require('../../models/Task'); 
 const passport = require('passport'); 
 const validateTaskInput = require('../../validation/tasks/new');
-const { findByIdAndDelete } = require("../../models/Task");
 
 router.get('/user/:user_id', (req, res) => {
   Task.find({user: req.params.user_id})
