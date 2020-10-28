@@ -24,6 +24,11 @@ class LoginForm extends React.Component {
     this.props.clearErrors();
   }
 
+  demoSignIn() {
+    const user = {email: "test@test.com", password: "password"};
+    this.props.login(user);
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -86,6 +91,10 @@ class LoginForm extends React.Component {
 
               <div className="form-login-button">
                 <input className="form-submit" type="submit" value="Login" />
+              </div>
+
+              <div className="form-demo-login-button">
+                <button className="form-submit" type="button" onClick={this.demoSignIn.bind(this)}>Demo Login</button>
               </div>
 
             </div>
