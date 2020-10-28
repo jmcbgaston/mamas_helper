@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Task = require('../../models/Task'); 
-// const Req = require('../../models/Req'); 
 const passport = require('passport'); 
 const validateTaskInput = require('../../validation/tasks/new');
 const { findByIdAndDelete } = require("../../models/Task");
@@ -64,6 +63,8 @@ router.patch('/:id', async (req, res) => {
     { title: req.body.title}, 
     { new: true }
   );
+
+  debugger;
 
   if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });
 
