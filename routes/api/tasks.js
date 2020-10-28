@@ -91,12 +91,14 @@ router.patch('/:id', async (req, res) => {
     return res.status(400).json(errors)
   }
 
-  const updatedTask = await Task.findByIdAndUpdate(req.params.id, {
-    title: req.body.title
-  }, { new: true });
-
-  if (!updatedTask) return res.status(404).json(      {notaskfound: 'No task found with that ID'}
+  const updatedTask = await Task.findByIdAndUpdate(req.params.id, 
+    { title: req.body.title}, 
+    { new: true }
   );
+
+  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });
+
+  res.send(updatedTask)
 
 });
 
