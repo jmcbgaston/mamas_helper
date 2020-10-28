@@ -7,7 +7,7 @@ const initialState = {
   user: {}
 };
 
-export default function(state = initialState, action) {
+const session = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return {
@@ -30,3 +30,4 @@ export default function(state = initialState, action) {
   }
 }
 
+export default session;
