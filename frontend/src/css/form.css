@@ -1,0 +1,27 @@
+.form-submit {
+    border-radius: 4px;
+    background-color: #baed91;
+    color: gray;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid lightgray; 
+    width: 73px;
+    height: 40px; 
+    font-size: 15px;
+    outline: none;
+}
+
+.form-submit:hover {
+    filter: brightness(105%);
+}
+
+.form-input-field {
+    height: 30px;
+    width: 150px; 
+    border-style: solid;
+    border-color: lightgray;
+    outline: none;
+    color: pink;
+    font-family: 'Martel Sans', sans-serif;
+}

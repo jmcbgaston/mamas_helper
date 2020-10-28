@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import "../../css/navbar.css";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -27,8 +28,11 @@ class NavBar extends React.Component {
       } else {
         return (
             <div>
-                <Link to={'/signup'}>Signup</Link>
-                <Link to={'/login'}>Login</Link>
+              <h1 className="nav-header">Welcome</h1>
+              <div>
+                <Link to={'/signup'}><button className="nav-signup">Sign Up</button></Link>
+                <Link to={'/login'}><button className="nav-signin">Sign In</button></Link>
+              </div>
             </div>
         );
       }
@@ -37,7 +41,6 @@ class NavBar extends React.Component {
   render() {
       return (
         <div>
-            <h1>Welcome</h1>
             { this.getLinks() }
         </div>
       );

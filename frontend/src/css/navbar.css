@@ -1,0 +1,41 @@
+.nav-header { 
+    color: #B784A7;
+    font-size: 40px;
+    font-family: 'Martel Sans', sans-serif;
+}
+
+.nav-signup {
+    border-radius: 4px;
+    background-color: #f8b88b;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid lightgray; 
+    width: 73px;
+    height: 40px; 
+    font-size: 15px;
+    outline: none;
+}
+
+.nav-signin {
+    border-radius: 4px;
+    background-color: #b2cefe;
+    color:white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid lightgray; 
+    width: 73px;
+    height: 40px; 
+    font-size: 15px;
+    outline: none;
+}
+
+.nav-signup:hover {
+    filter: brightness(105%);
+}
+
+.nav-signin:hover {
+    filter: brightness(105%);
+}
