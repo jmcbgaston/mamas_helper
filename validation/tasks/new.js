@@ -1,7 +1,8 @@
 const Validator = require('validator'); 
 const validText = require('../valid-text'); 
 
-module.exports = function validateNewTaskInput(data) {
+// module.exports = function validateNewTaskInput(data) {
+module.exports = function validateTaskInput(data) {
     let errors = {}; 
 
     data.title = validText(data.title) ? data.title : ""; 
@@ -15,3 +16,4 @@ module.exports = function validateNewTaskInput(data) {
         isValid: Object.keys(errors).length === 0
     }; 
 }; 
+
