@@ -20,6 +20,10 @@ class LoginForm extends React.Component {
     this.setState({errors: nextProps.errors})
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -37,17 +41,20 @@ class LoginForm extends React.Component {
     this.props.login(user); 
   }
 
-  renderErrors() {
+  renderErrors(field) {
+    let error_message = "";
+    if(this.props.errors[field] !== undefined)
+    {
+        error_message = this.props.errors[field];
+    }
+ 
     return(
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
+      <div>
+      { error_message }
+      </div>
     );
   }
+
 
   render() {
     return (
@@ -57,12 +64,16 @@ class LoginForm extends React.Component {
           <div className="form-input-container">
             <div>
               <div>
+
                 <input className="form-input-field" type="text"
                   value={this.state.email}
                   onChange={this.update('email')}
                   placeholder="Email"
                 />
               </div>
+
+              <div className='session-form-errors'>{this.renderErrors('email')}</div>
+
               <div>
                 <input className="form-input-field" type="password"
                   value={this.state.password}
@@ -70,14 +81,14 @@ class LoginForm extends React.Component {
                   placeholder="Password"
                 />
               </div>
+
+              <div className='session-form-errors'>{this.renderErrors('password')}</div>
+
               <div className="form-login-button">
                 <input className="form-submit" type="submit" value="Login" />
               </div>
+
             </div>
-
-
-            
-            {this.renderErrors()}
           </div>
         </form>
       </div>
