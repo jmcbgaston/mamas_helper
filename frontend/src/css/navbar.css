@@ -1,7 +1,19 @@
 .nav-header { 
-    color: #B784A7;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    /* color: #B784A7; */
+    /* color: #D291BC; */
+    color: purple;
     font-size: 40px;
     font-family: 'Martel Sans', sans-serif;
+    /* margin-top: 10px; */
+}
+
+.nav-button-container {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-signup {
@@ -16,6 +28,7 @@
     height: 40px; 
     font-size: 15px;
     outline: none;
+    width: 160px;
 }
 
 .nav-signin {
@@ -30,6 +43,7 @@
     height: 40px; 
     font-size: 15px;
     outline: none;
+    width: 158px;
 }
 
 .nav-signup:hover {

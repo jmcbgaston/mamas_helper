@@ -10,14 +10,17 @@ import "../css/0reset.css";
 import "../css/app.css"; 
 
 const App = () => (
-  <div className="app-container">
-    <NavBarContainer />
-    <Switch>
-        <ProtectedRoute exact path="/" component={MainPage} />
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupFormContainer} />
-    </Switch>
-  </div>
+ 
+    <div className="app-container">
+      <NavBarContainer />
+      <Switch>
+          <ProtectedRoute exact path="/" component={MainPage} />
+          <AuthRoute exact path="/login" component={LoginFormContainer} />
+          <AuthRoute exact path="/signup" component={SignupFormContainer} />
+      </Switch>
+
+    </div>
+
 );
 
 export default App;
