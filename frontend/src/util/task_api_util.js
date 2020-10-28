@@ -2,7 +2,6 @@ import axios from 'axios';
 
 // get all users tasks based on task.owner_id
 export const getUserTasks = owner_id => {
-    debugger;
     return axios.get(`/api/tasks/user/${owner_id}`)
 }
 // connected to tasks.js:9 // YES

@@ -34,7 +34,6 @@ export const removeTaskErrors = () => ({
 // thunk action creators
 
 export const fetchTasks = owner_id => dispatch => {
-    debugger;
     return (
         TaskAPIUtil.getUserTasks(owner_id)
         .then(tasks => dispatch(receiveTasks(tasks)))
