@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import "../../css/form.css";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -51,22 +52,31 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div>
+        <h1 className="signup-header"> Welcome Back!</h1>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <br/>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
+          <div className="form-input-container">
+            <div>
+              <div>
+                <input className="form-input-field" type="text"
+                  value={this.state.email}
+                  onChange={this.update('email')}
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <input className="form-input-field" type="password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                  placeholder="Password"
+                />
+              </div>
+              <div className="form-login-button">
+                <input className="form-submit" type="submit" value="Login" />
+              </div>
+            </div>
+
+
+            
             {this.renderErrors()}
           </div>
         </form>
@@ -76,3 +86,5 @@ class LoginForm extends React.Component {
 }
 
 export default withRouter(LoginForm);
+
+//adf

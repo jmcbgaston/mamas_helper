@@ -1,5 +1,6 @@
-import React from 'react';
+import React from 'react';  
 import { withRouter } from 'react-router-dom';
+import "../../css/form.css";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class SignupForm extends React.Component {
       password: this.state.password,
       password2: this.state.password2
     };
-
+ 
     this.props.signup(user, this.props.history);
   }
 
@@ -56,36 +57,47 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className="login-form-container">
+      <div>
+      <h1 className="signup-header"> Sign up for free!</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="login-form">
-            <br/>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="text"
-                value={this.state.handle}
-                onChange={this.update('handle')}
-                placeholder="Handle"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password2}
-                onChange={this.update('password2')}
-                placeholder="Confirm Password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
+          <div className="form-input-container">
+              <div>
+
+                <div>
+                  <input className="form-input-field" type="text"
+                    value={this.state.email}
+                    onChange={this.update('email')}
+                    placeholder="Email"
+                  />
+                </div>
+                <div>
+                  <input className="form-input-field" type="text"
+                    value={this.state.handle}
+                    onChange={this.update('handle')}
+                    placeholder="Handle"
+                  />
+                </div>
+                <div>
+                  <input className="form-input-field" type="password"
+                    value={this.state.password}
+                    onChange={this.update('password')}
+                    placeholder="Password"
+                  />
+                </div>
+                <div>
+                  <input className="form-input-field" type="password"
+                    value={this.state.password2}
+                    onChange={this.update('password2')}
+                    placeholder="Confirm Password"
+                  />
+                </div>
+                <div className="form-login-button">
+                  <input className="form-submit" type="submit" value="Submit" />
+                </div>
+
+              </div>
             {this.renderErrors()}
+
           </div>
         </form>
       </div>

@@ -1,0 +1,55 @@
+.nav-header { 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    /* color: #B784A7; */
+    /* color: #D291BC; */
+    color: purple;
+    font-size: 40px;
+    font-family: 'Martel Sans', sans-serif;
+    /* margin-top: 10px; */
+}
+
+.nav-button-container {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-signup {
+    border-radius: 4px;
+    background-color: #f8b88b;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid lightgray; 
+    width: 73px;
+    height: 40px; 
+    font-size: 15px;
+    outline: none;
+    width: 160px;
+}
+
+.nav-signin {
+    border-radius: 4px;
+    background-color: #b2cefe;
+    color:white;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid lightgray; 
+    width: 73px;
+    height: 40px; 
+    font-size: 15px;
+    outline: none;
+    width: 158px;
+}
+
+.nav-signup:hover {
+    filter: brightness(105%);
+}
+
+.nav-signin:hover {
+    filter: brightness(105%);
+}
