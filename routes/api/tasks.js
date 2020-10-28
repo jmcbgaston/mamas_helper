@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Task = require('../../models/Task'); 
-// const Req = require('../../models/Req'); 
 const passport = require('passport'); 
 const validateTaskInput = require('../../validation/tasks/new');
 
-// route to get all current users tasks
-// "/api/tasks/user/:id"
 router.get('/user/:user_id', (req, res) => {
   Task.find({user: req.params.user_id})
   .then(tasks => res.json(tasks))
@@ -16,9 +13,6 @@ router.get('/user/:user_id', (req, res) => {
 });
 
 //Passport for password protection
-// route to create a new task
-
-// on Task creation, requirements is an empty array // WORKS
 router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) => {
       const { errors, isValid } = validateTaskInput(req.body); 
 
@@ -49,39 +43,12 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) =
 //bugfix
 //we don't check if the user is assigned to that task
 //need to check the owner_id matching 'req.user._id'
-
-// route to get a single task // WORKS
 router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     Task.findById(req.params.id)
     .then(task => res.json(task))
     .catch(err =>
         res.status(404).json({notaskfound: 'No task found with that ID'}));
 });
-
-// router.patch('/:id',
-//   passport.authenticate('jwt', { session: false }), 
-//   (req, res) => {
-//     const { errors, isValid } = validateTaskInput(req.body);
-
-//     if (!isValid) {
-//       return res.status(400).json(errors)
-//     }
-
-//     const updatedTask = Task.findOneAndUpdate(req.params.id)
-//       .then(task => res.json(task))
-//       .catch(err => 
-//         res.status(404).json({notaskfound: 'No task found with that ID'}));
-
-//       updatedTask.description = req.body.description
-//       updatedTask.requirements = req.body.requirements
-
-//       updatedTask.save()
-//         .then(task => res.json(task))
-//         .catch(err => 
-//           res.status(400).json(errors))
-//   }
-
-// );
 
 router.patch('/:id', async (req, res) => {
 
@@ -91,51 +58,38 @@ router.patch('/:id', async (req, res) => {
     return res.status(400).json(errors)
   }
 
-  const updatedTask = await Task.findByIdAndUpdate(req.params.id, {
-    title: req.body.title
-  }, { new: true });
-
-  if (!updatedTask) return res.status(404).json(      {notaskfound: 'No task found with that ID'}
+  const updatedTask = await Task.findByIdAndUpdate(req.params.id, 
+    { title: req.body.title}, 
+    { new: true }
   );
+
+  debugger;
+
+  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });
+
+  res.send(updatedTask)
 
 });
 
-// router.put('/:id', async (req, res) => {
-//   const { error } = validateProduct(req.body); 
-//   if (error) return res.status(400).send(error.details[0].message);
+// needs tweaking
+router.delete('/:id', async (req, res) => {
 
-//   const product = await Product.findByIdAndUpdate(req.params.id, 
-//     { 
-//      name: req.body.name,
-//      description: req.body.description,
-//      category: req.body.category,
-//      tags: req.body.tags,
-//      withdrawn: req.body.withdrawn,
-//      extraData: {
-//        brand: req.body.extraData.brand,
-//        quantity: req.body.extraData.quantity,
-//        type: req.body.extraData.type
-//      } 
-//    }, 
-//    {new: true}
-//   );
+  const { errors, isValid } = validateTaskInput(req.body);
 
-//   if (!product) return res.status(404).json({notaskfound: 'No task found with that ID'}));
+  if (!isValid) {
+    return res.status(400).json(errors)
+  }
+  
+  // we may not want to just console log here
+  Task.findByIdAndDelete(req.params.id, function (err, docs) { 
+    if (err){ 
+        console.log(err) 
+    } 
+    else{ 
+        console.log("Deleted : ", docs); 
+    } 
+  }); 
 
-//   res.send(product);
-// });
-
-router.delete('/', 
-  passport.authenticate('jwt', { session: false }), 
-  (req, res) => {
-    const { errors, isValid } = validateTaskInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors)
-    }
-
-    Task.findById(req.params.id).delete
-  }  
-);
+});
 
 module.exports = router;

@@ -4,7 +4,17 @@ import Root from './components/root';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
-import { logout } from './actions/session_actions';
+import { logout, login } from './actions/session_actions';
+
+// TESTING
+import * as TaskActions from './actions/task_actions'
+window.fetchTasks = TaskActions.fetchTasks
+window.fetchTask = TaskActions.fetchTask
+window.createTask = TaskActions.createTask
+window.updateTask = TaskActions.updateTask
+window.removeTask = TaskActions.removeTask
+window.login = login
+//
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -17,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     store = configureStore(preloadedState);
 
+    //
+    window.getState = store.getState
+    window.dispatch = store.dispatch
+    //
+
     const currentTime = Date.now() / 1000;
 
  
@@ -26,6 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } else {
     store = configureStore({});
+    
+    //
+    window.getState = store.getState
+    window.dispatch = store.dispatch
+    //
   }
   const root = document.getElementById('root');
 
