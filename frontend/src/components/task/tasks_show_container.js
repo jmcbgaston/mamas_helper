@@ -3,6 +3,7 @@ import { fetchTasks } from '../../actions/task_actions';
 import TasksShow from './tasks_show'
 
 const mapStateToProps = (state) => {
+    // debugger 
     return({
         user: state.session.user,
         tasks: state.tasks
