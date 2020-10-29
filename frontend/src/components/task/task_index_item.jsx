@@ -6,12 +6,10 @@ class TaskIndexItem extends React.Component {
   }
 
   render() {
-    debugger
-
     return(
       <>
-        <ul>
-          <li>{this.props.task.title}</li>
+        <ul className="start-my-day-list-item">
+          <li className="task-title">{this.props.task.title}</li>
         </ul>
       </>
     )

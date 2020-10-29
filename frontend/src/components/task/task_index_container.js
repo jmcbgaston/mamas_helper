@@ -4,15 +4,14 @@ import { fetchTasks, createTask } from "../../actions/task_actions"
 
 const mapStateToProps = (state) => {
 
-    debugger
-
     const user = state.session.user
     const tasks = Object.values(state.tasks)
     // const tasks = state.tasks
 
     return({
         user: user,
-        tasks: tasks
+        tasks: tasks,
+        errors: state.errors.task
     })
 }
 
