@@ -1,6 +1,6 @@
 import { RECEIVE_TASKS, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_actions'
 
-const recipesReducer = (oldState = {}, action) => {
+const taskReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
     let newState = Object.assign({}, oldState)
  
@@ -18,4 +18,4 @@ const recipesReducer = (oldState = {}, action) => {
     }
 }
 
-export default recipesReducer;
+export default taskReducer;
