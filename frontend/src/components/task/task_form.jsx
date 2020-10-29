@@ -10,6 +10,13 @@ class TaskForm extends React.Component{
     //   owner_id: 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    return (
+      this.setState({title: event.currentTarget.value})
+    )
   }
 
   handleSubmit(e){
@@ -27,7 +34,7 @@ class TaskForm extends React.Component{
       <form onSubmit={this.handleSubmit}>
         <div>
         <label>Title:
-          <input type="text" value={this.state.title}/>
+          <input type="text" value={this.state.title} onChange={this.handleChange}/>
         </label>
         <input type="submit" value="Create Task"/>
         </div>
