@@ -12,7 +12,7 @@ window.fetchTasks = TaskActions.fetchTasks
 window.fetchTask = TaskActions.fetchTask
 window.createTask = TaskActions.createTask
 window.updateTask = TaskActions.updateTask
-window.removeTask = TaskActions.removeTask
+window.deleteTask = TaskActions.deleteTask
 window.login = login
 //
 

@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        errors.email = "Email already exists";
+        errors.email = "Please sign in instead!";
         return res.status(400).json(errors);
       } else {
 
@@ -67,8 +67,13 @@ router.post('/login', (req, res) => {
   User.findOne({email})
     .then(user => {
       if (!user) {
+<<<<<<< HEAD
         errors.email = 'User not found';
         return res.status(400).json(errors);
+=======
+        errors.email = 'User not found!';
+        return res.status(400).json(errors);
+>>>>>>> f8a9d0d6637ee33ddad2c28955e37d0011bae08c
       }
 
       bcrypt.compare(password, user.password)
@@ -86,8 +91,13 @@ router.post('/login', (req, res) => {
           });
         });
           } else {
+<<<<<<< HEAD
             errors.password = 'Incorrect Password'
             return res.status(400).json(errors);
+=======
+            errors.password = 'Correct password, please!'
+            return res.status(400).json(errors);
+>>>>>>> f8a9d0d6637ee33ddad2c28955e37d0011bae08c
           }
         })
     })

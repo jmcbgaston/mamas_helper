@@ -5,7 +5,7 @@ const passport = require('passport');
 const validateTaskInput = require('../../validation/tasks/new');
 
 router.get('/user/:user_id', (req, res) => {
-  Task.find({user: req.params.user_id})
+  Task.find({owner_id: req.params.user_id})
   .then(tasks => res.json(tasks))
   .catch(err =>
     res.status(404).json({ notasksfound: 'No tasks found from that user' })
@@ -63,33 +63,19 @@ router.patch('/:id', async (req, res) => {
     { new: true }
   );
 
-  debugger;
-
-  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });
-
+  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });  
   res.send(updatedTask)
-
-});
-
-// needs tweaking
-router.delete('/:id', async (req, res) => {
-
-  const { errors, isValid } = validateTaskInput(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors)
-  }
   
-  // we may not want to just console log here
-  Task.findByIdAndDelete(req.params.id, function (err, docs) { 
-    if (err){ 
-        console.log(err) 
-    } 
-    else{ 
-        console.log("Deleted : ", docs); 
-    } 
-  }); 
-
 });
+
+router.delete('/:id', function(req, res) {
+  Task.findByIdAndRemove(req.params.id)
+  .exec()
+  .then(doc => {
+    if (!doc) { return res.status(400).end(); }
+    return res.status(204).end();
+  })
+  .catch(err => next(err))
+})
 
 module.exports = router;
