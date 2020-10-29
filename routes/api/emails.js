@@ -11,7 +11,7 @@ router.post('/new', (req, res) => {
   const msg = {
     to: req.body.email,
     from: keys.verifiedSender,
-    subject: `<h1>Mama's Helper: Daily Tasks for ${req.body.handle}</h1>`,
+    subject: `Mama's Helper: Daily Tasks for ${req.body.handle}`,
     html: req.body.html
   }
 
