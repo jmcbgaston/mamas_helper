@@ -11,7 +11,7 @@ export const receiveTasks = tasks => ({
     type: RECEIVE_TASKS,
     tasks
 });
-  
+
 export const receiveTask = task => ({
     type: RECEIVE_TASK,
     task
@@ -58,7 +58,6 @@ export const createTask = task => dispatch => {
 };
 
 export const updateTask = task => dispatch => {
-    debugger;
     return (
         TaskAPIUtil.updateTask(task)
         .then(updatedTask => dispatch(receiveTask(updatedTask)))
@@ -67,7 +66,6 @@ export const updateTask = task => dispatch => {
 };
 
 export const deleteTask = taskId => dispatch => {
-    debugger
     return (
         TaskAPIUtil.deleteTask(taskId)
         .then(() => dispatch(removeTask(taskId)))
