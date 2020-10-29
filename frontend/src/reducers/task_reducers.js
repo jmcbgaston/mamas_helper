@@ -3,7 +3,7 @@ import { RECEIVE_TASKS, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_action
 const taskReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
     let newState = Object.assign({}, oldState)
- 
+
     switch (action.type) {
         case RECEIVE_TASKS:
             return action.tasks.data

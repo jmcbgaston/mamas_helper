@@ -11,7 +11,7 @@ export const receiveTasks = tasks => ({
     type: RECEIVE_TASKS,
     tasks
 });
-  
+
 export const receiveTask = task => ({
     type: RECEIVE_TASK,
     task
@@ -28,7 +28,7 @@ export const receiveTaskErrors = errors => ({
 });
 
 export const removeTaskErrors = () => ({
-    type: RECEIVE_TASK_ERRORS
+    type: REMOVE_TASK_ERRORS
 });
 
 // thunk action creators
@@ -50,6 +50,7 @@ export const fetchTask = taskId => dispatch => {
 };
 
 export const createTask = task => dispatch => {
+    // debugger 
     return (
         TaskAPIUtil.createTask(task)
         .then(newTask => dispatch(receiveTask(newTask)))
@@ -58,7 +59,6 @@ export const createTask = task => dispatch => {
 };
 
 export const updateTask = task => dispatch => {
-    debugger;
     return (
         TaskAPIUtil.updateTask(task)
         .then(updatedTask => dispatch(receiveTask(updatedTask)))
@@ -67,7 +67,6 @@ export const updateTask = task => dispatch => {
 };
 
 export const deleteTask = taskId => dispatch => {
-    debugger
     return (
         TaskAPIUtil.deleteTask(taskId)
         .then(() => dispatch(removeTask(taskId)))
