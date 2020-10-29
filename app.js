@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser'); 
-const mongoose = require('mongoose'); 
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const passport = require('passport');
 const tasks = require("./routes/api/tasks");
+const sendgrid = require("./routes/api/sendgrid");
 const path = require('path');
 
 //add tasks router to router
@@ -25,7 +26,7 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 mongoose
     .set('useFindAndModify', false)
-    .connect(db, {useNewUrlParser: true})
+    .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log("Mongo Working!! =)"))
     .catch(err => console.log(err));
 
@@ -35,3 +36,4 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use("/api/users", users);
 app.use("/api/tasks", tasks);
+app.use("/api/sendgrid", sendgrid);
