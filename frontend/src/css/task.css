@@ -1,0 +1,8 @@
+.create-task-errors {
+  margin-left: 5px;
+  margin-top: 5px;
+  height: 19px;
+  font-size: 12px;
+  font-family: 'Martel Sans', sans-serif;
+  color: firebrick;
+}

@@ -28,7 +28,7 @@ export const receiveTaskErrors = errors => ({
 });
 
 export const removeTaskErrors = () => ({
-    type: RECEIVE_TASK_ERRORS
+    type: REMOVE_TASK_ERRORS
 });
 
 // thunk action creators

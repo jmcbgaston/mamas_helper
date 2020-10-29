@@ -1,7 +1,9 @@
 import React from 'react';
 import TaskBox from './task_box';
+import TasksCreateContainer from './tasks_create_container'; 
 
 class TasksShow extends React.Component {
+
     componentDidMount(){
         const { fetchTasks, user } = this.props;
         fetchTasks(user.id)
@@ -24,10 +26,11 @@ class TasksShow extends React.Component {
                       </li>
                     )}
                 </ul>
-                <button className="add-task-button"
+                <TasksCreateContainer />
+                {/* <button className="add-task-button"
                         onClick={() => history.push('/tasks/new')}>
                   Add Task
-                </button>
+                </button> */}
             </div>
         )
     }

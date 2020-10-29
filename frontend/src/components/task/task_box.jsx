@@ -1,5 +1,6 @@
 import React from 'react';
 import RequirementBox from './requirement_box';
+import '../../css/task.css';
 
 class TaskBox extends React.Component {
   render() {

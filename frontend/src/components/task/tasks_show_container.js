@@ -1,6 +1,7 @@
 import { connect  } from 'react-redux';
 import { fetchTasks } from '../../actions/task_actions';
 import TasksShow from './tasks_show'
+import { createTask } from '../../actions/task_actions';
 
 const mapStateToProps = (state) => {
     return({
