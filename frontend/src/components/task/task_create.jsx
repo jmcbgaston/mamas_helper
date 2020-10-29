@@ -42,7 +42,6 @@ class TasksCreate extends React.Component {
     }
 
   render() {
-    debugger 
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

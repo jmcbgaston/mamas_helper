@@ -31,4 +31,19 @@
 
 .reusable {
   height: 10px;
+  padding-top: 5px;
+}
+
+.requirement-box-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.requirement-description {
+  padding-right: 5px;
+  padding-top: 5px;
+  font-size: 15px;
+  font-family: 'Martel Sans', sans-serif;
+  color: blueviolet;
+
 }
