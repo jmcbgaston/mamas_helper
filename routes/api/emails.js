@@ -5,7 +5,7 @@ const keys = require('../../config/keys');
 const User = require('../../models/User');
 const Task = require('../../models/Task');
 
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   sgMail.setApiKey(keys.sendGridApiKey);
 
   const msg = {
