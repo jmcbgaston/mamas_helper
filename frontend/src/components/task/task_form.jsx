@@ -15,7 +15,7 @@ class TaskForm extends React.Component{
 
   renderErrors() {
     return(
-      <ul>
+      <ul className="create-task-errors">
         {Object.keys(this.props.errors).map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
@@ -43,13 +43,13 @@ class TaskForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}  className="form-input-container">
         <div>
         <label>Title:
-          <input type="text" value={this.state.title} onChange={this.handleChange}/>
+          <input type="text" value={this.state.title} onChange={this.handleChange}  className="form-input-field"/>
         </label>
         {this.renderErrors()}
-        <input type="submit" value="Create Task"/>
+        <input type="submit" value="Create Task" className="form-submit" />
         </div>
       </form>
     )
