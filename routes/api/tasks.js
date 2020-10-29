@@ -5,7 +5,7 @@ const passport = require('passport');
 const validateTaskInput = require('../../validation/tasks/new');
 
 router.get('/user/:user_id', (req, res) => {
-  Task.find({user: req.params.user_id})
+  Task.find({owner_id: req.params.user_id})
   .then(tasks => res.json(tasks))
   .catch(err =>
     res.status(404).json({ notasksfound: 'No tasks found from that user' })

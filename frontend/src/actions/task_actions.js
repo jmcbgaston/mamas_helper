@@ -67,6 +67,7 @@ export const updateTask = task => dispatch => {
 };
 
 export const deleteTask = taskId => dispatch => {
+    debugger
     return (
         TaskAPIUtil.deleteTask(taskId)
         .then(() => dispatch(removeTask(taskId)))
