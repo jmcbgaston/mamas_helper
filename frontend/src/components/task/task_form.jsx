@@ -13,6 +13,18 @@ class TaskForm extends React.Component{
     this.handleChange = this.handleChange.bind(this);
   }
 
+  renderErrors() {
+    return(
+      <ul>
+        {Object.keys(this.props.errors).map((error, i) => (
+          <li key={`error-${i}`}>
+            {this.props.errors[error]}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   handleChange(event) {
     return (
       this.setState({title: event.currentTarget.value})
@@ -36,6 +48,7 @@ class TaskForm extends React.Component{
         <label>Title:
           <input type="text" value={this.state.title} onChange={this.handleChange}/>
         </label>
+        {this.renderErrors()}
         <input type="submit" value="Create Task"/>
         </div>
       </form>

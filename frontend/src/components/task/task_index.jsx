@@ -10,9 +10,7 @@ class TaskIndex extends React.Component {
 
   render() {
 
-    // if (!this.props.tasks.length) {
-    //     this.props.tasks = []
-    // }
+    debugger
 
     const taskList = this.props.tasks.map((task) => {
       return <TaskIndexItem  key={task._id} task={task} />;
@@ -20,7 +18,7 @@ class TaskIndex extends React.Component {
     return (
       <div>
           {taskList}
-          <TaskForm createTask={this.props.createTask} />
+          <TaskForm createTask={this.props.createTask} errors={this.props.errors} />
       </div>
     );
   }

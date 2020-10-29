@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
     const tasks = Object.values(state.tasks)
     // const tasks = state.tasks
 
+    debugger;
+    
     return({
         user: user,
         tasks: tasks,
