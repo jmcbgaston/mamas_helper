@@ -1,9 +1,9 @@
-.app-container {
+body {
     /* background-color: #FEC8D8; */
     background-color: thistle;
     /* background-color: #FFDFD3;
     background-color: #D291BC; */
-    height: 100vh;
+    height: 100%;
     /* width: 100vh;  */
     padding-top: 15px;
 }

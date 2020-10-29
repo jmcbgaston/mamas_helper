@@ -1,19 +1,20 @@
-import { connect  } from 'react-redux'; 
+import { connect  } from 'react-redux';
 import { fetchTasks } from '../../actions/task_actions';
 import TasksShow from './tasks_show'
+import { createTask } from '../../actions/task_actions';
 
 const mapStateToProps = (state) => {
-    // debugger 
     return({
         user: state.session.user,
         tasks: state.tasks
     })
-}; 
+};
 
 const mapDispatchToProps = (dispatch) => {
     return ({
         fetchTasks: (owner_id) => dispatch(fetchTasks(owner_id))
+
     })
-}; 
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TasksShow);

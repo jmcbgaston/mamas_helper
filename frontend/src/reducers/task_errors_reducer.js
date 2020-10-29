@@ -12,7 +12,8 @@ const TaskErrorsReducer = (state = [], action) => {
         case REMOVE_TASK_ERRORS:
             return [];
         default:
-            return [];
+            // return [];
+            return state; 
     }
 };
   
