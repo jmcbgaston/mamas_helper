@@ -15,6 +15,7 @@
 
 .start-my-day-list-item {
   display: flex;
+  padding-top: 3px;
 }
 
 .task-create-component {
@@ -27,4 +28,33 @@
   font-family: 'Martel Sans', sans-serif;
   color: purple;
   font: 20px;
+}
+
+.reusable {
+  height: 10px;
+  padding-top: 5px;
+}
+
+.requirement-box-container {
+  display: flex;
+  flex-direction: row;
+ 
+}
+
+.requirement-description {
+  padding-right: 5px;
+  padding-top: 5px;
+  font-size: 15px;
+  font-family: 'Martel Sans', sans-serif;
+  color: blueviolet;
+
+}
+
+
+.task-box-container:hover {  
+  background-color: lightyellow;
+}
+
+input[type=checkbox] {
+  margin-top: 0px;
 }
