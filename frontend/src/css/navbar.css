@@ -30,7 +30,7 @@
     justify-content: center;
 }
 
-.nav-signup {
+.nav-signup, .splash-my-tasks {
     border-radius: 4px;
     background-color: #f8b88b;
     color: white;
