@@ -8,7 +8,8 @@ const recipesReducer = (oldState = {}, action) => {
         case RECEIVE_TASKS:
             return action.tasks
         case RECEIVE_TASK:
-            newState[action.task.id] = action.task
+            debugger;
+            newState[action.task.data._id] = action.task
             return newState
         case REMOVE_TASK:
             delete newState[action.taskId]
