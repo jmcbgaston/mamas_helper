@@ -23,6 +23,7 @@ export const updateTask = data => {
 // update only takes :id, :title
 
 export const deleteTask = task_id => {
+    debugger 
     return axios.delete(`/api/tasks/${task_id}`)
 }
 // connected to tasks.js:74 // YES
