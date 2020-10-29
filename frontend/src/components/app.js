@@ -2,7 +2,6 @@ import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
-import TasksShowContainer from './task/tasks_show_container'
 // import TasksCreateContainer from './task/tasks_create_container'
 import TaskIndexContainer from './task/task_index_container'
 
@@ -11,6 +10,8 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import "../css/0reset.css";
 import "../css/app.css";
+import "../css/form.css";
+import "../css/task.css";
 
 const App = () => (
     <div className="app-container">
