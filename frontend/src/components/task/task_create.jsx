@@ -12,13 +12,17 @@ class TasksCreate extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({title: event.currentTarget.value});
+    return (
+      this.setState({title: event.currentTarget.value})
+    )
+
+
   }
 
-  handleSubmit(event) {
+  handleSubmit(e) {
     const { createTask, user, history } = this.props;
-    event.preventDefault();
-
+    e.preventDefault();
+    // debugger
     createTask({
       title: this.state.title,
       owner_id: user.id
@@ -38,6 +42,7 @@ class TasksCreate extends React.Component {
     }
 
   render() {
+    debugger 
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

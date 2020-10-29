@@ -6,3 +6,25 @@
   font-family: 'Martel Sans', sans-serif;
   color: firebrick;
 }
+
+.start-my-day-container{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.start-my-day-list-item {
+  display: flex;
+}
+
+.task-create-component {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.task-title {
+  font-family: 'Martel Sans', sans-serif;
+  color: purple;
+  font: 20px;
+}

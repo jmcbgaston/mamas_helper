@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         fetchTasks: (owner_id) => dispatch(fetchTasks(owner_id))
+
     })
 };
 
