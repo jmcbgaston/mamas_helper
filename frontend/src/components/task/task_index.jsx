@@ -10,7 +10,7 @@ class TaskIndex extends React.Component {
 
   render() {
 
-    debugger
+    // debugger
 
     const taskList = this.props.tasks.map((task) => {
       return (
@@ -22,7 +22,7 @@ class TaskIndex extends React.Component {
     return (
       <div className="start-my-day-container">
           {taskList}
-          <TaskForm createTask={this.props.createTask} errors={this.props.errors} />
+          <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
       </div>
     );
   }
