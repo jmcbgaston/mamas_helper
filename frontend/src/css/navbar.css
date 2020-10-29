@@ -1,3 +1,11 @@
+.nav-logged-in-container {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .nav-header { 
     display: flex; 
     align-items: center;
@@ -7,7 +15,12 @@
     color: purple;
     font-size: 40px;
     font-family: 'Martel Sans', sans-serif;
-    /* margin-top: 10px; */
+}
+
+.nav-welcome-message {
+    color: purple;
+    font-size: 20px;
+    font-family: 'Martel Sans', sans-serif;
 }
 
 .nav-button-container {
@@ -16,7 +29,7 @@
     justify-content: center;
 }
 
-.nav-signup {
+.nav-signup, .splash-my-tasks {
     border-radius: 4px;
     background-color: #f8b88b;
     color: white;
@@ -31,7 +44,7 @@
     width: 160px;
 }
 
-.nav-signin {
+.nav-signin, .nav-welcome-logout {
     border-radius: 4px;
     background-color: #b2cefe;
     color:white;

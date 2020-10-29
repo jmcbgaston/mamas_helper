@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getUserTasks = owner_id => {
     return axios.get(`/api/tasks/user/${owner_id}`)
 }
-// connected to tasks.js:9 // NOT WORKING
+// connected to tasks.js:9 // YES
  
 export const getUserTask = task_id => {
     return axios.get(`/api/tasks/${task_id}`)
@@ -17,14 +17,13 @@ export const createTask = data => {
 // connected to tasks.js:20 // YES
 
 export const updateTask = data => {
-    debugger
     return axios.patch(`/api/tasks/${data._id}`, data)
 }
-// connected to tasks.js:54 // YES!!!
+// connected to tasks.js:54 // YES
 // update only takes :id, :title
 
 export const deleteTask = task_id => {
     debugger 
     return axios.delete(`/api/tasks/${task_id}`)
 }
-// connected to tasks.js:74
+// connected to tasks.js:74 // YES

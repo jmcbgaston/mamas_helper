@@ -30,7 +30,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        errors.email = "Email already exists"; 
+        errors.email = "Please sign in instead!"; 
         return res.status(400).json(errors); 
       } else {
        
@@ -67,7 +67,7 @@ router.post('/login', (req, res) => {
   User.findOne({email})
     .then(user => {
       if (!user) {
-        errors.email = 'User not found'; 
+        errors.email = 'User not found!'; 
         return res.status(400).json(errors); 
       }
 
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
           });
         });
           } else {
-            errors.password = 'Incorrect Password'
+            errors.password = 'Correct password, please!'
             return res.status(400).json(errors); 
           }
         })
