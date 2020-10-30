@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
-import { fetchTasks, createTask } from "../../actions/task_actions"
+import { fetchTasks, createTask, removeTaskErrors } from "../../actions/task_actions";
 
 const mapStateToProps = (state) => {
 
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     const tasks = Object.values(state.tasks)
     // const tasks = state.tasks
 
-    debugger;
+    // debugger;
     
     return({
         user: user,
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     createTask: (task) => {
       return dispatch(createTask(task))
+    },
+    clearErrors: () => {
+      return dispatch(removeTaskErrors());
     }
   }) 
 }

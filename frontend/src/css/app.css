@@ -18,3 +18,7 @@ body {
 .start-my-day-button {
   margin: 50px 0px;
 }
+
+label {
+  font-size:15px;
+}

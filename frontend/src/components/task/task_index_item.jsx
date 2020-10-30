@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'; 
 
 class TaskIndexItem extends React.Component {
   constructor(props) {
@@ -6,10 +7,14 @@ class TaskIndexItem extends React.Component {
   }
 
   render() {
+    // debugger
+          
     return(
       <>
         <ul className="start-my-day-list-item">
-          <li className="task-title">{this.props.task.title}</li>
+          <Link to={`/startmyday/${this.props.task._id}`}>
+            <li className="task-title">{this.props.task.title}</li>
+          </Link>
         </ul>
       </>
     )
