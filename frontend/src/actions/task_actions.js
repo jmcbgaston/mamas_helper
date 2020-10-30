@@ -50,7 +50,6 @@ export const fetchTask = taskId => dispatch => {
 };
 
 export const createTask = task => dispatch => {
-    // debugger 
     return (
         TaskAPIUtil.createTask(task)
         .then(newTask => dispatch(receiveTask(newTask)))

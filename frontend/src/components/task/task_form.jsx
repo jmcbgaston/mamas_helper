@@ -1,5 +1,4 @@
 import React from 'react';
-import RequirementsForm from './requirements_form'
 
 class TaskForm extends React.Component{
   constructor(props){
@@ -41,23 +40,6 @@ class TaskForm extends React.Component{
   }
 
   render(){
-
-    let requirementsList
-
-    if (this.state.requirements === []) {
-      requirementsList = []
-    } else {
-      requirementsList = this.state.requirements.map((requirement, idx) => {
-        return (
-          <li key={idx}>
-            {requirement.description}
-          </li>
-        )
-      })
-    }
-    
-    debugger;
-
     return(
       <form onSubmit={this.handleSubmit}>
         <div  className="task-submit-container">
@@ -68,16 +50,6 @@ class TaskForm extends React.Component{
             onChange={this.handleChange} 
             onClick={this.props.clearErrors.bind(this)} className="form-input-field"/>
         </label>
-
-        
-        <label>Requirements:&nbsp;
-          <ul>
-            {requirementsList}
-          </ul>
-          <RequirementsForm task={this.state}/>
-        </label>
-
-
         {this.renderErrors()}
         <input type="submit" value="Create Task" className="form-submit" />
         </div>

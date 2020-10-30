@@ -7,8 +7,6 @@ class TaskIndexItem extends React.Component {
   }
 
   render() {
-    // debugger
-
     return(
       <>
         <ul className="start-my-day-list-item">

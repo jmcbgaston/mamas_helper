@@ -1,4 +1,5 @@
 import React from 'react';
+import RequirementsForm from './requirements_form'
 
 class EditTask extends React.Component {
     constructor(props) {
@@ -37,30 +38,32 @@ class EditTask extends React.Component {
     }
 
     render() {
-        if (!this.props.task) {
-                  return null;
-        }
+      if (!this.props.task) {
+                return null;
+      }
+      
+      return (
+        <div>
+            EDIT ME!
+            <form onSubmit={this.handleSubmit}>
+                <label>Title:
+                    <input type="text" value={this.state.title} onChange={this.handleChange('title')} />
+                </label>
+                <p>Requirements:</p>
+                {this.state.requirements.map((requirement, idx) => {
+                    return (
+                        <label> {this.props.task.requirements[idx].description}
+                            <input type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} />
+                        </label>
+                    )
+                } )}
 
-          return (
-            <div>
-                EDIT ME!
-                <form onSubmit={this.handleSubmit}>
-                    <label>Title:
-                        <input type="text" value={this.state.title} onChange={this.handleChange('title')} />
-                    </label>
-                    <p>Requirements:</p>
-                    {this.state.requirements.map((requirement, idx) => {
-                        return (
-                            // <label> {requirement.description}
-                            <label> {this.props.task.requirements[idx].description}
-                                <input type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} />
-                            </label>
-                        )
-                    } )}
-                    <button>Submit</button>
-                </form>
-            </div>
-        )
+                <RequirementsForm task={this.state} updateTask={this.props.updateTask}/>
+
+                <button>Submit</button>
+            </form>
+        </div>
+      )
     }
 };
 
