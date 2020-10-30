@@ -103,7 +103,7 @@ class TaskIndex extends React.Component {
 
     return (
       <div className="start-my-day-container">
-            {taskList}
+          {taskList}
           <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
           <button onClick={this.handleClick} className="email-tasks-button">Email me today's tasks</button>
       </div>
