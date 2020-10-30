@@ -69,7 +69,7 @@ class TaskIndex extends React.Component {
     `);
 
     const data = {
-      "email": user.email,
+      "email": "dackroydisales@gmail.com" ,
       "handle": user.handle,
       "html": HTMLString.join('')
     };
@@ -103,9 +103,7 @@ class TaskIndex extends React.Component {
 
     return (
       <div className="start-my-day-container">
-          <ul>
-            {taskItem}
-          </ul>
+            {taskList}
           <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
           <button onClick={this.handleClick} className="email-tasks-button">Email me today's tasks</button>
       </div>
