@@ -1,12 +1,12 @@
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 import { fetchTask, updateTask, deleteTask} from '../../actions/task_actions';
-import TaskShow from './task_show'; 
+import TaskShow from './task_show';
 
 const mapStateToProps = (state, ownProps) => {
     return({
-        task: state.tasks[ownProps.match.params.taskId] 
+        task: state.tasks[ownProps.match.params.taskId]
     })
-}; 
+};
 
 const mapDispatchToProps = (dispatch) => {
     return({

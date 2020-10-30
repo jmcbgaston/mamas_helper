@@ -36,7 +36,7 @@ class TaskForm extends React.Component{
     const task = this.state;
     this.props.createTask(task);
     this.setState({
-      title: "", 
+      title: "",
       requirements: []
     });
   }
@@ -56,4 +56,4 @@ class TaskForm extends React.Component{
   }
 }
 
-export default TaskForm; 
+export default TaskForm;
