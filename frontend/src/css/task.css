@@ -122,11 +122,10 @@ font-family: ‘Martel Sans’, sans-serif;
 }
 
 .task-list-item,
-.requirements-list-item,
-.task-list-container {
-  list-style: circle;
-  font-size: 15px;
-  color: white;
+.requirements-list-item {
+  /* list-style: circle; */
+  /* font-size: 15px; */
+  /* color: white; */
 }
 
 .task-list-container {
@@ -140,6 +139,7 @@ font-family: ‘Martel Sans’, sans-serif;
   margin-top: 40px;
   padding: 30px;
   text-align: center;
+  color: white;
 }
 
 .task-list-header,
@@ -147,10 +147,10 @@ font-family: ‘Martel Sans’, sans-serif;
   font-size: 24px;
 }
 
-.task-list-header {
-  color: #C3F998;
-}
+/* .task-list-header {
+  color: #04835b;
+} */
 
-.requirements-list-header {
-  color: #FFC0BB;
-}
+/* .requirements-list-header {
+  color: #aa3931;
+} */
