@@ -19,12 +19,18 @@ class RequirementsForm extends React.Component {
     }
 
     handleButton(e) {
+        debugger;
+
         e.preventDefault();
-        let newRequirement = { description: e.currentTarget.value, reusable: false }
+        let newRequirement = { description: this.state.description, reusable: false }
+
+        debugger;
         this.props.task.requirements.push(newRequirement); 
         this.setState({
-          description: ""
+            description: ""
         });
+
+        debugger;
     }
 
     render() {

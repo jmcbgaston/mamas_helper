@@ -56,6 +56,8 @@ class TaskForm extends React.Component{
       })
     }
     
+    debugger;
+
     return(
       <form onSubmit={this.handleSubmit}>
         <div  className="task-submit-container">
