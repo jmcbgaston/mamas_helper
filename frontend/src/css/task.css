@@ -7,9 +7,9 @@
   color: firebrick;
 }
 
-.start-my-day-container{
+.start-my-day-container {
   display: flex; 
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -57,4 +57,12 @@
 
 input[type=checkbox] {
   margin-top: 0px;
+}
+
+.task-submit-container {
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 16px;
 }

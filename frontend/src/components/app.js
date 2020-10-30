@@ -11,6 +11,8 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import "../css/0reset.css";
 import "../css/app.css";
+import "../css/form.css";
+import "../css/task.css";
 
 const App = () => (
     <div className="app-container">

@@ -8,14 +8,13 @@ class TaskIndexItem extends React.Component {
 
   render() {
     // debugger
-
+          
     return(
       <>
-        <ul>
+        <ul className="start-my-day-list-item">
           <Link to={`/startmyday/${this.props.task._id}`}>
-            <li>{this.props.task.title}</li>
+            <li className="task-title">{this.props.task.title}</li>
           </Link>
-          
         </ul>
       </>
     )
