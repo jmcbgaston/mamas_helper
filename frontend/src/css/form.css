@@ -3,14 +3,13 @@
     background-color: #baed91;
     color: gray;
     padding: 5px;
-    margin: 5px;
+    margin: auto;
     cursor: pointer;
     border: 1px solid lightgray; 
     width: 161px;
     height: 40px; 
     font-size: 15px;
     outline: none;
-    margin-left: auto;
 }
 
 .form-submit:hover {
@@ -32,7 +31,7 @@
 
 .form-input-field:focus {
     /* border: 2px solid #957DAD; */
-    border: 2px solid palevioletred;
+    border: 1px solid palevioletred;
     /* box-shadow: 2px 2px palevioletred; */
 }
 
@@ -47,7 +46,7 @@
     display: flex; 
     align-items: center;
     justify-content: center;
-    
+    margin-bottom: 10px;
 }
 
 /* .form-input-field:hover {
