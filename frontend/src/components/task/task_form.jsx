@@ -1,13 +1,12 @@
 import React from 'react';
+import RequirementsForm from './requirements_form'
 
 class TaskForm extends React.Component{
   constructor(props){
-    // debugger
     super(props);
     this.state = {
       title: "",
       requirements: []
-    //   owner_id: 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,18 +35,47 @@ class TaskForm extends React.Component{
     const task = this.state;
     this.props.createTask(task);
     this.setState({
-      title: "", 
+      title: "",
       requirements: []
     });
   }
 
   render(){
+
+    let requirementsList
+
+    if (this.state.requirements === []) {
+      requirementsList = []
+    } else {
+      requirementsList = this.state.requirements.map((requirement, idx) => {
+        return (
+          <li key={idx}>
+            {requirement.description}
+          </li>
+        )
+      })
+    }
+    
     return(
       <form onSubmit={this.handleSubmit}>
         <div  className="task-submit-container">
         <label>Title:&nbsp;
-          <input type="text" value={this.state.title} onChange={this.handleChange} onClick={this.props.clearErrors.bind(this)} className="form-input-field"/>
+          <input 
+            type="text" 
+            value={this.state.title} 
+            onChange={this.handleChange} 
+            onClick={this.props.clearErrors.bind(this)} className="form-input-field"/>
         </label>
+
+        
+        <label>Requirements:&nbsp;
+          <ul>
+            {requirementsList}
+          </ul>
+          <RequirementsForm task={this.state}/>
+        </label>
+
+
         {this.renderErrors()}
         <input type="submit" value="Create Task" className="form-submit" />
         </div>
