@@ -8,7 +8,6 @@ class MainPage extends React.Component {
     return (
       <div className = "main-page-container">
         <Link to='/startmyday' className = "start-my-day-button"><img alt = "Start My Day" src={startmyday} /></Link>
-        <Link to='/mytasks' ><button className = "splash-my-tasks">My Tasks</button></Link>
       </div>
     );
   }

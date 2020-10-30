@@ -19,7 +19,7 @@ class NavBar extends React.Component {
       if (this.props.loggedIn) {
         return (
             <div className = "nav-logged-in-container">
-                <h1 className="nav-header">Mama's Helper</h1>
+                <Link to="/startmyday" className="nav-header-link"><h1 className="nav-header">Mama's Helper</h1></Link>
                 <br />
                 <h1 className = "nav-welcome-message">Welcome!</h1>
                 <button className = "nav-welcome-logout" onClick={this.logoutUser}>Sign Out</button>
