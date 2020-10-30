@@ -7,7 +7,7 @@ class TaskIndex extends React.Component {
     super(props);
     this.handleChecked = this.handleChecked.bind(this);
     this.state = {
-      checked: {}
+      checkedTasksIds: {}
     }
   }
 
@@ -16,23 +16,22 @@ class TaskIndex extends React.Component {
   }
 
   handleChecked(e) {
-    const checked = this.state.checked;
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
     const task_id = e.currentTarget.id;
-    this.setState({ [checked[task_id]]: !checked[task_id] });
+    checkedTasksIds[task_id] = e.currentTarget.checked;
+    this.setState({ checkedTasksIds })
   }
-
 
   render() {
 
     const taskList = this.props.tasks.map((task) => {
-      const checked = this.state.checked[task._id];
       return (
         <li className="start-my-day-list-item" key={task._id}>
           <input
             type="checkbox"
             id={task._id}
             onClick={this.handleChecked}
-            checked={checked} />
+            />
           <TaskIndexItem task={task} />
         </li>
       );
