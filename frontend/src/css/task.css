@@ -8,7 +8,7 @@
 }
 
 .start-my-day-container {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -18,8 +18,27 @@
   padding-top: 3px;
 }
 
+.email-tasks-button {
+  border-radius: 4px;
+  background-color: #FFDAC1;
+  color: gray;
+  padding: 5px;
+  margin: 0 auto;
+  margin-top: 10px;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  width: 161px;
+  height: 50px;
+  font-size: 15px;
+  outline: none;
+}
+
+.email-tasks-button:hover {
+  filter: brightness(105%);
+}
+
 .task-create-component {
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -38,7 +57,7 @@
 .requirement-box-container {
   display: flex;
   flex-direction: row;
- 
+
 }
 
 .requirement-description {
@@ -51,7 +70,7 @@
 }
 
 
-.task-box-container:hover {  
+.task-box-container:hover {
   background-color: lightyellow;
 }
 
@@ -60,7 +79,7 @@ input[type=checkbox] {
 }
 
 .task-submit-container {
-    display: flex; 
+    display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;

@@ -26,7 +26,7 @@ class TaskIndex extends React.Component {
 
   handleClick(e) {
     const HTMLString = [];
-    const requirements = {};
+    const reqDescriptions = [];
     const { tasks, user } = this.props;
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
@@ -44,9 +44,8 @@ class TaskIndex extends React.Component {
 
       HTMLString.push(`<li>${task.title}</li>`);
       task.requirements.forEach((requirement) => {
-        debugger
-        if (!requirements[requirement._id]) {
-          requirements[requirement._id] = requirement;
+        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
+          reqDescriptions.push(requirement.description);
         }
       })
     })
@@ -58,34 +57,32 @@ class TaskIndex extends React.Component {
       <ul>
     `);
 
-    Object.keys(requirements).forEach((requirementId) => {
-      const requirement = requirements[requirementId];
-      HTMLString.push(`<li>${requirement.description}</li>`);
+    reqDescriptions.forEach((description) => {
+      HTMLString.push(`<li>${description}</li>`);
     });
 
     HTMLString.push(`
-    </ul>
-    <br>
-    <br>
-    - <i>With love, Mama's Helper.</i>
-  `);
+      </ul>
+      <br>
+      <br>
+      - <i>With love, Mama's Helper.</i>
+    `);
 
     const data = {
-      // "email": user.email,
-      "email": "werner22@ethereal.email",
+      "email": user.email,
       "handle": user.handle,
       "html": HTMLString.join('')
     };
 
-    // createEmail(data)
-    //   .then((res) => {
-    //     alert("Email sent successfully. Check your inbox!");
-    //   })
-    //   .catch((err) => {
-    //     alert("Sorry, email failed to send!");
-    //   })
-    //   .finally(() => Array.from(document.getElementsByClassName('task-checkbox'))
-    //                   .forEach((checkbox) => checkbox.checked = false ))
+    createEmail(data)
+      .then((res) => {
+        alert("Email sent successfully. Check your inbox!");
+      })
+      .catch((err) => {
+        alert("Sorry, email failed to send!");
+      })
+      .finally(() => Array.from(document.getElementsByClassName('task-checkbox'))
+                      .forEach((checkbox) => checkbox.checked = false ))
   }
 
   render() {
@@ -108,7 +105,7 @@ class TaskIndex extends React.Component {
       <div className="start-my-day-container">
           {taskList}
           <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
-          <button onClick={this.handleClick}>Email me my daily tasks</button>
+          <button onClick={this.handleClick} className="email-tasks-button">Email me today's tasks</button>
       </div>
     );
   }
