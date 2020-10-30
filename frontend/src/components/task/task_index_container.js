@@ -5,12 +5,14 @@ import { fetchTasks, createTask, removeTaskErrors } from "../../actions/task_act
 const mapStateToProps = (state) => {
   const user = state.session.user
   const tasks = Object.values(state.tasks)
-
-  return({
-    user: user,
-    tasks: tasks,
-    errors: state.errors.task
-  })
+  const user = state.session.user
+  const tasks = Object.values(state.tasks)
+    
+    return({
+        user: user,
+        tasks: tasks,
+        errors: state.errors.task
+    })
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -26,4 +28,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   })
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)
+

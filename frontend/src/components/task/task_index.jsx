@@ -31,7 +31,6 @@ class TaskIndex extends React.Component {
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
 
-
     HTMLString.push(`
       <h3 className="task-list-header"
           style="color:#04835b;font-size:20px;">
