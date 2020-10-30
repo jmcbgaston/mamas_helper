@@ -2,12 +2,10 @@ import React from 'react';
 
 class TaskForm extends React.Component{
   constructor(props){
-    // debugger
     super(props);
     this.state = {
       title: "",
       requirements: []
-    //   owner_id: 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +34,7 @@ class TaskForm extends React.Component{
     const task = this.state;
     this.props.createTask(task);
     this.setState({
-      title: "", 
+      title: "",
       requirements: []
     });
   }
@@ -56,4 +54,4 @@ class TaskForm extends React.Component{
   }
 }
 
-export default TaskForm; 
+export default TaskForm;

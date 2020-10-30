@@ -1,60 +1,56 @@
-.form-submit, .task-back {
+.form-submit,
+.task-back,
+.email-tasks-button,
+.list-tasks-button {
     border-radius: 4px;
     background-color: #baed91;
     color: gray;
     padding: 5px;
     margin: auto;
     cursor: pointer;
-    border: 1px solid lightgray; 
+    border: 1px solid lightgray;
     width: 158px;
-    height: 40px; 
+    height: 40px;
     font-size: 15px;
     outline: none;
 }
 
-.form-submit:hover {
+button:hover,
+input[type="submit"]:hover {
     filter: brightness(105%);
 }
 
 .form-input-field {
     height: 30px;
-    width: 155px; 
+    width: 155px;
     border: 1px solid lightgray;
     outline: none;
-    /* color: #800020; */
     color: hotpink;
-    /* color: #957DAD; */
     font-family: 'Martel Sans', sans-serif;
-    margin: 2px 0px; 
+    margin: 2px 0px;
     border-radius: 3px;
 }
 
 .form-input-field:focus {
-    /* border: 2px solid #957DAD; */
     border: 1px solid palevioletred;
-    /* box-shadow: 2px 2px palevioletred; */
 }
 
 .form-input-container {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 16px;
 }
 
 .form-login-button {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
 }
 
-/* .form-input-field:hover {
-    box-shadow: 5px 10px #baed91;
-} */
-
 .signup-header {
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 50px;

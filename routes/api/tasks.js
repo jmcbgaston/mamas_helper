@@ -12,7 +12,6 @@ router.get('/user/:user_id', (req, res) => {
   );
 });
 
-//Passport for password protection
 router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) => {
       const { errors, isValid } = validateTaskInput(req.body);
 
@@ -26,23 +25,18 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) =
           errors.task = "Task with that title already exists";
           return res.status(400).json(errors);
         } else {
-          // const reqSchema = new Req[req.body.requirements]
           const newTask = new Task({
             title: req.body.title,
             requirements: req.body.requirements,
             owner_id: req.user._id
           });
 
-          // console.log(`hello ${req.body.requirements.description}`)
           newTask.save()
           .then(task => res.json(task));
           }
       });
 });
 
-//bugfix
-//we don't check if the user is assigned to that task
-//need to check the owner_id matching 'req.user._id'
 router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     Task.findById(req.params.id)
     .then(task => res.json(task))

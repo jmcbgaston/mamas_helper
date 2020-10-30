@@ -51,7 +51,6 @@ class EditTask extends React.Component {
                     <p>Requirements:</p>
                     {this.state.requirements.map((requirement, idx) => {
                         return (
-                            // <label> {requirement.description}
                             <label> {this.props.task.requirements[idx].description}
                                 <input type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} />
                             </label>
