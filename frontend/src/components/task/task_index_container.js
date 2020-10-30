@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
         tasks: tasks,
         errors: state.errors.task
     })
-}
-
+} 
+//a
 const mapDispatchToProps = (dispatch) => {
   return({
     fetchTasks: (userId) => {
