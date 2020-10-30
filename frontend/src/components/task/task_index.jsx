@@ -69,7 +69,7 @@ class TaskIndex extends React.Component {
     `);
 
     const data = {
-      "email": "dackroydisales@gmail.com" ,
+      "email": user.email,
       "handle": user.handle,
       "html": HTMLString.join('')
     };
