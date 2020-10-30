@@ -5,7 +5,7 @@ import TaskForm from "./task_form";
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleChecked = this.handleChecked.bind(this);
     this.state = {
       checked: {}
     }
@@ -16,28 +16,23 @@ class TaskIndex extends React.Component {
   }
 
   handleChecked(e) {
-    e.preventDefault();
-    const { checked } = this.state;
+    const checked = this.state.checked;
     const task_id = e.currentTarget.id;
-    debugger
-
-    // if (checked[task_id] === undefined) {
-    //   this.setState({ checked[task_id]: true });
-    // } else {
-    //   this.setState({ checked[id]: !checked[id] });
-    // }
-    debugger
+    this.setState({ [checked[task_id]]: !checked[task_id] });
   }
 
 
   render() {
+
     const taskList = this.props.tasks.map((task) => {
+      const checked = this.state.checked[task._id];
       return (
         <li className="start-my-day-list-item" key={task._id}>
           <input
             type="checkbox"
-            id="task_id"
-            onChange={this.handleToggle}/>
+            id={task._id}
+            onClick={this.handleChecked}
+            checked={checked} />
           <TaskIndexItem task={task} />
         </li>
       );
