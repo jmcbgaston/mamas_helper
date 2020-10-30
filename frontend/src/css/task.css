@@ -120,3 +120,37 @@ font-family: ‘Martel Sans’, sans-serif;
 .reusable-task-show {
  margin-left: 10px;
 }
+
+.task-list-item,
+.requirements-list-item,
+.task-list-container {
+  list-style: circle;
+  font-size: 15px;
+  color: white;
+}
+
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid deeppink;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Martel Sans", sans-serif;
+  margin-top: 40px;
+  padding: 30px;
+  text-align: center;
+}
+
+.task-list-header,
+.requirements-list-header {
+  font-size: 24px;
+}
+
+.task-list-header {
+  color: #C3F998;
+}
+
+.requirements-list-header {
+  color: #FFC0BB;
+}

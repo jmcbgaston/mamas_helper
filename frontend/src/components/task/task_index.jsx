@@ -33,14 +33,14 @@ class TaskIndex extends React.Component {
 
 
     HTMLString.push(`
-      <h3>Task List:</h3>
-      <ul>
+      <h3 className="task-list-header">Task List:</h3>
+      <ul className="task-list-menu">
     `);
 
     checked.forEach((taskId) => {
       const task = tasks.find((requirement) => requirement._id === taskId);
 
-      HTMLString.push(`<li>${task.title}</li>`);
+      HTMLString.push(`<li className="task-list-item">${task.title}</li>`);
       task.requirements.forEach((requirement) => {
         if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
           reqDescriptions.push(requirement.description);
@@ -51,12 +51,12 @@ class TaskIndex extends React.Component {
     HTMLString.push(`
       </ul>
       <br>
-      <h3>Requirements:</h3>
-      <ul>
+      <h3 className="requirements-list-header">Requirements:</h3>
+      <ul className="requirements-list-menu">
     `);
 
     reqDescriptions.forEach((description) => {
-      HTMLString.push(`<li>${description}</li>`);
+      HTMLString.push(`<li className="requirements-list-item">${description}</li>`);
     });
 
     HTMLString.push(`
@@ -64,7 +64,7 @@ class TaskIndex extends React.Component {
     `)
 
     const html = {__html: HTMLString.join('') };
-    return <div dangerouslySetInnerHTML={html} />
+    return <div className="task-list-container" dangerouslySetInnerHTML={html} />
   }
 
   handleCheck(e) {
