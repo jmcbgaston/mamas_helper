@@ -128,3 +128,56 @@ font-family: ‘Martel Sans’, sans-serif;
 .reusable-task-show {
  margin-left: 10px;
 }
+
+.edit-task-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-task-inner-container {
+  display: flex; 
+  flex-direction: column;
+  /* border: 5px solid deeppink; */
+  border: 5px solid plum;
+  width: 350px;
+  height: 410px;
+  margin-top: 40px;
+  border-radius: 10px;
+
+}
+
+.edit-task-input {
+    height: 30px;
+    width: 230px;
+    border-style: solid;
+    border-color: lightgray;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    font-family: 'Martel Sans', sans-serif;
+    /* margin-left: auto; */
+    color: hotpink;
+    margin-top: 8px;
+    margin-left: 55px;
+}
+
+.edit-task-label-title {
+  font-family: 'Martel Sans', sans-serif;
+  color: purple;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 27px;
+  /* margin-left: 10px; */ 
+}
+
+.edit-task-label {
+  font-family: 'Martel Sans', sans-serif;
+  color: purple;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 26px;
+}
+
+.edit-task-input:focus {
+    border: 1px solid palevioletred;
+}
