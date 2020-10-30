@@ -13,12 +13,16 @@ class TaskShow extends React.Component {
 
     render() {
         return (
-            <div>
-                { (this.props.task) ? <h1>{this.props.task.title}</h1> : console.log("") }
-                { (this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("") }
-                <button onClick={ () => (this.props.deleteTask(this.props.task._id))}><Link to="/startmyday">Delete Task</Link></button>
-                <Link to={`/startmyday/${this.props.match.params.taskId}/edit`}>Edit Task</Link>
-                <Link to={"/startmyday"}>Home</Link>
+            <div className="task-show-outer-container"> 
+
+                <div className="task-show-inner-container">
+                    {(this.props.task) ? <h1 className="task-show-title">{this.props.task.title}</h1> : console.log("")}
+                    {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("")}
+                </div>
+                
+                <Link to="/startmyday"><button onClick={ () => (this.props.deleteTask(this.props.task._id))} className = "task-delete">Delete Task</button></Link>
+                <Link to={`/startmyday/${this.props.match.params.taskId}/edit`}><button type='button' className='task-edit'>Edit Task</button></Link>
+                <Link to={"/startmyday"}><button type='button' className='task-back'>Home</button></Link>
             </div>
         )
 

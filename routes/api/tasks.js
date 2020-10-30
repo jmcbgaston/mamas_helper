@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Task = require('../../models/Task'); 
-const passport = require('passport'); 
+const Task = require('../../models/Task');
+const passport = require('passport');
 const validateTaskInput = require('../../validation/tasks/new');
 
 router.get('/user/:user_id', (req, res) => {
@@ -13,21 +13,21 @@ router.get('/user/:user_id', (req, res) => {
 });
 
 router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) => {
-      const { errors, isValid } = validateTaskInput(req.body); 
+      const { errors, isValid } = validateTaskInput(req.body);
 
       if (!isValid) {
-        return res.status(400).json(errors); 
+        return res.status(400).json(errors);
       }
 
     Task.findOne({ title: req.body.title, owner_id: req.user._id })
       .then(task => {
         if (task) {
-          errors.task = "Task with that title already exists"; 
-          return res.status(400).json(errors); 
+          errors.task = "Task with that title already exists";
+          return res.status(400).json(errors);
         } else {
           const newTask = new Task({
             title: req.body.title,
-            requirements: req.body.requirements, 
+            requirements: req.body.requirements,
             owner_id: req.user._id
           });
 
@@ -52,14 +52,14 @@ router.patch('/:id', async (req, res) => {
     return res.status(400).json(errors)
   }
 
-  const updatedTask = await Task.findByIdAndUpdate(req.params.id, 
-    { title: req.body.title}, 
+  const updatedTask = await Task.findByIdAndUpdate(req.params.id,
+    { title: req.body.title, requirements: req.body.requirements },
     { new: true }
   );
 
-  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });  
+  if (!updatedTask) return res.status(404).json({ notaskfound: 'No task found with that ID' });
   res.send(updatedTask)
-  
+
 });
 
 router.delete('/:id', function(req, res) {

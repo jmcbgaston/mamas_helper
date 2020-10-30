@@ -1,4 +1,4 @@
-.form-submit {
+.form-submit, .task-back {
     border-radius: 4px;
     background-color: #baed91;
     color: gray;
@@ -6,7 +6,7 @@
     margin: auto;
     cursor: pointer;
     border: 1px solid lightgray; 
-    width: 161px;
+    width: 158px;
     height: 40px; 
     font-size: 15px;
     outline: none;
@@ -58,7 +58,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-size: 30px;
     color: purple;
     font-family: 'Martel Sans', sans-serif;
