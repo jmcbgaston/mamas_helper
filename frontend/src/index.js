@@ -8,12 +8,14 @@ import { logout, login } from './actions/session_actions';
 
 // TESTING
 import * as TaskActions from './actions/task_actions'
+import * as EmailAPIUtil from './util/email_api_util'
 window.fetchTasks = TaskActions.fetchTasks
 window.fetchTask = TaskActions.fetchTask
 window.createTask = TaskActions.createTask
 window.updateTask = TaskActions.updateTask
 window.deleteTask = TaskActions.deleteTask
 window.login = login
+window.createEmail = EmailAPIUtil.createEmail
 //
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,14 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentTime = Date.now() / 1000;
 
- 
+
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
       window.location.href = '/login';
     }
   } else {
     store = configureStore({});
-    
+
     //
     window.getState = store.getState
     window.dispatch = store.dispatch

@@ -6,7 +6,7 @@ const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const passport = require('passport');
 const tasks = require("./routes/api/tasks");
-const sendgrid = require("./routes/api/sendgrid");
+const emails = require("./routes/api/emails");
 const path = require('path');
 
 //add tasks router to router
@@ -36,4 +36,4 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use("/api/users", users);
 app.use("/api/tasks", tasks);
-app.use("/api/sendgrid", sendgrid);
+app.use("/api/emails", emails);
