@@ -6,9 +6,6 @@ const mapStateToProps = (state) => {
 
     const user = state.session.user
     const tasks = Object.values(state.tasks)
-    // const tasks = state.tasks
-
-    // debugger;
     
     return({
         user: user,
@@ -30,4 +27,5 @@ const mapDispatchToProps = (dispatch) => {
     }
   }) 
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)

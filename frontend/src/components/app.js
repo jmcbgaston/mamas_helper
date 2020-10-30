@@ -21,11 +21,9 @@ const App = () => (
           <ProtectedRoute exact path="/" component={MainPage} />
           <AuthRoute exact path="/login" component={LoginFormContainer} />
           <AuthRoute exact path="/signup" component={SignupFormContainer} />
-          {/* <ProtectedRoute exact path ="/startmyday" component={TasksShowContainer} /> */}
           <ProtectedRoute exact path ="/startmyday" component={TaskIndexContainer} />
           <ProtectedRoute exact path = "/startmyday/:taskId" component ={TaskShowContainer} />
           <ProtectedRoute exact path = "/startmyday/:taskId/edit" component ={EditTaskContainer} />
-          {/* <ProtectedRoute exact path ="/tasks/new" component={TasksCreateContainer} /> */}
       </Switch>
     </div>
 
