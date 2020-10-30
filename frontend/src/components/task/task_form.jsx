@@ -42,21 +42,21 @@ class TaskForm extends React.Component{
 
   render(){
 
-    let requirementsList
+    // let requirementsList
 
-    if (this.state.requirements === []) {
-      requirementsList = []
-    } else {
-      requirementsList = this.state.requirements.map((requirement, idx) => {
-        return (
-          <li key={idx}>
-            {requirement.description}
-          </li>
-        )
-      })
-    }
+    // if (this.state.requirements === []) {
+    //   requirementsList = []
+    // } else {
+    //   requirementsList = this.state.requirements.map((requirement, idx) => {
+    //     return (
+    //       <li key={idx}>
+    //         {requirement.description}
+    //       </li>
+    //     )
+    //   })
+    // }
     
-    debugger;
+    // debugger;
 
     return(
       <form onSubmit={this.handleSubmit}>
@@ -70,12 +70,12 @@ class TaskForm extends React.Component{
         </label>
 
         
-        <label>Requirements:&nbsp;
+        {/* <label>Requirements:&nbsp;
           <ul>
             {requirementsList}
           </ul>
           <RequirementsForm task={this.state}/>
-        </label>
+        </label> */}
 
 
         {this.renderErrors()}

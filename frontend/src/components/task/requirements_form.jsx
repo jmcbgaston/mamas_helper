@@ -11,7 +11,7 @@ class RequirementsForm extends React.Component {
     }
 
     handleChange(e) {
-        debugger
+        // debugger
 
         return (
           this.setState({description: e.currentTarget.value})
@@ -19,22 +19,22 @@ class RequirementsForm extends React.Component {
     }
 
     handleButton(e) {
-        debugger;
+        // debugger;
 
         e.preventDefault();
         let newRequirement = { description: this.state.description, reusable: false }
 
-        debugger;
+        // debugger;
         this.props.task.requirements.push(newRequirement); 
         this.setState({
             description: ""
         });
 
-        debugger;
+        // debugger;
     }
 
     render() {
-        debugger
+        // debugger
 
         return (
             <div>
