@@ -20,22 +20,14 @@
 }
 
 .email-tasks-button {
-  border-radius: 4px;
   background-color: #FFDAC1;
-  color: gray;
-  padding: 5px;
-  margin: 0 auto;
-  margin-top: 10px;
-  cursor: pointer;
-  border: 1px solid lightgray;
-  width: 161px;
   height: 50px;
-  font-size: 15px;
-  outline: none;
+  margin: 14px 0;
 }
 
-.email-tasks-button:hover {
-  filter: brightness(105%);
+.list-tasks-button {
+  background-color: #FFB7B2;
+  height: 50px;
 }
 
 .task-create-component {
@@ -181,3 +173,30 @@ font-family: ‘Martel Sans’, sans-serif;
 .edit-task-input:focus {
     border: 1px solid palevioletred;
 }
+
+.task-list-item,
+.requirements-list-item {
+  /* list-style: circle; */
+  /* font-size: 15px; */
+  /* color: white; */
+}
+
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid deeppink;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Martel Sans", sans-serif;
+  margin-top: 40px;
+  padding: 30px;
+  text-align: center;
+  color: white;
+}
+
+.task-list-header,
+.requirements-list-header {
+  font-size: 24px;
+}
+

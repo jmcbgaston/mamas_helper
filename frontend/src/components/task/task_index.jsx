@@ -7,14 +7,69 @@ class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
     this.handleCheck = this.handleCheck.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleEmailClick = this.handleEmailClick.bind(this);
+    this.handleTaskClick = this.handleTaskClick.bind(this);
     this.state = {
+      toggleTaskList: false,
       checkedTasksIds: {}
     }
   }
 
   componentDidMount() {
     this.props.fetchTasks(this.props.user.id);
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
+  buildTaskList() {
+    const HTMLString = [];
+    const reqDescriptions = [];
+    const { tasks, user } = this.props;
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
+    const checked = Object.keys(checkedTasksIds)
+                      .filter((taskId) => checkedTasksIds[taskId]);
+
+    HTMLString.push(`
+      <h3 className="task-list-header"
+          style="color:#04835b;font-size:20px;">
+        Task List:
+      </h3>
+      <ul className="task-list-menu">
+    `);
+
+    checked.forEach((taskId) => {
+      const task = tasks.find((requirement) => requirement._id === taskId);
+
+      HTMLString.push(`<li className="task-list-item" style="list-style: inside">${task.title}</li>`);
+      task.requirements.forEach((requirement) => {
+        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
+          reqDescriptions.push(requirement.description);
+        }
+      })
+    })
+
+    HTMLString.push(`
+      </ul>
+      <br>
+      <h3 className="requirements-list-header"
+          style="color:#aa3931;font-size:20px">
+        Requirements:
+      </h3>
+      <ul className="requirements-list-menu">
+    `);
+
+    reqDescriptions.forEach((description) => {
+      HTMLString.push(`<li className="requirements-list-item" style="list-style: inside">${description}</li>`);
+    });
+
+    HTMLString.push(`
+      </ul>
+    `)
+
+    const html = {__html: HTMLString.join('') };
+    return <div className="task-list-container" dangerouslySetInnerHTML={html} />
   }
 
   handleCheck(e) {
@@ -24,7 +79,13 @@ class TaskIndex extends React.Component {
     this.setState({ checkedTasksIds })
   }
 
-  handleClick(e) {
+  handleTaskClick(e) {
+    this.setState({
+      toggleTaskList: !this.state.toggleTaskList
+    })
+  }
+
+  handleEmailClick(e) {
     const HTMLString = [];
     const reqDescriptions = [];
     const { tasks, user } = this.props;
@@ -87,6 +148,8 @@ class TaskIndex extends React.Component {
 
   render() {
 
+    const html = {__html: 'First &middot; Second' };
+
     const taskList = this.props.tasks.map((task) => {
       return (
         <li className="start-my-day-list-item" key={task._id}>
@@ -102,11 +165,13 @@ class TaskIndex extends React.Component {
     });
 
     return (
-      <div className="start-my-day-container">
+      <ul className="start-my-day-container">
           {taskList}
           <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
-          <button onClick={this.handleClick} className="email-tasks-button">Email me today's tasks</button>
-      </div>
+          <button type="button" onClick={this.handleEmailClick} className="email-tasks-button">Email me today's tasks</button>
+          <button type="button" onClick={this.handleTaskClick} className="list-tasks-button">List my tasks and requirements</button>
+          {this.state.toggleTaskList ? this.buildTaskList() : null}
+      </ul>
     );
   }
 }

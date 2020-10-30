@@ -2,21 +2,21 @@ import React from 'react';
 
 class TaskForm extends React.Component{
   constructor(props){
-    // debugger
     super(props);
     this.state = {
       title: "",
       requirements: []
-    //   owner_id: 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   renderErrors() {
+    const errors = Object.keys(this.props.errors)
+
     return(
       <ul className="create-task-errors">
-        {Object.keys(this.props.errors).map((error, i) => (
+        { errors.map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
           </li>
@@ -36,7 +36,7 @@ class TaskForm extends React.Component{
     const task = this.state;
     this.props.createTask(task);
     this.setState({
-      title: "", 
+      title: "",
       requirements: []
     });
   }
@@ -56,4 +56,4 @@ class TaskForm extends React.Component{
   }
 }
 
-export default TaskForm; 
+export default TaskForm;

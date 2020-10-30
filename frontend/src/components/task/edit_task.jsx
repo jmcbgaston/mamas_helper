@@ -53,6 +53,7 @@ class EditTask extends React.Component {
                     <span className="edit-task-label">Requirements:</span>
                     {this.state.requirements.map((requirement, idx) => {
                         return (
+
                             // <label> {requirement.description}
                             <label> 
                               {/* {this.props.task.requirements[idx].description} */}
