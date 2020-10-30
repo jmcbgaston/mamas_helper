@@ -3,7 +3,6 @@ import { fetchTask, updateTask, deleteTask} from '../../actions/task_actions';
 import TaskShow from './task_show'; 
 
 const mapStateToProps = (state, ownProps) => {
-    // debugger
     return({
         task: state.tasks[ownProps.match.params.taskId] 
     })
