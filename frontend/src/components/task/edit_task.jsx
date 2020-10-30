@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../css/task.css'
+import '../../css/navbar.css'
 
 class EditTask extends React.Component {
     constructor(props) {
@@ -42,22 +44,26 @@ class EditTask extends React.Component {
         }
 
           return (
-            <div>
-                EDIT ME!
-                <form onSubmit={this.handleSubmit}>
-                    <label>Title:
-                        <input type="text" value={this.state.title} onChange={this.handleChange('title')} />
+            <div className="edit-task-outer-container">
+              
+                <form onSubmit={this.handleSubmit} className="edit-task-inner-container">
+                    <label> <div className="edit-task-label-title">Title:</div>
+                        <input className="edit-task-input" type="text" value={this.state.title} onChange={this.handleChange('title')} placeholder="Title*" />      
                     </label>
-                    <p>Requirements:</p>
+                    <span className="edit-task-label">Requirements:</span>
                     {this.state.requirements.map((requirement, idx) => {
                         return (
-                            <label> {this.props.task.requirements[idx].description}
-                                <input type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} />
+
+                            // <label> {requirement.description}
+                            <label> 
+                              {/* {this.props.task.requirements[idx].description} */}
+                                <input className="edit-task-input" type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} placeholder="descriptions*"/>
                             </label>
                         )
                     } )}
-                    <button>Submit</button>
+                    <button className="edit-task-submit-button">Update</button>
                 </form>
+              
             </div>
         )
     }

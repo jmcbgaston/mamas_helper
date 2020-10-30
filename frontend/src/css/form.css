@@ -1,7 +1,4 @@
-.form-submit,
-.task-back,
-.email-tasks-button,
-.list-tasks-button {
+.form-submit, .task-back, .edit-task-submit-button {
     border-radius: 4px;
     background-color: #baed91;
     color: gray;
