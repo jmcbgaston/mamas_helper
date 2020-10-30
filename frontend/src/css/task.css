@@ -16,6 +16,7 @@
 .start-my-day-list-item {
   display: flex;
   padding-top: 3px;
+  text-decoration: none;
 }
 
 .task-create-component {
@@ -66,3 +67,23 @@ input[type=checkbox] {
     justify-content: center;
     margin-top: 16px;
 }
+
+.task-show-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-show-inner-container {
+  display: flex;
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+  margin-top: 40px;
+}
+
+/* .task-show-title {
+  color: blue;
+  font-size: 60px;
+} */

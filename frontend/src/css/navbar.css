@@ -17,6 +17,10 @@
     font-family: 'Martel Sans', sans-serif;
 }
 
+.nav-header-link {
+    text-decoration: none;
+}
+
 .nav-welcome-message {
     color: purple;
     font-size: 20px;

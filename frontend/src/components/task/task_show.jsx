@@ -20,13 +20,15 @@ class TaskShow extends React.Component {
         //     return null; 
         // }
         return (
-            <div>
-                {(this.props.task) ? <h1>{this.props.task.title}</h1> : console.log("")}
-                {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("")}
-            
+            <div className="task-show-outer-container"> 
+
+                <div className="task-show-inner-container">
+                    {(this.props.task) ? <h1 className="task-show-title">{this.props.task.title}</h1> : console.log("")}
+                    {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("")}
+                </div>
+                
                 <button onClick={ () => (this.props.deleteTask(this.props.task._id))}><Link to="/startmyday">Delete Task</Link></button>
                 <Link to={`/startmyday/${this.props.match.params.taskId}/edit`}>Edit Task</Link>
-                {/* <Link to={`/startmyday/${this.props.task._id}/edit`}>Edit Task</Link> */}
                 <Link to={"/startmyday"}>Home</Link>
             </div>
         )
