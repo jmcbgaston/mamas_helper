@@ -4,6 +4,7 @@ import EditTask from './edit_task';
 import { fetchTask, updateTask } from '../../actions/task_actions';
 
 const mapStateToProps = (state, ownProps) => {
+    // debugger
     return ({
         task: state.tasks[ownProps.match.params.taskId]
     })
