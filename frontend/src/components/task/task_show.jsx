@@ -17,7 +17,7 @@ class TaskShow extends React.Component {
 
                 <div className="task-show-inner-container">
                     {(this.props.task) ? <h1 className="task-show-title">{this.props.task.title}</h1> : console.log("")}
-                    {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("")}
+                    {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem key={requirement._id} requirement={requirement} /> )}</h1> : console.log("")}
                 </div>
                 
                 <Link to="/startmyday"><button onClick={ () => (this.props.deleteTask(this.props.task._id))} className = "task-delete">Delete Task</button></Link>

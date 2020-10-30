@@ -2,19 +2,20 @@ import { RECEIVE_TASKS, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_action
 
 const taskReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
-    let newState = Object.assign({}, oldState)
+    let newState = Object.assign({}, oldState);
 
     switch (action.type) {
         case RECEIVE_TASKS:
-            return action.tasks.data
+          action.tasks.data.forEach(task => newState[task._id] = task);
+          return newState;
         case RECEIVE_TASK:
-            newState[action.task.data._id] = action.task.data
-            return newState
+          newState[action.task.data._id] = action.task.data;
+          return newState;
         case REMOVE_TASK:
-            delete newState[action.taskId]
-            return newState
+          delete newState[action.taskId];
+          return newState;
         default:
-            return oldState;
+          return oldState;
     }
 }
 

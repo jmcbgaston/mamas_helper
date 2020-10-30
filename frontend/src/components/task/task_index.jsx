@@ -17,6 +17,10 @@ class TaskIndex extends React.Component {
     this.props.fetchTasks(this.props.user.id);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
