@@ -1,4 +1,6 @@
 /config/keys_dev.js
 .DS_Store
 /node_modules/
-frontend/node_modules/ 
+.DS_Store
+frontend/node_modules/
+request.http

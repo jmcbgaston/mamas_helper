@@ -1,7 +1,8 @@
 import React from 'react';
 import RequirementShowItem from './requirement_show_item'; 
+import { Link } from 'react-router-dom';
 
-class RealTaskShow extends React.Component {
+class TaskShow extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -15,10 +16,14 @@ class RealTaskShow extends React.Component {
             <div>
                 {(this.props.task) ? <h1>{this.props.task.title}</h1> : console.log("")}
                 {(this.props.task) ? <h1>{this.props.task.requirements.map((requirement) => <RequirementShowItem requirement={requirement} /> )}</h1> : console.log("")}
+            
+                <button onClick={ () => (this.props.deleteTask(this.props.task._id))}><Link to="/startmyday">Delete Task</Link></button>
+                {/* <Link to={`/startmyday/${this.props.task._id}/edit`}>Edit Task</Link> */}
+                <Link to={"/startmyday"}>Home</Link>
             </div>
         )
 
     }
 }; 
 
-export default RealTaskShow; 
+export default TaskShow;

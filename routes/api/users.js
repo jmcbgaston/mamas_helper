@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const User = require('../../models/User'); 
+const User = require('../../models/User');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
-const passport = require('passport'); 
+const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 
@@ -13,27 +13,27 @@ const keys = require('../../config/keys');
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
-        id: req.user.id, 
-        handle: req.user.handle, 
+        id: req.user.id,
+        handle: req.user.handle,
         email: req.user.email
-    }); 
+    });
 })
 
 router.post('/register', (req, res) => {
 
-  const { errors, isValid } = validateRegisterInput(req.body); 
+  const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
-    return res.status(400).json(errors); 
+    return res.status(400).json(errors);
   }
- 
+
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        errors.email = "Please sign in instead!"; 
-        return res.status(400).json(errors); 
+        errors.email = "Please sign in instead!";
+        return res.status(400).json(errors);
       } else {
-       
+
         const newUser = new User({
           handle: req.body.handle,
           email: req.body.email,
@@ -55,10 +55,10 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
 
-  const { errors, isValid } = validateLoginInput(req.body); 
+  const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
-    return res.status(400).json(errors); 
+    return res.status(400).json(errors);
   }
 
   const email = req.body.email;
@@ -67,8 +67,8 @@ router.post('/login', (req, res) => {
   User.findOne({email})
     .then(user => {
       if (!user) {
-        errors.email = 'User not found!'; 
-        return res.status(400).json(errors); 
+        errors.email = 'User not found!';
+        return res.status(400).json(errors);
       }
 
       bcrypt.compare(password, user.password)
@@ -87,7 +87,7 @@ router.post('/login', (req, res) => {
         });
           } else {
             errors.password = 'Correct password, please!'
-            return res.status(400).json(errors); 
+            return res.status(400).json(errors);
           }
         })
     })

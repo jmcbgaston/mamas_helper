@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'; 
 import { fetchTask, updateTask, deleteTask} from '../../actions/task_actions';
-import RealTaskShow from './real_task_show'; 
+import TaskShow from './task_show'; 
 
 const mapStateToProps = (state, ownProps) => {
     return({
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch) => {
     })
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RealTaskShow);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskShow);
