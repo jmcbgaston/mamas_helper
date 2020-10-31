@@ -1,8 +1,5 @@
 import React from 'react';
 import RequirementsForm from './requirements_form'
-import '../../css/task.css'
-import '../../css/navbar.css'
-
 
 class EditTask extends React.Component {
     constructor(props) {
@@ -44,7 +41,7 @@ class EditTask extends React.Component {
       if (!this.props.task) {
         return null;
       }
-      
+
       return (
         <div className="edit-task-outer-container"  className="edit-task-inner-container">
             <form onSubmit={this.handleSubmit}>

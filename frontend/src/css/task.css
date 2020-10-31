@@ -1,4 +1,4 @@
-.create-task-errors {
+/* .create-task-errors {
   margin-left: 5px;
   margin-top: 5px;
   height: 19px;
@@ -128,9 +128,8 @@ font-family: ‘Martel Sans’, sans-serif;
 }
 
 .edit-task-inner-container {
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  /* border: 5px solid deeppink; */
   border: 5px solid plum;
   width: 350px;
   height: 410px;
@@ -147,7 +146,6 @@ font-family: ‘Martel Sans’, sans-serif;
     margin-bottom: 8px;
     margin-top: 20px;
     font-family: 'Martel Sans', sans-serif;
-    /* margin-left: auto; */
     color: hotpink;
     margin-top: 8px;
     margin-left: 55px;
@@ -159,7 +157,6 @@ font-family: ‘Martel Sans’, sans-serif;
   font-size: 18px;
   text-align: center;
   margin-top: 27px;
-  /* margin-left: 10px; */ 
 }
 
 .edit-task-label {
@@ -176,9 +173,9 @@ font-family: ‘Martel Sans’, sans-serif;
 
 .task-list-item,
 .requirements-list-item {
-  /* list-style: circle; */
-  /* font-size: 15px; */
-  /* color: white; */
+  list-style: circle;
+  font-size: 15px;
+  color: white;
 }
 
 .task-list-container {
@@ -199,4 +196,4 @@ font-family: ‘Martel Sans’, sans-serif;
 .requirements-list-header {
   font-size: 24px;
 }
-
+ */

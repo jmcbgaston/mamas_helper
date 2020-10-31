@@ -1,4 +1,4 @@
-.nav-logged-in-container {
+/* .nav-logged-in-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,8 +10,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* color: #B784A7; */
-    /* color: #D291BC; */
     color: purple;
     font-size: 40px;
     font-family: 'Martel Sans', sans-serif;
@@ -70,4 +68,27 @@
 
 .nav-signin:hover {
     filter: brightness(105%);
+} */
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar__header {
+  color: #800080;
+  text-align: center;
+}
+
+.nav-bar__session-button {
+  flex: 1;
+}
+
+.nav-bar__session-button,
+.nav-bar__logout-button {
+  height: 3rem;
+}
+
+.start-my-day-button {
+  margin: 0 auto;
 }
