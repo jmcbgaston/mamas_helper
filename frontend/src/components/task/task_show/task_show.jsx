@@ -11,6 +11,11 @@ class TaskShow extends React.Component {
 
   render() {
     const { task, deleteTask, match: { params } } = this.props;
+
+    if (!task) {
+      return null;
+    }
+
     const requirements = task.requirements;
 
     return (
@@ -20,9 +25,19 @@ class TaskShow extends React.Component {
           { requirements.length ? <RequirementsShow requirements={requirements} /> : null }
         </div>
 
-        <Link to="/startmyday"><button onClick={ () => (deleteTask(task._id))} className = "task-delete">Delete Task</button></Link>
-        <Link to={`/startmyday/${params.taskId}/edit`}><button type='button' className='task-edit'>Edit Task</button></Link>
-        <Link to={"/startmyday"}><button type='button' className='task-back'>Home</button></Link>
+        <Link to="/startmyday">
+          <button
+            className = "task-delete button"
+            onClick={ () => (deleteTask(task._id))}>
+              Delete Task
+          </button>
+        </Link>
+        <Link to={`/startmyday/${params.taskId}/edit`}>
+          <button type='button' className='task-edit button'>Edit Task</button>
+        </Link>
+        <Link to={"/startmyday"}>
+          <button type='button' className='task-back button'>Back</button>
+        </Link>
       </>
     )
   }

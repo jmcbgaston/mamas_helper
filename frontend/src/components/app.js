@@ -17,6 +17,7 @@ import '../css/form.css';
 // import '../css/task.css';
 import '../css/task/task_index.css'
 import '../css/task/task_show.css'
+import '../css/requirements/requirement_show.css'
 
 const App = () => (
     <div className='app-container'>

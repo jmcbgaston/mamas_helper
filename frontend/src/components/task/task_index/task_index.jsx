@@ -147,26 +147,31 @@ class TaskIndex extends React.Component {
                       .forEach((checkbox) => checkbox.checked = false ))
   }
 
+
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
 
-    const taskList = tasks.map((task) => {
-      return (
-        <li className="task-index__list-item" key={task._id}>
-          <input
-            type="checkbox"
-            id={task._id}
-            className="task-index__list-item-checkbox"
-            onClick={this.handleCheck} />
-          <Link to={`/startmyday/${task._id}`}>{task.title}</Link>
-        </li>
-      );
-    });
+    // const taskList = tasks.map((task) => {
+    //   return (
+    //     <li className="task-index__list-item" key={task._id}>
+    //       <input
+    //         type="checkbox"
+    //         id={task._id}
+    //         className="task-index__list-item-checkbox"
+    //         onClick={this.handleCheck} />
+    //       <Link to={`/startmyday/${task._id}`}
+    //         className="task-index__list-item-link">
+    //         {task.title}
+    //       </Link>
+    //     </li>
+    //   );
+    // });
 
     return (
       <>
         <ul className="task-index__list">
-          {taskList}
+          {tasks.map((task) => <TaskIndexItem task={task} />)}
+          {/* {taskList} */}
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <button type="button"

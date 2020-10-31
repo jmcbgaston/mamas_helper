@@ -11,6 +11,11 @@
   width: 1.5rem;
 }
 
+.task-index__list-item-link {
+  display: flex;
+  align-items: center;
+}
+
 .task-index__create-form {
   display: flex;
   flex-direction: column;
