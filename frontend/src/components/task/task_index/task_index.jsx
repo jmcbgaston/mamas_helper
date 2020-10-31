@@ -1,7 +1,8 @@
 import React from "react"
 import TaskIndexItem from "./task_index_item";
-import TaskForm from "./task_form";
-import { createEmail } from "../../util/email_api_util";
+import TaskForm from "../task_form";
+import { createEmail } from "../../../util/email_api_util";
+import { Link } from "react-router-dom";
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -147,31 +148,40 @@ class TaskIndex extends React.Component {
   }
 
   render() {
+    const { tasks, createTask, errors, clearErrors } = this.props;
 
-    const html = {__html: 'First &middot; Second' };
-
-    const taskList = this.props.tasks.map((task) => {
+    const taskList = tasks.map((task) => {
       return (
-        <li className="start-my-day-list-item" key={task._id}>
+        <li className="task-index__list-item" key={task._id}>
           <input
             type="checkbox"
             id={task._id}
-            className="task-checkbox"
-            onClick={this.handleCheck}
-            />
-          <TaskIndexItem task={task} />
+            className="task-index__list-item-checkbox"
+            onClick={this.handleCheck} />
+          <Link to={`/startmyday/${task._id}`}>{task.title}</Link>
         </li>
       );
     });
 
     return (
-      <ul className="start-my-day-container">
+      <>
+        <ul className="task-index__list">
           {taskList}
-          <TaskForm createTask={this.props.createTask} errors={this.props.errors} clearErrors={this.props.clearErrors}/>
-          <button type="button" onClick={this.handleEmailClick} className="email-tasks-button">Email me today's tasks</button>
-          <button type="button" onClick={this.handleTaskClick} className="list-tasks-button">List my tasks and requirements</button>
-          {this.state.toggleTaskList ? this.buildTaskList() : null}
-      </ul>
+        </ul>
+        <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <button type="button"
+          className="task-index__email-button button"
+          onClick={this.handleEmailClick}>
+          Email me today's tasks
+        </button>
+        <button
+          type="button"
+          className="task-index__list-button button"
+          onClick={this.handleTaskClick}>
+          List my tasks and requirements
+        </button>
+        {this.state.toggleTaskList ? this.buildTaskList() : null}
+      </>
     );
   }
 }

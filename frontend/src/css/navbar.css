@@ -73,7 +73,7 @@
 .nav-bar {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin: 3rem 0;
 }
 
 .nav-bar__header {
@@ -91,5 +91,6 @@
 }
 
 .start-my-day-button {
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }

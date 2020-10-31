@@ -42,19 +42,19 @@ class TaskForm extends React.Component{
   }
 
   render() {
-    return(
-      <form onSubmit={this.handleSubmit}>
-        <div  className="task-submit-container">
-        <label>Title:&nbsp;
-          <input 
-            type="text" 
-            value={this.state.title} 
-            onChange={this.handleChange} 
-            onClick={this.props.clearErrors.bind(this)} className="form-input-field"/>
+    return (
+      <form className="task-index__create-form" onSubmit={this.handleSubmit}>
+        <label className="task-index__create-label">
+          <div className="task-index__create-title">Title:&nbsp;</div>
+          <input
+            type="text"
+            className="task-index__create-input input-field"
+            value={this.state.title}
+            onChange={this.handleChange}
+            onClick={this.props.clearErrors.bind(this)}/>
         </label>
         {this.renderErrors()}
-        <input type="submit" value="Create Task" className="form-submit" />
-        </div>
+        <input type="submit" value="Create Task" className="task-index__create-submit button" />
       </form>
     )
   }

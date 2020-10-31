@@ -1,0 +1,31 @@
+.task-index__list {
+  margin: 0 auto;
+}
+
+.task-index__list-item {
+  display: flex;
+}
+
+.task-index__list-item-checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.task-index__create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-index__create-label {
+  align-items: center;
+  display: flex;
+  text-align: right;
+}
+
+.task-index__create-title {
+  flex: 1;
+}
+
+.task-index__create-input {
+  flex: 3;
+}

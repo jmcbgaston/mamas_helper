@@ -68,6 +68,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+h3 {
+  font-size: 1.25rem;
+}
+
 button {
   padding: 0;
 }
@@ -89,17 +93,23 @@ body,
 }
 
 .app-container, .content-container {
-  display: flex;
+  /* display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 .app-container {
+  /* display: flex; */
+  flex: 1;
+  /* flex-direction: column; */
   padding: 0 2rem;
   max-width: 800px;
 }
 
 .content-container {
+  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -129,4 +139,9 @@ body,
 
 .input-errors {
   border: 1px solid #b22222;
+}
+
+.reusable {
+  height: 1.5rem;
+  width: 1.5rem;
 }

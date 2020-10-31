@@ -4,7 +4,10 @@ import { Link, useLocation } from 'react-router-dom'
 const AuthNav = ({ logout }) => (
   <>
     <h2 className ="nav-bar__header">Welcome!</h2>
-    <button className ="nav-bar__logout-button button" onClick={() => logout()}>Sign Out
+    <button
+      className ="nav-bar__logout-button button"
+      onClick={() => logout()}>
+        Sign Out
     </button>
   </>
 )
@@ -13,7 +16,7 @@ const UnAuthNav = () => {
   const SignUp = () => (
     <Link className="button-links" to="/signup">
       <button className="nav-bar__session-button button">
-          Sign Up
+        Sign Up
       </button>
     </Link>
   )
