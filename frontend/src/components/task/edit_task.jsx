@@ -42,7 +42,7 @@ class EditTask extends React.Component {
 
     render() {
       if (!this.props.task) {
-                return null;
+        return null;
       }
       
       return (
@@ -64,6 +64,8 @@ class EditTask extends React.Component {
             </form>
         </div>
       )
+    }
+}
 
 
 export default EditTask;
