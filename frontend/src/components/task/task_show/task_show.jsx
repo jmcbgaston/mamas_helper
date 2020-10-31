@@ -24,20 +24,21 @@ class TaskShow extends React.Component {
           { task ? <h2 className="task-show__title">{task.title}</h2> : null }
           { requirements.length ? <RequirementsShow requirements={requirements} /> : null }
         </div>
-
-        <Link to="/startmyday">
-          <button
-            className = "task-delete button"
-            onClick={ () => (deleteTask(task._id))}>
-              Delete Task
-          </button>
-        </Link>
-        <Link to={`/startmyday/${params.taskId}/edit`}>
-          <button type='button' className='task-edit button'>Edit Task</button>
-        </Link>
-        <Link to={"/startmyday"}>
-          <button type='button' className='task-back button'>Back</button>
-        </Link>
+        <div className="task-show__options">
+          <Link to="/startmyday" className="task-show__link">
+            <button
+              className ="task-show__option button"
+              onClick={ () => (deleteTask(task._id))}>
+                Delete Task
+            </button>
+          </Link>
+          <Link to={`/startmyday/${params.taskId}/edit`} className="task-show__link">
+            <button type="button" className="task-show__option button">Edit Task</button>
+          </Link>
+          <Link to="/startmyday" className="task-show__link">
+            <button type="button" className="task-show__option button">Back</button>
+          </Link>
+        </div>
       </>
     )
   }

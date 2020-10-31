@@ -3,3 +3,19 @@
   flex-direction: column;
   align-items: center;
 }
+
+.task-show__title {
+  text-align: center;
+}
+
+.task-show__options {
+  margin: 3rem 0;
+}
+
+.task-show__link {
+  display: flex;
+}
+
+.task-show__option {
+  flex: 1;
+}
