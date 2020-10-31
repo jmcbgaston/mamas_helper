@@ -73,6 +73,7 @@
 .nav-bar {
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 
 .nav-bar__header {

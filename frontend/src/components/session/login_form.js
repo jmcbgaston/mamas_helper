@@ -60,31 +60,32 @@ class LoginForm extends React.Component {
 
   render() {
     const { user } = this.state;
+
     return (
-        <form class="session-form" onSubmit={this.handleSubmit}>
-          <h2 className="session-form__header">Welcome Back!</h2>
-            <input type="text"
-              className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
-              value={user.email}
-              onChange={this.update('email')}
-              placeholder="Email"
-            />
-            <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
+      <form class="session-form" onSubmit={this.handleSubmit}>
+        <h2 className="session-form__header">Welcome Back!</h2>
+          <input type="text"
+            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
+            value={user.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+          <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
 
-            <input type="password"
-              className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
-              value={user.password}
-              onChange={this.update('password')}
-              placeholder="Password"
-            />
-            <div className='session-form__errors form-errors'>{this.renderErrors('password')}</div>
+          <input type="password"
+            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
+            value={user.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+          <div className='session-form__errors form-errors'>{this.renderErrors('password')}</div>
 
-            <input className="session-form__submit button" type="submit" value="Login" />
+          <input className="session-form__submit button" type="submit" value="Login" />
 
-            <button className="session-form__demo button" type="button" onClick={this.demoSignIn}>
-              Demo Login
-            </button>
-        </form>
+          <button className="session-form__demo button" type="button" onClick={this.demoSignIn}>
+            Demo Login
+          </button>
+      </form>
     );
   }
 }

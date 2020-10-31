@@ -5,7 +5,8 @@
 }
 
 .session-form__header {
-  color: #800080
+  color: #800080;
+  margin-bottom: 2rem;
 }
 
 .session-form__submit {

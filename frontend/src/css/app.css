@@ -27,6 +27,8 @@ a {
 
 html {
   box-sizing: border-box;
+  min-height: 500px;
+  min-width: 300px;
 }
 
 *, *:before, *:after {
@@ -82,8 +84,8 @@ button:hover, input[type="submit"]:hover {
 body,
 #root {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  justify-content: center;
+  width: 100%;
 }
 
 .app-container, .content-container {
@@ -94,6 +96,7 @@ body,
 
 .app-container {
   padding: 0 2rem;
+  max-width: 800px;
 }
 
 .content-container {
@@ -106,6 +109,14 @@ body,
 
 .input-field {
   text-align: center;
+  border: 1px solid lightgray;
+}
+
+.button {
+  background-color: #baed91;
+  border-radius: .5rem;
+  border: 1px solid lightgray;
+  outline: none;
 }
 
 .form-errors {
