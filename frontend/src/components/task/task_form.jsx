@@ -12,9 +12,11 @@ class TaskForm extends React.Component{
   }
 
   renderErrors() {
+    const errors = Object.keys(this.props.errors)
+
     return(
       <ul className="create-task-errors">
-        {Object.keys(this.props.errors).map((error, i) => (
+        { errors.map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
           </li>
@@ -39,7 +41,7 @@ class TaskForm extends React.Component{
     });
   }
 
-  render(){
+  render() {
     return(
       <form onSubmit={this.handleSubmit}>
         <div  className="task-submit-container">
@@ -58,4 +60,4 @@ class TaskForm extends React.Component{
   }
 }
 
-export default TaskForm; 
+export default TaskForm;

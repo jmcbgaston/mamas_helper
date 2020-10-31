@@ -3,16 +3,14 @@ import TaskIndex from "./task_index"
 import { fetchTasks, createTask, removeTaskErrors } from "../../actions/task_actions";
 
 const mapStateToProps = (state) => {
-
     const user = state.session.user
     const tasks = Object.values(state.tasks)
-    
     return({
         user: user,
         tasks: tasks,
         errors: state.errors.task
     })
-}
+} 
 
 const mapDispatchToProps = (dispatch) => {
   return({
@@ -25,6 +23,8 @@ const mapDispatchToProps = (dispatch) => {
     clearErrors: () => {
       return dispatch(removeTaskErrors());
     }
-  }) 
+  })
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)
+
