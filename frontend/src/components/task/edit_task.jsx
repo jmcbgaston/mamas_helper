@@ -1,6 +1,8 @@
 import React from 'react';
+import RequirementsForm from './requirements_form'
 import '../../css/task.css'
 import '../../css/navbar.css'
+
 
 class EditTask extends React.Component {
     constructor(props) {
@@ -39,34 +41,29 @@ class EditTask extends React.Component {
     }
 
     render() {
-        if (!this.props.task) {
-                  return null;
-        }
+      if (!this.props.task) {
+                return null;
+      }
+      
+      return (
+        <div className="edit-task-outer-container"  className="edit-task-inner-container">
+            <form onSubmit={this.handleSubmit}>
+                <label><div className="edit-task-label-title">Title:</div>
+                    <input className="edit-task-input" type="text" value={this.state.title} onChange={this.handleChange('title')} placeholder="Title*" />
+                </label>
+                <span className="edit-task-label">Requirements:</span>
+                {this.state.requirements.map((requirement, idx) => {
+                    return (
+                        <label> {this.props.task.requirements[idx].description}
+                             <input className="edit-task-input" type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} placeholder="descriptions*"/>
+                        </label>
+                    )
+                } )}
+                <RequirementsForm task={this.state} updateTask={this.props.updateTask}/>
+                <button className="edit-task-submit-button">Update</button>
+            </form>
+        </div>
+      )
 
-          return (
-            <div className="edit-task-outer-container">
-              
-                <form onSubmit={this.handleSubmit} className="edit-task-inner-container">
-                    <label> <div className="edit-task-label-title">Title:</div>
-                        <input className="edit-task-input" type="text" value={this.state.title} onChange={this.handleChange('title')} placeholder="Title*" />      
-                    </label>
-                    <span className="edit-task-label">Requirements:</span>
-                    {this.state.requirements.map((requirement, idx) => {
-                        return (
-
-                            // <label> {requirement.description}
-                            <label> 
-                              {/* {this.props.task.requirements[idx].description} */}
-                                <input className="edit-task-input" type="text" value={requirement.description} onChange={this.handleRequirementChange(idx)} placeholder="descriptions*"/>
-                            </label>
-                        )
-                    } )}
-                    <button className="edit-task-submit-button">Update</button>
-                </form>
-              
-            </div>
-        )
-    }
-};
 
 export default EditTask;

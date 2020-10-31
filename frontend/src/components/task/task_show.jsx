@@ -3,8 +3,13 @@ import RequirementShowItem from './requirement_show_item';
 import { Link } from 'react-router-dom';
 
 class TaskShow extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     componentDidMount(){
-        this.props.fetchTask(this.props.match.params.taskId);
+        this.props.fetchTask(this.props.match.params.taskId); 
+
     }
 
     render() {
