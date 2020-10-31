@@ -1,6 +1,5 @@
 import React from 'react';
-import RequirementsShow from '../requirement_show/requirements_show';
-// import RequirementShowItem from '../requirement_show/requirement_show_item';
+import RequirementsShow from './task_show_requirements';
 import { Link } from 'react-router-dom';
 
 class TaskShow extends React.Component {

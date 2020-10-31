@@ -1,7 +1,7 @@
 import React from 'react';
 import Reusable from '../../reusable/reusable';
 
-const RequirementShowItem = ({ requirement }) => {
+const TaskShowRequirementItems = ({ requirement }) => {
     return (
       <li className="requiements-list-item">
         <h3 className = "description-show-title">➼ {requirement.description}</h3>
@@ -10,4 +10,4 @@ const RequirementShowItem = ({ requirement }) => {
     )
 };
 
-export default RequirementShowItem;
+export default TaskShowRequirementItems;

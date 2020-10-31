@@ -1,0 +1,20 @@
+.task-update-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.task-update-form__requirements-header {
+  margin: 2rem 0;
+}
+
+.task-update-form__label,
+.task-update-form__requirement-label {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.task-update-form__requirements-list-item {
+  margin-bottom: 3rem;
+}

@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
 import TaskShowContainer from './task/task_show/task_show_container'
 import TaskIndexContainer from './task/task_index/task_index_container'
-import EditTaskContainer from './task/edit_task_container';
+import TaskUpdateContainer from './task/task_update/task_update_container';
 
 import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
@@ -18,6 +18,7 @@ import '../css/form.css';
 import '../css/task/task_index.css'
 import '../css/task/task_show.css'
 import '../css/requirements/requirement_show.css'
+import '../css/task/task_update.css'
 
 const App = () => (
     <div className='app-container'>
@@ -29,7 +30,7 @@ const App = () => (
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
             <ProtectedRoute exact path ='/startmyday' component={TaskIndexContainer} />
             <ProtectedRoute exact path = '/startmyday/:taskId' component ={TaskShowContainer} />
-            <ProtectedRoute exact path = '/startmyday/:taskId/edit' component ={EditTaskContainer} />
+            <ProtectedRoute exact path = '/startmyday/:taskId/edit' component ={TaskUpdateContainer} />
         </Switch>
       </div>
     </div>
