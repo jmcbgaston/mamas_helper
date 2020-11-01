@@ -1,5 +1,5 @@
 .task-index__list {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .task-index__list-item {
@@ -7,13 +7,14 @@
 }
 
 .task-index__list-item-checkbox {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 3rem;
+  width: 3rem;
 }
 
 .task-index__list-item-link {
-  display: flex;
   align-items: center;
+  display: flex;
+  flex: 10;
 }
 
 .task-index__create-form {
@@ -21,7 +22,6 @@
 }
 
 .task-index__create-form-input {
-  border-right: 0;
   flex: 10;
 }
 
@@ -37,4 +37,8 @@
 .task-index__create-form-errors {
   color: #b22222;
   text-align: center;
+}
+
+.task-index__input-field {
+  flex: 10
 }

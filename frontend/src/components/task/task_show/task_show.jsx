@@ -27,7 +27,7 @@ class TaskShow extends React.Component {
           <Link to="/startmyday" className="task-show__link">
             <button
               className ="task-show__option button"
-              onClick={ () => (deleteTask(task._id))}>
+              onClick={() => (deleteTask(task._id))}>
                 Delete Task
             </button>
           </Link>

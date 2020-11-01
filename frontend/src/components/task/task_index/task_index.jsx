@@ -1,6 +1,6 @@
 import React from "react"
 import TaskIndexItem from "./task_index_item";
-import TaskForm from "../task_form";
+import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 
@@ -151,29 +151,12 @@ class TaskIndex extends React.Component {
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
 
-    // const taskList = tasks.map((task) => {
-    //   return (
-    //     <li className="task-index__list-item" key={task._id}>
-    //       <input
-    //         type="checkbox"
-    //         id={task._id}
-    //         className="task-index__list-item-checkbox"
-    //         onClick={this.handleCheck} />
-    //       <Link to={`/startmyday/${task._id}`}
-    //         className="task-index__list-item-link">
-    //         {task.title}
-    //       </Link>
-    //     </li>
-    //   );
-    // });
-
     return (
       <>
         <ul className="task-index__list">
           {tasks.map((task) =>
             <TaskIndexItem key={`task-index__list-item-${task._id}`} task={task} />
           )}
-          {/* {taskList} */}
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <button type="button"

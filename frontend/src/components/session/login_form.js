@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
     const { user } = this.state;
 
     return (
-      <form class="session-form" onSubmit={this.handleSubmit}>
+      <form className="session-form" onSubmit={this.handleSubmit}>
         <h2 className="session-form__header">Welcome Back!</h2>
           <input type="text"
             className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}

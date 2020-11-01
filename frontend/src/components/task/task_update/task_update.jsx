@@ -1,6 +1,6 @@
 import React from 'react';
-import RequirementsForm from '../requirements_form'
-import TaskUpdateRequirements from './task_update_requirements';
+import TaskUpdateAddRequirement from './task_update_add_requirement'
+// import TaskUpdateRequirements from './task_update_requirements';
 
 class TaskUpdate extends React.Component {
     constructor(props) {
@@ -43,12 +43,12 @@ class TaskUpdate extends React.Component {
       }
 
       const { task, updateTask } = this.props;
-      const requirements = task.requirements;
+      const { requirements } = this.state;
 
       return (
         <form className="task-update-form" onSubmit={this.handleSubmit}>
+            <h2 className="task-update-form__title">Title:</h2>
             <label className="task-update-form__label">
-              <h2 className="task-update-form__title">Title:&nbsp;</h2>
               <input type="text"
                 className="task-update-form__input input-field"
                 value={this.state.title}
@@ -62,20 +62,28 @@ class TaskUpdate extends React.Component {
               <ul className="task-update-form__requirements-list">
                 {requirements.map((requirement, idx) => {
                   return (
-                    <li key={`task-update-form__requirements-list-item-${requirement._id}`} className="task-update-form__requirements-list-item">
-                      <label className="task-update-form__requirement-label">
-                        <input type="text"
-                          className="task-update-form__requirement-input input-field"
-                          value={requirement.description}
-                          onChange={ this.handleRequirementChange(idx) }
-                          placeholder={requirement.description}/>
-                      </label>
+                    <li key={`task-update-form__requirements-list-item-${requirement._id}`}
+                      className="input-add-on">
+                      <span type="button"
+                        className="input-add-on-item__span input-add-on-item">
+                        {idx + 1}
+                      </span>
+                      <input type="text"
+                        className="task-update-form__requirement-input input-field"
+                        value={requirement.description}
+                        onChange={ this.handleRequirementChange(idx) }
+                        placeholder={requirement.description}/>
+                      <button
+                        type="button"
+                        className="input-add-on-item input-add-on-item__minus">
+                          <i className="fas fa-minus" />
+                      </button>
                     </li>
                   )
                 })}
               </ul>
             </div>
-            <RequirementsForm task={this.state} updateTask={updateTask}/>
+            <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
             <button className="task-update-form__submit button">Update</button>
         </form>
       )

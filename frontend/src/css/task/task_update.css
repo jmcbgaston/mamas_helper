@@ -4,17 +4,16 @@
   text-align: center;
 }
 
-.task-update-form__requirements-header {
-  /* margin: 2rem 0; */
-}
-
 .task-update-form__label,
 .task-update-form__requirement-label {
   display: flex;
   flex-direction: column;
 }
 
+.task-update-form__requirement-input {
+  flex: 8;
+}
 
-.task-update-form__requirements-list-item {
-  /* margin-bottom: 3rem; */
+.task-update-form__create-requirement-input {
+  flex: 10;
 }

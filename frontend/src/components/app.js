@@ -13,12 +13,10 @@ import '../css/reset.css';
 import '../css/app.css';
 import '../css/navbar.css'
 import '../css/session_forms.css';
-import '../css/form.css';
-// import '../css/task.css';
 import '../css/task/task_index.css'
 import '../css/task/task_show.css'
-import '../css/requirements/requirement_show.css'
 import '../css/task/task_update.css'
+import '../css/requirements/requirement_show.css'
 
 const App = () => (
     <div className='app-container'>

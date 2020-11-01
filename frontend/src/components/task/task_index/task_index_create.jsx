@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TaskForm extends React.Component{
+class TaskIndexCreate extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -47,16 +47,16 @@ class TaskForm extends React.Component{
         <form className="task-index__create-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
-            className="task-index__create-form-input input-field"
+            className="task-index__input-field input-add-on input-field"
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}
             onClick={this.props.clearErrors.bind(this)}/>
           <button
             type="submit"
-            className="task-index__create-form-button"
+            className="input-add-on-item input-add-on-item__plus"
             onClick={this.handleButton}>
-              <i class="fas fa-plus" />
+              <i className="fas fa-plus" />
           </button>
         </form>
         {this.renderErrors()}
@@ -65,4 +65,4 @@ class TaskForm extends React.Component{
   }
 }
 
-export default TaskForm;
+export default TaskIndexCreate;
