@@ -44,17 +44,17 @@ class TaskIndexCreate extends React.Component{
   render() {
     return (
       <>
-        <form className="task-index__create-form" onSubmit={this.handleSubmit}>
+        <form className="input-add-on" onSubmit={this.handleSubmit}>
           <input
             type="text"
-            className="task-index__input-field input-add-on input-field"
+            className="input-add-on__field input-add-on__field--left input-field"
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}
             onClick={this.props.clearErrors.bind(this)}/>
           <button
             type="submit"
-            className="input-add-on-item input-add-on-item__plus"
+            className="input-add-on__item input-add-on__item--right input-add-on__item--plus"
             onClick={this.handleButton}>
               <i className="fas fa-plus" />
           </button>

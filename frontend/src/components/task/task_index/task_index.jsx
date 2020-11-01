@@ -162,13 +162,13 @@ class TaskIndex extends React.Component {
         <button type="button"
           className="task-index__email-button button"
           onClick={this.handleEmailClick}>
-          Email me today's tasks
+            Email me today's tasks
         </button>
         <button
           type="button"
           className="task-index__list-button button"
           onClick={this.handleTaskClick}>
-          List my tasks and requirements
+            List my tasks and requirements
         </button>
         {this.state.toggleTaskList ? this.buildTaskList() : null}
       </>

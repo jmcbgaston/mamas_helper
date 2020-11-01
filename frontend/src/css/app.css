@@ -57,6 +57,7 @@ input, button, select, textarea, optgroup, option {
   font-weight: inherit;
   margin: inherit;
   padding: inherit;
+  border: 1px solid lightgray;
 }
 
 input[type="input"] {
@@ -99,7 +100,6 @@ body,
 .button {
   background-color: #baed91;
   border-radius: .5rem;
-  border: 1px solid lightgray;
   outline: none;
 }
 
@@ -117,29 +117,51 @@ body,
 .reusable {
   height: 1.5rem;
   width: 1.5rem;
+  margin-left: 1rem;
+}
+
+.input-add-on__item--span {
+  background-color: #efefef;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-add-on {
   display: flex;
 }
 
-.input-add-on-item {
+.input-add-on__field {
+  flex: 1;
+}
+
+.input-add-on__field--middle {
+  border-left: none;
+  border-right: none;
+}
+
+.input-add-on__field--left {
+  border-right: none;
+}
+
+.input-add-on__item {
   min-width: 3rem;
 }
 
-.input-add-on-item__plus {
+.input-add-on__item--left {
+  border-right: none;
+}
+
+.input-add-on__item--right {
+  border-left: none;
+}
+
+.input-add-on__item--plus {
   background-color: #a7e9af;
 }
 
-.input-add-on-item__minus {
+.input-add-on__item--minus {
   background-color: #f19292;
-}
-
-.input-add-on-item__span {
-  background-color: #efefef;
-  border-radius: 3px;
-  border: 1px solid #767676;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

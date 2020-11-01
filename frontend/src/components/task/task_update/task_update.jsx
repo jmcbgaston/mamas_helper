@@ -38,11 +38,12 @@ class TaskUpdate extends React.Component {
     }
 
     render() {
-      if (!this.props.task) {
+      const { task, updateTask, history } = this.props;
+
+      if (!task) {
         return null;
       }
 
-      const { task, updateTask } = this.props;
       const { requirements } = this.state;
 
       return (
@@ -65,17 +66,20 @@ class TaskUpdate extends React.Component {
                     <li key={`task-update-form__requirements-list-item-${requirement._id}`}
                       className="input-add-on">
                       <span type="button"
-                        className="input-add-on-item__span input-add-on-item">
+                        className="input-add-on__item
+                          input-add-on__item--span input-add-on__item--left">
                         {idx + 1}
                       </span>
                       <input type="text"
-                        className="task-update-form__requirement-input input-field"
+                        className="input-add-on__field
+                          input-add-on__field--middle input-field"
                         value={requirement.description}
-                        onChange={ this.handleRequirementChange(idx) }
-                        placeholder={requirement.description}/>
+                        onChange={this.handleRequirementChange(idx)}
+                        placeholder={task.requirements[idx].description}/>
                       <button
                         type="button"
-                        className="input-add-on-item input-add-on-item__minus">
+                        className="input-add-on__item
+                        input-add-on__item--right input-add-on__item__minus">
                           <i className="fas fa-minus" />
                       </button>
                     </li>
@@ -85,6 +89,11 @@ class TaskUpdate extends React.Component {
             </div>
             <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
             <button className="task-update-form__submit button">Update</button>
+            <button type="button"
+              className="task-update-form__cancel button"
+              onClick={() => history.goBack()}>
+                Cancel
+            </button>
         </form>
       )
     }

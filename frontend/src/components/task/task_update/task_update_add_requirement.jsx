@@ -35,14 +35,15 @@ class TaskUpdateAddRequirement extends React.Component {
         <div className="input-add-on">
           <input
             type="text"
-            className="task-update-form__create-requirement-input input-field"
+            className="input-add-on__field input-add-on__field--left input-field"
             value={this.state.description}
             onChange={this.handleChange}
             placeholder="add a new requirement"
           />
           <button
             type="button"
-            className="input-add-on-item input-add-on-item__plus"
+            className="input-add-on__item
+              input-add-on__item--right input-add-on-item__plus"
             onClick={this.handleButton}>
               <i className="fas fa-plus" />
           </button>
