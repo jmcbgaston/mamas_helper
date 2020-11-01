@@ -170,7 +170,9 @@ class TaskIndex extends React.Component {
     return (
       <>
         <ul className="task-index__list">
-          {tasks.map((task) => <TaskIndexItem task={task} />)}
+          {tasks.map((task) =>
+            <TaskIndexItem key={`task-index__list-item-${task._id}`} task={task} />
+          )}
           {/* {taskList} */}
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>

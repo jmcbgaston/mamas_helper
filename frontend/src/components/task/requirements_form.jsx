@@ -4,7 +4,7 @@ class RequirementsForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            description: ""
+          description: ""
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleButton = this.handleButton.bind(this)
@@ -19,7 +19,7 @@ class RequirementsForm extends React.Component {
     handleButton(e) {
         e.preventDefault();
         let newRequirement = { description: this.state.description, reusable: false }
-        this.props.task.requirements.push(newRequirement); 
+        this.props.task.requirements.push(newRequirement);
         this.setState({
             description: ""
         });
@@ -27,20 +27,21 @@ class RequirementsForm extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <input 
-                    type="text" 
-                    value={this.state.description} 
-                    onChange={this.handleChange} 
-                />
-                <button 
-                    type="button" 
-                    onClick={this.handleButton}>
-                        Add item to list
-                </button>
-            </div>
-        )
+      return (
+        <div className="">
+          <input
+            type="text"
+            value={this.state.description}
+            onChange={this.handleChange}
+            placeholder="add a new requirement"
+          />
+          <button
+            type="button"
+            onClick={this.handleButton}>
+              <i class="fas fa-plus fa-2x" />
+          </button>
+        </div>
+      )
     }
 }
 

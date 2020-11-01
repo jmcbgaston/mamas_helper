@@ -18,19 +18,18 @@
 
 .task-index__create-form {
   display: flex;
-  flex-direction: column;
 }
 
-.task-index__create-label {
-  align-items: center;
-  display: flex;
-  text-align: right;
+.task-index__create-form-input {
+  border-right: 0;
+  flex: 10;
 }
 
-.task-index__create-title {
-  flex: 1;
+.task-index__create-form-button {
+  flex: 2
 }
 
-.task-index__create-input {
-  flex: 3;
+.task-index__create-form-input,
+.task-index__create-form-button {
+  border: 1px solid rgba(147,128,108,.25);
 }

@@ -3,8 +3,12 @@ import TaskShowRequirementItems from './task_show_requirement_items';
 
 const TaskShowRequirements = ({ requirements }) => {
   return (
-    <ul className="requirements-list">
-      {requirements.map((requirement) => <TaskShowRequirementItems requirement={requirement} />)}
+    <ul className="task-show__requirements-list">
+      {requirements.map((requirement) =>
+        <TaskShowRequirementItems
+          key={`task-show__requirements-list-item-${requirement._id}`}
+          requirement={requirement} />
+      )}
     </ul>
   )
 }

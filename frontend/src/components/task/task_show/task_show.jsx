@@ -1,5 +1,5 @@
 import React from 'react';
-import RequirementsShow from './task_show_requirements';
+import TaskShowRequirements from './task_show_requirements';
 import { Link } from 'react-router-dom';
 
 class TaskShow extends React.Component {
@@ -21,7 +21,7 @@ class TaskShow extends React.Component {
       <>
         <div className="task-show__container">
           { task ? <h2 className="task-show__title">{task.title}</h2> : null }
-          { requirements.length ? <RequirementsShow requirements={requirements} /> : null }
+          { requirements.length ? <TaskShowRequirements requirements={requirements} /> : null }
         </div>
         <div className="task-show__options">
           <Link to="/startmyday" className="task-show__link">

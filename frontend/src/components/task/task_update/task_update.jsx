@@ -64,9 +64,9 @@ class TaskUpdate extends React.Component {
                   return (
                     <li key={`task-update-form__requirements-list-item-${requirement._id}`} className="task-update-form__requirements-list-item">
                       <label className="task-update-form__requirement-label">
-                        <h3>{ requirements[idx].description }</h3>
                         <input type="text"
                           className="task-update-form__requirement-input input-field"
+                          value={requirement.description}
                           onChange={ this.handleRequirementChange(idx) }
                           placeholder={requirement.description}/>
                       </label>
@@ -75,7 +75,7 @@ class TaskUpdate extends React.Component {
                 })}
               </ul>
             </div>
-            <RequirementsForm task={this.state} updateTask={this.props.updateTask}/>
+            <RequirementsForm task={this.state} updateTask={updateTask}/>
             <button className="task-update-form__submit button">Update</button>
         </form>
       )
