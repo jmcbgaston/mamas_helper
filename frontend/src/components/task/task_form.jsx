@@ -15,7 +15,7 @@ class TaskForm extends React.Component{
     const errors = Object.keys(this.props.errors)
 
     return(
-      <ul className="create-task-errors">
+      <ul className="task-index__create-form-errors">
         { errors.map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
@@ -43,23 +43,24 @@ class TaskForm extends React.Component{
 
   render() {
     return (
-      <form className="task-index__create-form" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          className="task-index__create-form-input input-field"
-          value={this.state.title}
-          placeholder="add a new task"
-          onChange={this.handleChange}
-          onClick={this.props.clearErrors.bind(this)}/>
-        <button
-          type="submit"
-          className="task-index__create-form-button"
-          onClick={this.handleButton}>
-            <i class="fas fa-plus" />
-        </button>
-        {/* <input type="submit" value="Create Task" className="task-index__create-submit button" /> */}
-        {/* {this.renderErrors()} */}
-      </form>
+      <>
+        <form className="task-index__create-form" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            className="task-index__create-form-input input-field"
+            value={this.state.title}
+            placeholder="add a new task"
+            onChange={this.handleChange}
+            onClick={this.props.clearErrors.bind(this)}/>
+          <button
+            type="submit"
+            className="task-index__create-form-button"
+            onClick={this.handleButton}>
+              <i class="fas fa-plus" />
+          </button>
+        </form>
+        {this.renderErrors()}
+      </>
     )
   }
 }
