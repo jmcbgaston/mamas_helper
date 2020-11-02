@@ -24,11 +24,6 @@
   border: 1px solid rgba(147,128,108,.25);
 }
 
-.task-index__create-form-errors {
-  color: #b22222;
-  text-align: center;
-}
-
 .task-list-container {
   margin: 3rem auto;
 }
