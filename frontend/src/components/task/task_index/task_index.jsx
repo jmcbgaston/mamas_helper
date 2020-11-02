@@ -1,5 +1,4 @@
 import React from "react"
-import TaskIndexItem from "./task_index_item";
 import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
@@ -27,7 +26,7 @@ class TaskIndex extends React.Component {
   buildTaskList() {
     const HTMLString = [];
     const reqDescriptions = [];
-    const { tasks, user } = this.props;
+    const { tasks } = this.props;
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
@@ -143,10 +142,9 @@ class TaskIndex extends React.Component {
       .catch((err) => {
         alert("Sorry, email failed to send!");
       })
-      .finally(() => Array.from(document.getElementsByClassName('task-checkbox'))
+      .finally(() => Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
                       .forEach((checkbox) => checkbox.checked = false ))
   }
-
 
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
@@ -155,7 +153,18 @@ class TaskIndex extends React.Component {
       <>
         <ul className="task-index__list">
           {tasks.map((task) =>
-            <TaskIndexItem key={`task-index__list-item-${task._id}`} task={task} />
+            <li className="task-index__list-item" key={task._id}>
+              <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
+              <Link to={`/startmyday/${task._id}`}
+                className="task-index__list-item-link">
+                {task.title}
+              </Link>
+            </li>
           )}
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
