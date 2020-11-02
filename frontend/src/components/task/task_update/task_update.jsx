@@ -32,7 +32,8 @@ class TaskUpdate extends React.Component {
     }
 
     handleRequirementDelete(idx) {
-      this.state.requirements.splice(idx, 1)
+      this.state.requirements.splice(idx, 1);
+      this.props.updateTask(this.state);
     }
 
     componentDidMount(){
