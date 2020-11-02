@@ -30,6 +30,7 @@ class TaskUpdate extends React.Component {
         const { requirements } = this.state;
         requirements[idx].description = e.currentTarget.value;
         this.setState({ requirements });
+        this.props.updateTask(this.state)
       }
     }
 
