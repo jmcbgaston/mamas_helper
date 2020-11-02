@@ -1,4 +1,6 @@
 import React from 'react';
+// import MainPopup from '../main_popup';
+import Popup from '../popup'; 
 
 class TaskIndexCreate extends React.Component{
   constructor(props){
@@ -9,7 +11,13 @@ class TaskIndexCreate extends React.Component{
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.state = { showPopup: false };
+    this.togglePopup = this.togglePopup.bind(this);
   }
+
+   togglePopup() {
+        this.setState({ showPopup: !this.state.showPopup})
+    }
 
   renderErrors() {
     const errors = Object.keys(this.props.errors)
@@ -39,11 +47,14 @@ class TaskIndexCreate extends React.Component{
       title: "",
       requirements: []
     });
+    this.setState({ showPopup: !this.state.showPopup})
   }
 
   render() {
     return (
       <>
+        {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null} 
+
         <form className="input-add-on" onSubmit={this.handleSubmit}>
           <input
             type="text"
