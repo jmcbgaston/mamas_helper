@@ -70,7 +70,7 @@ class TaskUpdate extends React.Component {
               <ul className="task-update-form__requirements-list">
                 {requirements.map((requirement, idx) => {
                   return (
-                    <li key={`task-update-form__requirements-list-item-${requirement._id}`}
+                    <li key={`${idx}`}
                       className="input-add-on">
                       <span type="button"
                         className="input-add-on__item
