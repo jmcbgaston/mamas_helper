@@ -142,8 +142,14 @@ class TaskIndex extends React.Component {
       .catch((err) => {
         alert("Sorry, email failed to send!");
       })
-      .finally(() => Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
-                      .forEach((checkbox) => checkbox.checked = false ))
+      .finally(() => {
+        Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
+                      .forEach((checkbox) => checkbox.checked = false );
+        this.setState({
+          toggleTaskList: false,
+          checkedTasksIds: {}
+        });
+      })
   }
 
   render() {
