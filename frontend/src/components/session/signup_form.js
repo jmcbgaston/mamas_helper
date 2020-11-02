@@ -1,15 +1,17 @@
-import React from 'react';  
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import "../../css/form.css";
 
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      email: '',
-      handle: '',
-      password: '',
-      password2: '',
+      user: {
+        email: '',
+        handle: '',
+        password: '',
+        password2: '',
+      },
       errors: {}
     };
 
@@ -18,8 +20,10 @@ class SignupForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.login({ email: this.state.email, password: this.state.password });
+    const { user } = this.state;
+
+    if (nextProps.signedIn) {
+      this.props.login({ email: user.email, password: user.password });
     }
 
     this.setState({errors: nextProps.errors})
@@ -30,94 +34,68 @@ class SignupForm extends React.Component {
   }
 
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    const { user } = this.state;
+
+    return e => {
+      user[field] = e.currentTarget.value;
+      this.setState({ user });
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let user = {
-      email: this.state.email,
-      handle: this.state.handle,
-      password: this.state.password,
-      password2: this.state.password2
-    };
- 
-    this.props.signup(user, this.props.history);
+    this.props.signup(this.state.user, this.props.history);
   }
 
   renderErrors(field) {
-    let error_message = "";
-    if(this.props.errors[field] !== undefined)
-    {
-        error_message = this.props.errors[field];
-    }
- 
-    return(
-      <div>
-      { error_message }
-      </div>
-    );
+    const { errors } = this.props;
+    return errors[field] ? errors[field] : null
   }
 
+  addErrorsClass(field) {
+    return this.state.errors[field] ? "input-errors" : '';
+  }
 
   render() {
+    const { user } = this.state;
+
     return (
-      <div>
-      <h1 className="signup-header"> Sign up for free!</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-input-container">
-              <div>
+        <form className="session-form" onSubmit={this.handleSubmit}>
+          <h2 className="session-form__header">Sign up for free!</h2>
+            <input type="text"
+              className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
+              value={user.email}
+              onChange={this.update('email')}
+              placeholder="Email"
+            />
+            <div className='session-form__errors form-errors'>{this.renderErrors('handle')}</div>
 
-                <div>
-                  <input className="form-input-field" type="text"
-                    value={this.state.email}
-                    onChange={this.update('email')}
-                    placeholder="Email"
-                  />
-                </div>
+            <input type="text"
+              className={`session-form__input-field input-field ${this.addErrorsClass('handle')}`}
+              value={user.handle}
+              onChange={this.update('handle')}
+              placeholder="Handle"
+            />
+            <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
 
-                <div className='session-form-errors'>{this.renderErrors('email')}</div>
+            <input type="password"
+              className={`session-form__input-field input-field ${this.addErrorsClass('password')}`}
+              value={user.password}
+              onChange={this.update('password')}
+              placeholder="Password"
+            />
+            <div className='session-form__errors form-errors'>{this.renderErrors('password')}</div>
 
-                <div>
-                  <input className="form-input-field" type="text"
-                    value={this.state.handle}
-                    onChange={this.update('handle')}
-                    placeholder="Handle"
-                  />
-                </div>
+            <input type="password"
+              className={`session-form__input-field input-field ${this.addErrorsClass('password2')}`}
+              value={user.password}
+              onChange={this.update('password2')}
+              placeholder="Confirm Password"
+            />
+            <div className='session-form__errors form-errors'>{this.renderErrors('password2')}</div>
 
-              <div className='session-form-errors'>{this.renderErrors('handle')}</div>
-
-                <div>
-                  <input className="form-input-field" type="password"
-                    value={this.state.password}
-                    onChange={this.update('password')}
-                    placeholder="Password"
-                  />
-                </div>
-
-                <div className='session-form-errors'>{this.renderErrors('password')}</div>
-
-                <div>
-                  <input className="form-input-field" type="password"
-                    value={this.state.password2}
-                    onChange={this.update('password2')}
-                    placeholder="Confirm Password"
-                  />
-                </div>
-
-                <div className='session-form-errors'>{this.renderErrors('password2')}</div>
-
-                <div className="form-login-button">
-                  <input className="form-submit" type="submit" value="Submit" />
-                </div>
-
-              </div>
-          </div>
+            <input className="session-form__submit button" type="submit" value="Sign Up" />
         </form>
-      </div>
     );
   }
 }

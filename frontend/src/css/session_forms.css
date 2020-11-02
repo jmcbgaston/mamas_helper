@@ -1,0 +1,15 @@
+.session-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex: 1;
+}
+
+.session-form__header {
+  color: #800080;
+  /* margin-bottom: 2rem; */
+}
+
+.session-form__submit {
+  /* margin-bottom: 3rem; */
+}

@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
-import { fetchTasks, createTask, removeTaskErrors } from "../../actions/task_actions";
+import { fetchTasks, createTask, removeTaskErrors } from "../../../actions/task_actions";
 
 const mapStateToProps = (state) => {
     const user = state.session.user
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
         tasks: tasks,
         errors: state.errors.task
     })
-} 
+}
 
 const mapDispatchToProps = (dispatch) => {
   return({

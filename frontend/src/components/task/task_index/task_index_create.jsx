@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TaskForm extends React.Component{
+class TaskIndexCreate extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class TaskForm extends React.Component{
     const errors = Object.keys(this.props.errors)
 
     return(
-      <ul className="create-task-errors">
+      <ul className="task-index__create-form-errors">
         { errors.map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
@@ -42,22 +42,27 @@ class TaskForm extends React.Component{
   }
 
   render() {
-    return(
-      <form onSubmit={this.handleSubmit}>
-        <div  className="task-submit-container">
-        <label>Title:&nbsp;
-          <input 
-            type="text" 
-            value={this.state.title} 
-            onChange={this.handleChange} 
-            onClick={this.props.clearErrors.bind(this)} className="form-input-field"/>
-        </label>
+    return (
+      <>
+        <form className="input-add-on" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            className="input-add-on__field input-add-on__field--left input-field"
+            value={this.state.title}
+            placeholder="add a new task"
+            onChange={this.handleChange}
+            onClick={this.props.clearErrors.bind(this)}/>
+          <button
+            type="submit"
+            className="input-add-on__item input-add-on__item--right input-add-on__item--plus"
+            onClick={this.handleButton}>
+              <i className="fas fa-plus" />
+          </button>
+        </form>
         {this.renderErrors()}
-        <input type="submit" value="Create Task" className="form-submit" />
-        </div>
-      </form>
+      </>
     )
   }
 }
 
-export default TaskForm;
+export default TaskIndexCreate;

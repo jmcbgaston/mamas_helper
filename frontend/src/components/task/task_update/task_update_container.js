@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import EditTask from './edit_task';
-import { fetchTask, updateTask } from '../../actions/task_actions';
+import { fetchTask, updateTask } from '../../../actions/task_actions';
+import TaskUpdate from './task_update';
 
 const mapStateToProps = (state, ownProps) => {
     return ({
@@ -16,4 +15,4 @@ const mapDispatchToProps = (dispatch) => {
     })
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditTask);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskUpdate);

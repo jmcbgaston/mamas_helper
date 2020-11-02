@@ -1,58 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import "../../css/navbar.css";
+import { Link, useLocation } from 'react-router-dom'
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.logoutUser = this.logoutUser.bind(this);
-    this.getLinks = this.getLinks.bind(this);
-  }
+const AuthNav = ({ logout }) => (
+  <>
+    <h2 className ="nav-bar__header">Welcome!</h2>
+    <button
+      className ="nav-bar__logout-button button"
+      onClick={() => logout()}>
+        Sign Out
+    </button>
+  </>
+)
 
-  logoutUser(e) {
-      e.preventDefault();
-      this.props.logout();
-  }
+const UnAuthNav = () => {
+  const SignUp = () => (
+    <Link className="button-links" to="/signup">
+      <button className="nav-bar__session-button button">
+        Sign Up
+      </button>
+    </Link>
+  )
 
-  getLinks() {
-      if (this.props.loggedIn) {
-        return (
-            <div className = "nav-logged-in-container">
-                <Link to="/startmyday" className="nav-header-link"><h1 className="nav-header">Mama's Helper</h1></Link>
-                <br />
-                <h1 className = "nav-welcome-message">Welcome!</h1>
-                <button className = "nav-welcome-logout" onClick={this.logoutUser}>Sign Out</button>
-            </div>
-        );
-      } else {
-        return (
-            <div>
-              <h1 className="nav-header">Mama's Helper</h1>
-              <div className="nav-button-container">
+  const LogIn = () => (
+    <Link className="button-links" to="/login">
+      <button className="nav-bar__session-button button">
+        Login
+      </button>
+    </Link>
+  )
 
-                <div>
-                  <div>
-                    <Link to={'/signup'}><button className="nav-signup">Sign Up</button></Link>
-                  </div>
-                  <div>
-                    <Link to={'/login'}><button className="nav-signin">Sign In</button></Link>
-                  </div>
-                </div>
+  const { pathname } = useLocation();
+  return pathname === '/signup' ? <LogIn /> : <SignUp />
+}
 
-              </div>
-            </div>
+const NavBar = (props) => {
+  const { loggedIn, logout } = props;
 
-        );
-      }
-  }
+  return (
+    <nav className="nav-bar">
+      <h1>
+        <Link to="/startmyday" className="nav-bar__header">
+          Mama's Helper
+        </Link>
+      </h1>
 
-  render() {
-      return (
-        <div>
-            { this.getLinks() }
-        </div>
-      );
-  }
+      { loggedIn ? <AuthNav logout={logout}/> :<UnAuthNav /> }
+    </nav>
+  );
 }
 
 export default NavBar;

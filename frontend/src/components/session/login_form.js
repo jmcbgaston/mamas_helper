@@ -1,23 +1,25 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import "../../css/form.css";
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
+      user: {
+        email: '',
+        password: '',
+      },
       errors: {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+    this.demoSignIn = this.demoSignIn.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({errors: nextProps.errors})
+    this.setState({ errors: nextProps.errors })
   }
 
   componentWillUnmount() {
@@ -25,86 +27,67 @@ class LoginForm extends React.Component {
   }
 
   demoSignIn() {
-    const user = {email: "test@test.com", password: "password"};
+    const user = {
+      email: "test@test.com",
+      password: "password"
+    };
+
     this.props.login(user);
   }
 
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    const { user } = this.state;
+
+    return e => {
+      user[field] = e.currentTarget.value;
+      this.setState({ user });
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-
-    let user = {
-      email: this.state.email,
-      password: this.state.password
-    };
-
-    this.props.login(user); 
+    this.props.login(this.state.user);
   }
 
   renderErrors(field) {
-    let error_message = "";
-    if(this.props.errors[field] !== undefined)
-    {
-        error_message = this.props.errors[field];
-    }
- 
-    return(
-      <div>
-      { error_message }
-      </div>
-    );
+    const { errors } = this.props;
+    return errors[field] ? errors[field] : null
   }
 
+  addErrorsClass(field) {
+    return this.state.errors[field] ? "input-errors" : '';
+  }
 
   render() {
+    const { user } = this.state;
+
     return (
-      <div>
-        <h1 className="signup-header"> Welcome Back!</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-input-container">
-            <div>
-              <div>
+      <form className="session-form" onSubmit={this.handleSubmit}>
+        <h2 className="session-form__header">Welcome Back!</h2>
+          <input type="text"
+            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
+            value={user.email}
+            onChange={this.update('email')}
+            placeholder="Email"
+          />
+          <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
 
-                <input className="form-input-field" type="text"
-                  value={this.state.email}
-                  onChange={this.update('email')}
-                  placeholder="Email"
-                />
-              </div>
+          <input type="password"
+            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
+            value={user.password}
+            onChange={this.update('password')}
+            placeholder="Password"
+          />
+          <div className='session-form__errors form-errors'>{this.renderErrors('password')}</div>
 
-              <div className='session-form-errors'>{this.renderErrors('email')}</div>
+          <input className="session-form__submit button" type="submit" value="Login" />
 
-              <div>
-                <input className="form-input-field" type="password"
-                  value={this.state.password}
-                  onChange={this.update('password')}
-                  placeholder="Password"
-                />
-              </div>
-
-              <div className='session-form-errors'>{this.renderErrors('password')}</div>
-
-              <div className="form-login-button">
-                <input className="form-submit" type="submit" value="Login" />
-              </div>
-
-              <div className="form-demo-login-button">
-                <button className="form-submit" type="button" onClick={this.demoSignIn.bind(this)}>Demo Login</button>
-              </div>
-
-            </div>
-          </div>
-        </form>
-      </div>
+          <button className="session-form__demo button" type="button" onClick={this.demoSignIn}>
+            Demo Login
+          </button>
+      </form>
     );
   }
 }
 
 export default withRouter(LoginForm);
-
-//adf

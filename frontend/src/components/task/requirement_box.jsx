@@ -1,5 +1,5 @@
 import React from 'react';
-import reusable_img from "./reusable.png";
+import Reusable from '../../reusable/reusable';
 
 class RequirementBox extends React.Component {
   render() {
@@ -8,7 +8,7 @@ class RequirementBox extends React.Component {
     return (
       <li className="requirement-box-container">
         <p className = "requirement-description">{description}</p>
-        {reusable ? <img className = "reusable" src={reusable_img} alt="recycle-logo" /> : "" }
+        {reusable ? <Reusable /> : null }
       </li>
     )
   }

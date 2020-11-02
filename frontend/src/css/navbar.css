@@ -1,73 +1,24 @@
-.nav-logged-in-container {
+.nav-bar {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* margin: 3rem 0; */
+}
+
+.nav-bar__header {
+  color: #800080;
+  text-align: center;
+}
+
+.nav-bar__session-button {
+  flex: 1;
+}
+
+.nav-bar__session-button,
+.nav-bar__logout-button {
+  height: 3rem;
+}
+
+.start-my-day-button {
+  display: flex;
   justify-content: center;
-
-}
-
-.nav-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* color: #B784A7; */
-    /* color: #D291BC; */
-    color: purple;
-    font-size: 40px;
-    font-family: 'Martel Sans', sans-serif;
-}
-
-.nav-header-link {
-    text-decoration: none;
-}
-
-.nav-welcome-message {
-    color: purple;
-    font-size: 20px;
-    font-family: 'Martel Sans', sans-serif;
-}
-
-.nav-button-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-signup, .splash-my-tasks, .task-delete {
-    border-radius: 4px;
-    background-color: #f8b88b;
-    color: white;
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer;
-    border: 1px solid lightgray;
-    width: 73px;
-    height: 40px;
-    font-size: 15px;
-    outline: none;
-    width: 160px;
-}
-
-.nav-signin, .nav-welcome-logout, .task-edit {
-    border-radius: 4px;
-    background-color: #b2cefe;
-    color:white;
-    padding: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    border: 1px solid lightgray;
-    width: 73px;
-    height: 40px;
-    font-size: 15px;
-    outline: none;
-    width: 158px;
-}
-
-.nav-signup:hover {
-    filter: brightness(105%);
-}
-
-.nav-signin:hover {
-    filter: brightness(105%);
 }

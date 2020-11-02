@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { login, receiveErrors } from '../../actions/session_actions';
+import { login, clearErrors } from '../../actions/session_actions';
 import LoginForm from './login_form';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
-    clearErrors: () => dispatch(receiveErrors([]))
+    clearErrors: () => dispatch(clearErrors())
   }
 }
 
