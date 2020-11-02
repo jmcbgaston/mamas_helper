@@ -96,7 +96,6 @@ class TaskUpdate extends React.Component {
               </ul>
             </div>
             <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
-            {/* <button className="task-update-form__submit button">Update</button> */}
             <button type="button"
               className="task-update-form__cancel button"
               onClick={() => history.goBack()}>
