@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
+import { Link } from 'react-router-dom'
 // import TaskUpdateRequirements from './task_update_requirements';
 
 class TaskUpdate extends React.Component {
@@ -94,11 +95,11 @@ class TaskUpdate extends React.Component {
               </ul>
             </div>
             <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
-            <button className="task-update-form__submit button">Update</button>
+            {/* <button className="task-update-form__submit button">Update</button> */}
             <button type="button"
               className="task-update-form__cancel button"
               onClick={() => history.goBack()}>
-                Cancel
+                Back
             </button>
         </form>
       )
