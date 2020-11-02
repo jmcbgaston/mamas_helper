@@ -1,7 +1,5 @@
 import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
-import { Link } from 'react-router-dom'
-// import TaskUpdateRequirements from './task_update_requirements';
 
 class TaskUpdate extends React.Component {
     constructor(props) {
@@ -22,7 +20,6 @@ class TaskUpdate extends React.Component {
     handleChange(type) {
       return (e) => {
         this.setState({ [type]: e.currentTarget.value })
-        this.props.updateTask(this.state)
       }
     }
 
@@ -31,18 +28,20 @@ class TaskUpdate extends React.Component {
         const { requirements } = this.state;
         requirements[idx].description = e.currentTarget.value;
         this.setState({ requirements });
-        this.props.updateTask(this.state)
       }
     }
 
     handleRequirementDelete(idx) {
       this.state.requirements.splice(idx, 1)
-      this.props.updateTask(this.state)
     }
 
     componentDidMount(){
         this.props.fetchTask(this.props.match.params.taskId)
         this.setState({ ...this.props.task})
+    }
+
+    componentWillUnmount(){
+      this.props.updateTask(this.state);
     }
 
     render() {
