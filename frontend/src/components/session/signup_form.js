@@ -88,7 +88,7 @@ class SignupForm extends React.Component {
 
             <input type="password"
               className={`session-form__input-field input-field ${this.addErrorsClass('password2')}`}
-              value={user.password}
+              value={user.password2}
               onChange={this.update('password2')}
               placeholder="Confirm Password"
             />
