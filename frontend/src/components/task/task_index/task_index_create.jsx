@@ -1,6 +1,6 @@
 import React from 'react';
 // import MainPopup from '../main_popup';
-import Popup from '../popup'; 
+import Popup from '../popup';
 
 class TaskIndexCreate extends React.Component{
   constructor(props){
@@ -23,7 +23,7 @@ class TaskIndexCreate extends React.Component{
     const errors = Object.keys(this.props.errors)
 
     return(
-      <ul className="task-index__create-form-errors">
+      <ul className="form-errors">
         { errors.map((error, i) => (
           <li key={`error-${i}`}>
             {this.props.errors[error]}
@@ -53,7 +53,7 @@ class TaskIndexCreate extends React.Component{
   render() {
     return (
       <>
-        {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null} 
+        {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
 
         <form className="input-add-on" onSubmit={this.handleSubmit}>
           <input

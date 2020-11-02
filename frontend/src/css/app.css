@@ -80,6 +80,7 @@ body,
 
 .app-container {
   flex: 1;
+  margin: 2rem;
   max-width: 800px;
 }
 
@@ -107,6 +108,7 @@ body,
   align-items: center;
   color: #c23b23;
   display: flex;
+  height: 2rem;
   justify-content: center;
 }
 
