@@ -35,6 +35,7 @@ class TaskUpdateAddRequirement extends React.Component {
         <div className="input-add-on">
           <input
             type="text"
+            maxLength="30"
             className="input-add-on__field input-add-on__field--left input-field"
             value={this.state.description}
             onChange={this.handleChange}

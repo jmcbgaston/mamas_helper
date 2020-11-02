@@ -22,6 +22,7 @@ class TaskUpdate extends React.Component {
     handleChange(type) {
       return (e) => {
         this.setState({ [type]: e.currentTarget.value })
+        this.props.updateTask(this.state)
       }
     }
 
@@ -58,6 +59,7 @@ class TaskUpdate extends React.Component {
             <h2 className="task-update-form__title">Title:</h2>
             <label className="task-update-form__label">
               <input type="text"
+                maxLength="30"
                 className="task-update-form__input input-field"
                 value={this.state.title}
                 onChange={this.handleChange('title')}
@@ -78,6 +80,7 @@ class TaskUpdate extends React.Component {
                         {idx + 1}
                       </span>
                       <input type="text"
+                        maxLength="30"
                         className="input-add-on__field
                           input-add-on__field--middle input-field"
                         value={requirement.description}
