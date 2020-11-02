@@ -19,7 +19,28 @@
   margin: 1rem 0 1rem 1rem;
 }
 
+/* .task-index__create-form {
+  display: flex;
+} */
+
+/* .task-index__create-form-input {
+  flex: 10;
+}
+
+.task-index__create-form-button {
+  flex: 2
+} */
+
+.task-index__create-form-input,
+.task-index__create-form-button {
+  border: 1px solid rgba(147,128,108,.25);
+}
+
 .task-index__create-form-errors {
   color: #b22222;
   text-align: center;
 }
+
+/* .task-index__input-field {
+  flex: 10;
+} */
