@@ -16,7 +16,7 @@ class EditTask extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       this.props.updateTask(this.state)
-        .then( () => this.props.history.push('/startmyday'))
+        .then( () => this.props.history.push(`/startmyday/${this.props.match.params.taskId}`))
         .catch( () => console.log("errrrorrrrsss"))
     }
 
