@@ -32,6 +32,11 @@ class TaskUpdate extends React.Component {
       }
     }
 
+    handleRequirementDelete(idx) {
+      this.state.requirements.splice(idx, 1)
+      this.props.updateTask(this.state)
+    }
+
     componentDidMount(){
         this.props.fetchTask(this.props.match.params.taskId)
         this.setState({ ...this.props.task})
@@ -79,7 +84,8 @@ class TaskUpdate extends React.Component {
                       <button
                         type="button"
                         className="input-add-on__item
-                        input-add-on__item--right input-add-on__item__minus">
+                        input-add-on__item--right input-add-on__item__minus"
+                        onClick={() => this.handleRequirementDelete(idx)}>
                           <i className="fas fa-minus" />
                       </button>
                     </li>
