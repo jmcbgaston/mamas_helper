@@ -7,13 +7,23 @@
   right: 0;  
   bottom: 10%;  
   margin: auto;  
-  background-color: rgba(0,0,0, 0.1);  
+  background-color: rgba(0,0,0, 0.3);  
+}
+
+.popup button {
+  float: right;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: outset;
+  font-weight: bolder;
 }
 
 .inner-popup {  
   position: absolute;  
-  left: 80%;
-  right: 25%;  
+  left: 50%;
   top: 50%;  
   bottom: 30%;  
   margin: auto;  
@@ -24,6 +34,16 @@
 }
 
 .modal-text {
-    font-size: 18px;
     text-align: center;
+}
+
+.inner-popup h1 {
+   font-size: 20px;
+   font-weight: bold;
+   padding: 5px;
+  }
+  
+  .inner-popup h2 {
+    font-size: 18px;
+    padding: 5px;
 }
