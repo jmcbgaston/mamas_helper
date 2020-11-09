@@ -71,7 +71,6 @@ class TaskIndex extends React.Component {
 
   handleEmailClick(e) {
     const HTMLString = [];
-    const reqDescriptions = [];
     const { tasks, user } = this.props;
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
@@ -87,24 +86,16 @@ class TaskIndex extends React.Component {
     checked.forEach((taskId) => {
       const task = tasks.find((requirement) => requirement._id === taskId);
 
-      HTMLString.push(`<li>${task.title}</li>`);
+      HTMLString.push(`
+        <li>${task.title}</li>
+        <ul>
+      `);
+
       task.requirements.forEach((requirement) => {
-        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
-          reqDescriptions.push(requirement.description);
-        }
+        HTMLString.push(`<li>${requirement.description}</li>`);
       })
+      HTMLString.push(`</ul>`);
     })
-
-    HTMLString.push(`
-      </ul>
-      <br>
-      <h3>Requirements:</h3>
-      <ul>
-    `);
-
-    reqDescriptions.forEach((description) => {
-      HTMLString.push(`<li>${description}</li>`);
-    });
 
     HTMLString.push(`
       </ul>
