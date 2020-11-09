@@ -2,6 +2,7 @@ import React from "react"
 import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
+import { TaskIndexList } from "./task_index_list";
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class TaskIndex extends React.Component {
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.state = {
-      toggleTaskList: false,
+      showModal: false,
       checkedTasksIds: {}
     }
   }
@@ -23,39 +24,6 @@ class TaskIndex extends React.Component {
     this.props.clearErrors();
   }
 
-  buildTaskList() {
-    const HTMLString = [];
-    const { tasks } = this.props;
-    const checkedTasksIds = { ...this.state.checkedTasksIds };
-    const checked = Object.keys(checkedTasksIds)
-                      .filter((taskId) => checkedTasksIds[taskId]);
-
-    HTMLString.push(`
-      <h3 className="task-list-header"
-          style="color:#04835b; font-size:20px; text-align: center">
-        Task List:
-      </h3>
-      <ul className="task-list-menu">
-    `);
-
-    checked.forEach((taskId) => {
-      const task = tasks.find((requirement) => requirement._id === taskId);
-
-      HTMLString.push(`
-        <li className="task-list-item" style="list-style: disc">${task.title}</li>
-        <ul className="task-list-item-reqs">
-      `);
-
-      task.requirements.forEach((requirement) => {
-        HTMLString.push(`<li className="task-list-item-reqs-item" style="list-style: circle; margin-left: 1rem">${requirement.description}</li>`);
-      })
-    })
-    HTMLString.push(`</ul>`);
-
-    const html = {__html: HTMLString.join('') };
-    return <div className="task-list-container" dangerouslySetInnerHTML={html} />
-  }
-
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
@@ -65,7 +33,7 @@ class TaskIndex extends React.Component {
 
   handleTaskClick(e) {
     this.setState({
-      toggleTaskList: !this.state.toggleTaskList
+      showModal: !this.state.showModal
     })
   }
 
@@ -121,7 +89,7 @@ class TaskIndex extends React.Component {
         Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
                       .forEach((checkbox) => checkbox.checked = false );
         this.setState({
-          toggleTaskList: false,
+          showModal: false,
           checkedTasksIds: {}
         });
       })
@@ -160,7 +128,7 @@ class TaskIndex extends React.Component {
           onClick={this.handleTaskClick}>
             List my tasks and requirements
         </button>
-        {this.state.toggleTaskList ? this.buildTaskList() : null}
+        {this.state.showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...this.state.checkedTasksIds}} /> : null}
       </>
     );
   }

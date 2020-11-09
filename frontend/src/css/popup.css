@@ -1,23 +1,23 @@
-.popup {  
-  position: fixed;  
-  width: 100%;  
-  height: 100%;  
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
   top: 10%;
-  left: 0;  
-  right: 0;  
-  bottom: 10%;  
-  margin: auto;  
-  background-color: rgba(0,0,0, 0.1);  
+  left: 0;
+  right: 0;
+  bottom: 10%;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.1);
 }
 
-.inner-popup {  
-  position: absolute;  
+.inner-popup {
+  position: absolute;
   left: 80%;
-  right: 25%;  
-  top: 50%;  
-  bottom: 30%;  
-  margin: auto;  
-  border-radius: 5px;  
+  right: 25%;
+  top: 50%;
+  bottom: 30%;
+  margin: auto;
+  border-radius: 5px;
   background-color: peachpuff;
   transform: translate(-50%, -50%);
   width: 300px;
@@ -26,4 +26,54 @@
 .modal-text {
     font-size: 18px;
     text-align: center;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 60%;
+  text-align: center;
+  padding: 1rem 2rem 2rem 2rem;
+}
+
+.modal-items-container {
+  display: inline-block;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.task-list-item__header {
+  font-size: 1.25rem;
+}
+
+.task-list-item__requirement {
+  color: goldenrod;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.modal-items-spacing {
+  margin: 1rem 0;
+}
+
+.modal-header__title {
+  flex: 1;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
