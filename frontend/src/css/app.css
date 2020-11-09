@@ -104,6 +104,14 @@ body,
   outline: none;
 }
 
+.button:disabled {
+  background-color: #EBEBE4;
+}
+
+.button:disabled:hover {
+  filter: brightness(100%);
+}
+
 .form-errors {
   align-items: center;
   color: #c23b23;

@@ -97,6 +97,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
+    const { showModal, checkedTasksIds } = this.state;
 
     return (
       <>
@@ -125,10 +126,11 @@ class TaskIndex extends React.Component {
         <button
           type="button"
           className="task-index__list-button button"
-          onClick={this.handleTaskClick}>
-            List my tasks and requirements
+          onClick={this.handleTaskClick}
+          disabled={!Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length}>
+            Show my tasks
         </button>
-        {this.state.showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...this.state.checkedTasksIds}} /> : null}
+        {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
       </>
     );
   }
