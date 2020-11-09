@@ -25,7 +25,6 @@ class TaskIndex extends React.Component {
 
   buildTaskList() {
     const HTMLString = [];
-    const reqDescriptions = [];
     const { tasks } = this.props;
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
@@ -33,7 +32,7 @@ class TaskIndex extends React.Component {
 
     HTMLString.push(`
       <h3 className="task-list-header"
-          style="color:#04835b;font-size:20px;">
+          style="color:#04835b; font-size:20px; text-align: center">
         Task List:
       </h3>
       <ul className="task-list-menu">
@@ -42,31 +41,16 @@ class TaskIndex extends React.Component {
     checked.forEach((taskId) => {
       const task = tasks.find((requirement) => requirement._id === taskId);
 
-      HTMLString.push(`<li className="task-list-item" style="list-style: inside">${task.title}</li>`);
+      HTMLString.push(`
+        <li className="task-list-item" style="list-style: disc">${task.title}</li>
+        <ul className="task-list-item-reqs">
+      `);
+
       task.requirements.forEach((requirement) => {
-        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
-          reqDescriptions.push(requirement.description);
-        }
+        HTMLString.push(`<li className="task-list-item-reqs-item" style="list-style: circle; margin-left: 1rem">${requirement.description}</li>`);
       })
     })
-
-    HTMLString.push(`
-      </ul>
-      <br>
-      <h3 className="requirements-list-header"
-          style="color:#aa3931;font-size:20px">
-        Requirements:
-      </h3>
-      <ul className="requirements-list-menu">
-    `);
-
-    reqDescriptions.forEach((description) => {
-      HTMLString.push(`<li className="requirements-list-item" style="list-style: inside">${description}</li>`);
-    });
-
-    HTMLString.push(`
-      </ul>
-    `)
+    HTMLString.push(`</ul>`);
 
     const html = {__html: HTMLString.join('') };
     return <div className="task-list-container" dangerouslySetInnerHTML={html} />
