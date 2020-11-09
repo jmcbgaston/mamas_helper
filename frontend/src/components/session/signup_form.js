@@ -68,7 +68,7 @@ class SignupForm extends React.Component {
               onChange={this.update('email')}
               placeholder="Email"
             />
-            <div className='session-form__errors form-errors'>{this.renderErrors('handle')}</div>
+            <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
 
             <input type="text"
               className={`session-form__input-field input-field ${this.addErrorsClass('handle')}`}
@@ -76,7 +76,7 @@ class SignupForm extends React.Component {
               onChange={this.update('handle')}
               placeholder="Handle"
             />
-            <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
+            <div className='session-form__errors form-errors'>{this.renderErrors('handle')}</div>
 
             <input type="password"
               className={`session-form__input-field input-field ${this.addErrorsClass('password')}`}
