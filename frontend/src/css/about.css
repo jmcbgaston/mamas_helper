@@ -1,0 +1,50 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: lavenderblush; */
+    width: 90%;
+    margin: 20px 0;
+}
+
+.about-main-ul {
+    display: flex;
+    margin-bottom: 20px;
+    width: inherit;
+}
+
+.prof-pic {
+    width: 40%;
+    height: 100%;
+    max-width: 200px;
+    border-radius: 15px;
+    margin-right: 10%;
+}
+
+.about-sub-ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 60%;
+}
+
+.about-name {
+    font-size: 130%;
+}
+
+.about-role {
+    font-size: 15px;
+    margin: 2% 5%;
+}
+
+.about-links-ul {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 28px 0;
+}
+
+.about-links-ul img {
+    width: 30px;
+    height: 30px;
+}
