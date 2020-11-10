@@ -7,11 +7,11 @@ class TaskIndexCreate extends React.Component{
     super(props);
     this.state = {
       title: "",
-      requirements: []
+      requirements: [],
+      showPopup: false 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { showPopup: false };
     this.togglePopup = this.togglePopup.bind(this);
   }
 
@@ -41,14 +41,18 @@ class TaskIndexCreate extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    const { tasks } = this.props;
+    const formInputStr = e.nativeEvent.srcElement[0].value;
+    const duplicate = tasks.find((task) => task.title === formInputStr);
+    if(!duplicate && formInputStr.length > 2) this.togglePopup();
     const task = this.state;
-    this.props.createTask(task);
+    this.props.createTask(task)
     this.setState({
       title: "",
       requirements: []
     });
-    this.setState({ showPopup: !this.state.showPopup})
   }
+
 
   render() {
     return (
@@ -70,7 +74,7 @@ class TaskIndexCreate extends React.Component{
               <i className="fas fa-plus" />
           </button>
         </form>
-        {this.renderErrors()}
+        { this.renderErrors() }
       </>
     )
   }

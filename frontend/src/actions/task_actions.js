@@ -39,6 +39,7 @@ export const fetchTasks = owner_id => dispatch => {
 };
 
 export const fetchTask = taskId => dispatch => {
+
     return (
         TaskAPIUtil.getUserTask(taskId)
         .then(task => dispatch(receiveTask(task)))
