@@ -39,7 +39,7 @@ const NavBar = (props) => {
   return (
     <nav className="nav-bar">
       <h1>
-        <Link to="/startmyday" className="nav-bar__header">
+        <Link to="/" className="nav-bar__header">
           Mama's Helper
         </Link>
       </h1>

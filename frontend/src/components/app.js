@@ -6,7 +6,6 @@ import TaskShowContainer from './task/task_show/task_show_container'
 import TaskIndexContainer from './task/task_index/task_index_container'
 import TaskUpdateContainer from './task/task_update/task_update_container';
 
-import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import '../css/reset.css';
@@ -23,12 +22,11 @@ const App = () => (
       <NavBarContainer />
       <div className='content-container'>
         <Switch>
-            <ProtectedRoute exact path='/' component={MainPage} />
+            <ProtectedRoute exact path='/' component={TaskIndexContainer} />
             <AuthRoute exact path='/login' component={LoginFormContainer} />
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
-            <ProtectedRoute exact path ='/startmyday' component={TaskIndexContainer} />
-            <ProtectedRoute exact path = '/startmyday/:taskId' component ={TaskShowContainer} />
-            <ProtectedRoute exact path = '/startmyday/:taskId/edit' component ={TaskUpdateContainer} />
+            <ProtectedRoute exact path = '/tasks/:taskId' component ={TaskShowContainer} />
+            <ProtectedRoute exact path = '/tasks/:taskId/edit' component ={TaskUpdateContainer} />
         </Switch>
       </div>
     </div>
