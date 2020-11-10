@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import SignupInstructionBox from './signup_instruction_box';
+import SessionInstructionBox from './session_instruction_box';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class SignupForm extends React.Component {
 
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
-        <SignupInstructionBox />
+        <SessionInstructionBox />
         <h2 className="session-form__header">Sign up for free!</h2>
         <input
           type="text"

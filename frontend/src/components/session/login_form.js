@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import SessionInstructionBox from "./session_instruction_box";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class LoginForm extends React.Component {
 
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
+        <SessionInstructionBox/>
         <h2 className="session-form__header">Welcome Back!</h2>
           <input type="text"
             className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
