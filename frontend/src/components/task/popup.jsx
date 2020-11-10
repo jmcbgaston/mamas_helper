@@ -6,8 +6,9 @@ class Popup extends React.Component {
         return (
             <div className="popup">
                 <div className="inner-popup">
-                    <h1 className="modal-text">Your Task has been added! To add Requirements to this task, please select the Task and then select Edit Task. </h1>
                     <button onClick={this.props.closePopup}>X</button>
+                    <h1 className="modal-text">Your Task has been added!</h1>
+                    <h2 className="modal-text">To add Requirements to this task, please select the Task and then select Edit Task.</h2>
                 </div>
             </div>
         )
