@@ -35,7 +35,9 @@ const App = () => (
             <ProtectedRoute exact path = '/startmyday/:taskId/edit' component ={TaskUpdateContainer} />
         </Switch>
       </div>
-      <Link to="/about">About Us</Link>
+      <footer>
+        <Link to="/about">About Us</Link>
+      </footer>
     </div>
 
 );
