@@ -5,7 +5,7 @@ import daniel from '../../images/daniel.png'
 import jose from '../../images/jose.png'
 import jason from '../../images/jason.png'
 import alvin from '../../images/alvin.png'
-
+ 
 const About = () => (
   <div className="about">
 
