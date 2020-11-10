@@ -2,6 +2,7 @@ import React from "react"
 import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
+import { TaskIndexList } from "./task_index_list";
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class TaskIndex extends React.Component {
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.state = {
-      toggleTaskList: false,
+      showModal: false,
       checkedTasksIds: {}
     }
   }
@@ -23,55 +24,6 @@ class TaskIndex extends React.Component {
     this.props.clearErrors();
   }
 
-  buildTaskList() {
-    const HTMLString = [];
-    const reqDescriptions = [];
-    const { tasks } = this.props;
-    const checkedTasksIds = { ...this.state.checkedTasksIds };
-    const checked = Object.keys(checkedTasksIds)
-                      .filter((taskId) => checkedTasksIds[taskId]);
-
-    HTMLString.push(`
-      <h3 className="task-list-header"
-          style="color:#04835b;font-size:20px;">
-        Task List:
-      </h3>
-      <ul className="task-list-menu">
-    `);
-
-    checked.forEach((taskId) => {
-      const task = tasks.find((requirement) => requirement._id === taskId);
-
-      HTMLString.push(`<li className="task-list-item" style="list-style: inside">${task.title}</li>`);
-      task.requirements.forEach((requirement) => {
-        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
-          reqDescriptions.push(requirement.description);
-        }
-      })
-    })
-
-    HTMLString.push(`
-      </ul>
-      <br>
-      <h3 className="requirements-list-header"
-          style="color:#aa3931;font-size:20px">
-        Requirements:
-      </h3>
-      <ul className="requirements-list-menu">
-    `);
-
-    reqDescriptions.forEach((description) => {
-      HTMLString.push(`<li className="requirements-list-item" style="list-style: inside">${description}</li>`);
-    });
-
-    HTMLString.push(`
-      </ul>
-    `)
-
-    const html = {__html: HTMLString.join('') };
-    return <div className="task-list-container" dangerouslySetInnerHTML={html} />
-  }
-
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
@@ -81,13 +33,12 @@ class TaskIndex extends React.Component {
 
   handleTaskClick(e) {
     this.setState({
-      toggleTaskList: !this.state.toggleTaskList
+      showModal: !this.state.showModal
     })
   }
 
   handleEmailClick(e) {
     const HTMLString = [];
-    const reqDescriptions = [];
     const { tasks, user } = this.props;
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
@@ -103,24 +54,16 @@ class TaskIndex extends React.Component {
     checked.forEach((taskId) => {
       const task = tasks.find((requirement) => requirement._id === taskId);
 
-      HTMLString.push(`<li>${task.title}</li>`);
+      HTMLString.push(`
+        <li>${task.title}</li>
+        <ul>
+      `);
+
       task.requirements.forEach((requirement) => {
-        if (!reqDescriptions.includes(requirement.description) || !requirement.reusable) {
-          reqDescriptions.push(requirement.description);
-        }
+        HTMLString.push(`<li>${requirement.description}</li>`);
       })
+      HTMLString.push(`</ul>`);
     })
-
-    HTMLString.push(`
-      </ul>
-      <br>
-      <h3>Requirements:</h3>
-      <ul>
-    `);
-
-    reqDescriptions.forEach((description) => {
-      HTMLString.push(`<li>${description}</li>`);
-    });
 
     HTMLString.push(`
       </ul>
@@ -146,7 +89,7 @@ class TaskIndex extends React.Component {
         Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
                       .forEach((checkbox) => checkbox.checked = false );
         this.setState({
-          toggleTaskList: false,
+          showModal: false,
           checkedTasksIds: {}
         });
       })
@@ -154,6 +97,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
+    const { showModal, checkedTasksIds } = this.state;
 
     return (
       <>
@@ -182,10 +126,11 @@ class TaskIndex extends React.Component {
         <button
           type="button"
           className="task-index__list-button button"
-          onClick={this.handleTaskClick}>
-            List my tasks and requirements
+          onClick={this.handleTaskClick}
+          disabled={!Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length}>
+            Show my tasks
         </button>
-        {this.state.toggleTaskList ? this.buildTaskList() : null}
+        {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
       </>
     );
   }

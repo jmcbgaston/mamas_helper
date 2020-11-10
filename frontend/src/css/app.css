@@ -104,6 +104,14 @@ body,
   outline: none;
 }
 
+.button:disabled {
+  background-color: #EBEBE4;
+}
+
+.button:disabled:hover {
+  filter: brightness(100%);
+}
+
 .form-errors {
   align-items: center;
   color: #c23b23;
@@ -161,9 +169,9 @@ body,
 }
 
 .input-add-on__item--plus {
-  background-color: #a7e9af;
+  background-color: #3AAC78;
 }
 
 .input-add-on__item--minus {
-  background-color: #f19292;
+  background-color: #f03030;
 }

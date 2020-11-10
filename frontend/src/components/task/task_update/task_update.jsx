@@ -89,7 +89,7 @@ class TaskUpdate extends React.Component {
                       <button
                         type="button"
                         className="input-add-on__item
-                        input-add-on__item--right input-add-on__item__minus"
+                        input-add-on__item--right input-add-on__item--minus"
                         onClick={() => this.handleRequirementDelete(idx)}>
                           <i className="fas fa-minus" />
                       </button>
