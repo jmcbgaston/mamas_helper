@@ -3,6 +3,7 @@ import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
+import TaskInstructionBox from "./task_instruction_box";
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -124,6 +125,7 @@ class TaskIndex extends React.Component {
           )}
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskInstructionBox/>
         <button type="button"
           className="task-index__email-button button"
           onClick={this.handleEmailClick}
