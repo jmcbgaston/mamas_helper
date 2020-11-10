@@ -175,3 +175,13 @@ body,
 .input-add-on__item--minus {
   background-color: #f03030;
 }
+
+.task-instruction-box, .signup-instruction-box {
+  background-color: #baed91;
+  padding: 5px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 250px;
+  align-items: center;
+  border-radius: 5px;
+}
