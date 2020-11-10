@@ -44,7 +44,7 @@ class TaskUpdateAddRequirement extends React.Component {
           <button
             type="button"
             className="input-add-on__item
-              input-add-on__item--right input-add-on-item__plus"
+              input-add-on__item--right input-add-on__item--plus"
             onClick={this.handleButton}>
               <i className="fas fa-plus" />
           </button>
