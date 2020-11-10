@@ -1,10 +1,10 @@
 import React from "react";
 
-class SignupInstructionBox extends React.Component {
+class SessionInstructionBox extends React.Component {
   render()
   {
     return (
-      <div className="signup-instruction-box">
+      <div className="session-instruction-box">
         <p>Welcome to Mama's Helper!</p>
         <br />
         <p>
@@ -18,6 +18,6 @@ class SignupInstructionBox extends React.Component {
   }
 }
 
-export default SignupInstructionBox;
+export default SessionInstructionBox;
 
 
