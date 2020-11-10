@@ -99,6 +99,12 @@ class TaskIndex extends React.Component {
     const { tasks, createTask, errors, clearErrors } = this.props;
     const { showModal, checkedTasksIds } = this.state;
 
+    //helper method for if a task is selected
+    const is_task_selected = () => 
+    {
+      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
+    };
+
     return (
       <>
         <ul className="task-index__list">
@@ -120,14 +126,15 @@ class TaskIndex extends React.Component {
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <button type="button"
           className="task-index__email-button button"
-          onClick={this.handleEmailClick}>
+          onClick={this.handleEmailClick}
+          disabled={is_task_selected()}>
             Email me today's tasks
         </button>
         <button
           type="button"
           className="task-index__list-button button"
           onClick={this.handleTaskClick}
-          disabled={!Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length}>
+          disabled={is_task_selected()}>
             Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
