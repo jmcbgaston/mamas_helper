@@ -1,5 +1,5 @@
 import React from "react"
-import TaskForm from "./task_index_create";
+import TaskIndexCreate from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 
@@ -173,7 +173,7 @@ class TaskIndex extends React.Component {
             </li>
           )}
         </ul>
-        <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <button type="button"
           className="task-index__email-button button"
           onClick={this.handleEmailClick}>
