@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
 import { fetchTasks, createTask, removeTaskErrors } from "../../../actions/task_actions";
+import TaskIndexCreate from "./task_index_create";
 
 const mapStateToProps = (state) => {
     const user = state.session.user
@@ -26,5 +27,5 @@ const mapDispatchToProps = (dispatch) => {
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);
 

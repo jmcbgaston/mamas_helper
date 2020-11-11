@@ -41,6 +41,7 @@ class TaskIndexCreate extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    debugger 
     const { tasks } = this.props;
     const formInputStr = e.nativeEvent.srcElement[0].value;
     const duplicate = tasks.find((task) => task.title === formInputStr);
