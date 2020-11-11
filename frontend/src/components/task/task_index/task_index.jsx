@@ -124,7 +124,7 @@ class TaskIndex extends React.Component {
             </li>
           )}
         </ul>
-        <TaskIndexCreate createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <TaskInstructionBox/>
         <button type="button"
           className="task-index__email-button button"
