@@ -2,8 +2,12 @@
   margin: 0 auto;
 }
 
-.about-main-ul:not(:last-child) {
+.about-main-ul:not(:first-child) {
    margin-top: 4rem;
+}
+
+.about-main-ul:first-child {
+  margin-top: 2rem;
 }
 
 .about-main-ul {

@@ -10,7 +10,6 @@ class SessionInstructionBox extends React.Component {
           sure they have everything they need for the tasks they have for the
           day.
         </p>
-        <br />
       </div>
     );
   }
