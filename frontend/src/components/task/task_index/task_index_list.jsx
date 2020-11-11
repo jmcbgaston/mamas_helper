@@ -22,7 +22,7 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
     <div className="task-index__task-list-container">
       <div className="task-index__task-list">
         <div className="task-index__task-list-button-container">
-          <button class="task-index__task-list-button" onClick={handleClose}>
+          <button className="task-index__task-list-button" onClick={handleClose}>
              <CloseIcon/>
           </button>
           <span className="task-index__task-list-header">Task List</span>

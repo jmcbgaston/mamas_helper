@@ -1,28 +1,28 @@
 .task-show__container {
   align-items: center;
-  border: 2px solid #ff1493;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding-bottom: 2rem;
 }
 
-.task-show__title {
-  text-align: center;
-}
-
-.task-show__options {
-  /* margin: 3rem 0; */
-}
 
 .task-show__link {
   display: flex;
 }
 
 .task-show__option {
-  flex: 1;
+  width: 100%;
 }
 
-.description-show-title {
-  flex: 1;
+.task-show__option--delete {
+  background-color: #ec5c5c;
+}
+
+.task-show__option--update {
+  background-color: #e9df83;
+}
+
+.requirements-list-item__bullet-point {
+  color: #800080;
+  margin-right: 1rem;
 }

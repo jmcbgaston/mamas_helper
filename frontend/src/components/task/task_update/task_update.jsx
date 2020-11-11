@@ -1,5 +1,7 @@
 import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Back from '../../back';
 
 class TaskUpdate extends React.Component {
     constructor(props) {
@@ -73,7 +75,7 @@ class TaskUpdate extends React.Component {
                 {requirements.map((requirement, idx) => {
                   return (
                     <li key={`${idx}`}
-                      className="input-add-on">
+                      className="input-add-on box__no-bottom-border">
                       <span type="button"
                         className="input-add-on__item
                           input-add-on__item--span input-add-on__item--left">
@@ -99,11 +101,7 @@ class TaskUpdate extends React.Component {
               </ul>
             </div>
             <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
-            <button type="button"
-              className="task-update-form__cancel button"
-              onClick={() => history.goBack()}>
-                Back
-            </button>
+            <Back history={history} />
         </form>
       )
     }

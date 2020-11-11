@@ -5,11 +5,13 @@ import daniel from './daniel.png'
 import jose from './jose.png'
 import jason from './jason.png'
 import alvin from './alvin.png'
-  
-const About = () => (
+import Back from '../back';
+import {withRouter} from 'react-router-dom';
+
+const About = (props) => (
   <div className="about">
 
-    <ul className="about-main-ul">    
+    <ul className="about-main-ul">
         <img className="prof-pic" src={daniel} />
         <ul className="about-sub-ul">
             <li className="about-name">Daniel Ackroyd-Isales</li>
@@ -25,7 +27,7 @@ const About = () => (
         </ul>
     </ul>
 
-    <ul className="about-main-ul">    
+    <ul className="about-main-ul">
         <img className="prof-pic" src={jose} />
         <ul className="about-sub-ul">
             <li className="about-name">Jose Gaston</li>
@@ -41,7 +43,7 @@ const About = () => (
         </ul>
     </ul>
 
-    <ul className="about-main-ul">    
+    <ul className="about-main-ul">
         <img className="prof-pic" src={jason} />
         <ul className="about-sub-ul">
             <li className="about-name">Jason Zhen</li>
@@ -57,7 +59,7 @@ const About = () => (
         </ul>
     </ul>
 
-    <ul className="about-main-ul">    
+    <ul className="about-main-ul">
         <img className="prof-pic" src={alvin} />
         <ul className="about-sub-ul">
             <li className="about-name">Alvin Chong</li>
@@ -73,7 +75,8 @@ const About = () => (
         </ul>
     </ul>
 
+    <Back history={props.history}/>
   </div>
 )
 
-export default About;
+export default withRouter(About);

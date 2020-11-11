@@ -50,22 +50,29 @@ class TaskIndexCreate extends React.Component{
     this.setState({ showPopup: !this.state.showPopup})
   }
 
+  addErrorsClass() {
+    const { errors } = this.props;
+    return Object.keys(errors).length  ? "task-index__create--errors" : '';
+  }
+
   render() {
+    // debugger
     return (
       <>
         {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
 
-        <form className="input-add-on" onSubmit={this.handleSubmit}>
+        <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
           <input
             type="text"
-            className="input-add-on__field input-add-on__field--left input-field"
+            className="input-add-on__field input-field"
+            // className={`input-add-on__field input-field ${this.addErrorsClass()}`}
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}
             onClick={this.props.clearErrors.bind(this)}/>
           <button
             type="submit"
-            className="input-add-on__item input-add-on__item--right input-add-on__item--plus"
+            className="input-add-on__item input-add-on__item--plus"
             onClick={this.handleButton}>
               <i className="fas fa-plus" />
           </button>

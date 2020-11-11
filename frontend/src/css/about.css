@@ -1,67 +1,52 @@
 .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background-color: lavenderblush; */
-    width: 90%;
-    margin: 20px 0;
+  margin: 0 auto;
+}
+
+.about-main-ul:not(:last-child) {
+   margin-top: 4rem;
 }
 
 .about-main-ul {
-    display: flex;
-    margin-bottom: 20px;
-    width: inherit;
+  display: flex;
+  justify-content: center;
 }
 
 .prof-pic {
-    width: 40%;
-    height: 100%;
-    max-width: 200px;
-    border-radius: 15px;
-    margin-right: 10%;
+  width: 40%;
+  height: 100%;
+  max-width: 250px;
+  border-radius: 15px;
+  margin-right: 5rem;
+  border: 2px solid #2C353A;
 }
 
 .about-sub-ul {
-    display: flex;
-    flex-direction: column;
-    margin-top: 5%;
-    width: 60%;
-}
-
-.about-name {
-    font-size: 130%;
-}
-
-.about-role {
-    font-size: 15px;
-    margin: 2% 5%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .about-links-ul {
-    display: flex;
-    justify-content: space-evenly;
-    width: 80%;
-    margin: 28px 0;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 28px 0;
 }
 
 .about-links-ul img {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.footer {
+  height: 6rem;
+  background: #2C353A;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-footer a {
-    background-color: whitesmoke;
-    width: 93px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
+.footer__about-link {
+  color: #eee;
 }

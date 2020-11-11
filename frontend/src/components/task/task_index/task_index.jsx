@@ -3,6 +3,8 @@ import TaskForm from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
+import EmailIcon from '@material-ui/icons/Email';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -119,16 +121,16 @@ class TaskIndex extends React.Component {
         </ul>
         <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <button type="button"
-          className="task-index__email-button button"
+          className="task-index__email-button button box__no-bottom-border"
           onClick={this.handleEmailClick}>
-            Email me today's tasks
+            <EmailIcon />&nbsp;Email me today's tasks
         </button>
         <button
           type="button"
           className="task-index__list-button button"
           onClick={this.handleTaskClick}
           disabled={!Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length}>
-            Show my tasks
+            <VisibilityIcon />&nbsp;Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
       </>

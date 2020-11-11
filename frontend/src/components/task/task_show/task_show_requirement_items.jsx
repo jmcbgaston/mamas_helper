@@ -4,7 +4,10 @@ import Reusable from '../../reusable/reusable';
 const TaskShowRequirementItems = ({ requirement }) => {
     return (
       <li className="requirements-list-item">
-        <h3 className = "description-show-title">➼ {requirement.description}</h3>
+        <h3>
+          <span className="requirements-list-item__bullet-point">➼</span>
+          {requirement.description}
+        </h3>
         { requirement.reusable ? <Reusable /> : null }
       </li>
     )
