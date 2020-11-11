@@ -39,7 +39,7 @@ const NavBar = (props) => {
 
   return (
     <nav className="nav-bar">
-      <Link to="/startmyday" className="nav-bar__app-title">
+      <Link to="/" className="nav-bar__app-title">
         <p className="nav-bar__logo">(logo)&nbsp;</p>
         Mama's Helper
       </Link>

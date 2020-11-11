@@ -1,3 +1,5 @@
+//NB: Deprecated file, no longer used in project
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import startmyday from './start_my_day.png';

@@ -119,7 +119,7 @@ class TaskIndex extends React.Component {
                 className="task-index__list-item-checkbox"
                 onClick={this.handleCheck}
                 />
-              <Link to={`/startmyday/${task._id}`}
+              <Link to={`/tasks/${task._id}`}
                 className="task-index__list-item-link">
                 {task.title}
               </Link>
