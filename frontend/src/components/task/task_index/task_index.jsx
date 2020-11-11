@@ -132,7 +132,7 @@ class TaskIndex extends React.Component {
           className="task-index__email-button button box__no-bottom-border"
           onClick={this.handleEmailClick}
           disabled={is_task_selected()}>
-            Email me today's tasks
+            <EmailIcon />&nbsp;Email me today's tasks
         </button>
         <button
           type="button"
