@@ -36,9 +36,10 @@
   justify-content: center;
 }
 
-.start-my-day-button {
+.main-page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media only screen

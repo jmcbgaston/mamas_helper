@@ -9,7 +9,7 @@ html {
 }
 
 ::selection {
-  background: #E9B7D4; /* WebKit/Blink Browsers */
+  background: #E9B7D4;
 }
 
 body {
@@ -158,27 +158,10 @@ body,
 .box__no-bottom-border {
   border-bottom: none;
 }
-/*
-.input-add-on__field--middle {
-  border-left: none;
-  border-right: none;
-}
-
-.input-add-on__field--left {
-  border-right: none;
-} */
 
 .input-add-on__item {
   min-width: 3rem;
 }
-
-/* .input-add-on__item--left {
-  border-right: none;
-}
-
-.input-add-on__item--right {
-  border-left: none;
-} */
 
 .input-add-on__item--plus {
   background-color: #3AAC78;
@@ -197,4 +180,14 @@ and (min-width: 576px) {
   .content {
     max-width: 640px;
   }
+}
+
+.task-instruction-box, .session-instruction-box {
+  background-color: #baed91;
+  padding: 5px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 250px;
+  align-items: center;
+  border-radius: 5px;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-// import MainPopup from '../main_popup';
 import Popup from '../popup';
 
 class TaskIndexCreate extends React.Component{
@@ -56,7 +55,6 @@ class TaskIndexCreate extends React.Component{
   }
 
   render() {
-    // debugger
     return (
       <>
         {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
@@ -65,7 +63,6 @@ class TaskIndexCreate extends React.Component{
           <input
             type="text"
             className="input-add-on__field input-field"
-            // className={`input-add-on__field input-field ${this.addErrorsClass()}`}
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}

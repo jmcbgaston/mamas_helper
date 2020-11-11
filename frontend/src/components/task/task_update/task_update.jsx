@@ -1,6 +1,5 @@
 import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Back from '../../back';
 
 class TaskUpdate extends React.Component {
@@ -78,20 +77,18 @@ class TaskUpdate extends React.Component {
                       className="input-add-on box__no-bottom-border">
                       <span type="button"
                         className="input-add-on__item
-                          input-add-on__item--span input-add-on__item--left">
+                          input-add-on__item--span">
                         {idx + 1}
                       </span>
                       <input type="text"
                         maxLength="30"
-                        className="input-add-on__field
-                          input-add-on__field--middle input-field"
+                        className="input-add-on__field input-field"
                         value={requirement.description}
                         onChange={this.handleRequirementChange(idx)}
                         placeholder={task.requirements[idx].description}/>
                       <button
                         type="button"
-                        className="input-add-on__item
-                        input-add-on__item--right input-add-on__item--minus"
+                        className="input-add-on__item input-add-on__item--minus"
                         onClick={() => this.handleRequirementDelete(idx)}>
                           <i className="fas fa-minus" />
                       </button>

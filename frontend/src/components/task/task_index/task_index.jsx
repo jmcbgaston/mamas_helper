@@ -1,10 +1,11 @@
 import React from "react"
-import TaskForm from "./task_index_create";
+import TaskIndexCreate from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import TaskInstructionBox from "./task_instruction_box";
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -101,6 +102,12 @@ class TaskIndex extends React.Component {
     const { tasks, createTask, errors, clearErrors } = this.props;
     const { showModal, checkedTasksIds } = this.state;
 
+    //helper method for if a task is selected
+    const is_task_selected = () =>
+    {
+      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
+    };
+
     return (
       <>
         <ul className="task-index__list">
@@ -119,18 +126,20 @@ class TaskIndex extends React.Component {
             </li>
           )}
         </ul>
-        <TaskForm createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskIndexCreate createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskInstructionBox/>
         <button type="button"
           className="task-index__email-button button box__no-bottom-border"
-          onClick={this.handleEmailClick}>
-            <EmailIcon />&nbsp;Email me today's tasks
+          onClick={this.handleEmailClick}
+          disabled={is_task_selected()}>
+            Email me today's tasks
         </button>
         <button
           type="button"
           className="task-index__list-button button"
           onClick={this.handleTaskClick}
-          disabled={!Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length}>
-            <VisibilityIcon />&nbsp;Show my tasks
+          disabled={is_task_selected()}>
+          <VisibilityIcon />&nbsp;Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
       </>
