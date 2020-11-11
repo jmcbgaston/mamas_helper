@@ -14,9 +14,9 @@ class TaskIndexCreate extends React.Component{
     this.togglePopup = this.togglePopup.bind(this);
   }
 
-   togglePopup() {
-        this.setState({ showPopup: !this.state.showPopup})
-    }
+  togglePopup() {
+      this.setState({ showPopup: !this.state.showPopup})
+  }
 
   renderErrors() {
     const errors = Object.keys(this.props.errors)
@@ -40,12 +40,13 @@ class TaskIndexCreate extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    const { tasks } = this.props;
+    const { tasks, createTask } = this.props;
     const formInputStr = e.nativeEvent.srcElement[0].value;
     const duplicate = tasks.find((task) => task.title === formInputStr);
-    if(!duplicate && formInputStr.length > 2) this.togglePopup();
-    const task = this.state;
-    this.props.createTask(task)
+    if(!duplicate && formInputStr.length >= 2) {
+      this.togglePopup();
+    }
+    createTask(this.state);
     this.setState({
       title: "",
       requirements: []

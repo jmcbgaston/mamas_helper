@@ -9,14 +9,39 @@
 }
 
 .task-index__list-item-checkbox {
-  height: 2rem;
-  width: 2rem;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 3em;
+  height: 3em;
+  border: 1px solid gray;
+  color: #800080;
+}
+
+.task-index__list-item-checkbox::before {
+  content: "➼";
+  position: absolute;
+  font-size: 2.5em;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+
+.task-index__list-item-checkbox:checked::before {
+  visibility: visible;
+}
+
+.task-index__list-item-checkbox:disabled {
+  border-color: black;
+  background: #ddd;
+  color: gray;
 }
 
 .task-index__list-item-link {
   align-items: center;
   display: flex;
-  margin: 1rem 0 1rem 1rem;
+  margin-left: 1rem;
 }
 
 .task-index__create-form-input,
