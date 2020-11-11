@@ -4,10 +4,22 @@
   text-align: center;
 }
 
+.task-update-form__label {
+  border: 2px solid #2C353A;
+}
+
 .task-update-form__label,
 .task-update-form__requirement-label {
   display: flex;
   flex-direction: column;
+}
+
+.task-update-form__title {
+  margin-bottom: 0.75rem;
+}
+
+.task-update-form__requirements-header {
+  margin: 3rem 0 0.75rem 0;
 }
 
 .task-update-form__requirement-input {
@@ -16,4 +28,8 @@
 
 .task-update-form__create-requirement-input {
   flex: 10;
+}
+
+.task-update-form__cancel {
+  margin-top: 4rem;
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 import TaskShowRequirements from './task_show_requirements';
 import { Link } from 'react-router-dom';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import Back from '../../back';
 
 class TaskShow extends React.Component {
   componentDidMount(){
@@ -9,7 +12,7 @@ class TaskShow extends React.Component {
   }
 
   render() {
-    const { task, deleteTask, match: { params } } = this.props;
+    const { task, deleteTask, history, match: { params } } = this.props;
 
     if (!task) {
       return null;
@@ -24,19 +27,19 @@ class TaskShow extends React.Component {
           { requirements.length ? <TaskShowRequirements requirements={requirements} /> : null }
         </div>
         <div className="task-show__options">
-          <Link to="/startmyday" className="task-show__link">
+          <Link to="/tasks" className="task-show__link">
             <button
-              className ="task-show__option button"
+              className ="task-show__option task-show__option--delete button box__no-bottom-border"
               onClick={() => (deleteTask(task._id))}>
-                Delete Task
+                <DeleteIcon />&nbsp;Delete Task
             </button>
           </Link>
-          <Link to={`/startmyday/${params.taskId}/edit`} className="task-show__link">
-            <button type="button" className="task-show__option button">Edit Task</button>
+          <Link to={`/tasks/${params.taskId}/edit`} className="task-show__link">
+            <button type="button" className="task-show__option task-show__option--update button">
+              <EditIcon />&nbsp;Edit Task
+            </button>
           </Link>
-          <Link to="/startmyday" className="task-show__link">
-            <button type="button" className="task-show__option button">Back</button>
-          </Link>
+          <Back history={history} />
         </div>
       </>
     )
