@@ -67,6 +67,7 @@ class TaskIndexCreate extends React.Component{
           <input
             type="text"
             className="input-add-on__field input-field"
+            maxLength="30"
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}
