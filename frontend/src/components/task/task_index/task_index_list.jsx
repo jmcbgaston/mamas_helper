@@ -7,7 +7,12 @@ const TaskIndexListItem = ({task, requirements}) => {
       <p className="task-index__task-list-item-header">{task.title}</p>
       <ul>
         {requirements.map((requirement) => {
-          return <li className="task-list-item__requirement">{requirement.description}</li>
+          return (
+            <li className="task-list-item__requirement">
+              <span className="list-item__bullet-point">➼</span>
+              {requirement.description}
+            </li>
+          )
         })}
       </ul>
     </li>
