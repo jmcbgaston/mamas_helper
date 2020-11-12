@@ -108,9 +108,9 @@ class TaskIndex extends React.Component {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
 
-    debugger
-
+    
     if (this.props.user.isLimitedUser || this.props.user.household.length === 0) {
+      debugger
       return (
         <>
           <ul className="task-index__list">
@@ -150,6 +150,7 @@ class TaskIndex extends React.Component {
         </>
       );
     } else {
+      debugger
       return (
         <>
           <ul className="task-index__list">
