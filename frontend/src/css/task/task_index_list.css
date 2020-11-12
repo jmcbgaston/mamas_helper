@@ -7,12 +7,12 @@
   left: 0;
   position: fixed;
   top: 0;
-  width:100%;
+  width: 100%;
 }
 
 .task-index__task-list {
   padding: 1rem 2rem 2rem 2rem;
-  position:fixed;
+  position: fixed;
   text-align: center;
   background-color: #F3F3F3;
   border: 3px solid #2C353A;
@@ -57,4 +57,8 @@
 
 .task-index__task-list-item-requirement {
   font-size: 1.25rem;
+}
+
+.task-index__instruction-button {
+  margin-bottom: 3rem;
 }
