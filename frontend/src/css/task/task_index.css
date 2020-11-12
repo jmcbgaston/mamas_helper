@@ -14,8 +14,9 @@
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid gray;
+  border: 1px solid #808080;
   color: #800080;
+  margin: 0;
 }
 
 .task-index__list-item-checkbox::before {
@@ -28,14 +29,12 @@
   visibility: hidden;
 }
 
-.task-index__list-item-checkbox:checked::before {
-  visibility: visible;
+.task-index__list-item-checkbox:checked {
+  border: 2px solid #2C353A;
 }
 
-.task-index__list-item-checkbox:disabled {
-  border-color: black;
-  background: #ddd;
-  color: gray;
+.task-index__list-item-checkbox:checked::before {
+  visibility: visible;
 }
 
 .task-index__list-item-link {
@@ -43,6 +42,11 @@
   display: flex;
   margin-left: 1rem;
 }
+
+.task-index__list-item:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
 
 .task-index__create-form-input,
 .task-index__create-form-button {
@@ -79,9 +83,9 @@
   padding: 1rem 2rem 2rem 2rem;
   position:fixed;
   text-align: center;
-  width: 60%;
   background-color: #F3F3F3;
   border: 3px solid #2C353A;
+  margin: 2rem;
 }
 
 .task-index__task-list-button-container {
@@ -98,24 +102,18 @@
   width: 2rem;
   height: 2rem;
   background-color: #DF1616;
-  margin: 0;
+  margin: 0 0 0 1rem;
 }
 
 .task-index__task-list-header {
   flex: 1;
   font-size: 1.5rem;
-  text-transform: uppercase;
 }
 
 .task-index__task-list-items-container {
   display: inline-block;
   overflow-wrap: anywhere;
   text-align: left;
-}
-
-.task-list-item__requirement {
-  list-style-position: inside;
-  list-style-type: disc;
 }
 
 .task-index__task-list-items--spacing {

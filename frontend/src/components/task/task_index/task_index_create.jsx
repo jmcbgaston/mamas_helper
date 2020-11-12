@@ -1,5 +1,5 @@
 import React from 'react';
-import Popup from '../popup';
+import TaskIndexCreateModal from './task_index_create_modal';
 
 class TaskIndexCreate extends React.Component{
   constructor(props){
@@ -61,7 +61,7 @@ class TaskIndexCreate extends React.Component{
   render() {
     return (
       <>
-        {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
+        {this.state.showPopup ? <TaskIndexCreateModal handleClose={this.togglePopup} /> : null}
 
         <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
           <input
