@@ -1,6 +1,6 @@
 .task-index__list {
   margin: 0 auto;
-  padding: 0 2rem 1rem 2rem;
+  padding: 1rem 0 2rem 0;
 }
 
 .task-index__list-item {
@@ -47,7 +47,6 @@
   margin-top: 0.5rem;
 }
 
-
 .task-index__create-form-input,
 .task-index__create-form-button {
   border: 1px solid rgba(147,128,108,.25);
@@ -63,4 +62,17 @@
 
 .task-index__email-button {
   margin-top: 1rem;
+}
+
+.task-index__instruction-container {
+  display: flex;
+  align-items: center;
+}
+
+.task-index__instruction-header {
+  flex: 1;
+}
+
+.task-index__instruction-button {
+  position: absolute;
 }

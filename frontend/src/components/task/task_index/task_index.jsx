@@ -124,11 +124,14 @@ class TaskIndex extends React.Component {
 
     return (
       <>
-        <button type="button"
-          className="task-index__instruction-button button"
-          onClick={this.handleInstructionClick}>
-            <InfoIcon />&nbsp;Info
-        </button>
+        <div className="task-index__instruction-container">
+          <h2 className="task-index__instruction-header">Tasks</h2>
+          <button type="button"
+            className="task-index__instruction-button button"
+            onClick={this.handleInstructionClick}>
+              <InfoIcon />&nbsp;Help
+          </button>
+        </div>
         <ul className="task-index__list">
           {tasks.map((task) =>
             <li className="task-index__list-item" key={task._id}>

@@ -34,6 +34,7 @@
   height: 2rem;
   background-color: #DF1616;
   margin: 0 0 0 1rem;
+  border: 2px solid #2C353A;
 }
 
 .task-index__task-list-header {
@@ -57,8 +58,4 @@
 
 .task-index__task-list-item-requirement {
   font-size: 1.25rem;
-}
-
-.task-index__instruction-button {
-  margin-bottom: 3rem;
 }
