@@ -27,7 +27,7 @@ class TaskShow extends React.Component {
           { requirements.length ? <TaskShowRequirements requirements={requirements} /> : null }
         </div>
         <div className="task-show__options">
-          <Link to="/tasks" className="task-show__link">
+          <Link to="/" className="task-show__link">
             <button
               className ="task-show__option task-show__option--delete button box__no-bottom-border"
               onClick={() => (deleteTask(task._id))}>
