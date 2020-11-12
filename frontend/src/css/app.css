@@ -92,6 +92,9 @@ body,
   background-color: #f3f3f3;
   border: 3px solid #2C353A;
   box-shadow: 5px 5px 10px #2C353A;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .input-field, .button {
