@@ -8,7 +8,7 @@ const TaskIndexListItem = ({task, requirements}) => {
       <ul>
         {requirements.map((requirement) => {
           return (
-            <li className="task-list-item__requirement">
+            <li key={requirement._id} className="task-list-item__requirement">
               <span className="list-item__bullet-point">➼</span>
               {requirement.description}
             </li>
@@ -36,10 +36,10 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
           {checked.map((taskId, idx) => {
             const task = tasks.find((requirement) => requirement._id === taskId);
             return (
-              <>
+              <React.Fragment key={task._id}>
                 <TaskIndexListItem task={task} requirements={task.requirements} />
                 {(checked.length > 1 && idx !== checked.length - 1) ? <div className="task-index__task-list-items--spacing"/> : null}
-              </>
+              </React.Fragment>
             )
           })}
         </ul>
