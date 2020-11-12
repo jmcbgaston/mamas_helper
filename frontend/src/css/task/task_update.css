@@ -33,3 +33,7 @@
 .task-update-form__cancel {
   margin-top: 4rem;
 }
+
+.task-update-form__message {
+  margin-bottom: 2rem;
+}

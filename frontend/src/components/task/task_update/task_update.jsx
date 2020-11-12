@@ -56,50 +56,49 @@ class TaskUpdate extends React.Component {
       const { requirements } = this.state;
 
       return (
-        <form className="task-update-form" onSubmit={this.handleSubmit}>
-            <h2 className="task-update-form__title">Title:</h2>
-            <label className="task-update-form__label">
-              <input type="text"
-                maxLength="30"
-                className="task-update-form__input input-field"
-                value={this.state.title}
-                onChange={this.handleChange('title')}
-                placeholder={task.title} />
-            </label>
-            {/* <TaskUpdateRequirements /> */}
-
-            <div className="task-update-form__requirements-container">
-              <h2 className="task-update-form__requirements-header">Requirements:</h2>
-              <ul className="task-update-form__requirements-list">
-                {requirements.map((requirement, idx) => {
-                  return (
-                    <li key={`${idx}`}
-                      className="input-add-on box__no-bottom-border">
-                      <span type="button"
-                        className="input-add-on__item
-                          input-add-on__item--span">
-                        {idx + 1}
-                      </span>
-                      <input type="text"
-                        maxLength="30"
-                        className="input-add-on__field input-field"
-                        value={requirement.description}
-                        onChange={this.handleRequirementChange(idx)}
-                        placeholder={task.requirements[idx].description}/>
-                      <button
-                        type="button"
-                        className="input-add-on__item input-add-on__item--minus"
-                        onClick={() => this.handleRequirementDelete(idx)}>
-                          <i className="fas fa-minus" />
-                      </button>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-            <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
-            <Back history={history} />
-        </form>
+        <>
+          <p className="task-update-form__message">Changes are saved automatically</p>
+          <h2 className="task-update-form__title">Title:</h2>
+          <label className="task-update-form__label">
+            <input type="text"
+              maxLength="30"
+              className="task-update-form__input input-field"
+              value={this.state.title}
+              onChange={this.handleChange('title')}
+              placeholder={task.title} />
+          </label>
+          <div className="task-update-form__requirements-container">
+            <h2 className="task-update-form__requirements-header">Requirements:</h2>
+            <ul className="task-update-form__requirements-list">
+              {requirements.map((requirement, idx) => {
+                return (
+                  <li key={`${idx}`}
+                    className="input-add-on box__no-bottom-border">
+                    <span type="button"
+                      className="input-add-on__item
+                        input-add-on__item--span">
+                      {idx + 1}
+                    </span>
+                    <input type="text"
+                      maxLength="30"
+                      className="input-add-on__field input-field"
+                      value={requirement.description}
+                      onChange={this.handleRequirementChange(idx)}
+                      placeholder={task.requirements[idx].description}/>
+                    <button
+                      type="button"
+                      className="input-add-on__item input-add-on__item--minus"
+                      onClick={() => this.handleRequirementDelete(idx)}>
+                        <i className="fas fa-minus" />
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
+          <Back history={history} />
+        </>
       )
     }
 }
