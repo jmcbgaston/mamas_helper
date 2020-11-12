@@ -147,11 +147,14 @@ class SignupForm extends React.Component {
             className={`session-form__input-field input-field ${this.addErrorsClass(
               "parentId"
               )}`}
-              value={user.parentID}
+              value={user.parentId}
               onChange={this.update("parentId")}
               placeholder="User ID"
               />
         </label>
+        <div className="session-form__errors form-errors">
+          {this.renderErrors("parentId")}
+        </div>
 
         <input
           className="session-form__submit button"

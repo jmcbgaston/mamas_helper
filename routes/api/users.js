@@ -42,33 +42,31 @@ router.post('/register', (req, res) => {
             return res.status(400).json(errors);
 
           } else {
-            console.log(req.body.isLimitedUser)
             if (req.body.isLimitedUser) {
               User.findOne({ _id: req.body.parentId })
-              .then(pId => {
-                if (!pId) {
-                  errors.parentId = "This user does not exist";
-                  return res.status(400).json(errors);
-                } else {
-                  const newUser = new User({
-                    handle: req.body.handle,
-                    email: req.body.email,
-                    password: req.body.password, 
-                    household: req.body.household,
-                    isLimitedUser: req.body.isLimitedUser,
-                    assignedTasks: req.body.assignedTasks,
-                    parentId: req.body.parentId
+              .then(() => {
+                const newUser = new User({
+                  handle: req.body.handle,
+                  email: req.body.email,
+                  password: req.body.password, 
+                  household: req.body.household,
+                  isLimitedUser: req.body.isLimitedUser,
+                  assignedTasks: req.body.assignedTasks,
+                  parentId: req.body.parentId
+                })
+                bcrypt.genSalt(10, (err, salt) => {
+                  bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    newUser.password = hash;
+                    newUser.save()
+                      .then(user => res.json(user))
+                      .catch(err => console.log(err));
                   })
-                  bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                      if (err) throw err;
-                      newUser.password = hash;
-                      newUser.save()
-                        .then(user => res.json(user))
-                        .catch(err => console.log(err));
-                    })
-                  })
-                }
+                })
+              })
+              .catch(() => {
+                errors.parentId = "This user does not exist";
+                return res.status(400).json(errors);
               })
             } else {
               const newUser = new User({
