@@ -4,6 +4,7 @@ import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
+import InfoIcon from '@material-ui/icons/Info';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
 
@@ -13,8 +14,10 @@ class TaskIndex extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
+    this.handleInstructionClick = this.handleInstructionClick.bind(this);
     this.state = {
       showModal: false,
+      showInstructions: false,
       checkedTasksIds: {}
     }
   }
@@ -40,6 +43,12 @@ class TaskIndex extends React.Component {
     })
   }
 
+  handleInstructionClick(e) {
+    this.setState({
+      showInstructions: !this.state.showInstructions
+    })
+  }
+
   handleEmailClick(e) {
     const HTMLString = [];
     const { tasks, user } = this.props;
@@ -62,9 +71,14 @@ class TaskIndex extends React.Component {
         <ul>
       `);
 
-      task.requirements.forEach((requirement) => {
-        HTMLString.push(`<li>${requirement.description}</li>`);
-      })
+      if (task.requirements.length) {
+        task.requirements.forEach((requirement) => {
+          HTMLString.push(`<li>${requirement.description}</li>`);
+        })
+      } else {
+        HTMLString.push(`(no requirements)`);
+      }
+
       HTMLString.push(`</ul>`);
     })
 
@@ -100,7 +114,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
-    const { showModal, checkedTasksIds } = this.state;
+    const { showModal, showInstructions, checkedTasksIds } = this.state;
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -110,6 +124,14 @@ class TaskIndex extends React.Component {
 
     return (
       <>
+        <div className="task-index__instruction-container">
+          <h2 className="task-index__instruction-header">Tasks</h2>
+          <button type="button"
+            className="task-index__instruction-button button"
+            onClick={this.handleInstructionClick}>
+              <InfoIcon />&nbsp;Help
+          </button>
+        </div>
         <ul className="task-index__list">
           {tasks.map((task) =>
             <li className="task-index__list-item" key={task._id}>
@@ -127,7 +149,6 @@ class TaskIndex extends React.Component {
           )}
         </ul>
         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-        <TaskInstructionBox/>
         <button type="button"
           className="task-index__email-button button box__no-bottom-border"
           onClick={this.handleEmailClick}
@@ -142,6 +163,7 @@ class TaskIndex extends React.Component {
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
+        {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
       </>
     );
   }

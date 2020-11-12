@@ -5,6 +5,9 @@
   padding-bottom: 2rem;
 }
 
+.task-show__no-requirements {
+  margin-top: 1rem;
+}
 
 .task-show__link {
   display: flex;

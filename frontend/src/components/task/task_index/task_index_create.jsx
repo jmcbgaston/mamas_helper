@@ -41,11 +41,13 @@ class TaskIndexCreate extends React.Component{
   handleSubmit(e){
     e.preventDefault();
     const { tasks, createTask } = this.props;
-    const formInputStr = e.nativeEvent.srcElement[0].value;
+
+    const formInputStr = e.currentTarget[0].value;
     const duplicate = tasks.find((task) => task.title === formInputStr);
     if(!duplicate && formInputStr.length >= 2) {
       this.togglePopup();
     }
+
     createTask(this.state);
     this.setState({
       title: "",
