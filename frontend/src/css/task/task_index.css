@@ -14,8 +14,9 @@
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid gray;
+  border: 1px solid #808080;
   color: #800080;
+  margin: 0;
 }
 
 .task-index__list-item-checkbox::before {
@@ -28,14 +29,12 @@
   visibility: hidden;
 }
 
-.task-index__list-item-checkbox:checked::before {
-  visibility: visible;
+.task-index__list-item-checkbox:checked {
+  border: 2px solid #2C353A;
 }
 
-.task-index__list-item-checkbox:disabled {
-  border-color: black;
-  background: #ddd;
-  color: gray;
+.task-index__list-item-checkbox:checked::before {
+  visibility: visible;
 }
 
 .task-index__list-item-link {
@@ -43,6 +42,11 @@
   display: flex;
   margin-left: 1rem;
 }
+
+.task-index__list-item:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
 
 .task-index__create-form-input,
 .task-index__create-form-button {

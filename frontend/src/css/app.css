@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
-  min-height: 500px;
-  min-width: 400px;
+  /* min-height: 500px; */
+  /* min-width: 400px; */
 }
 
 *, *:before, *:after {
