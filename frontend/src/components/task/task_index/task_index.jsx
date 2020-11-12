@@ -62,9 +62,14 @@ class TaskIndex extends React.Component {
         <ul>
       `);
 
-      task.requirements.forEach((requirement) => {
-        HTMLString.push(`<li>${requirement.description}</li>`);
-      })
+      if (task.requirements.length) {
+        task.requirements.forEach((requirement) => {
+          HTMLString.push(`<li>${requirement.description}</li>`);
+        })
+      } else {
+        HTMLString.push(`(no requirements)`);
+      }
+
       HTMLString.push(`</ul>`);
     })
 
