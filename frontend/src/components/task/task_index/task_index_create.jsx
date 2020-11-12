@@ -1,5 +1,4 @@
 import React from 'react';
-// import MainPopup from '../main_popup';
 import Popup from '../popup';
 
 class TaskIndexCreate extends React.Component{
@@ -8,16 +7,16 @@ class TaskIndexCreate extends React.Component{
     this.state = {
       title: "",
       requirements: [],
-      showPopup: false 
+      showPopup: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
   }
 
-   togglePopup() {
-        this.setState({ showPopup: !this.state.showPopup})
-    }
+  togglePopup() {
+      this.setState({ showPopup: !this.state.showPopup})
+  }
 
   renderErrors() {
     const errors = Object.keys(this.props.errors)
@@ -41,36 +40,41 @@ class TaskIndexCreate extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    debugger 
-    const { tasks } = this.props;
+    const { tasks, createTask } = this.props;
     const formInputStr = e.nativeEvent.srcElement[0].value;
     const duplicate = tasks.find((task) => task.title === formInputStr);
-    if(!duplicate && formInputStr.length > 2) this.togglePopup();
-    const task = this.state;
-    this.props.createTask(task)
+    if(!duplicate && formInputStr.length >= 2) {
+      this.togglePopup();
+    }
+    createTask(this.state);
     this.setState({
       title: "",
       requirements: []
     });
   }
 
+  addErrorsClass() {
+    const { errors } = this.props;
+    return Object.keys(errors).length  ? "task-index__create--errors" : '';
+  }
 
   render() {
     return (
       <>
         {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
 
-        <form className="input-add-on" onSubmit={this.handleSubmit}>
+        <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
           <input
             type="text"
-            className="input-add-on__field input-add-on__field--left input-field"
+            className="input-add-on__field input-field"
+            maxLength="30"
             value={this.state.title}
             placeholder="add a new task"
             onChange={this.handleChange}
             onClick={this.props.clearErrors.bind(this)}/>
           <button
             type="submit"
-            className="input-add-on__item input-add-on__item--right input-add-on__item--plus"
+            className="input-add-on__item input-add-on__item--plus"
             onClick={this.handleButton}>
               <i className="fas fa-plus" />
           </button>

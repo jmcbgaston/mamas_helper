@@ -1,5 +1,5 @@
-import { connect } from "react-redux"
-import TaskIndex from "./task_index"
+import { connect } from "react-redux";
+import TaskComplete from "./task_complete";
 import { fetchTasks, createTask, removeTaskErrors } from "../../../actions/task_actions";
 
 const mapStateToProps = (state) => {
@@ -26,5 +26,4 @@ const mapDispatchToProps = (dispatch) => {
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);
-
+export default connect(mapStateToProps, mapDispatchToProps)(TaskComplete);

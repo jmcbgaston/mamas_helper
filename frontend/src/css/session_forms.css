@@ -1,15 +1,24 @@
 .session-form {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  flex: 1;
 }
 
 .session-form__header {
-  color: #800080;
-  /* margin-bottom: 2rem; */
+  margin: 2rem 0 2rem 0;
 }
 
 .session-form__submit {
-  /* margin-bottom: 3rem; */
+  margin-top: 1rem;
+}
+
+.session-form__demo {
+  margin-top: 2rem;
+}
+
+.session-form__input-field {
+  border: 2px solid #2C353A;
+}
+
+.session-form__input--errors {
+  border: 2px solid #c23b23;
 }

@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
   }
 
   addErrorsClass(field) {
-    return this.state.errors[field] ? "input-errors" : '';
+    return this.state.errors[field] ? "session-form__input--errors" : '';
   }
 
   render() {

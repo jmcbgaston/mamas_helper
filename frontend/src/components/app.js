@@ -1,12 +1,13 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
 import TaskShowContainer from './task/task_show/task_show_container'
 import TaskIndexContainer from './task/task_index/task_index_container'
 import TaskUpdateContainer from './task/task_update/task_update_container';
+import TaskCompleteContainer from './task/task_complete/task_complete_container';
 
-import MainPage from './main/main_page';
+import Footer from './footer/footer';
 import About from './about/about';
 
 import LoginFormContainer from './session/login_form_container';
@@ -22,23 +23,23 @@ import '../css/task/task_update.css'
 import '../css/requirements/requirement_show.css'
 
 const App = () => (
-    <div className='app-container'>
+    <>
       <NavBarContainer />
       <div className='content-container'>
+        <div className='content'>
         <Switch>
-            <ProtectedRoute exact path='/' component={MainPage} />
+            <ProtectedRoute exact path='/' component={TaskIndexContainer} />
             <Route exact path='/about' component={About} />
             <AuthRoute exact path='/login' component={LoginFormContainer} />
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
-            <ProtectedRoute exact path ='/startmyday' component={TaskIndexContainer} />
-            <ProtectedRoute exact path = '/startmyday/:taskId' component ={TaskShowContainer} />
-            <ProtectedRoute exact path = '/startmyday/:taskId/edit' component ={TaskUpdateContainer} />
+            <ProtectedRoute exact path = '/tasks/:taskId' component ={TaskShowContainer} />
+            <ProtectedRoute exact path = '/tasks/:taskId/edit' component ={TaskUpdateContainer} />
+            <ProtectedRoute exact path = '/completion' component={TaskCompleteContainer}/>
         </Switch>
+        </div>
       </div>
-      <footer>
-        <Link to="/about">About Us</Link>
-      </footer>
-    </div>
+      <Footer />
+    </>
 
 );
 

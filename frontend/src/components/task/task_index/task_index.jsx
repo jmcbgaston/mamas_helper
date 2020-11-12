@@ -3,6 +3,8 @@ import TaskIndexCreate from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
+import EmailIcon from '@material-ui/icons/Email';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
 
 class TaskIndex extends React.Component {
@@ -11,9 +13,12 @@ class TaskIndex extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
+    this.handleCheckCompletion = this.handleCheckCompletion.bind(this);
+    this.handleCompleteClick = this.handleCompleteClick.bind(this);
     this.state = {
       showModal: false,
-      checkedTasksIds: {}
+      checkedTasksIds: {},
+      checkedCompletionIds: {}
     }
   }
 
@@ -23,6 +28,21 @@ class TaskIndex extends React.Component {
 
   componentWillUnmount() {
     this.props.clearErrors();
+  }
+
+  handleCheckCompletion(e) {
+    debugger 
+    const checkedCompletionIds = {...this.state.checkedCompletionIds};
+    const taskId = e.currentTarget.id;
+    checkedCompletionIds[taskId] = e.currentTarget.checked;
+    this.setState({ checkedCompletionIds })
+  }
+
+  handleCompleteClick(e) {
+    e.preventDefault();
+    const checkedComplete = Object.keys(this.state.checkedCompletionIds).filter((id) => this.state.checkedCompletionIds[id]);
+
+
   }
 
   handleCheck(e) {
@@ -101,13 +121,14 @@ class TaskIndex extends React.Component {
     const { showModal, checkedTasksIds } = this.state;
 
     //helper method for if a task is selected
-    const is_task_selected = () => 
+    const is_task_selected = () =>
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
 
     return (
       <>
+        <Link to="/completion"><button onClick={this.handleCompleteClick}>Complete</button></Link>
         <ul className="task-index__list">
           {tasks.map((task) =>
             <li className="task-index__list-item" key={task._id}>
@@ -117,27 +138,33 @@ class TaskIndex extends React.Component {
                 className="task-index__list-item-checkbox"
                 onClick={this.handleCheck}
                 />
-              <Link to={`/startmyday/${task._id}`}
+              <Link to={`/tasks/${task._id}`}
                 className="task-index__list-item-link">
                 {task.title}
               </Link>
+              <input 
+              type="checkbox" 
+              id={task._id}
+              className=""
+              onClick={this.handleCheckCompletion}
+              />
             </li>
           )}
         </ul>
-        <TaskIndexCreate tasks ={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+        <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
         <TaskInstructionBox/>
         <button type="button"
-          className="task-index__email-button button"
+          className="task-index__email-button button box__no-bottom-border"
           onClick={this.handleEmailClick}
           disabled={is_task_selected()}>
-            Email me today's tasks
+            <EmailIcon />&nbsp;Email me today's tasks
         </button>
         <button
           type="button"
           className="task-index__list-button button"
           onClick={this.handleTaskClick}
           disabled={is_task_selected()}>
-            Show my tasks
+          <VisibilityIcon />&nbsp;Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
       </>
