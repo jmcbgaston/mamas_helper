@@ -9,17 +9,15 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    debugger
     res.json({
         id: req.user.id,
         handle: req.user.handle,
         email: req.user.email,
-        household: [],
-        isLimitedUser: false,
-        assignedTasks: [],
-        parentId: req.body.parentId
+        household: req.user.household,
+        isLimitedUser: req.user.isLimitedUser,
+        assignedTasks: req.user.assignedTasks,
+        parentId: req.user.parentId
     });
-    console.log(req.body.parentId)
 })
 
 router.post('/register', (req, res) => {
@@ -43,25 +41,15 @@ router.post('/register', (req, res) => {
             return res.status(400).json(errors);
           } else {
             
-            debugger;
-    
             const newUser = new User({
               handle: req.body.handle,
               email: req.body.email,
               password: req.body.password, 
-              household: [],
-              isLimitedUser: false,
-              assignedTasks: [],
+              household: req.body.household,
+              isLimitedUser: req.body.isLimitedUser,
+              assignedTasks: req.body.assignedTasks,
               parentId: req.body.parentId
             })
-            console.log(newUser.handle)
-            console.log(newUser.email)
-            console.log(newUser.household)
-            console.log(newUser.isLimitedUser)
-            console.log(newUser.assignedTasks)
-            console.log(newUser.parentId)
-
-            debugger;
     
             bcrypt.genSalt(10, (err, salt) => {
               bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -103,7 +91,11 @@ router.post('/login', (req, res) => {
             const payload = {
               id: user.id,
               email: user.email,
-              handle: user.handle
+              handle: user.handle, 
+              household: user.household, 
+              assignedTasks: user.assignedTasks, 
+              isLimitedUser: user.isLimitedUser, 
+              parentId: user.parentId
             };
 
              jwt.sign(

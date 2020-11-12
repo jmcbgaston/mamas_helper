@@ -108,8 +108,6 @@ class TaskIndex extends React.Component {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
 
-    debugger
-
     return (
       <>
         <ul className="task-index__list">

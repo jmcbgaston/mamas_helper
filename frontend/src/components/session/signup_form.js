@@ -12,6 +12,8 @@ class SignupForm extends React.Component {
         handle: '',
         password: '',
         password2: '',
+        household: [], 
+        assignedTasks: [], 
         isLimitedUser: false, 
         parentId: ''
       },
@@ -54,19 +56,15 @@ class SignupForm extends React.Component {
   }
 
   handleLimited(e) {
-    // debugger
     if (e.currentTarget.checked) {
       this.state.user.isLimitedUser = true
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', '')
-      // debugger
     } else {
       this.state.user.isLimitedUser = false
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', 'hidden')
-      // debugger
     }
-    // debugger
   }
 
   renderErrors(field) {

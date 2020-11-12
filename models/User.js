@@ -17,20 +17,16 @@ const UserSchema = new Schema({
         required: true
     },
     household: {
-        type: Array,
-        // default: []
+        type: Array
     },
     isLimitedUser: {
-        type: Boolean,
-        // default: false
+        type: Boolean
     },
     assignedTasks: {
-        type: Array,
-        // default: [] 
+        type: Array
     },
     parentId: {
-        type: String,
-        // default: ""
+        type: String
     }
 }, {
     timestamps: true

@@ -27,29 +27,11 @@ const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
-//
-const receiveUser = (user) => ({
-    type: FETCH_USER, 
-    user
-})
-
-
-export const fetchUser = (user) => dispatch => {
-    debugger
-    return(
-        APIUtil.fetchUser(user.id).then(() => (
-            dispatch(receiveUser(user))
-        ))
-    )
-}
-//
-
 export const clearErrors = () => dispatch => {
   return dispatch(receiveErrors([]));
 }
 
 export const signup = user => dispatch => {
-    debugger
     return(
         APIUtil.signup(user).then(() => (
             dispatch(receiveUserSignIn())
@@ -60,7 +42,6 @@ export const signup = user => dispatch => {
 };
 
 export const login = user => dispatch => {
-    debugger
     return(
         APIUtil.login(user).then(res => {
             const { token } = res.data;

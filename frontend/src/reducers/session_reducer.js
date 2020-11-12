@@ -10,26 +10,17 @@ const initialState = {
 const session = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      debugger
       return {
         ...state,
         isAuthenticated: !!action.currentUser,
         user: action.currentUser
       };
-    case FETCH_USER:
-      debugger
-      return {
-        ...state,
-        isAuthenticated: !!action.user,
-        user: action.user
-      }
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
         user: undefined
       };
     case RECEIVE_USER_SIGN_IN:
-      // debugger;
       return {
         ...state,
         isSignedIn: true
