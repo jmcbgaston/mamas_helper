@@ -1,7 +1,6 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
 import { fetchTasks, createTask, removeTaskErrors } from "../../../actions/task_actions";
-import { fetchUser } from "../../../actions/session_actions";
 
 const mapStateToProps = (state) => {
     const user = state.session.user
