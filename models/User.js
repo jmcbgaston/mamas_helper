@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ObjectId = Schema.ObjectId;
+// const ObjectId = Schema.ObjectId;
 
 const UserSchema = new Schema({
     handle: {
@@ -18,17 +18,20 @@ const UserSchema = new Schema({
     },
     household: {
         type: Array,
-        default: []
+        // default: []
     },
     isLimitedUser: {
         type: Boolean,
-        default: false
+        // default: false
     },
     assignedTasks: {
         type: Array,
-        default: [] 
+        // default: [] 
     },
-    parentId: ObjectId
+    parentId: {
+        type: String,
+        // default: ""
+    }
 }, {
     timestamps: true
 })

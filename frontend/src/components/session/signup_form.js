@@ -54,19 +54,19 @@ class SignupForm extends React.Component {
   }
 
   handleLimited(e) {
-    debugger
+    // debugger
     if (e.currentTarget.checked) {
       this.state.user.isLimitedUser = true
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', '')
-      debugger
+      // debugger
     } else {
       this.state.user.isLimitedUser = false
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', 'hidden')
-      debugger
+      // debugger
     }
-    debugger
+    // debugger
   }
 
   renderErrors(field) {
@@ -137,30 +137,29 @@ class SignupForm extends React.Component {
           {this.renderErrors("password2")}
         </div>
 
-        <input
-          className="session-form__submit button"
-          type="submit"
-          value="Sign Up"
-        />
-
         <label>
           <input 
             type="checkbox" 
             onClick={this.handleLimited} />
             Check box if Limited User
-
-        <br/>
-        <input
-          id="conditional-show"
-          type="hidden"
-          className={`session-form__input-field input-field ${this.addErrorsClass(
-            "parentId"
-            )}`}
-            value={user.parentID}
-            onChange={this.update("parentId")}
-            placeholder="User ID"
-            />
+          <br/>
+          <input
+            id="conditional-show"
+            type="hidden"
+            className={`session-form__input-field input-field ${this.addErrorsClass(
+              "parentId"
+              )}`}
+              value={user.parentID}
+              onChange={this.update("parentId")}
+              placeholder="User ID"
+              />
         </label>
+
+        <input
+          className="session-form__submit button"
+          type="submit"
+          value="Sign Up"
+        />
 
       </form>
     );
