@@ -20,4 +20,4 @@ Mama's Helper is a mobile optimized app that allows users to make sure they have
 
 ## Upcoming Features
 - Push notifications
-- Assign tasks
+- "Mama's Tips" chatroom
