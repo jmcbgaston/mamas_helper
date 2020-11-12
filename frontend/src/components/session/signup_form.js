@@ -12,12 +12,17 @@ class SignupForm extends React.Component {
         handle: '',
         password: '',
         password2: '',
+        isLimitedUser: false, 
+        parentId: ''
       },
       errors: {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLimited = this.handleLimited.bind(this);
     this.clearedErrors = false;
+
+    window.state = this.state
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,6 +51,22 @@ class SignupForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.signup(this.state.user, this.props.history);
+  }
+
+  handleLimited(e) {
+    debugger
+    if (e.currentTarget.checked) {
+      this.state.user.isLimitedUser = true
+      let att = document.getElementById('conditional-show')
+      att.setAttribute('type', '')
+      debugger
+    } else {
+      this.state.user.isLimitedUser = false
+      let att = document.getElementById('conditional-show')
+      att.setAttribute('type', 'hidden')
+      debugger
+    }
+    debugger
   }
 
   renderErrors(field) {
@@ -121,6 +142,26 @@ class SignupForm extends React.Component {
           type="submit"
           value="Sign Up"
         />
+
+        <label>
+          <input 
+            type="checkbox" 
+            onClick={this.handleLimited} />
+            Check box if Limited User
+
+        <br/>
+        <input
+          id="conditional-show"
+          type="hidden"
+          className={`session-form__input-field input-field ${this.addErrorsClass(
+            "parentId"
+            )}`}
+            value={user.parentID}
+            onChange={this.update("parentId")}
+            placeholder="User ID"
+            />
+        </label>
+
       </form>
     );
   }
