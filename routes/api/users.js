@@ -7,6 +7,7 @@ const validateLoginInput = require('../../validation/login');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
+// const db = require('../../config/keys').mongoURI;
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
@@ -54,6 +55,18 @@ router.post('/register', (req, res) => {
                   assignedTasks: req.body.assignedTasks,
                   parentId: req.body.parentId
                 })
+
+                let id = newUser._id
+
+                User.findByIdAndUpdate(req.body.parentId,
+                  { "$push": { "household": id } },
+                  { new: true, upsert: true }
+                ).then(res => {
+                  console.log(res)
+                }).catch(err => {
+                  console.log(err)
+                });
+
                 bcrypt.genSalt(10, (err, salt) => {
                   bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
