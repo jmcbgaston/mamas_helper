@@ -142,6 +142,8 @@ class TaskIndex extends React.Component {
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
+
+        <p>User ID: {this.props.user.id}</p>
       </>
     );
   }

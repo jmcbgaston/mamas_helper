@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ObjectId = Schema.ObjectId;
+
 const UserSchema = new Schema({
     handle: {
         type: String, 
@@ -13,7 +15,20 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    household: {
+        type: Array,
+        default: []
+    },
+    isLimitedUser: {
+        type: Boolean,
+        default: false
+    },
+    assignedTasks: {
+        type: Array,
+        default: [] 
+    },
+    parentId: ObjectId
 }, {
     timestamps: true
 })
