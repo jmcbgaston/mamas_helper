@@ -3,8 +3,8 @@ import React from 'react';
 const DeleteConfirmation = ({ history, taskId, handleDelete, handleCancel }) => (
   <div className="delete-confirmation">
     <div className="delete-confirmation__content">
-      <div className="delete-confirmation__warning">Are you sure?</div>
-      <div>
+      <div className="delete-confirmation__warning">Are you sure you want to delete this item?</div>
+      <div className="delete-confirmation__buttons-container">
         <button type="button"
           className="delete-confirmation__confirm-button delete-confirmation__button"
           onClick={() => {

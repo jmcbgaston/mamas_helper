@@ -63,7 +63,6 @@ class TaskIndexCreate extends React.Component{
   render() {
     return (
       <>
-
         <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
           <input
             type="text"
