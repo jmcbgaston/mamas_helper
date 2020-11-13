@@ -12,6 +12,7 @@ class TaskIndex extends React.Component {
     super(props);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
+    this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.state = {
       showModal: false,
@@ -25,6 +26,33 @@ class TaskIndex extends React.Component {
 
   componentWillUnmount() {
     this.props.clearErrors();
+  }
+
+  handleAssigneeDropdown() {
+    // debugger
+
+    const assignees = this.props.user.household.map((assignee, idx) => {
+      return(
+        <option 
+          value={assignee.handle} 
+          id={idx}>
+            {assignee.handle}
+        </option>
+      )
+    })
+
+    handleAssignTaskToSelectedUser() {
+
+    }
+
+    return(
+      <div>
+        <select name="assignees" id="assigness">
+          <option value="none">---</option>
+          {assignees}
+        </select>
+      </div>
+    )
   }
 
   handleCheck(e) {
@@ -107,10 +135,10 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
-
     
     if (this.props.user.isLimitedUser || this.props.user.household.length === 0) {
-      debugger
+      // debugger
+
       return (
         <>
           <ul className="task-index__list">
@@ -150,7 +178,8 @@ class TaskIndex extends React.Component {
         </>
       );
     } else {
-      debugger
+      // debugger
+
       return (
         <>
           <ul className="task-index__list">
@@ -166,10 +195,15 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                {this.handleAssigneeDropdown()}
               </li>
             )}
           </ul>
           <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+
+
+
+
           <TaskInstructionBox/>
           <button type="button"
             className="task-index__email-button button box__no-bottom-border"
@@ -190,7 +224,6 @@ class TaskIndex extends React.Component {
         </>
       );
     }
-
   }
 }
 

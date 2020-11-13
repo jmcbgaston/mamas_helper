@@ -56,10 +56,10 @@ router.post('/register', (req, res) => {
                   parentId: req.body.parentId
                 })
 
-                let id = newUser._id
+                // let id = newUser
 
                 User.findByIdAndUpdate(req.body.parentId,
-                  { "$push": { "household": id } },
+                  { "$push": { "household": newUser } },
                   { new: true, upsert: true }
                 ).then(res => {
                   console.log(res)
