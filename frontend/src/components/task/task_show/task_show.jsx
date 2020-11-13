@@ -36,16 +36,6 @@ class TaskShow extends React.Component {
 
     return (
       <>
-        {this.state.showDeleteConfirmation ?
-          <DeleteConfirmation
-            history={history}
-            taskId={task._id}
-            handleDelete={deleteTask}
-            handleCancel={this.handleClickDelete} />
-          :
-          null
-        }
-
         <div className="task-show__container">
           <h2 className="task-show__title">{task.title}</h2>
           { requirements.length ?
@@ -67,6 +57,15 @@ class TaskShow extends React.Component {
           </Link>
           <Back history={history} />
         </div>
+        {this.state.showDeleteConfirmation ?
+          <DeleteConfirmation
+            history={history}
+            taskId={task._id}
+            handleDelete={deleteTask}
+            handleCancel={this.handleClickDelete} />
+          :
+          null
+        }
       </>
     )
   }
