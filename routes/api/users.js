@@ -21,6 +21,33 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
     });
 })
 
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+  User.findById(req.params.id)
+  .then(user => res.json(user))
+  .catch(err =>
+      res.status(404).json({nouserfound: 'No user found with that ID'}));
+});
+
+router.patch('/:id', async (req, res) => {
+
+  const updatedUser = await User.findByIdAndUpdate(req.params.id,
+    { assignedTasks: req.body.assignedTasks },
+    { new: true }
+  )
+
+  console.log(req.body)
+
+  // res.send(updatedUser)
+
+  // console.log(updatedUser)
+  // .then(res => {
+  //   console.log(res)
+  // }).catch(err => {
+  //   console.log(err)
+  // });
+
+});
+
 router.post('/register', (req, res) => {
 
   const { errors, isValid } = validateRegisterInput(req.body);

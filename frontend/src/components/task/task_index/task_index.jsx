@@ -6,6 +6,7 @@ import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
+import { updateUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -13,11 +14,14 @@ class TaskIndex extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {}
     }
+    this.taskId = ""
+    this.assigneeId = ""
   }
 
   componentDidMount() {
@@ -29,30 +33,44 @@ class TaskIndex extends React.Component {
   }
 
   handleAssigneeDropdown() {
-    // debugger
-
-    const assignees = this.props.user.household.map((assignee, idx) => {
+    const assignees = this.props.user.household.map((assignee) => {
       return(
         <option 
           value={assignee.handle} 
-          id={idx}>
+          id={assignee._id}>
             {assignee.handle}
         </option>
       )
     })
 
-    handleAssignTaskToSelectedUser() {
-
-    }
-
     return(
       <div>
-        <select name="assignees" id="assigness">
+        <select 
+          name="assignees" 
+          className="assigness"
+          onChange={this.handleSelection}>
           <option value="none">---</option>
           {assignees}
         </select>
       </div>
     )
+  }
+
+  handleSelection(e) {
+    debugger
+
+    this.assigneeId = e.currentTarget.selectedOptions[0].id
+    this.taskId = e.currentTarget.closest('li').firstElementChild.id
+
+    let task = this.props.tasks.find(task => task._id === this.taskId)
+    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+    assignee.assignedTasks.push(task)
+    debugger
+
+    // update user in the database
+    updateUser(assignee)
+
+    debugger
   }
 
   handleCheck(e) {
@@ -195,15 +213,15 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+
+
                 {this.handleAssigneeDropdown()}
+
+
               </li>
             )}
           </ul>
           <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-
-
-
-
           <TaskInstructionBox/>
           <button type="button"
             className="task-index__email-button button box__no-bottom-border"
