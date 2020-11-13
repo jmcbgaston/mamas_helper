@@ -19,8 +19,12 @@
 }
 
 .delete-confirmation__button {
+  flex: 1;
   height: 3rem;
-  width: 10rem;
+}
+
+.delete-confirmation__buttons-container {
+  display: flex;
 }
 
 .delete-confirmation__confirm-button {
@@ -35,5 +39,5 @@
 }
 
 .delete-confirmation__warning {
-  margin: 3rem 0 ;
+  margin: 3rem 1rem;
 }
