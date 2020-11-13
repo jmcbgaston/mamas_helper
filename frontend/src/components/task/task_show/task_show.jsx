@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Back from '../../back';
-import DeleteConfirmation from '../../delete_confirmation';
+import TaskShowDeleteConfirmation from './task_show_delete_confirmation';
 
 class TaskShow extends React.Component {
   constructor() {
@@ -58,10 +58,10 @@ class TaskShow extends React.Component {
           <Back history={history} />
         </div>
         {this.state.showDeleteConfirmation ?
-          <DeleteConfirmation
+          <TaskShowDeleteConfirmation
             history={history}
-            taskId={task._id}
             handleDelete={deleteTask}
+            handleDeleteArg={task._id}
             handleCancel={this.handleClickDelete} />
           :
           null
