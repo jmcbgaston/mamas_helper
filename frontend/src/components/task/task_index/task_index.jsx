@@ -159,10 +159,8 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
-    
-    if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
-      // debugger
 
+    if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
       return (
         <>
           <ul className="task-index__list">
@@ -204,8 +202,6 @@ class TaskIndex extends React.Component {
     } 
     
     if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
-      // debugger
-
       return (
         <>
           <ul className="task-index__list">
@@ -252,8 +248,6 @@ class TaskIndex extends React.Component {
     }
 
     if (this.props.user.isLimitedUser) { // Child User
-      // debugger
-
       return (
         <>
           <label>Assigned tasks:</label>
@@ -306,7 +300,7 @@ class TaskIndex extends React.Component {
             disabled={is_task_selected()}>
             <VisibilityIcon />&nbsp;Show my tasks
           </button>
-          {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
+          {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks.concat(this.props.user.assignedTasks)} checkedTasksIds={{...checkedTasksIds}} /> : null}
   
           <p>User ID: {this.props.user.id}</p>
         </>
