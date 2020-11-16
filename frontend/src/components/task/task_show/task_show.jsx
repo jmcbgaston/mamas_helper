@@ -87,6 +87,7 @@ class TaskShow extends React.Component {
         </>
       )
     }
+  }
 };
 
 export default TaskShow;
