@@ -57,19 +57,15 @@ class TaskIndex extends React.Component {
   }
 
   handleSelection(e) {
-    debugger
 
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
     if (e.currentTarget.value === 'none') {
-      debugger
-
       this.props.user.household.forEach(user => {
         let newAT = user.assignedTasks.filter(aTask => aTask !== task)
         user.assignedTasks = newAT
         updateChildUser(user)
-        debugger
       })
 
       return
@@ -81,8 +77,6 @@ class TaskIndex extends React.Component {
     assignee.assignedTasks.push(task)
 
     updateChildUser(assignee)
-
-    debugger
   }
 
   handleCheck(e) {
@@ -166,8 +160,8 @@ class TaskIndex extends React.Component {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
     
-    if (this.props.user.isLimitedUser || this.props.user.household.length === 0) {
-      debugger
+    if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
+      // debugger
 
       return (
         <>
@@ -207,8 +201,10 @@ class TaskIndex extends React.Component {
           <p>User ID: {this.props.user.id}</p>
         </>
       );
-    } else {
-      debugger
+    } 
+    
+    if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
+      // debugger
 
       return (
         <>
@@ -254,6 +250,67 @@ class TaskIndex extends React.Component {
         </>
       );
     }
+
+    if (this.props.user.isLimitedUser) { // Child User
+      // debugger
+
+      return (
+        <>
+          <ul className="aTask-index__list">
+            {this.props.user.assignedTasks.map((aTask) =>
+              <li className="task-index__list-item" key={aTask._id}>
+                <input
+                  type="checkbox"
+                  id={aTask._id}
+                  className="task-index__list-item-checkbox"
+                  onClick={this.handleCheck}
+                  />
+                <Link to={`/tasks/${aTask._id}`}
+                  className="task-index__list-item-link">
+                  {aTask.title}
+                </Link>
+              </li>
+            )}
+          </ul>
+
+          <ul className="task-index__list">
+            {tasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                  type="checkbox"
+                  id={task._id}
+                  className="task-index__list-item-checkbox"
+                  onClick={this.handleCheck}
+                  />
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+              </li>
+            )}
+          </ul>
+          <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
+          <TaskInstructionBox/>
+          <button type="button"
+            className="task-index__email-button button box__no-bottom-border"
+            onClick={this.handleEmailClick}
+            disabled={is_task_selected()}>
+              <EmailIcon />&nbsp;Email me today's tasks
+          </button>
+          <button
+            type="button"
+            className="task-index__list-button button"
+            onClick={this.handleTaskClick}
+            disabled={is_task_selected()}>
+            <VisibilityIcon />&nbsp;Show my tasks
+          </button>
+          {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
+  
+          <p>User ID: {this.props.user.id}</p>
+        </>
+      );
+    } 
+    
   }
 }
 
