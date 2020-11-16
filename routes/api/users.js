@@ -7,7 +7,6 @@ const validateLoginInput = require('../../validation/login');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
-// const db = require('../../config/keys').mongoURI;
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
@@ -30,22 +29,12 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 
 router.patch('/:id', async (req, res) => {
 
-  const updatedUser = await User.findByIdAndUpdate(req.params.id,
+  const updatedChildUser = await User.findByIdAndUpdate(req.params.id,
     { assignedTasks: req.body.assignedTasks },
     { new: true }
   )
 
-  console.log(req.body)
-
-  // res.send(updatedUser)
-
-  // console.log(updatedUser)
-  // .then(res => {
-  //   console.log(res)
-  // }).catch(err => {
-  //   console.log(err)
-  // });
-
+  console.log(updatedChildUser)
 });
 
 router.post('/register', (req, res) => {

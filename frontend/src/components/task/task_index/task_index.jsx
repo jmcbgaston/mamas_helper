@@ -6,7 +6,7 @@ import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
-import { updateUser } from "../../../util/user_api_util"
+import { updateChildUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -59,16 +59,28 @@ class TaskIndex extends React.Component {
   handleSelection(e) {
     debugger
 
-    this.assigneeId = e.currentTarget.selectedOptions[0].id
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
-
     let task = this.props.tasks.find(task => task._id === this.taskId)
-    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
-    assignee.assignedTasks.push(task)
-    debugger
 
-    // update user in the database
-    updateUser(assignee)
+    if (e.currentTarget.value === 'none') {
+      debugger
+
+      this.props.user.household.forEach(user => {
+        let newAT = user.assignedTasks.filter(aTask => aTask !== task)
+        user.assignedTasks = newAT
+        updateChildUser(user)
+        debugger
+      })
+
+      return
+    }
+
+    this.assigneeId = e.currentTarget.selectedOptions[0].id
+    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+
+    assignee.assignedTasks.push(task)
+
+    updateChildUser(assignee)
 
     debugger
   }
@@ -155,7 +167,7 @@ class TaskIndex extends React.Component {
     };
     
     if (this.props.user.isLimitedUser || this.props.user.household.length === 0) {
-      // debugger
+      debugger
 
       return (
         <>
@@ -196,7 +208,7 @@ class TaskIndex extends React.Component {
         </>
       );
     } else {
-      // debugger
+      debugger
 
       return (
         <>
