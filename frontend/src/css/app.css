@@ -111,7 +111,7 @@ body,
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 0;
+  padding: 0 0.5rem;
   height: 3rem;
 }
 
@@ -121,7 +121,7 @@ body,
 
 .button:disabled:hover {
   filter: brightness(100%);
-  cursor: initial;
+  cursor: not-allowed;
 }
 
 .form-errors {

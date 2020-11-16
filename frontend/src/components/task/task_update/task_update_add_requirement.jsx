@@ -32,22 +32,24 @@ class TaskUpdateAddRequirement extends React.Component {
 
     render() {
       return (
-        <div className="input-add-on">
-          <input
-            type="text"
-            maxLength="30"
-            className="input-add-on__field input-field"
-            value={this.state.description}
-            onChange={this.handleChange}
-            placeholder="add a new requirement"
-          />
-          <button
-            type="button"
-            className="input-add-on__item input-add-on__item--plus"
-            onClick={this.handleButton}>
-              <i className="fas fa-plus" />
-          </button>
-        </div>
+        <form className="task-update__add-requirement" onSubmit={this.handleButton}>
+          <div className="input-add-on">
+            <input
+              type="text"
+              maxLength="30"
+              className="input-add-on__field input-field"
+              value={this.state.description}
+              onChange={this.handleChange}
+              placeholder="add a new requirement"
+            />
+            <button
+              type="button"
+              className="input-add-on__item input-add-on__item--plus"
+              onClick={this.handleButton}>
+                <i className="fas fa-plus" />
+            </button>
+          </div>
+        </form>
       )
     }
 }
