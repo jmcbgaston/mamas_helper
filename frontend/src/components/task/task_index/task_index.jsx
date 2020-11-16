@@ -256,23 +256,25 @@ class TaskIndex extends React.Component {
 
       return (
         <>
-          <ul className="aTask-index__list">
-            {this.props.user.assignedTasks.map((aTask) =>
-              <li className="task-index__list-item" key={aTask._id}>
+          <label>Assigned tasks:</label>
+          <ul className="task-index__list">
+            {this.props.user.assignedTasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
                 <input
                   type="checkbox"
-                  id={aTask._id}
+                  id={task._id}
                   className="task-index__list-item-checkbox"
                   onClick={this.handleCheck}
                   />
-                <Link to={`/tasks/${aTask._id}`}
+                <Link to={`/tasks/${task._id}`}
                   className="task-index__list-item-link">
-                  {aTask.title}
+                  {task.title}
                 </Link>
               </li>
             )}
           </ul>
 
+          <label>Your tasks:</label>
           <ul className="task-index__list">
             {tasks.map((task) =>
               <li className="task-index__list-item" key={task._id}>
