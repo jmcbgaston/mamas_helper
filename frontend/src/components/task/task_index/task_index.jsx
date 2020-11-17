@@ -27,7 +27,7 @@ class TaskIndex extends React.Component {
     this.taskId = ""
     this.assigneeId = ""
     this.oldState = ""
-
+    this.selectedOptionsArr = ""
   }
 
   componentDidMount() {
@@ -49,44 +49,41 @@ class TaskIndex extends React.Component {
         </option>
       )
     })
-
     return assignees
-    // return(
-    //   <div>
-    //     <select 
-    //       name="assignees" 
-    //       className="assigness"
-    //       onChange={this.handleSelection}>
-    //       <option value="none">---</option>
-    //       {assignees}
-    //     </select>
-    //   </div>
-    // )
   }
 
   handleSelection(e) {
-    debugger
+      debugger
 
-    this.taskId = e.currentTarget.closest('li').firstElementChild.id
-    let task = this.props.tasks.find(task => task._id === this.taskId)
+      // get task id
+      this.taskId = e.currentTarget.closest('li').firstElementChild.id
+      let task = this.props.tasks.find(task => task._id === this.taskId)
+          // remove task when none is chosen
+          if (e.currentTarget.value === 'none') {
+            this.props.user.household.forEach(user => {
+              let newAT = user.assignedTasks.filter(aTask => aTask !== task)
+              user.assignedTasks = newAT
+              updateChildUser(user)
+            })
+            return
+          }
+      // get user id
+      this.assigneeId = e.currentTarget.selectedOptions[0].id
+      let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+          // update user assigned tasks to reflect current state
+          assignee.assignedTasks.push(task)
+      updateChildUser(assignee)
 
-    if (e.currentTarget.value === 'none') {
-      this.props.user.household.forEach(user => {
-        let newAT = user.assignedTasks.filter(aTask => aTask !== task)
-        user.assignedTasks = newAT
-        updateChildUser(user)
-      })
-      return
-    }
+      // set up currently selected items
+      this.selectedOptionsArr = new Array(this.props.user.household.length)
+      debugger
 
-    this.assigneeId = e.currentTarget.selectedOptions[0].id
-    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+      for (let i = 0; i < this.selectedOptionsArr.length; i++) {
+        this.selectedOptionsArr[i] = ([this.taskId, e.currentTarget.value])
+      }
 
-    debugger
+      debugger
 
-    assignee.assignedTasks.push(task)
-
-    updateChildUser(assignee)
   }
 
   updateChildTasks() {
