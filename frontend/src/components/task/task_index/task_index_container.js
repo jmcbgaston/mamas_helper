@@ -5,7 +5,7 @@ import { fetchUser } from "../../../actions/user_actions"
 
 const mapStateToProps = (state) => {
     const user = state.session.user
-    const tasks = Object.values(state.tasks)
+    const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
     const fetchedUser = state.fetchedUser
 
     return({
