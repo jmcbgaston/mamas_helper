@@ -2,9 +2,12 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const AuthNav = ({ logout }) => (
+const AuthNav = ({ userId, logout }) => (
   <>
-    <h2 className ="nav-bar__header">Welcome!</h2>
+    <div className="nav-bar__header-container">
+      <h3 className ="nav-bar__header">Welcome!</h3>
+      <div>User ID: {userId}</div>
+    </div>
     <button
       className ="nav-bar__session-button button"
       onClick={() => logout()}>
@@ -34,9 +37,7 @@ const UnAuthNav = () => {
   return pathname === '/signup' ? <LogIn /> : <SignUp />
 }
 
-const NavBar = (props) => {
-  const { loggedIn, logout } = props;
-
+const NavBar = ({ userId, loggedIn, logout }) => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-bar__app-title">
@@ -44,7 +45,7 @@ const NavBar = (props) => {
         Mama's Helper
       </Link>
 
-      { loggedIn ? <AuthNav logout={logout}/> :<UnAuthNav /> }
+      { loggedIn ? <AuthNav userId={userId} logout={logout}/> :<UnAuthNav /> }
     </nav>
   );
 }

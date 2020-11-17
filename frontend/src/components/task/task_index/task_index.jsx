@@ -46,8 +46,8 @@ class TaskIndex extends React.Component {
   handleAssigneeDropdown() {
     const assignees = this.props.user.household.map((assignee) => {
       return(
-        <option 
-          value={assignee.handle} 
+        <option
+          value={assignee.handle}
           id={assignee._id}>
             {assignee.handle}
         </option>
@@ -56,8 +56,8 @@ class TaskIndex extends React.Component {
 
     return(
       <div>
-        <select 
-          name="assignees" 
+        <select
+          name="assignees"
           className="assigness"
           onChange={this.handleSelection}>
           <option value="none">---</option>
@@ -208,7 +208,7 @@ class TaskIndex extends React.Component {
                 <InfoIcon />&nbsp;Help
             </button>
           </div>
-          
+
           <ul className="task-index__list">
             {tasks.map((task) =>
               <li className="task-index__list-item" key={task._id}>
@@ -241,12 +241,12 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-          
-          <p>User ID: {this.props.user.id}</p>
+
+          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
-    } 
-    
+    }
+
     if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
       return (
         <>
@@ -258,7 +258,7 @@ class TaskIndex extends React.Component {
                 <InfoIcon />&nbsp;Help
             </button>
           </div>
-          
+
           <ul className="task-index__list">
             {tasks.map((task) =>
               <li className="task-index__list-item" key={task._id}>
@@ -296,8 +296,8 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-          
-          <p>User ID: {this.props.user.id}</p>
+
+          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
     }
@@ -313,7 +313,7 @@ class TaskIndex extends React.Component {
                 <InfoIcon />&nbsp;Help
             </button>
           </div>
-          
+
           <label>Assigned tasks:</label>
           <ul className="task-index__list">
             {this.props.user.assignedTasks.map((task) =>
@@ -365,11 +365,11 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks.concat(this.props.user.assignedTasks)} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-          
-          <p>User ID: {this.props.user.id}</p>
+
+          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
-    } 
+    }
   }
 }
 
