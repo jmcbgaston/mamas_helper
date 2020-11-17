@@ -12,16 +12,25 @@ class TaskShow extends React.Component {
     this.handleClickDelete = this.handleClickDelete.bind(this);
 
     this.state = {
+      task: null,
       showDeleteConfirmation: false
     }
   }
 
   componentDidMount(){
-    const { task, fetchTask, match: { params } } = this.props;
+    const { user, task, fetchTask, match: { params } } = this.props;
+    // debugger
 
-    if (!task) {
-      fetchTask(params.taskId);
+    let currentTask;
+    if (task) {
+      currentTask = task;
+    } else {
+      currentTask = user.assignedTasks.find((task) => task._id === params.taskId);
     }
+
+    this.setState({
+      task: currentTask
+    });
   }
 
   handleClickDelete(e) {
@@ -29,16 +38,16 @@ class TaskShow extends React.Component {
   }
 
   render() {
-    const { task, deleteTask, history, match: { params } } = this.props;
+    const { deleteTask, history, match: { params } } = this.props;
+    const { task } = this.state;
 
     if (!task) {
       return null;
     }
 
-
     const requirements = task.requirements;
 
-    if (this.props.userId !== task.owner_id) {
+    if (this.props.user.id !== task.owner_id) {
       return (
         <>
           <div className="task-show__container">
@@ -46,7 +55,9 @@ class TaskShow extends React.Component {
             { requirements.length ?
               <TaskShowRequirements requirements={requirements} />
               :
-              <p className="task-show__no-requirements">No requirements yet. Click "Edit Task" button to add requirements.</p>
+              <p className="task-show__no-requirements">
+                Your assigned task does not have any requirements yet.
+              </p>
             }
           </div>
           <div className="task-show__options">
@@ -62,7 +73,9 @@ class TaskShow extends React.Component {
             { requirements.length ?
               <TaskShowRequirements requirements={requirements} />
               :
-              <p className="task-show__no-requirements">No requirements yet. Click "Edit Task" button to add requirements.</p>
+              <p className="task-show__no-requirements">
+                No requirements yet. Click "Edit Task" button to add requirements.
+              </p>
             }
           </div>
           <div className="task-show__options">
@@ -72,7 +85,9 @@ class TaskShow extends React.Component {
                 <DeleteIcon />&nbsp;Delete Task
             </button>
             <Link to={`/tasks/${params.taskId}/edit`} className="task-show__link">
-              <button type="button" className="task-show__option task-show__option--update button">
+              <button
+                type="button"
+                className="task-show__option task-show__option--update button">
                 <EditIcon />&nbsp;Edit Task
               </button>
             </Link>
