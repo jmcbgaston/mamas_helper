@@ -41,10 +41,10 @@ const NavBar = (props) => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-bar__app-title">
-        <img className="nav-bar__logo" src={logo}/>
+        <img className="nav-bar__logo" src={logo} />
       </Link>
 
-      { loggedIn ? <AuthNav logout={logout}/> :<UnAuthNav /> }
+      {loggedIn ? <AuthNav logout={logout} /> : <UnAuthNav />}
     </nav>
   );
 }

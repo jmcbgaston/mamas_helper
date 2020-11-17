@@ -14,27 +14,14 @@
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid #808080;
-  color: #800080;
+  background-image:url(PNG_MH_Unchecked.png);
+  background-size: 3em 3em;
   margin: 0;
 }
 
-.task-index__list-item-checkbox::before {
-  content: "➼";
-  position: absolute;
-  font-size: 2.5em;
-  top: 56%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  visibility: hidden;
-}
-
 .task-index__list-item-checkbox:checked {
-  border: 2px solid #2C353A;
-}
-
-.task-index__list-item-checkbox:checked::before {
-  visibility: visible;
+  background-image:url(PNG_MH_Check.png);
+  background-size: 3em 3em;
 }
 
 .task-index__list-item-link {
