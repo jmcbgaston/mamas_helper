@@ -10,8 +10,8 @@ import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
@@ -30,13 +30,8 @@ class TaskIndex extends React.Component {
   }
 
   componentDidMount() {
-    // debugger
-
     this.oldState = this.props.tasks
-
     this.props.fetchTasks(this.props.user.id);
-
-    // debugger
   }
 
   componentWillUnmount() {
@@ -90,8 +85,6 @@ class TaskIndex extends React.Component {
   }
 
   updateChildTasks() {
-    // debugger
-
     this.props.user.household.forEach(child => {
       updateChildUser(child)
     })
@@ -191,11 +184,8 @@ class TaskIndex extends React.Component {
     };
 
     if (this.props.tasks.length < this.oldState.length) {
-      // debugger
       this.updateChildTasks()
     }
-
-    // debugger
 
     if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
       return (

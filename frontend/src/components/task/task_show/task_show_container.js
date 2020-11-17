@@ -4,7 +4,8 @@ import TaskShow from './task_show';
 
 const mapStateToProps = (state, ownProps) => {
     return({
-        task: state.tasks[ownProps.match.params.taskId],
+        task: state.session.user.assignedTasks.find((task) =>
+          ownProps.match.params.taskId),
         userId: state.session.user.id
     })
 };

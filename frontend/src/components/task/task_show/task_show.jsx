@@ -17,8 +17,11 @@ class TaskShow extends React.Component {
   }
 
   componentDidMount(){
-    const { fetchTask, match: { params } } = this.props;
-    fetchTask(params.taskId);
+    const { task, fetchTask, match: { params } } = this.props;
+
+    if (!task) {
+      fetchTask(params.taskId);
+    }
   }
 
   handleClickDelete(e) {
