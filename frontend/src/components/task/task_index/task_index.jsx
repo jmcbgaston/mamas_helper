@@ -22,21 +22,17 @@ class TaskIndex extends React.Component {
     this.state = {
       showModal: false,
       showInstructions: false,
-      checkedTasksIds: {}
+      checkedTasksIds: {}, 
     }
     this.taskId = ""
     this.assigneeId = ""
     this.oldState = ""
+
   }
 
   componentDidMount() {
-    // debugger
-
     this.oldState = this.props.tasks
-
     this.props.fetchTasks(this.props.user.id);
-
-    // debugger
   }
 
   componentWillUnmount() {
@@ -54,20 +50,23 @@ class TaskIndex extends React.Component {
       )
     })
 
-    return(
-      <div>
-        <select 
-          name="assignees" 
-          className="assigness"
-          onChange={this.handleSelection}>
-          <option value="none">---</option>
-          {assignees}
-        </select>
-      </div>
-    )
+    return assignees
+    // return(
+    //   <div>
+    //     <select 
+    //       name="assignees" 
+    //       className="assigness"
+    //       onChange={this.handleSelection}>
+    //       <option value="none">---</option>
+    //       {assignees}
+    //     </select>
+    //   </div>
+    // )
   }
 
   handleSelection(e) {
+    debugger
+
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
@@ -77,12 +76,13 @@ class TaskIndex extends React.Component {
         user.assignedTasks = newAT
         updateChildUser(user)
       })
-
       return
     }
 
     this.assigneeId = e.currentTarget.selectedOptions[0].id
     let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+
+    debugger
 
     assignee.assignedTasks.push(task)
 
@@ -90,12 +90,9 @@ class TaskIndex extends React.Component {
   }
 
   updateChildTasks() {
-    // debugger
-
     this.props.user.household.forEach(child => {
       updateChildUser(child)
     })
-
   }
 
   handleCheck(e) {
@@ -191,11 +188,8 @@ class TaskIndex extends React.Component {
     };
 
     if (this.props.tasks.length < this.oldState.length) {
-      // debugger
       this.updateChildTasks()
     }
-
-    // debugger
 
     if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
       return (
@@ -248,6 +242,8 @@ class TaskIndex extends React.Component {
     } 
     
     if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
+      debugger
+
       return (
         <>
           <div className="task-index__instruction-container">
@@ -261,7 +257,7 @@ class TaskIndex extends React.Component {
           
           <ul className="task-index__list">
             {tasks.map((task) =>
-              <li className="task-index__list-item" key={task._id}>
+              <li className="task-index__list-item" id={task._id} key={task._id}>
                 <input
                   type="checkbox"
                   id={task._id}
@@ -272,14 +268,20 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
-
-
-                {this.handleAssigneeDropdown()}
-
-
+                <div>
+                  <select 
+                    name="assignees" 
+                    id={task._id}
+                    className="assigness"
+                    onChange={this.handleSelection}>
+                    <option value="none">---</option>
+                    {this.handleAssigneeDropdown()}
+                  </select>
+                </div>
               </li>
             )}
           </ul>
+
           <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
           <button type="button"
             className="task-index__email-button button box__no-bottom-border"
