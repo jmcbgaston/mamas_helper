@@ -16,6 +16,7 @@ class TaskIndex extends React.Component {
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
+    this.updateChildTasks = this.updateChildTasks.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
     this.state = {
@@ -25,10 +26,17 @@ class TaskIndex extends React.Component {
     }
     this.taskId = ""
     this.assigneeId = ""
+    this.oldState = ""
   }
 
   componentDidMount() {
+    // debugger
+
+    this.oldState = this.props.tasks
+
     this.props.fetchTasks(this.props.user.id);
+
+    // debugger
   }
 
   componentWillUnmount() {
@@ -60,7 +68,6 @@ class TaskIndex extends React.Component {
   }
 
   handleSelection(e) {
-
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
@@ -80,6 +87,15 @@ class TaskIndex extends React.Component {
     assignee.assignedTasks.push(task)
 
     updateChildUser(assignee)
+  }
+
+  updateChildTasks() {
+    // debugger
+
+    this.props.user.household.forEach(child => {
+      updateChildUser(child)
+    })
+
   }
 
   handleCheck(e) {
@@ -173,6 +189,13 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
+
+    if (this.props.tasks.length < this.oldState.length) {
+      // debugger
+      this.updateChildTasks()
+    }
+
+    // debugger
 
     if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
       return (
