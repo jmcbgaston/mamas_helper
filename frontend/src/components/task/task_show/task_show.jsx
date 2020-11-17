@@ -23,11 +23,15 @@ class TaskShow extends React.Component {
     return (
       <>
         <div className="task-show__container">
-          { task ? <h2 className="task-show__title">{task.title}</h2> : null }
-          { requirements.length ? <TaskShowRequirements requirements={requirements} /> : null }
+          <h2 className="task-show__title">{task.title}</h2>
+          { requirements.length ?
+            <TaskShowRequirements requirements={requirements} />
+            :
+            <p className="task-show__no-requirements">No requirements yet. Click "Edit Task" button to add requirements.</p>
+          }
         </div>
         <div className="task-show__options">
-          <Link to="/tasks" className="task-show__link">
+          <Link to="/" className="task-show__link">
             <button
               className ="task-show__option task-show__option--delete button box__no-bottom-border"
               onClick={() => (deleteTask(task._id))}>

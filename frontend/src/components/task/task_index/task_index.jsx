@@ -4,8 +4,10 @@ import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
+import InfoIcon from '@material-ui/icons/Info';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
+import TaskIndexCompleteList from './task_index_complete_list';
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -13,12 +15,13 @@ class TaskIndex extends React.Component {
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
-    this.handleCheckCompletion = this.handleCheckCompletion.bind(this);
-    this.handleCompleteClick = this.handleCompleteClick.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
+    this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {},
-      checkedCompletionIds: {}
+      checkedCompleteIds: {},
+      showCompleteModal: false
     }
   }
 
@@ -30,20 +33,33 @@ class TaskIndex extends React.Component {
     this.props.clearErrors();
   }
 
-  handleCheckCompletion(e) {
-    debugger 
-    const checkedCompletionIds = {...this.state.checkedCompletionIds};
-    const taskId = e.currentTarget.id;
-    checkedCompletionIds[taskId] = e.currentTarget.checked;
-    this.setState({ checkedCompletionIds })
+  handleComplete(e) {
+    // debugger
+      this.props.tasks.find((task) => task._id === e.currentTarget.id).completed = !this.props.tasks.find((task) => task._id === e.currentTarget.id).completed 
+      // this.props.tasks.map((task) => {
+      //   if(task._id === e.currentTarget.id) {
+      //     return !task.completed
+      //   }
+      // })
+      const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+      const taskId = e.currentTarget.id;
+      checkedCompleteIds[taskId] = e.currentTarget.checked;
+      this.setState({ checkedCompleteIds })
+
   }
 
-  handleCompleteClick(e) {
-    e.preventDefault();
-    const checkedComplete = Object.keys(this.state.checkedCompletionIds).filter((id) => this.state.checkedCompletionIds[id]);
-
-
-  }
+  toggleCompleteModal() {
+    this.setState({ showCompleteModal: !this.state.showCompleteModal})
+    const completedTaskIds = Object.keys(this.state.checkedCompleteIds)
+    const lists = document.getElementsByClassName("task-index__list-item-link")
+    this.props.tasks.map((task, i) => {
+      if(completedTaskIds.includes(task._id)) {
+        const lists = document.getElementsByClassName("task-index__list-item")
+        lists[i].innerText = ""
+        // this.props.deleteTask(task._id)
+      }
+    })
+  };
 
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
@@ -55,6 +71,12 @@ class TaskIndex extends React.Component {
   handleTaskClick(e) {
     this.setState({
       showModal: !this.state.showModal
+    })
+  }
+
+  handleInstructionClick(e) {
+    this.setState({
+      showInstructions: !this.state.showInstructions
     })
   }
 
@@ -80,9 +102,14 @@ class TaskIndex extends React.Component {
         <ul>
       `);
 
-      task.requirements.forEach((requirement) => {
-        HTMLString.push(`<li>${requirement.description}</li>`);
-      })
+      if (task.requirements.length) {
+        task.requirements.forEach((requirement) => {
+          HTMLString.push(`<li>${requirement.description}</li>`);
+        })
+      } else {
+        HTMLString.push(`(no requirements)`);
+      }
+
       HTMLString.push(`</ul>`);
     })
 
@@ -117,8 +144,9 @@ class TaskIndex extends React.Component {
   }
 
   render() {
+    // debugger
     const { tasks, createTask, errors, clearErrors } = this.props;
-    const { showModal, checkedTasksIds } = this.state;
+    const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -128,7 +156,15 @@ class TaskIndex extends React.Component {
 
     return (
       <>
-        <Link to="/completion"><button onClick={this.handleCompleteClick}>Complete</button></Link>
+        <Link to="/completion"><button>Completion page</button></Link>
+        <div className="task-index__instruction-container">
+          <h2 className="task-index__instruction-header">Tasks</h2>
+          <button type="button"
+            className="task-index__instruction-button button"
+            onClick={this.handleInstructionClick}>
+              <InfoIcon />&nbsp;Help
+          </button>
+        </div>
         <ul className="task-index__list">
           {tasks.map((task) =>
             <li className="task-index__list-item" key={task._id}>
@@ -143,16 +179,15 @@ class TaskIndex extends React.Component {
                 {task.title}
               </Link>
               <input 
-              type="checkbox" 
-              id={task._id}
-              className=""
-              onClick={this.handleCheckCompletion}
+                type="checkbox"
+                id={task._id}
+                className=""
+                onClick={this.handleComplete}
               />
             </li>
           )}
         </ul>
         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-        <TaskInstructionBox/>
         <button type="button"
           className="task-index__email-button button box__no-bottom-border"
           onClick={this.handleEmailClick}
@@ -166,7 +201,10 @@ class TaskIndex extends React.Component {
           disabled={is_task_selected()}>
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
+        <button onClick={this.toggleCompleteModal}>Mark as Complete</button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
+        {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
+        {showCompleteModal ? <TaskIndexCompleteList handleClose={this.toggleCompleteModal} tasks={this.props.tasks} checkedCompleteIds={{...checkedCompleteIds}} /> : null}
       </>
     );
   }

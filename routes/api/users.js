@@ -17,7 +17,7 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 })
 
 router.post('/register', (req, res) => {
-
+ 
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -36,7 +36,6 @@ router.post('/register', (req, res) => {
             errors.email = "That email is taken!";
             return res.status(400).json(errors);
           } else {
-    
             const newUser = new User({
               handle: req.body.handle,
               email: req.body.email,
@@ -60,7 +59,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {

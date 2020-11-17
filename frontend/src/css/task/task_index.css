@@ -1,6 +1,6 @@
 .task-index__list {
   margin: 0 auto;
-  padding: 0 2rem 1rem 2rem;
+  padding: 1rem 0 2rem 0;
 }
 
 .task-index__list-item {
@@ -14,8 +14,9 @@
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid gray;
+  border: 1px solid #808080;
   color: #800080;
+  margin: 0;
 }
 
 .task-index__list-item-checkbox::before {
@@ -28,20 +29,22 @@
   visibility: hidden;
 }
 
-.task-index__list-item-checkbox:checked::before {
-  visibility: visible;
+.task-index__list-item-checkbox:checked {
+  border: 2px solid #2C353A;
 }
 
-.task-index__list-item-checkbox:disabled {
-  border-color: black;
-  background: #ddd;
-  color: gray;
+.task-index__list-item-checkbox:checked::before {
+  visibility: visible;
 }
 
 .task-index__list-item-link {
   align-items: center;
   display: flex;
   margin-left: 1rem;
+}
+
+.task-index__list-item:not(:first-child) {
+  margin-top: 0.5rem;
 }
 
 .task-index__create-form-input,
@@ -61,69 +64,15 @@
   margin-top: 1rem;
 }
 
-/* task_index_list.jsx */
-
-.task-index__task-list-container {
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
+.task-index__instruction-container {
   display: flex;
-  justify-content: center;
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width:100%;
-}
-
-.task-index__task-list {
-  padding: 1rem 2rem 2rem 2rem;
-  position:fixed;
-  text-align: center;
-  width: 60%;
-  background-color: #F3F3F3;
-  border: 3px solid #2C353A;
-}
-
-.task-index__task-list-button-container {
-  display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: 1rem;
   align-items: center;
 }
 
-.task-index__task-list-button {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background-color: #DF1616;
-  margin: 0;
-}
-
-.task-index__task-list-header {
+.task-index__instruction-header {
   flex: 1;
-  font-size: 1.5rem;
-  text-transform: uppercase;
 }
 
-.task-index__task-list-items-container {
-  display: inline-block;
-  overflow-wrap: anywhere;
-  text-align: left;
+.task-index__instruction-button {
+  position: absolute;
 }
-
-.task-list-item__requirement {
-  list-style-position: inside;
-  list-style-type: disc;
-}
-
-.task-index__task-list-items--spacing {
-  margin: 1rem 0;
-}
-
-.task-index__task-list-item-header {
-  font-size: 1.25rem;
-}
-
-/* task_index_list.jsx */

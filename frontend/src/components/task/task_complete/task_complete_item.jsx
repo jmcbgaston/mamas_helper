@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import Back from '../../back';
 import {withRouter} from 'react-router-dom';
 
-const TaskCompleteItem = ( {history} ) => {
+const TaskCompleteItem = ( {task, history} ) => {
     return (
         <div>
-            <h1>Task Completed List</h1>
-            {/* <button><Link to="/"> Click here to go back</Link></button> */}
-            < Back history={history}/>
+            <div>
+                <h2>{task.title}</h2>
+                <h2>{task.updatedAt}</h2>
+            </div>
+                {/* < Back history={history}/> */}
         </div>
+
     )
 };
 
-export default withRouter(TaskCompleteItem);
+// export default withRouter(TaskCompleteItem);
+export default TaskCompleteItem;

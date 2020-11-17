@@ -5,6 +5,9 @@
   padding-bottom: 2rem;
 }
 
+.task-show__no-requirements {
+  margin-top: 1rem;
+}
 
 .task-show__link {
   display: flex;
@@ -22,7 +25,7 @@
   background-color: #e9df83;
 }
 
-.requirements-list-item__bullet-point {
+.list-item__bullet-point {
   color: #800080;
   margin-right: 1rem;
 }

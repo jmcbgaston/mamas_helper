@@ -13,6 +13,7 @@ router.get('/user/:user_id', (req, res) => {
 });
 
 router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) => {
+  
       const { errors, isValid } = validateTaskInput(req.body);
 
       if (!isValid) {
@@ -30,14 +31,15 @@ router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) =
             requirements: req.body.requirements,
             owner_id: req.user._id
           });
-
           newTask.save()
           .then(task => res.json(task));
-          }
+       
+        }
       });
 });
 
 router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+
     Task.findById(req.params.id)
     .then(task => res.json(task))
     .catch(err =>

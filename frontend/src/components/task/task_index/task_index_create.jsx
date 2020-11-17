@@ -1,5 +1,5 @@
 import React from 'react';
-import Popup from '../popup';
+import TaskIndexCreateModal from './task_index_create_modal';
 
 class TaskIndexCreate extends React.Component{
   constructor(props){
@@ -41,11 +41,13 @@ class TaskIndexCreate extends React.Component{
   handleSubmit(e){
     e.preventDefault();
     const { tasks, createTask } = this.props;
-    const formInputStr = e.nativeEvent.srcElement[0].value;
+
+    const formInputStr = e.currentTarget[0].value;
     const duplicate = tasks.find((task) => task.title === formInputStr);
     if(!duplicate && formInputStr.length >= 2) {
       this.togglePopup();
     }
+    
     createTask(this.state);
     this.setState({
       title: "",
@@ -61,7 +63,7 @@ class TaskIndexCreate extends React.Component{
   render() {
     return (
       <>
-        {this.state.showPopup ? <Popup closePopup={this.togglePopup} /> : null}
+        {this.state.showPopup ? <TaskIndexCreateModal handleClose={this.togglePopup} /> : null}
 
         <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
           <input

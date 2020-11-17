@@ -5,7 +5,7 @@ const TaskShowRequirementItems = ({ requirement }) => {
     return (
       <li className="requirements-list-item">
         <h3>
-          <span className="requirements-list-item__bullet-point">➼</span>
+          <span className="list-item__bullet-point">➼</span>
           {requirement.description}
         </h3>
         { requirement.reusable ? <Reusable /> : null }

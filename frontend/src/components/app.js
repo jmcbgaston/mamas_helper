@@ -18,6 +18,7 @@ import '../css/navbar.css'
 import '../css/about.css'
 import '../css/session_forms.css';
 import '../css/task/task_index.css'
+import '../css/task/task_index_list.css'
 import '../css/task/task_show.css'
 import '../css/task/task_update.css'
 import '../css/requirements/requirement_show.css'
