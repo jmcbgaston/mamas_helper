@@ -16,7 +16,10 @@ class TaskIndex extends React.Component {
     this.handleEmailClick = this.handleEmailClick.bind(this);
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
+    this.setOptions = this.setOptions.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
     this.updateChildTasks = this.updateChildTasks.bind(this);
+    this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
     this.state = {
@@ -53,7 +56,6 @@ class TaskIndex extends React.Component {
   }
 
   handleSelection(e) {
-      debugger
 
       // get task id
       this.taskId = e.currentTarget.closest('li').firstElementChild.id
@@ -64,26 +66,44 @@ class TaskIndex extends React.Component {
               let newAT = user.assignedTasks.filter(aTask => aTask !== task)
               user.assignedTasks = newAT
               updateChildUser(user)
+              this.setupLocalStorage();
             })
             return
           }
+
+      this.setupLocalStorage();
+
       // get user id
       this.assigneeId = e.currentTarget.selectedOptions[0].id
       let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
           // update user assigned tasks to reflect current state
           assignee.assignedTasks.push(task)
       updateChildUser(assignee)
+  }
 
-      // set up currently selected items
-      this.selectedOptionsArr = new Array(this.props.user.household.length)
-      debugger
+  setupLocalStorage() {
+    // set up currently selected items
+    this.selectedOptionsArr = new Array(this.props.tasks.length)
+    let selectElements = document.getElementsByTagName('select')
+    // let optionElements = 
+        for (let i = 0; i < this.selectedOptionsArr.length; i++) {
+          this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
+        }
+    window.localStorage.selectedOptionsArr = this.selectedOptionsArr
+  }  
 
-      for (let i = 0; i < this.selectedOptionsArr.length; i++) {
-        this.selectedOptionsArr[i] = ([this.taskId, e.currentTarget.value])
+  componentDidUpdate() {
+    this.setOptions()
+  }
+
+  setOptions() {
+    let select = document.getElementsByTagName('select')
+    if (localStorage.selectedOptionsArr) {
+      let lsArr = localStorage.selectedOptionsArr.split(',')
+      for (let i = 0; i < select.length; i++) {
+          select[i].selectedIndex = lsArr[(i*2)+1]
       }
-
-      debugger
-
+    }
   }
 
   updateChildTasks() {
@@ -239,8 +259,6 @@ class TaskIndex extends React.Component {
     } 
     
     if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
-      debugger
-
       return (
         <>
           <div className="task-index__instruction-container">
@@ -271,7 +289,11 @@ class TaskIndex extends React.Component {
                     id={task._id}
                     className="assigness"
                     onChange={this.handleSelection}>
-                    <option value="none">---</option>
+                    <option 
+                      value="none"
+                      id="0">
+                        ---
+                    </option>
                     {this.handleAssigneeDropdown()}
                   </select>
                 </div>
