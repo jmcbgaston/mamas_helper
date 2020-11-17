@@ -241,8 +241,6 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-
-          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
     }
@@ -296,8 +294,6 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-
-          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
     }
@@ -365,8 +361,6 @@ class TaskIndex extends React.Component {
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks.concat(this.props.user.assignedTasks)} checkedTasksIds={{...checkedTasksIds}} /> : null}
           {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-
-          {/* <p>User ID: {this.props.user.id}</p> */}
         </>
       );
     }

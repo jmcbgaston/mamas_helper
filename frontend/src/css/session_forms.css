@@ -29,6 +29,11 @@
   margin-bottom: 1rem;
 }
 
+.session-form__limited-user-label {
+  display: flex;
+  align-items: center;
+}
+
 .session-form__limit-user-header {
   margin-left: 1rem;
 }

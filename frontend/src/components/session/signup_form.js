@@ -137,25 +137,27 @@ class SignupForm extends React.Component {
           {this.renderErrors("password2")}
         </div>
 
-        <label className="session-form__limited-user">
-          <input
-            type="checkbox"
-            onClick={this.handleLimited} />
-          <div className="session-form__limit-user-header">
-            limited user?&nbsp;
-              <Tooltip placement="top" title={
-                <span style={{ fontSize: "1rem" }}>
-                  A limited user can receive tasks from their parent user,
-                  but does not have the ability to send tasks. A parent user has
-                  the ability to send tasks to users in their household.
-                  Both types of users have the ability to create tasks.
-                  When this is selected, a limited user must insert their parent's
-                  user ID into the field that forms below.
-                </span>}>
-              <HelpIcon />
-            </Tooltip>
-          </div>
-        </label>
+        <div className="session-form__limited-user">
+          <label className="session-form__limited-user-label">
+            <input
+              type="checkbox"
+              onClick={this.handleLimited} />
+            <div className="session-form__limit-user-header">
+              limited user?&nbsp;
+            </div>
+          </label>
+          <Tooltip placement="top" title={
+              <span style={{ fontSize: "1rem" }}>
+                A limited user can receive tasks from their parent user,
+                but does not have the ability to send tasks. A parent user has
+                the ability to send tasks to users in their household.
+                Both types of users have the ability to create tasks.
+                When this is selected, a limited user must insert their parent's
+                user ID into the field that forms below.
+              </span>}>
+            <HelpIcon />
+          </Tooltip>
+        </div>
         <input
           id="conditional-show"
           type="hidden"
