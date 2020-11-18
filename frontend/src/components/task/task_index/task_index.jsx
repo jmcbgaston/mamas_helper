@@ -149,6 +149,7 @@ class TaskIndex extends React.Component {
   handleEmailClick(e) {
     const HTMLString = [];
     const { tasks, user } = this.props;
+    const allTasks = tasks.concat(user.assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
@@ -161,7 +162,7 @@ class TaskIndex extends React.Component {
     `);
 
     checked.forEach((taskId) => {
-      const task = tasks.find((requirement) => requirement._id === taskId);
+      const task = allTasks.find((requirement) => requirement._id === taskId);
 
       HTMLString.push(`
         <li>${task.title}</li>
