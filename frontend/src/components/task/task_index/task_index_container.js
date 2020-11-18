@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
     const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
     const fetchedUser = state.fetchedUser
 
+    // debugger
+
     return({
         user: user,
         fetchedUser: fetchedUser,
