@@ -47,7 +47,10 @@ class TaskShow extends React.Component {
               </p>
             }
           </div>
-          <div className="task-show__options">
+          <p className="task-show__no-requirements">
+            You cannot edit or delete an assigned task.
+          </p>
+          <div className="task-show__options task-show__options--assigned-back">
             <Back history={history} />
           </div>
         </>
