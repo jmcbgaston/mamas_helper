@@ -139,22 +139,23 @@ class SignupForm extends React.Component {
 
         <div className="session-form__limited-user">
           <label className="session-form__limited-user-label">
-            <input
-              type="checkbox"
-              onClick={this.handleLimited} />
+            <input type="checkbox" onClick={this.handleLimited} />
             <div className="session-form__limit-user-header">
-              limited user?&nbsp;
+              Limited user?&nbsp;
             </div>
           </label>
-          <Tooltip placement="top" title={
+          <Tooltip
+            placement="top"
+            title={
               <span style={{ fontSize: "1rem" }}>
-                A limited user can receive tasks from their parent user,
-                but does not have the ability to send tasks. A parent user has
-                the ability to send tasks to users in their household.
-                Both types of users have the ability to create tasks.
-                When this is selected, a limited user must insert their parent's
-                user ID into the field that forms below.
-              </span>}>
+                Limited users: Select this option and enter your household's
+                parent ID, in order to receive tasks from your parent user.<br/>
+                Regular users: Provide your user ID to a new user, in order to add them
+                to your household.  <br/>
+                Both types of users have the ability to create and use their own tasks.
+              </span>
+            }
+          >
             <HelpIcon />
           </Tooltip>
         </div>
@@ -163,11 +164,11 @@ class SignupForm extends React.Component {
           type="hidden"
           className={`session-form__input-field input-field ${this.addErrorsClass(
             "parentId"
-            )}`}
-            value={user.parentId}
-            onChange={this.update("parentId")}
-            placeholder="Parent User ID"
-            />
+          )}`}
+          value={user.parentId}
+          onChange={this.update("parentId")}
+          placeholder="Parent User ID"
+        />
         <div className="session-form__errors form-errors">
           {this.renderErrors("parentId")}
         </div>
@@ -177,7 +178,6 @@ class SignupForm extends React.Component {
           type="submit"
           value="Sign Up"
         />
-
       </form>
     );
   }
