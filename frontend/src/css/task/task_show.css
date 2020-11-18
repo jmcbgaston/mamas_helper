@@ -28,4 +28,6 @@
 .list-item__bullet-point {
   color: #800080;
   margin-right: 1rem;
+  width: 1em;
+  vertical-align: middle;
 }
