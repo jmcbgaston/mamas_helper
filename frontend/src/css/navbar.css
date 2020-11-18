@@ -13,8 +13,9 @@
   text-shadow: 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A;
 }
 
+
 .nav-bar__logo {
-  display: none;
+  width: 6rem;
 }
 
 .nav-bar__header-container {

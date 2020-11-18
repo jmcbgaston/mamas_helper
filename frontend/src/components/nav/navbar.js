@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import logo from './PNG_MH_Logo.png';
 
 const AuthNav = ({ user, logout }) => (
   <>
@@ -41,8 +42,7 @@ const NavBar = ({ user, loggedIn, logout }) => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-bar__app-title">
-        <p className="nav-bar__logo">(logo)&nbsp;</p>
-        Mama's Helper
+        <img className="nav-bar__logo" src={logo} />
       </Link>
 
       { loggedIn ? <AuthNav user={user} logout={logout}/> :<UnAuthNav /> }

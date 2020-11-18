@@ -14,8 +14,8 @@
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid #808080;
-  color: #800080;
+  background-image:url(PNG_MH_Unchecked.png);
+  background-size: 3em 3em;
   margin: 0;
 } */
 
