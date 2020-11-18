@@ -301,7 +301,7 @@ class TaskIndex extends React.Component {
             <VisibilityIcon />&nbsp;Show my tasks
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
-          {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
+          {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} copyId={this.props.user.id}/> : null}
         </>
       );
     }
@@ -364,7 +364,7 @@ class TaskIndex extends React.Component {
             <VisibilityIcon />&nbsp;Show my tasks
           </button>
           {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
-          {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
+          {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} copyId={this.props.user.id}/> : null}
         </>
       );
     }
