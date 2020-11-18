@@ -90,3 +90,9 @@ and (min-width: 992px) {
     margin: 0;
   }
 }
+
+.nav-bar___user-id{
+  background-color: plum;
+  padding: 5px;
+  border: 1px solid black;
+}
