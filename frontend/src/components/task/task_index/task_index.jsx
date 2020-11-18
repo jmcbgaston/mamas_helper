@@ -14,12 +14,13 @@ class TaskIndex extends React.Component {
     super(props);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleEmailClick = this.handleEmailClick.bind(this);
+    
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.setOptions = this.setOptions.bind(this);
-    this.handleSelection = this.handleSelection.bind(this);
     this.updateChildTasks = this.updateChildTasks.bind(this);
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
+
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
     this.state = {
@@ -60,32 +61,32 @@ class TaskIndex extends React.Component {
       // get task id
       this.taskId = e.currentTarget.closest('li').firstElementChild.id
       let task = this.props.tasks.find(task => task._id === this.taskId)
-          // remove task when none is chosen
-          if (e.currentTarget.value === 'none') {
-            this.props.user.household.forEach(user => {
-              let newAT = user.assignedTasks.filter(aTask => aTask !== task)
-              user.assignedTasks = newAT
-              updateChildUser(user)
-              this.setupLocalStorage();
-            })
-            return
-          }
+      // remove task when none is chosen
+      if (e.currentTarget.value === 'none') {
+        this.props.user.household.forEach(user => {
+          let newAT = user.assignedTasks.filter(aTask => aTask !== task)
+          user.assignedTasks = newAT
 
-      this.setupLocalStorage();
+          updateChildUser(user)
+          this.setupLocalStorage();
+        })
+        return
+      }
 
       // get user id
       this.assigneeId = e.currentTarget.selectedOptions[0].id
       let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
-          // update user assigned tasks to reflect current state
-          assignee.assignedTasks.push(task)
+      // update user assigned tasks to reflect current state
+      assignee.assignedTasks.push(task)
+
       updateChildUser(assignee)
+      this.setupLocalStorage();
   }
 
   setupLocalStorage() {
     // set up currently selected items
     this.selectedOptionsArr = new Array(this.props.tasks.length)
     let selectElements = document.getElementsByTagName('select')
-    // let optionElements = 
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
           this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
         }
@@ -93,7 +94,8 @@ class TaskIndex extends React.Component {
   }  
 
   componentDidUpdate() {
-    this.setOptions()
+    this.oldState = this.props.tasks
+    this.setOptions() 
   }
 
   setOptions() {
@@ -101,9 +103,12 @@ class TaskIndex extends React.Component {
     if (localStorage.selectedOptionsArr) {
       let lsArr = localStorage.selectedOptionsArr.split(',')
       for (let i = 0; i < select.length; i++) {
-          select[i].selectedIndex = lsArr[(i*2)+1]
+          if (select[i].id === lsArr[(i*2)]) {
+            select[i].selectedIndex = lsArr[(i*2)+1]
+          }
       }
     }
+    this.setupLocalStorage()
   }
 
   updateChildTasks() {
