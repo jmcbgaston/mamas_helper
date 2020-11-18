@@ -32,7 +32,6 @@ class TaskShow extends React.Component {
       return null;
     }
 
-
     const requirements = task.requirements;
 
     if (this.props.userId !== task.owner_id) {
@@ -43,7 +42,9 @@ class TaskShow extends React.Component {
             { requirements.length ?
               <TaskShowRequirements requirements={requirements} />
               :
-              <p className="task-show__no-requirements">No requirements yet. Click "Edit Task" button to add requirements.</p>
+              <p className="task-show__no-requirements">
+                Your assigned task does not have any requirements yet.
+              </p>
             }
           </div>
           <div className="task-show__options">
@@ -59,7 +60,9 @@ class TaskShow extends React.Component {
             { requirements.length ?
               <TaskShowRequirements requirements={requirements} />
               :
-              <p className="task-show__no-requirements">No requirements yet. Click "Edit Task" button to add requirements.</p>
+              <p className="task-show__no-requirements">
+                No requirements yet. Click "Edit Task" button to add requirements.
+              </p>
             }
           </div>
           <div className="task-show__options">
@@ -69,7 +72,9 @@ class TaskShow extends React.Component {
                 <DeleteIcon />&nbsp;Delete Task
             </button>
             <Link to={`/tasks/${params.taskId}/edit`} className="task-show__link">
-              <button type="button" className="task-show__option task-show__option--update button">
+              <button
+                type="button"
+                className="task-show__option task-show__option--update button">
                 <EditIcon />&nbsp;Edit Task
               </button>
             </Link>
