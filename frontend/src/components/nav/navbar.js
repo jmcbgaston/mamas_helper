@@ -22,10 +22,6 @@ const AuthNav = ({ user, logout }) => {
       <>
         <div className="nav-bar__header-container">
           <h3 className ="nav-bar__header">Welcome!</h3>
-          <button className = "nav-bar___user-id" onClick={() => 
-            {navigator.clipboard.writeText(user.id); 
-            alert("User ID copied to clipboard! Add limited users to your household by including this ID during user signup.")}
-            }>Copy User ID</button>
         </div>
         <button
           className ="nav-bar__session-button button"
