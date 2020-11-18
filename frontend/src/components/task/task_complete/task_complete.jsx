@@ -10,10 +10,14 @@ class TaskComplete extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchTasks()
+        
+        this.props.fetchTasks(this.props.user.id)
+      
+      
     }
 
     render() {
+        
         return(
             <div>
                 <h1>Task Completed List</h1>

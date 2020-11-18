@@ -17,6 +17,7 @@ class TaskIndex extends React.Component {
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
+    this.handleCompleteClick = this.handleCompleteClick.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {},
@@ -34,8 +35,9 @@ class TaskIndex extends React.Component {
   }
 
   handleComplete(e) {
-    // debugger
-      this.props.tasks.find((task) => task._id === e.currentTarget.id).completed = !this.props.tasks.find((task) => task._id === e.currentTarget.id).completed 
+    
+    
+      
       // this.props.tasks.map((task) => {
       //   if(task._id === e.currentTarget.id) {
       //     return !task.completed
@@ -48,19 +50,35 @@ class TaskIndex extends React.Component {
 
   }
 
-  toggleCompleteModal() {
-    this.setState({ showCompleteModal: !this.state.showCompleteModal})
-    const completedTaskIds = Object.keys(this.state.checkedCompleteIds)
-    const lists = document.getElementsByClassName("task-index__list-item-link")
-    this.props.tasks.map((task, i) => {
-      if(completedTaskIds.includes(task._id)) {
-        const lists = document.getElementsByClassName("task-index__list-item")
-        lists[i].innerText = ""
-        // this.props.deleteTask(task._id)
-      }
+  handleCompleteClick() {
+  
+    const { tasks, user } = this.props;
+    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+    const checked = Object.keys(checkedCompleteIds)
+                      .filter((taskId) => checkedCompleteIds[taskId]);
+
+    // const findTask = this.props.tasks.find((task) => task._id === e.currentTarget.id);
+    checked.forEach((taskId) => {
+    const findTask = this.props.tasks.find((task) => task._id === taskId)
+    findTask.completed = !findTask.completed
+    this.props.updateTask(findTask)
     })
+    this.toggleCompleteModal();
+    // const completedTaskIds = Object.keys(this.state.checkedCompleteIds)
+    // this.props.tasks.map((task, i) => {
+    //   if(completedTaskIds.includes(task._id)) {
+    //     const lists = document.getElementsByClassName("task-index__list-item")
+    //     lists[i].innerText = ""
+    //   }
+    // })
+
+
   };
 
+  toggleCompleteModal() {
+    this.setState({ showCompleteModal: !this.state.showCompleteModal})
+  }
+  
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
@@ -144,7 +162,6 @@ class TaskIndex extends React.Component {
   }
 
   render() {
-    // debugger
     const { tasks, createTask, errors, clearErrors } = this.props;
     const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
 
@@ -153,7 +170,7 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
-
+    
     return (
       <>
         <Link to="/completion"><button>Completion page</button></Link>
@@ -166,25 +183,32 @@ class TaskIndex extends React.Component {
           </button>
         </div>
         <ul className="task-index__list">
-          {tasks.map((task) =>
-            <li className="task-index__list-item" key={task._id}>
-              <input
-                type="checkbox"
-                id={task._id}
-                className="task-index__list-item-checkbox"
-                onClick={this.handleCheck}
+          {tasks.map((task) => {
+            // if(task.completed === false) {
+              return (
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                  type="checkbox"
+                  id={task._id}
+                  className="task-index__list-item-checkbox"
+                  onClick={this.handleCheck}
+                  />
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+                <input 
+                  type="checkbox"
+                  id={task._id}
+                  className=""
+                  onClick={this.handleComplete}
                 />
-              <Link to={`/tasks/${task._id}`}
-                className="task-index__list-item-link">
-                {task.title}
-              </Link>
-              <input 
-                type="checkbox"
-                id={task._id}
-                className=""
-                onClick={this.handleComplete}
-              />
-            </li>
+              </li>
+
+              )
+            // }
+
+          }
           )}
         </ul>
         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
@@ -201,7 +225,7 @@ class TaskIndex extends React.Component {
           disabled={is_task_selected()}>
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
-        <button onClick={this.toggleCompleteModal}>Mark as Complete</button>
+        <button onClick={this.handleCompleteClick}>Mark as Complete</button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
         {showCompleteModal ? <TaskIndexCompleteList handleClose={this.toggleCompleteModal} tasks={this.props.tasks} checkedCompleteIds={{...checkedCompleteIds}} /> : null}
