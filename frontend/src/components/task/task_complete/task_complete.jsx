@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import TaskCompleteItem from './task_complete_item';
 import {withRouter} from 'react-router-dom';
 import Back from '../../back';

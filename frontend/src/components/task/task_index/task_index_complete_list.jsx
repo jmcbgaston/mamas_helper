@@ -1,15 +1,6 @@
 import React from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
-// const TaskIndexCompleteListItem = ({ task }) => {
-//     return (
-//     <li>
-//       <p className="task-index__task-list-item-header">{task.title}</p>
-//       <span>Task completed on {task.updatedAt}</span>
-//     </li>
-//     )
-// }
-
 const TaskIndexCompleteList = ({ handleClose, tasks, checkedCompleteIds }) => {
     const checked = Object.keys(checkedCompleteIds)
     .filter((taskId) => checkedCompleteIds[taskId]);

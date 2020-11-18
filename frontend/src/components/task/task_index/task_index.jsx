@@ -35,14 +35,6 @@ class TaskIndex extends React.Component {
   }
 
   handleComplete(e) {
-    
-    
-      
-      // this.props.tasks.map((task) => {
-      //   if(task._id === e.currentTarget.id) {
-      //     return !task.completed
-      //   }
-      // })
       const checkedCompleteIds = { ...this.state.checkedCompleteIds };
       const taskId = e.currentTarget.id;
       checkedCompleteIds[taskId] = e.currentTarget.checked;
@@ -51,27 +43,17 @@ class TaskIndex extends React.Component {
   }
 
   handleCompleteClick() {
-  
-    const { tasks, user } = this.props;
     const checkedCompleteIds = { ...this.state.checkedCompleteIds };
     const checked = Object.keys(checkedCompleteIds)
                       .filter((taskId) => checkedCompleteIds[taskId]);
-
-    // const findTask = this.props.tasks.find((task) => task._id === e.currentTarget.id);
     checked.forEach((taskId) => {
     const findTask = this.props.tasks.find((task) => task._id === taskId)
     findTask.completed = !findTask.completed
     this.props.updateTask(findTask)
+    // const completedTask = document.getElementById(`${findTask._id}`)
+    // completedTask.style.backgroundColor = "darkgreen"
     })
     this.toggleCompleteModal();
-    // const completedTaskIds = Object.keys(this.state.checkedCompleteIds)
-    // this.props.tasks.map((task, i) => {
-    //   if(completedTaskIds.includes(task._id)) {
-    //     const lists = document.getElementsByClassName("task-index__list-item")
-    //     lists[i].innerText = ""
-    //   }
-    // })
-
 
   };
 
@@ -184,7 +166,7 @@ class TaskIndex extends React.Component {
         </div>
         <ul className="task-index__list">
           {tasks.map((task) => {
-            // if(task.completed === false) {
+            if(task.completed) {
               return (
               <li className="task-index__list-item" key={task._id}>
                 <input
@@ -203,10 +185,31 @@ class TaskIndex extends React.Component {
                   className=""
                   onClick={this.handleComplete}
                 />
+                <span>I am completed</span>
               </li>
-
               )
-            // }
+            } else {
+              return(
+                 <li className="task-index__list-item" key={task._id}>
+                <input
+                  type="checkbox"
+                  id={task._id}
+                  className="task-index__list-item-checkbox"
+                  onClick={this.handleCheck}
+                  />
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+                <input 
+                  type="checkbox"
+                  id={task._id}
+                  className=""
+                  onClick={this.handleComplete}
+                />
+              </li>
+              )
+            }
 
           }
           )}
