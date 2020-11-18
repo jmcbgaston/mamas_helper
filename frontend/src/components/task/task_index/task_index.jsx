@@ -58,6 +58,8 @@ class TaskIndex extends React.Component {
 
   handleSelection(e) {
 
+    // debugger
+
       // get task id
       this.taskId = e.currentTarget.closest('li').firstElementChild.id
       let task = this.props.tasks.find(task => task._id === this.taskId)
@@ -84,6 +86,8 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
+    // debugger
+
     // set up currently selected items
     this.selectedOptionsArr = new Array(this.props.tasks.length)
     let selectElements = document.getElementsByTagName('select')
@@ -94,11 +98,17 @@ class TaskIndex extends React.Component {
   }  
 
   componentDidUpdate() {
-    this.oldState = this.props.tasks
-    this.setOptions() 
+    // debugger
+
+    if (!this.props.user.isLimitedUser) {
+      this.oldState = this.props.tasks
+      this.setOptions();
+    }
   }
 
   setOptions() {
+    // debugger
+
     let select = document.getElementsByTagName('select')
     if (localStorage.selectedOptionsArr) {
       let lsArr = localStorage.selectedOptionsArr.split(',')
