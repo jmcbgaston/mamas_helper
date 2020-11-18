@@ -3,19 +3,37 @@ import { Link, useLocation } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import logo from './PNG_MH_Logo.png';
 
-const AuthNav = ({ user, logout }) => (
-  <>
-    <div className="nav-bar__header-container">
-      <h3 className ="nav-bar__header">Welcome!</h3>
-      <div>User ID: {user.id}</div>
-    </div>
-    <button
-      className ="nav-bar__session-button button"
-      onClick={() => logout()}>
-        <ExitToAppIcon />&nbsp;Sign Out
-    </button>
-  </>
-)
+const AuthNav = ({ user, logout }) => {
+  debugger
+  if (user.isLimitedUser) {
+    return(
+      <>
+        <div className="nav-bar__header-container">
+          <h3 className ="nav-bar__header">Welcome!</h3>
+        </div>
+        <button
+          className ="nav-bar__session-button button"
+          onClick={() => logout()}>
+            <ExitToAppIcon />&nbsp;Sign Out
+        </button>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <div className="nav-bar__header-container">
+          <h3 className ="nav-bar__header">Welcome!</h3>
+          <div>User ID: {user.id}</div>
+        </div>
+        <button
+          className ="nav-bar__session-button button"
+          onClick={() => logout()}>
+            <ExitToAppIcon />&nbsp;Sign Out
+        </button>
+      </>
+    )
+  }
+}
 
 const UnAuthNav = () => {
   const SignUp = () => (
