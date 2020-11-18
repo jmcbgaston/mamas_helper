@@ -9,7 +9,9 @@ const TaskInstructionBox = ({ handleClose }) => {
           <button className="task-index__task-list-button" onClick={handleClose}>
               <CloseIcon/>
           </button>
-          <span className="task-index__task-list-header">Instructions</span>
+        </div>
+        <div className="task-index__task-list-header">
+          Instructions
         </div>
         <div className="task-instruction-box">
           <p>
