@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SessionInstructionBox from './session_instruction_box';
+import HelpIcon from '@material-ui/icons/Help';
+import Tooltip from "@material-ui/core/Tooltip";
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -12,9 +14,9 @@ class SignupForm extends React.Component {
         handle: '',
         password: '',
         password2: '',
-        household: [], 
-        assignedTasks: [], 
-        isLimitedUser: false, 
+        household: [],
+        assignedTasks: [],
+        isLimitedUser: false,
         parentId: ''
       },
       errors: {}
@@ -135,23 +137,37 @@ class SignupForm extends React.Component {
           {this.renderErrors("password2")}
         </div>
 
-        <label>
-          <input 
-            type="checkbox" 
-            onClick={this.handleLimited} />
-            Check box if Limited User
-          <br/>
-          <input
-            id="conditional-show"
-            type="hidden"
-            className={`session-form__input-field input-field ${this.addErrorsClass(
-              "parentId"
-              )}`}
-              value={user.parentId}
-              onChange={this.update("parentId")}
-              placeholder="User ID"
-              />
-        </label>
+        <div className="session-form__limited-user">
+          <label className="session-form__limited-user-label">
+            <input
+              type="checkbox"
+              onClick={this.handleLimited} />
+            <div className="session-form__limit-user-header">
+              limited user?&nbsp;
+            </div>
+          </label>
+          <Tooltip placement="top" title={
+              <span style={{ fontSize: "1rem" }}>
+                A limited user can receive tasks from their parent user,
+                but does not have the ability to send tasks. A parent user has
+                the ability to send tasks to users in their household.
+                Both types of users have the ability to create tasks.
+                When this is selected, a limited user must insert their parent's
+                user ID into the field that forms below.
+              </span>}>
+            <HelpIcon />
+          </Tooltip>
+        </div>
+        <input
+          id="conditional-show"
+          type="hidden"
+          className={`session-form__input-field input-field ${this.addErrorsClass(
+            "parentId"
+            )}`}
+            value={user.parentId}
+            onChange={this.update("parentId")}
+            placeholder="Parent User ID"
+            />
         <div className="session-form__errors form-errors">
           {this.renderErrors("parentId")}
         </div>
