@@ -30,12 +30,10 @@ class TaskIndex extends React.Component {
     }
     this.taskId = ""
     this.assigneeId = ""
-    this.oldState = ""
     this.selectedOptionsArr = ""
   }
 
   componentDidMount() {
-    this.oldState = this.props.tasks
     this.props.fetchTasks(this.props.user.id);
   }
 
@@ -44,12 +42,14 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    // debugger
+    debugger
 
-    if (!this.props.user.isLimitedUser) {
-      // this.oldState = this.props.tasks
+    if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
+      debugger
       this.setOptions();
     }
+
+    debugger
   }
 
   setOptions() {
@@ -103,10 +103,12 @@ class TaskIndex extends React.Component {
   handleSelection(e) {
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
+        
+        // if none is chosen
         if (e.currentTarget.value === 'none') { 
           this.setupLocalStorage();
-          this.handleFillAssignedTasks();
-          this.updateChildTasks();
+          // this.handleFillAssignedTasks();
+          // this.updateChildTasks();
           return
         }
 
@@ -116,9 +118,8 @@ class TaskIndex extends React.Component {
     assignee.assignedTasks.push(task)
 
     this.setupLocalStorage();
-    this.handleFillAssignedTasks();
-    this.updateChildTasks();
-    // debugger
+    // this.handleFillAssignedTasks();
+    // this.updateChildTasks();
   }
 
   handleFillAssignedTasks() {
@@ -207,7 +208,7 @@ class TaskIndex extends React.Component {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
 
-    if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
+    if (!this.props.user.isLimitedUser && this.props.user.household.length === 0) { // Regular User
       return (
         <>
           <div className="task-index__instruction-container">
@@ -255,7 +256,7 @@ class TaskIndex extends React.Component {
       );
     }
 
-    if (this.props.user.household.length > 0 && this.props.user.isLimitedUser === false) { // Parent User
+    if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) { // Parent User
       return (
         <>
           <div className="task-index__instruction-container">
