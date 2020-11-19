@@ -42,20 +42,13 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
-
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
-      debugger
       this.setOptions();
     }
-
-    debugger
   }
 
   setOptions() {
-    // debugger
     // sets dropdown value on render and calls setupLocalStorage to creaate localStorage.selectedOptionsArr
-
     let select = document.getElementsByTagName('select')
     if (localStorage.selectedOptionsArr) {
       let lsArr = localStorage.selectedOptionsArr.split(',')
@@ -80,7 +73,6 @@ class TaskIndex extends React.Component {
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal.length > window.localStorage.selectedOptionsArr.length) {
-      // debugger;
       this.handleFillAssignedTasks()
       this.updateChildTasks();
     }
