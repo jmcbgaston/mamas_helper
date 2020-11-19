@@ -37,18 +37,26 @@ class TaskIndex extends React.Component {
 
   handleComplete(e) {
       // debugger
-      const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-      const taskId = e.currentTarget.id;
-      checkedCompleteIds[taskId] = e.currentTarget.checked;
-      this.setState({ checkedCompleteIds })
+      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+      // const taskId = e.currentTarget.id;
+      // checkedCompleteIds[taskId] = e.currentTarget.checked;
+      // this.setState({ checkedCompleteIds })
 
-      const checked = Object.keys(checkedCompleteIds)
-                      .filter((taskId) => checkedCompleteIds[taskId]);
-      checked.forEach((taskId) => {
+      // const checked = Object.keys(checkedCompleteIds);
+      //                 // .filter((taskId) => checkedCompleteIds[taskId]);
+      // checked.forEach((taskId) => {
+        // const findTask = this.props.tasks.find((task) => task._id === taskId)
+        //   findTask.completed = !findTask.completed
+        //   this.props.updateTask(findTask)
+        // })
+
+
+      const taskId = e.currentTarget.id;
+
       const findTask = this.props.tasks.find((task) => task._id === taskId)
-        findTask.completed = !findTask.completed
-        this.props.updateTask(findTask)
-      })
+
+      findTask.completed = !findTask.completed
+      this.props.updateTask(findTask)
   }
 
   // handleIncompleteClick() {
@@ -87,7 +95,7 @@ class TaskIndex extends React.Component {
   toggleCompleteModal() {
     this.setState({ showCompleteModal: !this.state.showCompleteModal})
   }
-  
+
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
@@ -214,9 +222,21 @@ class TaskIndex extends React.Component {
                   {task.title}
                 </Link>
                 <label class="switch">
-                  <input type="checkbox" id={task._id} onClick={this.handleComplete} />
+                  {/* {task.completed ?
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                    :
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
+                  } */}
+                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
                   <span class="slider round"></span>
                 </label>
+                {/* <input
+                  type="checkbox"
+                  id={task._id}
+                  className=""
+                  onClick={this.handleComplete}
+                /> */}
+                {/* <span id="meow">I am completed</span> */}
               </li>
               )
 
@@ -237,8 +257,8 @@ class TaskIndex extends React.Component {
           disabled={is_task_selected()}>
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
-        <button 
-          onClick={this.handleCompleteClick} 
+        <button
+          onClick={this.handleCompleteClick}
           disabled={is_task_completed()}
           className="task-index__list-button button">
           Mark as Complete
