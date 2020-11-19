@@ -18,6 +18,7 @@ class TaskIndex extends React.Component {
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
     this.handleCompleteClick = this.handleCompleteClick.bind(this);
+    this.handleIncompleteClick = this.handleIncompleteClick.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {},
@@ -35,11 +36,25 @@ class TaskIndex extends React.Component {
   }
 
   handleComplete(e) {
-      const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-      const taskId = e.currentTarget.id;
-      checkedCompleteIds[taskId] = e.currentTarget.checked;
-      this.setState({ checkedCompleteIds })
+      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+      // const taskId = e.currentTarget.id;
+      // checkedCompleteIds[taskId] = e.currentTarget.checked;
+      // this.setState({ checkedCompleteIds })
+  }
 
+  handleIncompleteClick() {
+    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+    const checked = Object.keys(checkedCompleteIds)
+                      .filter((taskId) => checkedCompleteIds[taskId]);
+    checked.forEach((taskId) => {
+    const findTask = this.props.tasks.find((task) => task._id === taskId)
+    if (!findTask.completed) {
+      alert(`${findTask.title} has not been completed`)
+    } else {
+      findTask.completed = !findTask.completed
+      this.props.updateTask(findTask)
+    }
+    })
   }
 
   handleCompleteClick() {
@@ -48,12 +63,15 @@ class TaskIndex extends React.Component {
                       .filter((taskId) => checkedCompleteIds[taskId]);
     checked.forEach((taskId) => {
     const findTask = this.props.tasks.find((task) => task._id === taskId)
-    findTask.completed = !findTask.completed
-    this.props.updateTask(findTask)
-    // const completedTask = document.getElementById(`${findTask._id}`)
-    // completedTask.style.backgroundColor = "darkgreen"
+    if (findTask.completed) {
+      alert(`${findTask.title} is already completed`)
+    } else {
+      findTask.completed = !findTask.completed
+      this.props.updateTask(findTask)
+      this.toggleCompleteModal();
+    }
     })
-    this.toggleCompleteModal();
+
 
   };
 
@@ -66,6 +84,10 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
+
+    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+    checkedCompleteIds[taskId] = e.currentTarget.checked;
+    this.setState({ checkedCompleteIds })
   }
 
   handleTaskClick(e) {
@@ -152,7 +174,11 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
-    
+    const is_task_completed = () =>
+    {
+      return !Object.keys(checkedCompleteIds).filter((taskId) => checkedCompleteIds[taskId]).length
+    };
+  
     return (
       <>
         <Link to="/completion"><button>Completion page</button></Link>
@@ -179,12 +205,12 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
-                <input 
+                {/* <input 
                   type="checkbox"
                   id={task._id}
                   className=""
                   onClick={this.handleComplete}
-                />
+                /> */}
                 <span>I am completed</span>
               </li>
               )
@@ -201,12 +227,12 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
-                <input 
+                {/* <input 
                   type="checkbox"
                   id={task._id}
                   className=""
                   onClick={this.handleComplete}
-                />
+                /> */}
               </li>
               )
             }
@@ -228,7 +254,18 @@ class TaskIndex extends React.Component {
           disabled={is_task_selected()}>
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
-        <button onClick={this.handleCompleteClick}>Mark as Complete</button>
+        <button 
+          onClick={this.handleCompleteClick} 
+          disabled={is_task_completed()}
+          className="task-index__list-button button">
+          Mark as Complete
+        </button>
+        <button
+          onClick={this.handleIncompleteClick}
+          disabled={is_task_completed()}
+          className="task-index__list-button button">
+            Mark as Incomplete
+        </button>
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
         {showCompleteModal ? <TaskIndexCompleteList handleClose={this.toggleCompleteModal} tasks={this.props.tasks} checkedCompleteIds={{...checkedCompleteIds}} /> : null}

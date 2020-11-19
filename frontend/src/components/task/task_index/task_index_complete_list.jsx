@@ -16,13 +16,16 @@ const TaskIndexCompleteList = ({ handleClose, tasks, checkedCompleteIds }) => {
         <ul className="task-index__task-list-items-container">
           {checked.map((taskId) => {
             const task = tasks.find((task) => task._id === taskId);
-            return (
-            <li>
-                 <p className="task-index__task-list-item-header">{task.title}</p>
-                 <span>Task completed on {task.updatedAt}</span>
-            </li>
-                
-            )
+            // if(task.completed)
+              return (
+              <li>
+                   <p className="task-index__task-list-item-header">{task.title}</p>
+                   <span>Task completed on {task.updatedAt}</span>
+              </li>
+                  
+              )
+            // }
+
           })}
         </ul>
       </div>
