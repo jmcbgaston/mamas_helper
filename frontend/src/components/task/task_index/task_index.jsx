@@ -67,9 +67,8 @@ class TaskIndex extends React.Component {
     }
     this.setupLocalStorage()
   }
-  
+
   setupLocalStorage() {
-    // update localStorage    
 
     let oldLocal = localStorage.selectedOptionsArr
 
@@ -163,50 +162,22 @@ class TaskIndex extends React.Component {
   }
 
   handleEmailClick(e) {
-    const HTMLString = [];
     const { tasks, user } = this.props;
+    const taskList = [];
     const allTasks = tasks.concat(user.assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
 
-    HTMLString.push(`
-      <h2>Howdy, ${user.handle}! This is Mama's Helper with your tasks for today.</h2>
-      <br>
-      <h3>Task List:</h3>
-      <ul>
-    `);
-
     checked.forEach((taskId) => {
-      const task = allTasks.find((requirement) => requirement._id === taskId);
-
-      HTMLString.push(`
-        <li>${task.title}</li>
-        <ul>
-      `);
-
-      if (task.requirements.length) {
-        task.requirements.forEach((requirement) => {
-          HTMLString.push(`<li>${requirement.description}</li>`);
-        })
-      } else {
-        HTMLString.push(`(no requirements)`);
-      }
-
-      HTMLString.push(`</ul>`);
+      const task = allTasks.find((task) => task._id === taskId);
+      taskList.push(task);
     })
 
-    HTMLString.push(`
-      </ul>
-      <br>
-      <br>
-      - <i>With love, Mama's Helper.</i>
-    `);
-
     const data = {
+      "tasks": taskList,
       "email": user.email,
       "handle": user.handle,
-      "html": HTMLString.join('')
     };
 
     createEmail(data)
