@@ -8,6 +8,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
+// import TaskIndexCompleteList from './task_index_complete_list';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -20,13 +21,17 @@ class TaskIndex extends React.Component {
     this.setOptions = this.setOptions.bind(this);
     this.updateChildTasks = this.updateChildTasks.bind(this);
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
+    this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
     this.handleTaskClick = this.handleTaskClick.bind(this);
-    this.handleInstructionClick = this.handleInstructionClick.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
+    this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
     this.state = {
       showModal: false,
       showInstructions: false,
       checkedTasksIds: {},
+      checkedCompleteIds: {},
+      showCompleteModal: false
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -132,12 +137,76 @@ class TaskIndex extends React.Component {
       updateChildUser(child)
     })
   }
+  handleComplete(e) {
+      // debugger
+      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+      // const taskId = e.currentTarget.id;
+      // checkedCompleteIds[taskId] = e.currentTarget.checked;
+      // this.setState({ checkedCompleteIds })
+
+      // const checked = Object.keys(checkedCompleteIds);
+      //                 // .filter((taskId) => checkedCompleteIds[taskId]);
+      // checked.forEach((taskId) => {
+        // const findTask = this.props.tasks.find((task) => task._id === taskId)
+        //   findTask.completed = !findTask.completed
+        //   this.props.updateTask(findTask)
+        // })
+
+
+      const taskId = e.currentTarget.id;
+
+      const findTask = this.props.tasks.find((task) => task._id === taskId)
+
+      findTask.completed = !findTask.completed
+      this.props.updateTask(findTask)
+  }
+
+  // handleIncompleteClick() {
+  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+  //   const checked = Object.keys(checkedCompleteIds)
+  //                     .filter((taskId) => checkedCompleteIds[taskId]);
+  //   checked.forEach((taskId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
+  //   if (!findTask.completed) {
+  //     alert(`${findTask.title} has not been completed`)
+  //   } else {
+  //     findTask.completed = !findTask.completed
+  //     this.props.updateTask(findTask)
+  //   }
+  //   })
+  // }
+
+  // handleCompleteClick() {
+  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+  //   const checked = Object.keys(checkedCompleteIds)
+  //                     .filter((taskId) => checkedCompleteIds[taskId]);
+  //   checked.forEach((taskId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
+  //   if (findTask.completed) {
+  //     alert(`${findTask.title} is already completed`)
+  //   } else {
+  //     findTask.completed = !findTask.completed
+  //     this.props.updateTask(findTask)
+  //     this.toggleCompleteModal();
+  //   }
+  //   })
+
+
+  // };
+
+  toggleCompleteModal() {
+    this.setState({ showCompleteModal: !this.state.showCompleteModal})
+  }
 
   handleCheck(e) {
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
+
+    // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+    // checkedCompleteIds[taskId] = e.currentTarget.checked;
+    // this.setState({ checkedCompleteIds })
   }
 
   handleTaskClick(e) {
@@ -190,7 +259,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { tasks, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds } = this.state;
+    const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -201,6 +270,7 @@ class TaskIndex extends React.Component {
     if (!this.props.user.isLimitedUser && this.props.user.household.length === 0) { // Regular User
       return (
         <>
+          <Link to="/completion"><button>Completion page</button></Link>
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
             <button type="button"
@@ -223,6 +293,16 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                <label class="switch">
+                  {/* {task.completed ?
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                    :
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
+                  } */}
+                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
+                  <span class="slider round"></span>
+                </label>
+
               </li>
             )}
           </ul>
@@ -249,6 +329,7 @@ class TaskIndex extends React.Component {
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) { // Parent User
       return (
         <>
+          <Link to="/completion"><button>Completion page</button></Link>
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
             <button type="button"
@@ -271,6 +352,16 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                <label class="switch">
+                  {/* {task.completed ?
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                    :
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
+                  } */}
+                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
+                  <span class="slider round"></span>
+                </label>
+
                 <div>
                   <select
                     name="assignees"
@@ -313,6 +404,7 @@ class TaskIndex extends React.Component {
     if (this.props.user.isLimitedUser) { // Child User
       return (
         <>
+          <Link to="/completion"><button>Completion page</button></Link>
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
             <button type="button"
@@ -354,6 +446,15 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                <label class="switch">
+                  {/* {task.completed ?
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                    :
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
+                  } */}
+                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
+                  <span class="slider round"></span>
+                </label>
               </li>
             )}
           </ul>
