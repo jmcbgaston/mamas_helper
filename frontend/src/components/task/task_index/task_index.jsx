@@ -17,8 +17,8 @@ class TaskIndex extends React.Component {
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
-    this.handleCompleteClick = this.handleCompleteClick.bind(this);
-    this.handleIncompleteClick = this.handleIncompleteClick.bind(this);
+    // this.handleCompleteClick = this.handleCompleteClick.bind(this);
+    // this.handleIncompleteClick = this.handleIncompleteClick.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {},
@@ -36,44 +36,53 @@ class TaskIndex extends React.Component {
   }
 
   handleComplete(e) {
-      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-      // const taskId = e.currentTarget.id;
-      // checkedCompleteIds[taskId] = e.currentTarget.checked;
-      // this.setState({ checkedCompleteIds })
+      // debugger
+      const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+      const taskId = e.currentTarget.id;
+      checkedCompleteIds[taskId] = e.currentTarget.checked;
+      this.setState({ checkedCompleteIds })
+
+      const checked = Object.keys(checkedCompleteIds)
+                      .filter((taskId) => checkedCompleteIds[taskId]);
+      checked.forEach((taskId) => {
+      const findTask = this.props.tasks.find((task) => task._id === taskId)
+        findTask.completed = !findTask.completed
+        this.props.updateTask(findTask)
+      })
   }
 
-  handleIncompleteClick() {
-    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-    const checked = Object.keys(checkedCompleteIds)
-                      .filter((taskId) => checkedCompleteIds[taskId]);
-    checked.forEach((taskId) => {
-    const findTask = this.props.tasks.find((task) => task._id === taskId)
-    if (!findTask.completed) {
-      alert(`${findTask.title} has not been completed`)
-    } else {
-      findTask.completed = !findTask.completed
-      this.props.updateTask(findTask)
-    }
-    })
-  }
+  // handleIncompleteClick() {
+  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+  //   const checked = Object.keys(checkedCompleteIds)
+  //                     .filter((taskId) => checkedCompleteIds[taskId]);
+  //   checked.forEach((taskId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
+  //   if (!findTask.completed) {
+  //     alert(`${findTask.title} has not been completed`)
+  //   } else {
+  //     findTask.completed = !findTask.completed
+  //     this.props.updateTask(findTask)
+  //   }
+  //   })
+  // }
 
-  handleCompleteClick() {
-    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-    const checked = Object.keys(checkedCompleteIds)
-                      .filter((taskId) => checkedCompleteIds[taskId]);
-    checked.forEach((taskId) => {
-    const findTask = this.props.tasks.find((task) => task._id === taskId)
-    if (findTask.completed) {
-      alert(`${findTask.title} is already completed`)
-    } else {
-      findTask.completed = !findTask.completed
-      this.props.updateTask(findTask)
-      this.toggleCompleteModal();
-    }
-    })
+  // handleCompleteClick() {
+  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+  //   const checked = Object.keys(checkedCompleteIds)
+  //                     .filter((taskId) => checkedCompleteIds[taskId]);
+  //   checked.forEach((taskId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
+  //   if (findTask.completed) {
+  //     alert(`${findTask.title} is already completed`)
+  //   } else {
+  //     findTask.completed = !findTask.completed
+  //     this.props.updateTask(findTask)
+  //     this.toggleCompleteModal();
+  //   }
+  //   })
 
 
-  };
+  // };
 
   toggleCompleteModal() {
     this.setState({ showCompleteModal: !this.state.showCompleteModal})
@@ -85,9 +94,9 @@ class TaskIndex extends React.Component {
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
 
-    const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-    checkedCompleteIds[taskId] = e.currentTarget.checked;
-    this.setState({ checkedCompleteIds })
+    // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
+    // checkedCompleteIds[taskId] = e.currentTarget.checked;
+    // this.setState({ checkedCompleteIds })
   }
 
   handleTaskClick(e) {
@@ -178,7 +187,7 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedCompleteIds).filter((taskId) => checkedCompleteIds[taskId]).length
     };
-  
+  // debugger
     return (
       <>
         <Link to="/completion"><button>Completion page</button></Link>
@@ -192,7 +201,7 @@ class TaskIndex extends React.Component {
         </div>
         <ul className="task-index__list">
           {tasks.map((task) => {
-            if(task.completed) {
+            // if(task.completed) {
               return (
               <li className="task-index__list-item" key={task._id}>
                 <input
@@ -205,37 +214,21 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                <label class="switch">
+                  <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                  <span class="slider round"></span>
+                </label>
                 {/* <input 
                   type="checkbox"
                   id={task._id}
                   className=""
                   onClick={this.handleComplete}
                 /> */}
-                <span>I am completed</span>
+                {/* <span id="meow">I am completed</span> */}
               </li>
               )
-            } else {
-              return(
-                 <li className="task-index__list-item" key={task._id}>
-                <input
-                  type="checkbox"
-                  id={task._id}
-                  className="task-index__list-item-checkbox"
-                  onClick={this.handleCheck}
-                  />
-                <Link to={`/tasks/${task._id}`}
-                  className="task-index__list-item-link">
-                  {task.title}
-                </Link>
-                {/* <input 
-                  type="checkbox"
-                  id={task._id}
-                  className=""
-                  onClick={this.handleComplete}
-                /> */}
-              </li>
-              )
-            }
+            // } else {
+            // }
 
           }
           )}

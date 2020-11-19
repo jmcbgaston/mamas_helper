@@ -22,6 +22,7 @@ import '../css/task/task_index_list.css'
 import '../css/task/task_show.css'
 import '../css/task/task_update.css'
 import '../css/requirements/requirement_show.css'
+import '../css/task/task_slider.css'
 
 const App = () => (
     <>
