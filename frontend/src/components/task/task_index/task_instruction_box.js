@@ -34,20 +34,39 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
             tasks on your to-do list so that you can make sure that you have
             everything you need to get things done.
           </p>
-          {copyId ?
-          (<div>
-            <br/>
-          <h4>Set up your household</h4>
-            <p>Use this button below to copy your user ID to your clipboard. A new user can assign themselves to your household while registering.</p>
-          <button
-            className="nav-bar___user-id"
-            onClick={() => {
-              navigator.clipboard.writeText(copyId);
-            }}>
-            User ID
-          </button>
-          </div>
-          ) : null } 
+          {copyId ? (
+            <div>
+              <br />
+              <h4>Set up your household</h4>
+              <p>
+                Use this button below to copy your user ID to your clipboard. A
+                new user can assign themselves to your household while
+                registering.
+              </p>
+              <button
+                className="nav-bar___user-id"
+                onClick={() => {
+                  navigator.clipboard.writeText(copyId);
+                }}
+              >
+                User ID
+              </button>
+            </div>
+          ) : (
+            <div>
+              <br />
+              <h4>Receiving assigned tasks</h4>
+              <p>
+                As a limited user, you will be assigned tasks from the parent
+                user of your household.
+              </p>
+              <p>
+                <br />
+                You cannot edit tasks that you are assigned, but you are free to
+                create and edit your own tasks.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
