@@ -12,7 +12,11 @@ router.post('/new', (req, res) => {
     to: req.body.email,
     from: keys.verifiedSender,
     subject: `Mama's Helper: Daily Tasks for ${req.body.handle}`,
-    html: req.body.html
+    templateId: 'd-beb10ea6d81b412c86dfba4161ccd41f',
+    dynamic_template_data: {
+      tasks: req.body.tasks,
+      handle: req.body.handle
+    }
   }
 
   sgMail
