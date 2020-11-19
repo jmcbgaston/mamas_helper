@@ -255,7 +255,7 @@ class TaskIndex extends React.Component {
           disabled={is_task_selected()}>
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
-        <button
+        {/* <button
           onClick={this.handleCompleteClick}
           disabled={is_task_completed()}
           className="task-index__list-button button">
@@ -266,10 +266,10 @@ class TaskIndex extends React.Component {
           disabled={is_task_completed()}
           className="task-index__list-button button">
             Mark as Incomplete
-        </button>
+        </button> */}
         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-        {showCompleteModal ? <TaskIndexCompleteList handleClose={this.toggleCompleteModal} tasks={this.props.tasks} checkedCompleteIds={{...checkedCompleteIds}} /> : null}
+        {/* {showCompleteModal ? <TaskIndexCompleteList handleClose={this.toggleCompleteModal} tasks={this.props.tasks} checkedCompleteIds={{...checkedCompleteIds}} /> : null} */}
       </>
     );
   }
