@@ -76,3 +76,11 @@
 .task-index__instruction-button {
   position: absolute;
 }
+
+.select-options {
+  margin-left: 1rem;
+}
+
+/* .options {
+  text-align: center;
+} */
