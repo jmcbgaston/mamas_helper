@@ -154,8 +154,8 @@ class TaskIndex extends React.Component {
 
 
       const taskId = e.currentTarget.id;
-
-      const findTask = this.props.tasks.find((task) => task._id === taskId)
+      const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
+      const findTask = allTasks.find((task) => task._id === taskId)
 
       findTask.completed = !findTask.completed
       this.props.updateTask(findTask)
@@ -352,15 +352,6 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
-                <label class="switch">
-                  {/* {task.completed ?
-                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
-                    :
-                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
-                  } */}
-                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
-                  <span class="slider round"></span>
-                </label>
 
                 <div>
                   <select
@@ -428,6 +419,15 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
+                <label class="switch">
+                  {/* {task.completed ?
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                    :
+                    <input type="checkbox" id={task._id} onClick={this.handleComplete}/>
+                  } */}
+                  <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
+                  <span class="slider round"></span>
+                </label>
               </li>
             )}
           </ul>
