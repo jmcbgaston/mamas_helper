@@ -62,7 +62,6 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
-
     let oldLocal = localStorage.selectedOptionsArr
 
     this.selectedOptionsArr = new Array(this.props.tasks.length)
@@ -72,7 +71,7 @@ class TaskIndex extends React.Component {
         }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
-    if (oldLocal.length > window.localStorage.selectedOptionsArr.length) {
+    if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
       this.updateChildTasks();
     }
@@ -96,11 +95,10 @@ class TaskIndex extends React.Component {
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
         
-        // if none is chosen
         if (e.currentTarget.value === 'none') { 
           this.setupLocalStorage();
-          // this.handleFillAssignedTasks();
-          // this.updateChildTasks();
+          this.handleFillAssignedTasks();
+          this.updateChildTasks();
           return
         }
 
@@ -110,8 +108,8 @@ class TaskIndex extends React.Component {
     assignee.assignedTasks.push(task)
 
     this.setupLocalStorage();
-    // this.handleFillAssignedTasks();
-    // this.updateChildTasks();
+    this.handleFillAssignedTasks();
+    this.updateChildTasks();
   }
 
   handleFillAssignedTasks() {
