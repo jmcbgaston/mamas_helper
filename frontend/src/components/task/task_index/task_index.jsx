@@ -62,7 +62,6 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
-
     let oldLocal = localStorage.selectedOptionsArr
 
     this.selectedOptionsArr = new Array(this.props.tasks.length)
@@ -72,7 +71,7 @@ class TaskIndex extends React.Component {
         }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
-    if (oldLocal.length > window.localStorage.selectedOptionsArr.length) {
+    if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
       this.updateChildTasks();
     }
