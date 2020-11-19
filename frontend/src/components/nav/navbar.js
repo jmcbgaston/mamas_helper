@@ -3,16 +3,35 @@ import { Link, useLocation } from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import logo from './PNG_MH_Logo.png';
 
-const AuthNav = ({ logout }) => (
-  <>
-    <h2 className ="nav-bar__header">Welcome!</h2>
-    <button
-      className ="nav-bar__session-button button"
-      onClick={() => logout()}>
-        <ExitToAppIcon />&nbsp;Sign Out
-    </button>
-  </>
-)
+const AuthNav = ({ user, logout }) => {
+  if (user.isLimitedUser) {
+    return(
+      <>
+        <div className="nav-bar__header-container">
+          <h3 className ="nav-bar__header">Welcome!</h3>
+        </div>
+        <button
+          className ="nav-bar__session-button button"
+          onClick={() => logout()}>
+            <ExitToAppIcon />&nbsp;Sign Out
+        </button>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <div className="nav-bar__header-container">
+          <h3 className ="nav-bar__header">Welcome!</h3>
+        </div>
+        <button
+          className ="nav-bar__session-button button"
+          onClick={() => logout()}>
+            <ExitToAppIcon />&nbsp;Sign Out
+        </button>
+      </>
+    )
+  }
+}
 
 const UnAuthNav = () => {
   const SignUp = () => (
@@ -35,16 +54,14 @@ const UnAuthNav = () => {
   return pathname === '/signup' ? <LogIn /> : <SignUp />
 }
 
-const NavBar = (props) => {
-  const { loggedIn, logout } = props;
-
+const NavBar = ({ user, loggedIn, logout }) => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-bar__app-title">
         <img className="nav-bar__logo" src={logo} />
       </Link>
 
-      {loggedIn ? <AuthNav logout={logout} /> : <UnAuthNav />}
+      { loggedIn ? <AuthNav user={user} logout={logout}/> :<UnAuthNav /> }
     </nav>
   );
 }

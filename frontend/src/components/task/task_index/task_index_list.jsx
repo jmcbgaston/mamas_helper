@@ -26,6 +26,7 @@ const TaskIndexListItem = ({task, requirements}) => {
 }
 
 export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
+  
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
 

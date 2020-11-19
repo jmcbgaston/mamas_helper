@@ -22,3 +22,22 @@
 .session-form__input--errors {
   border: 2px solid #c23b23;
 }
+
+.session-form__limited-user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.session-form__limited-user-label {
+  display: flex;
+  align-items: center;
+}
+
+.session-form__limit-user-header {
+  margin-left: 1rem;
+}
+
+.tooltip {
+  font-size: 3rem;
+}
