@@ -17,8 +17,6 @@ class TaskIndex extends React.Component {
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
-    // this.handleCompleteClick = this.handleCompleteClick.bind(this);
-    // this.handleIncompleteClick = this.handleIncompleteClick.bind(this);
     this.state = {
       showModal: false,
       checkedTasksIds: {},
