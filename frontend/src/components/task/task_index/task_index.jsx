@@ -201,7 +201,6 @@ class TaskIndex extends React.Component {
         </div>
         <ul className="task-index__list">
           {tasks.map((task) => {
-            // if(task.completed) {
               return (
               <li className="task-index__list-item" key={task._id}>
                 <input
@@ -215,20 +214,11 @@ class TaskIndex extends React.Component {
                   {task.title}
                 </Link>
                 <label class="switch">
-                  <input type="checkbox" id={task._id} onClick={this.handleComplete} checked/>
+                  <input type="checkbox" id={task._id} onClick={this.handleComplete} />
                   <span class="slider round"></span>
                 </label>
-                {/* <input 
-                  type="checkbox"
-                  id={task._id}
-                  className=""
-                  onClick={this.handleComplete}
-                /> */}
-                {/* <span id="meow">I am completed</span> */}
               </li>
               )
-            // } else {
-            // }
 
           }
           )}
