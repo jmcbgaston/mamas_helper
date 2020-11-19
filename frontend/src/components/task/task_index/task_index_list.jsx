@@ -26,6 +26,7 @@ const TaskIndexListItem = ({task, requirements}) => {
 }
 
 export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
+  
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
 
@@ -40,7 +41,7 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
         </div>
         <ul className="task-index__task-list-items-container">
           {checked.map((taskId, idx) => {
-            const task = tasks.find((requirement) => requirement._id === taskId);
+            const task = tasks.find((task) => task._id === taskId);
             return (
               <React.Fragment key={task._id}>
                 <TaskIndexListItem task={task} requirements={task.requirements} />

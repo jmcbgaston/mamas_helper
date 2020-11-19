@@ -1,82 +1,98 @@
 import React from 'react';
-import linkedIn from './linkedin.png'
-import github from './github.svg'
 import daniel from './daniel.png'
 import jose from './jose.png'
 import jason from './jason.png'
 import alvin from './alvin.png'
 import Back from '../back';
 import {withRouter} from 'react-router-dom';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const About = (props) => (
-  <div className="about">
-
-    <ul className="about-main-ul">
+  <>
+    <div className="about">
+      <ul className="about-main-ul">
         <img className="prof-pic" src={daniel} />
         <ul className="about-sub-ul">
-            <li className="about-name">Daniel Ackroyd-Isales</li>
-            <li className="about-role">insert role here</li>
-            <ul className="about-links-ul">
-                <li><a href="https://www.linkedin.com/in/daniel-ackroyd-isales/">
-                        <img src={linkedIn} alt="LinkedIn Link"/>
-                </a></li>
-                <li><a href="http://github.com/dackroydisales">
-                    <img src={github} alt="GitHub Link"/>
-                </a></li>
-            </ul>
+          <li className="about-name">Daniel Ackroyd-Isales</li>
+          <li className="about-role">insert role here</li>
+          <ul className="about-links-ul">
+            <li>
+              <a href="https://www.linkedin.com/in/daniel-ackroyd-isales/">
+                <LinkedInIcon className="about-icon" />
+              </a>
+            </li>
+            <li>
+              <a href="http://github.com/dackroydisales">
+                <GitHubIcon className="about-icon" />
+              </a>
+            </li>
+          </ul>
         </ul>
-    </ul>
+      </ul>
 
-    <ul className="about-main-ul">
+      <ul className="about-main-ul">
         <img className="prof-pic" src={jose} />
         <ul className="about-sub-ul">
-            <li className="about-name">Jose Gaston</li>
-            <li className="about-role">insert role here</li>
-            <ul className="about-links-ul">
-                <li><a href="https://www.linkedin.com/in/jose-maria-canuto-b-gaston-904411115/">
-                        <img src={linkedIn} alt="LinkedIn Link"/>
-                </a></li>
-                <li><a href="https://github.com/jmcbgaston">
-                    <img src={github} alt="GitHub Link"/>
-                </a></li>
-            </ul>
+          <li className="about-name">Jose Gaston</li>
+          <li className="about-role">insert role here</li>
+          <ul className="about-links-ul">
+            <li>
+              <a href="https://www.linkedin.com/in/jose-maria-canuto-b-gaston-904411115/">
+                <LinkedInIcon className="about-icon" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/jmcbgaston">
+                <GitHubIcon className="about-icon" />
+              </a>
+            </li>
+          </ul>
         </ul>
-    </ul>
+      </ul>
 
-    <ul className="about-main-ul">
+      <ul className="about-main-ul">
         <img className="prof-pic" src={jason} />
         <ul className="about-sub-ul">
-            <li className="about-name">Jason Zhen</li>
-            <li className="about-role">insert role here</li>
-            <ul className="about-links-ul">
-                <li><a href="https://www.linkedin.com/in/jazhen/">
-                        <img src={linkedIn} alt="LinkedIn Link"/>
-                </a></li>
-                <li><a href="https://github.com/jazhen">
-                    <img src={github} alt="GitHub Link"/>
-                </a></li>
-            </ul>
+          <li className="about-name">Jason Zhen</li>
+          <li className="about-role">insert role here</li>
+          <ul className="about-links-ul">
+            <li>
+              <a href="https://www.linkedin.com/in/jazhen/">
+                <LinkedInIcon className="about-icon" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/jazhen">
+                <GitHubIcon className="about-icon" />
+              </a>
+            </li>
+          </ul>
         </ul>
-    </ul>
+      </ul>
 
-    <ul className="about-main-ul">
+      <ul className="about-main-ul">
         <img className="prof-pic" src={alvin} />
         <ul className="about-sub-ul">
-            <li className="about-name">Alvin Chong</li>
-            <li className="about-role">insert role here</li>
-            <ul className="about-links-ul">
-                <li><a href="https://www.linkedin.com/in/alvin-chong-4b88011a1/">
-                        <img src={linkedIn} alt="LinkedIn Link"/>
-                </a></li>
-                <li><a href="https://github.com/alvinc90">
-                    <img src={github} alt="GitHub Link"/>
-                </a></li>
-            </ul>
+          <li className="about-name">Alvin Chong</li>
+          <li className="about-role">insert role here</li>
+          <ul className="about-links-ul">
+            <li>
+              <a href="https://www.linkedin.com/in/alvin-chong-4b88011a1/">
+                <LinkedInIcon className="about-icon" />
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/alvinc90">
+                <GitHubIcon className="about-icon" />
+              </a>
+            </li>
+          </ul>
         </ul>
-    </ul>
-
+      </ul>
+    </div>
     <Back history={props.history}/>
-  </div>
+  </>
 )
 
 export default withRouter(About);

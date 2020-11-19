@@ -1,40 +1,45 @@
 import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
 import Back from '../../back';
+import TaskUpdateDeleteConfirmation from './task_update_delete_confirmation';
 
 class TaskUpdate extends React.Component {
     constructor(props) {
       super(props)
-      this.state = this.props.task;
-      this.handleSubmit = this.handleSubmit.bind(this)
-      this.handleChange = this.handleChange.bind(this)
-      this.handleRequirementChange = this.handleRequirementChange.bind(this)
-    }
-
-    handleSubmit(event) {
-      event.preventDefault();
-      this.props.updateTask(this.state)
-        .then(() => this.props.history.goBack())
-        .catch(() => alert('Error occurred. Please try again.'))
-    }
-
-    handleChange(type) {
-      return (e) => {
-        this.setState({ [type]: e.currentTarget.value })
+      this.state = {
+        task: this.props.task,
+        idx: -1
       }
+      this.handleTitleChange = this.handleTitleChange.bind(this);
+      this.handleRequirementChange = this.handleRequirementChange.bind(this);
+      this.handleClickDelete = this.handleClickDelete.bind(this);
+    }
+
+    handleTitleChange(e) {
+      const task = this.state.task;
+      task.title = e.currentTarget.value;
+      this.setState({ [task]: task })
+    }
+
+
+    handleClickDelete(idx) {
+      this.setState({
+        showDeleteConfirmation: !this.state.showDeleteConfirmation,
+        idx
+      })
     }
 
     handleRequirementChange(idx) {
       return (e) => {
-        const { requirements } = this.state;
+        const { requirements } = this.state.task;
         requirements[idx].description = e.currentTarget.value;
         this.setState({ requirements });
       }
     }
 
     handleRequirementDelete(idx) {
-      this.state.requirements.splice(idx, 1);
-      this.props.updateTask(this.state);
+      this.state.task.requirements.splice(idx, 1);
+      this.props.updateTask(this.state.task);
     }
 
     componentDidMount(){
@@ -43,7 +48,7 @@ class TaskUpdate extends React.Component {
     }
 
     componentWillUnmount(){
-      this.props.updateTask(this.state);
+      this.props.updateTask(this.state.task);
     }
 
     render() {
@@ -53,7 +58,7 @@ class TaskUpdate extends React.Component {
         return null;
       }
 
-      const { requirements } = this.state;
+      const { requirements } = this.state.task;
 
       return (
         <>
@@ -63,8 +68,8 @@ class TaskUpdate extends React.Component {
             <input type="text"
               maxLength="30"
               className="task-update-form__input input-field"
-              value={this.state.title}
-              onChange={this.handleChange('title')}
+              value={this.state.task.title}
+              onChange={this.handleTitleChange}
               placeholder={task.title} />
           </label>
           <div className="task-update-form__requirements-container">
@@ -88,7 +93,7 @@ class TaskUpdate extends React.Component {
                     <button
                       type="button"
                       className="input-add-on__item input-add-on__item--minus"
-                      onClick={() => this.handleRequirementDelete(idx)}>
+                      onClick={() => this.handleClickDelete(idx)}>
                         <i className="fas fa-minus" />
                     </button>
                   </li>
@@ -96,8 +101,17 @@ class TaskUpdate extends React.Component {
               })}
             </ul>
           </div>
-          <TaskUpdateAddRequirement task={this.state} updateTask={updateTask} />
+          <TaskUpdateAddRequirement task={this.state.task} updateTask={updateTask} />
           <Back history={history} />
+          {this.state.showDeleteConfirmation ?
+            <TaskUpdateDeleteConfirmation
+              idx={this.state.idx}
+              handleDelete={updateTask}
+              handleDeleteArg={this.state.task}
+              handleCancel={this.handleClickDelete} />
+            :
+            null
+          }
         </>
       )
     }

@@ -1,0 +1,43 @@
+.delete-confirmation {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.delete-confirmation__content {
+  position: fixed;
+  text-align: center;
+  background-color: #F3F3F3;
+  border: 3px solid #2C353A;
+  margin: 2rem;
+}
+
+.delete-confirmation__button {
+  flex: 1;
+  height: 3rem;
+}
+
+.delete-confirmation__buttons-container {
+  display: flex;
+}
+
+.delete-confirmation__confirm-button {
+  border-top: 3px solid #2C353A;
+  border-right: 3px solid #2C353A;
+  background-color: #EC5C5C;
+}
+
+.delete-confirmation__cancel-button {
+  border-top: 3px solid #2C353A;
+  background-color: #9BC5EC;
+}
+
+.delete-confirmation__warning {
+  margin: 3rem 1rem;
+}

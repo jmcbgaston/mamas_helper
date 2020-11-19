@@ -1,7 +1,7 @@
 .nav-bar {
   display: flex;
   flex-direction: column;
-  padding: 2rem 4rem;
+  padding: 1rem 2rem;
   text-align: center;
   align-items: center;
   background-color: rgba(44, 53, 58, 0.60);
@@ -9,18 +9,22 @@
 
 .nav-bar__app-title {
   color: #eee;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-shadow: 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A;
 }
 
+
 .nav-bar__logo {
-  display: none;
+  width: 6rem;
+}
+
+.nav-bar__header-container {
+  color: #eee;
+  text-shadow: 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A;
 }
 
 .nav-bar__header {
   display: none;
-  color: #eee;
-  text-shadow: 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A, 0 0 3px #2C353A;
 }
 
 .nav-bar__session-button {
@@ -58,15 +62,20 @@ and (min-width: 992px) {
     display: block;
   }
 
-  .nav-bar__header {
+  .nav-bar__header-container {
     flex: 1;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .nav-bar__header {
+    display: block;
+  }
+
   .nav-bar__session-button {
-    right: 4rem;
+    right: 2rem;
     width: 8rem;
   }
 
@@ -80,4 +89,10 @@ and (min-width: 992px) {
   .nav-bar__session-links-container {
     margin: 0;
   }
+}
+
+.nav-bar___user-id{
+  background-color: plum;
+  padding: 5px;
+  border: 1px solid black;
 }

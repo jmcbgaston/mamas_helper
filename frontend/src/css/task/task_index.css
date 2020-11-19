@@ -8,18 +8,18 @@
   display: flex;
 }
 
-.task-index__list-item-checkbox {
+/* .task-index__list-item-checkbox {
   -webkit-appearance: none;
   appearance: none;
   position: relative;
   width: 3em;
   height: 3em;
-  border: 1px solid #808080;
-  color: #800080;
+  background-image:url(PNG_MH_Unchecked.png);
+  background-size: 3em 3em;
   margin: 0;
-}
+} */
 
-.task-index__list-item-checkbox::before {
+/* .task-index__list-item-checkbox::before {
   content: "➼";
   position: absolute;
   font-size: 2.5em;
@@ -35,7 +35,7 @@
 
 .task-index__list-item-checkbox:checked::before {
   visibility: visible;
-}
+} */
 
 .task-index__list-item-link {
   align-items: center;
@@ -76,3 +76,11 @@
 .task-index__instruction-button {
   position: absolute;
 }
+
+.select-options {
+  margin-left: 1rem;
+}
+
+/* .options {
+  text-align: center;
+} */
