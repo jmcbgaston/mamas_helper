@@ -9,6 +9,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
 // import TaskIndexCompleteList from './task_index_complete_list';
+import completed from './green-circle-check.png';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -352,7 +353,9 @@ class TaskIndex extends React.Component {
                   className="task-index__list-item-link">
                   {task.title}
                 </Link>
-
+              <div>
+                {task.completed ? <img className = "task-index__completed-image" src={completed} title="Complete"/>: null}
+              </div>
                 <div>
                   <select
                     name="assignees"
