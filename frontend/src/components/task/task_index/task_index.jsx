@@ -10,6 +10,7 @@ import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
 // import TaskIndexCompleteList from './task_index_complete_list';
 import completed from './green-circle-check.png';
+import notcompleted from './blank-circle.png';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -352,10 +353,8 @@ class TaskIndex extends React.Component {
                 <Link to={`/tasks/${task._id}`}
                   className="task-index__list-item-link">
                   {task.title}
+                  {task.completed ? <img className = "task-index__completed-image" src={completed} title="Complete"/>: <img className = "task-index__completed-image" src={notcompleted} title="Not complete"/>}
                 </Link>
-              <div>
-                {task.completed ? <img className = "task-index__completed-image" src={completed} title="Complete"/>: null}
-              </div>
                 <div>
                   <select
                     name="assignees"
