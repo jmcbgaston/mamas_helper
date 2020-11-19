@@ -44,7 +44,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
 
     if (!this.props.user.isLimitedUser) {
       // this.oldState = this.props.tasks
@@ -53,7 +53,7 @@ class TaskIndex extends React.Component {
   }
 
   setOptions() {
-    debugger
+    // debugger
     // sets dropdown value on render and calls setupLocalStorage to creaate localStorage.selectedOptionsArr
 
     let select = document.getElementsByTagName('select')
@@ -67,9 +67,9 @@ class TaskIndex extends React.Component {
     }
     this.setupLocalStorage()
   }
-  
+
   setupLocalStorage() {
-    debugger
+    // debugger
     // updates localStorage
 
     let oldLocal = localStorage.selectedOptionsArr
@@ -82,7 +82,7 @@ class TaskIndex extends React.Component {
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal.length > window.localStorage.selectedOptionsArr.length) {
-      debugger;
+      // debugger;
       this.handleFillAssignedTasks()
       this.updateChildTasks();
     }
@@ -103,12 +103,12 @@ class TaskIndex extends React.Component {
 
   handleSelection(e) {
 
-    debugger
+    // debugger
 
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
         // consider just hitting return if none selected
-        if (e.currentTarget.value === 'none') { 
+        if (e.currentTarget.value === 'none') {
           // this.props.user.household.forEach(user => {
           //   let newAT = user.assignedTasks.filter(aTask => aTask !== task)
           //   user.assignedTasks = newAT
@@ -134,7 +134,7 @@ class TaskIndex extends React.Component {
 
     // updates childrens tasks based on localStorage
     this.updateChildTasks();
-    debugger
+    // debugger
   }
 
   handleFillAssignedTasks() {
@@ -152,7 +152,7 @@ class TaskIndex extends React.Component {
   }
 
   updateChildTasks() {
-    debugger
+    // debugger
 
     this.props.user.household.forEach(child => {
       updateChildUser(child)
@@ -228,7 +228,7 @@ class TaskIndex extends React.Component {
     //   this.updateChildTasks()
     // }
 
-    debugger
+    // debugger
 
     if (this.props.user.household.length === 0 && this.props.user.isLimitedUser === false) { // Regular User
       return (
