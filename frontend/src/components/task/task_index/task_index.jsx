@@ -271,21 +271,26 @@ class TaskIndex extends React.Component {
       <label>Assigned tasks:</label>
       <ul className="task-index__list">
       {this.props.user.assignedTasks.map((task) =>
-      <li className="task-index__list-item" key={task._id}>
-      <input
-      type="checkbox"
-      id={task._id}
-      className="task-index__list-item-checkbox"
-      onClick={this.handleCheck}
-      />
-      <Link to={`/tasks/${task._id}`}
-      className="task-index__list-item-link">
-      {task.title}
-      </Link>
-      <label class="switch">
-      <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
-      <span class="slider round"></span>
-      </label>
+      <li 
+        className="task-index__list-item" 
+        key={task._id}>
+        <input
+          type="checkbox"
+          id={task._id}
+          className="task-index__list-item-checkbox"
+          onClick={this.handleCheck}/>
+        <Link to={`/tasks/${task._id}`}
+          className="task-index__list-item-link">
+          {task.title}
+        </Link>
+        <label class="switch">
+          <input 
+            type="checkbox" 
+            id={task._id} 
+            onChange={this.handleComplete} 
+            defaultChecked={task.completed} />
+          <span class="slider round"></span>
+        </label>
       </li>
       )}
       </ul>
@@ -302,7 +307,11 @@ class TaskIndex extends React.Component {
           {task.title}
         </Link>
         <label class="switch">
-          <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
+          <input 
+            type="checkbox" 
+            id={task._id} 
+            onChange={this.handleComplete} 
+            defaultChecked={task.completed} />
           <span class="slider round"></span>
         </label>
       </>
@@ -314,10 +323,15 @@ class TaskIndex extends React.Component {
         <Link to={`/tasks/${task._id}`}
           className="task-index__list-item-link">
             {task.title}
-            {task.completed ? 
-              <img className = "task-index__completed-image" src={completed} title="Complete"/> : 
-              <img className = "task-index__completed-image" src={notcompleted} title="Not complete"/>
-            }
+            { task.completed ? 
+              <img 
+                className = "task-index__completed-image" 
+                src={completed} 
+                title="Complete"/> : 
+              <img 
+                className = "task-index__completed-image" 
+                src={notcompleted} 
+                title="Not complete"/> }
         </Link>
         <div>
           <select
@@ -348,15 +362,13 @@ class TaskIndex extends React.Component {
           handleClose={this.handleTaskClick}
           tasks={this.props.tasks} 
           checkedTasksIds={checkedTasksIds} /> : 
-        null 
-      }
+        null }
 
       { showInstructions ? 
         <TaskInstructionBox 
           handleClose={this.handleInstructionClick} 
           copyId={this.props.user.id}/> : 
-        null
-      }
+        null }
       </>
     )
   }
@@ -368,15 +380,14 @@ class TaskIndex extends React.Component {
       { showModal ? 
         <TaskIndexList 
           handleClose={this.handleTaskClick}
-          tasks={this.props.tasks.concat(this.props.user.assignedTasks)} checkedTasksIds={checkedTasksIds} /> : 
-        null
-      }
+          tasks={this.props.tasks.concat(this.props.user.assignedTasks)} 
+          checkedTasksIds={checkedTasksIds} /> : 
+        null }
 
       { showInstructions ? 
         <TaskInstructionBox 
           handleClose={this.handleInstructionClick} /> : 
-        null
-      }
+        null }
       </>
     )
   }
@@ -418,7 +429,9 @@ class TaskIndex extends React.Component {
             onClick={this.handleCheck}
             />
 
-          { user.household.length === 0 ? this.p21(task) : this.p22(task) }
+          { user.household.length === 0 ? 
+          this.p21(task) : 
+          this.p22(task) }
           
           </li>
           )}
@@ -446,205 +459,12 @@ class TaskIndex extends React.Component {
           <VisibilityIcon />&nbsp;Show my tasks
         </button>
 
-        { !user.isLimitedUser ? this.p31(showModal, showInstructions, checkedTasksIds) : this.p32(showModal, showInstructions, checkedTasksIds) }
+        { !user.isLimitedUser ? 
+          this.p31(showModal, showInstructions, checkedTasksIds) : 
+          this.p32(showModal, showInstructions, checkedTasksIds) }
 
       </>
     )
-
-  //   if (!this.props.user.isLimitedUser && this.props.user.household.length === 0) { // Regular User
-  //     return (
-  //       <>
-  //         <Link to="/completion"><button>Completion page</button></Link>
-  //         <div className="task-index__instruction-container">
-  //           <h2 className="task-index__instruction-header">Tasks</h2>
-  //           <button type="button"
-  //             className="task-index__instruction-button button"
-  //             onClick={this.handleInstructionClick}>
-  //               <InfoIcon />&nbsp;Help
-  //           </button>
-  //         </div>
-
-  //         <ul className="task-index__list">
-  //           {tasks.map((task) =>
-  //             <li className="task-index__list-item" key={task._id}>
-  //               <input
-  //                 type="checkbox"
-  //                 id={task._id}
-  //                 className="task-index__list-item-checkbox"
-  //                 onClick={this.handleCheck}
-  //                 />
-  //               <Link to={`/tasks/${task._id}`}
-  //                 className="task-index__list-item-link">
-  //                 {task.title}
-  //               </Link>
-  //               <label class="switch">
-  //                 <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
-  //                 <span class="slider round"></span>
-  //               </label>
-  //             </li>
-  //           )}
-  //         </ul>
-  //         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-  //         <button type="button"
-  //           className="task-index__email-button button box__no-bottom-border"
-  //           onClick={this.handleEmailClick}
-  //           disabled={is_task_selected()}>
-  //             <EmailIcon />&nbsp;Email me today's tasks
-  //         </button>
-  //         <button
-  //           type="button"
-  //           className="task-index__list-button button"
-  //           onClick={this.handleTaskClick}
-  //           disabled={is_task_selected()}>
-  //           <VisibilityIcon />&nbsp;Show my tasks
-  //         </button>
-  //         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
-  //         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} copyId={this.props.user.id}/> : null}
-  //       </>
-  //     );
-  //   }
-
-  //   if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) { // Parent User
-  //     return (
-  //       <>
-  //         <Link to="/completion"><button>Completion page</button></Link>
-  //         <div className="task-index__instruction-container">
-  //           <h2 className="task-index__instruction-header">Tasks</h2>
-  //           <button type="button"
-  //             className="task-index__instruction-button button"
-  //             onClick={this.handleInstructionClick}>
-  //               <InfoIcon />&nbsp;Help
-  //           </button>
-  //         </div>
-
-  //         <ul className="task-index__list">
-  //           {tasks.map((task) =>
-  //             <li className="task-index__list-item" id={task._id} key={task._id}>
-  //               <input
-  //                 type="checkbox"
-  //                 id={task._id}
-  //                 className="task-index__list-item-checkbox"
-  //                 onClick={this.handleCheck}
-  //                 />
-  //               <Link to={`/tasks/${task._id}`}
-  //                 className="task-index__list-item-link">
-  //                 {task.title}
-  //                 {task.completed ? <img className = "task-index__completed-image" src={completed} title="Complete"/>: <img className = "task-index__completed-image" src={notcompleted} title="Not complete"/>}
-  //               </Link>
-  //               <div>
-  //                 <select
-  //                   name="assignees"
-  //                   id={task._id}
-  //                   className="select-options"
-  //                   onChange={this.handleSelection}>
-  //                   <option
-  //                     value="none"
-  //                     className="options"
-  //                     id="0">
-  //                       ---
-  //                   </option>
-  //                   {this.handleAssigneeDropdown()}
-  //                 </select>
-  //               </div>
-  //             </li>
-  //           )}
-  //         </ul>
-
-  //         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-  //         <button type="button"
-  //           className="task-index__email-button button box__no-bottom-border"
-  //           onClick={this.handleEmailClick}
-  //           disabled={is_task_selected()}>
-  //             <EmailIcon />&nbsp;Email me today's tasks
-  //         </button>
-  //         <button
-  //           type="button"
-  //           className="task-index__list-button button"
-  //           onClick={this.handleTaskClick}
-  //           disabled={is_task_selected()}>
-  //           <VisibilityIcon />&nbsp;Show my tasks
-  //         </button>
-  //         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks} checkedTasksIds={{...checkedTasksIds}} /> : null}
-  //         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} copyId={this.props.user.id}/> : null}
-  //       </>
-  //     );
-  //   }
-
-  //   if (this.props.user.isLimitedUser) { // Child User
-  //     return (
-  //       <>
-  //         <Link to="/completion"><button>Completion page</button></Link>
-  //         <div className="task-index__instruction-container">
-  //           <h2 className="task-index__instruction-header">Tasks</h2>
-  //           <button type="button"
-  //             className="task-index__instruction-button button"
-  //             onClick={this.handleInstructionClick}>
-  //               <InfoIcon />&nbsp;Help
-  //           </button>
-  //         </div>
-
-  //         <label>Assigned tasks:</label>
-  //         <ul className="task-index__list">
-  //           {this.props.user.assignedTasks.map((task) =>
-  //             <li className="task-index__list-item" key={task._id}>
-  //               <input
-  //                 type="checkbox"
-  //                 id={task._id}
-  //                 className="task-index__list-item-checkbox"
-  //                 onClick={this.handleCheck}
-  //                 />
-  //               <Link to={`/tasks/${task._id}`}
-  //                 className="task-index__list-item-link">
-  //                 {task.title}
-  //               </Link>
-  //               <label class="switch">
-  //                 <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
-  //                 <span class="slider round"></span>
-  //               </label>
-  //             </li>
-  //           )}
-  //         </ul>
-
-  //         <label>Your tasks:</label>
-  //         <ul className="task-index__list">
-  //           {tasks.map((task) =>
-  //             <li className="task-index__list-item" key={task._id}>
-  //               <input
-  //                 type="checkbox"
-  //                 id={task._id}
-  //                 className="task-index__list-item-checkbox"
-  //                 onClick={this.handleCheck}
-  //                 />
-  //               <Link to={`/tasks/${task._id}`}
-  //                 className="task-index__list-item-link">
-  //                 {task.title}
-  //               </Link>
-  //               <label class="switch">
-  //                 <input type="checkbox" id={task._id} onChange={this.handleComplete} defaultChecked={task.completed} />
-  //                 <span class="slider round"></span>
-  //               </label>
-  //             </li>
-  //           )}
-  //         </ul>
-  //         <TaskIndexCreate tasks={tasks} createTask={createTask} errors={errors} clearErrors={clearErrors}/>
-  //         <button type="button"
-  //           className="task-index__email-button button box__no-bottom-border"
-  //           onClick={this.handleEmailClick}
-  //           disabled={is_task_selected()}>
-  //             <EmailIcon />&nbsp;Email me today's tasks
-  //         </button>
-  //         <button
-  //           type="button"
-  //           className="task-index__list-button button"
-  //           onClick={this.handleTaskClick}
-  //           disabled={is_task_selected()}>
-  //           <VisibilityIcon />&nbsp;Show my tasks
-  //         </button>
-  //         {showModal ? <TaskIndexList handleClose={this.handleTaskClick} tasks={this.props.tasks.concat(this.props.user.assignedTasks)} checkedTasksIds={{...checkedTasksIds}} /> : null}
-  //         {showInstructions ? <TaskInstructionBox handleClose={this.handleInstructionClick} /> : null}
-  //       </>
-  //     );
-  //   }
   }
 }
 
