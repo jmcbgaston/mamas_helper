@@ -16,7 +16,8 @@ const TaskSchema = new Schema({
   title: String, 
   requirements: [ReqSchema], 
   owner_id: ObjectId,
-  completed: {type: Boolean, default: false}
+  completed: {type: Boolean, default: false},
+  archived: {type: Boolean, default: false}
   // createdAt: {type: Date, default: Date.now}
   // completedAt: {type:Date}
 },
