@@ -2,6 +2,7 @@ import React from 'react';
 import TaskUpdateAddRequirement from './task_update_add_requirement'
 import Back from '../../back';
 import TaskUpdateDeleteConfirmation from './task_update_delete_confirmation';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 class TaskUpdate extends React.Component {
     constructor(props) {
@@ -92,9 +93,9 @@ class TaskUpdate extends React.Component {
                       placeholder={task.requirements[idx].description}/>
                     <button
                       type="button"
-                      className="input-add-on__item input-add-on__item--minus"
+                      className="input-add-on__item input-minus"
                       onClick={() => this.handleClickDelete(idx)}>
-                        <i className="fas fa-minus" />
+                        <RemoveIcon/>
                     </button>
                   </li>
                 )

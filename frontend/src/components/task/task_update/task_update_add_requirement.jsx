@@ -1,4 +1,5 @@
 import React from 'react'
+import AddIcon from '@material-ui/icons/Add';
 
 class TaskUpdateAddRequirement extends React.Component {
     constructor(props) {
@@ -44,9 +45,9 @@ class TaskUpdateAddRequirement extends React.Component {
             />
             <button
               type="button"
-              className="input-add-on__item input-add-on__item--plus"
+              className="input-add-on__item input-plus"
               onClick={this.handleButton}>
-                <i className="fas fa-plus" />
+                <AddIcon/>
             </button>
           </div>
         </form>

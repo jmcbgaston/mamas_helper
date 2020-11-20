@@ -192,13 +192,14 @@ body,
   min-width: 3rem;
 }
 
-.input-add-on__item--plus {
-  background-color: #3AAC78;
+.input-plus {
+  background-color: #4CAF50;
 }
 
-.input-add-on__item--minus {
-  background-color: #ec5c5c;
+.input-minus {
+  background-color: #f44336;
 }
+
 
 .back-button {
   margin-top: 4rem;

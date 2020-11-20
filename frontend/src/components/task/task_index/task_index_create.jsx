@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskIndexCreateModal from './task_index_create_modal';
+import AddIcon from '@material-ui/icons/Add';
 
 class TaskIndexCreate extends React.Component{
   constructor(props){
@@ -74,9 +75,9 @@ class TaskIndexCreate extends React.Component{
             onClick={this.props.clearErrors.bind(this)}/>
           <button
             type="submit"
-            className="input-add-on__item input-add-on__item--plus"
+            className="input-add-on__item input-plus"
             onClick={this.handleButton}>
-              <i className="fas fa-plus" />
+              <AddIcon/>
           </button>
         </form>
         { this.renderErrors() }
