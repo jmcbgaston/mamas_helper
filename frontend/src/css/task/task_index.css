@@ -81,6 +81,11 @@
   margin-left: 1rem;
 }
 
+.task-index__completed-image {
+  width: 1em;
+  margin-left: 1rem;
+}
+
 /* .options {
   text-align: center;
 } */

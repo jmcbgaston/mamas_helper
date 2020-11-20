@@ -38,7 +38,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-
+ 
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -122,7 +122,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {

@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
-import { fetchTasks, fetchTask, createTask, removeTaskErrors } from "../../../actions/task_actions";
+import { fetchTasks, fetchTask, createTask, removeTaskErrors, deleteTask, updateTask } from "../../../actions/task_actions";
 import { fetchUser } from "../../../actions/user_actions"
 
 const mapStateToProps = (state) => {
@@ -33,8 +33,10 @@ const mapDispatchToProps = (dispatch) => {
     clearErrors: () => {
       return dispatch(removeTaskErrors());
     },
+    deleteTask: (taskId) => dispatch(deleteTask(taskId)),
+    updateTask: (task) => dispatch(updateTask(task))
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);
 
