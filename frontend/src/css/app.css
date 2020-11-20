@@ -193,10 +193,16 @@ body,
 }
 
 .input-plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #4CAF50;
 }
 
 .input-minus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #f44336;
 }
 
