@@ -62,6 +62,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
+    debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -210,8 +211,12 @@ class TaskIndex extends React.Component {
   }
 
   handleTaskClick(e) {
+    let checkedTasksIds_ = {};
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+      .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      checkedTasksIds: checkedTasksIds_
     })
   }
 
@@ -256,12 +261,13 @@ class TaskIndex extends React.Component {
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
 
-    checked.forEach((taskId) => {
-      const task = allTasks.find((task) => task._id === taskId);
 
       // uncheck all
       Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
         .forEach((checkbox) => checkbox.checked = false );
+
+    checked.forEach((taskId) => {
+      const task = allTasks.find((task) => task._id === taskId);
 
       // set checked to incomplete
       task.completed = false;

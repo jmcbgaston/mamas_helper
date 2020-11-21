@@ -41,7 +41,11 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
     <div className="task-index__task-list-container">
       <div className="task-index__task-list">
         <div className="task-index__task-list-button-container">
-          <button className="task-index__task-list-button" onClick={handleClose}>
+          <button className="task-index__task-list-button" onClick={() => { 
+      Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+        .forEach((checkbox) => checkbox.checked = false );
+      handleClose();
+        }}>
              <CloseIcon/>
           </button>
           <span className="task-index__task-list-header">Task List</span>
