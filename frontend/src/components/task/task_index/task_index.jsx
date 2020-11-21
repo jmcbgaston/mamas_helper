@@ -62,7 +62,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -466,7 +466,7 @@ class TaskIndex extends React.Component {
               <button type="button"
               className="task-index__instruction-button button"
               onClick={this.handleInstructionClick}>
-                <InfoIcon />&nbsp;Help
+                <InfoIcon />&nbsp; {/* Help */}
               </button>
           </div>
 
@@ -545,7 +545,7 @@ class TaskIndex extends React.Component {
               <button type="button"
               className="task-index__instruction-button button"
               onClick={this.handleInstructionClick}>
-                <InfoIcon />&nbsp;Help
+                <InfoIcon />&nbsp; {/* Help */}
               </button>
           </div>
 

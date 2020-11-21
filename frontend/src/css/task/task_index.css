@@ -89,7 +89,7 @@
 }
 
 .select-options {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 }
 
 
@@ -120,6 +120,10 @@
 and (min-width: 992px) {
   .task-index__list-button {
     height: 4rem;
+  }
+
+  .task-index__instruction-button {
+    position: absolute;
   }
 
   .task-index__list-button-label {
