@@ -58,12 +58,16 @@ class SignupForm extends React.Component {
   }
 
   handleLimited(e) {
+    const { user } = this.state;
+
     if (e.currentTarget.checked) {
-      this.state.user.isLimitedUser = true
+      user.isLimitedUser = true;
+      this.setState(user);
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', '')
     } else {
-      this.state.user.isLimitedUser = false
+      user.isLimitedUser = false;
+      this.setState(user);
       let att = document.getElementById('conditional-show')
       att.setAttribute('type', 'hidden')
     }

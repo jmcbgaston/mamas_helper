@@ -1,5 +1,7 @@
 import React from 'react';
+
 import CloseIcon from '@material-ui/icons/Close';
+import EmailIcon from '@material-ui/icons/Email';
 
 const TaskIndexListItem = ({task, requirements}) => {
 
@@ -28,10 +30,8 @@ const TaskIndexListItem = ({task, requirements}) => {
   )
 }
 
-export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
+export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleClose}) => {
 
-  // debugger
-  
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
 
@@ -60,6 +60,11 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
             )
           })}
         </ul>
+        <button type="button"
+          className="task-index__task-list-email button"
+          onClick={handleEmailClick}>
+            <EmailIcon />&nbsp;Email me this list
+        </button>
       </div>
     </div>
   )
