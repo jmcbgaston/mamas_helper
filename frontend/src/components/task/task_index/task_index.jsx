@@ -432,8 +432,16 @@ class TaskIndex extends React.Component {
     //helper method for if a task is selected
     const is_task_selected = () =>
     {
-      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
+      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
     };
+
+    const is_assigned_task_selected = () =>
+    {
+      debugger
+      let assignedtaskIds = user.assignedTasks.map(task => task._id);
+      return !!Object.keys(checkedTasksIds).filter(
+        (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
+    }
 
     return (
       <div class="tab-container">
@@ -493,7 +501,7 @@ class TaskIndex extends React.Component {
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleClear}
-              disabled={is_task_selected()}>
+              disabled={is_task_selected() || is_assigned_task_selected()}>
               <ArchiveIcon />
               <div className="task-index__list-button-label">Archive selected</div>
             </button>
@@ -506,13 +514,12 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Clear selected</div>
             </button>
           </div>
-          <!--
-          <button 
+          {/* <button 
             onClick={this.handleArchiveClick}
             type="button"
             className="task-index__list-button button">
             Archive
-          </button> -->
+          </button>  */}
         
           { !user.isLimitedUser ? 
             this.p31(showModal, showInstructions, checkedTasksIds) : 
