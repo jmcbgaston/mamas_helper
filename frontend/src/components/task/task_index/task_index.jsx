@@ -81,9 +81,17 @@ class TaskIndex extends React.Component {
   setupLocalStorage() {
     let oldLocal = localStorage.selectedOptionsArr
 
-    this.selectedOptionsArr = new Array(this.props.tasks.length)
+    // debugger
+
+    const tasks = this.props.tasks.filter(task => task.archived === false)
+
+    // debugger
+
+    this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
+          // debugger
+
           this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
         }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
@@ -150,21 +158,6 @@ class TaskIndex extends React.Component {
     })
   }
   handleComplete(e) {
-      // debugger
-      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-      // const taskId = e.currentTarget.id;
-      // checkedCompleteIds[taskId] = e.currentTarget.checked;
-      // this.setState({ checkedCompleteIds })
-
-      // const checked = Object.keys(checkedCompleteIds);
-      //                 // .filter((taskId) => checkedCompleteIds[taskId]);
-      // checked.forEach((taskId) => {
-        // const findTask = this.props.tasks.find((task) => task._id === taskId)
-        //   findTask.completed = !findTask.completed
-        //   this.props.updateTask(findTask)
-        // })
-
-
       const taskId = e.currentTarget.id;
       const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
@@ -173,48 +166,25 @@ class TaskIndex extends React.Component {
       this.props.updateTask(findTask)
   }
 
-  // handleIncompleteClick() {
-  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-  //   const checked = Object.keys(checkedCompleteIds)
-  //                     .filter((taskId) => checkedCompleteIds[taskId]);
-  //   checked.forEach((taskId) => {
-  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
-  //   if (!findTask.completed) {
-  //     alert(`${findTask.title} has not been completed`)
-  //   } else {
-  //     findTask.completed = !findTask.completed
-  //     this.props.updateTask(findTask)
-  //   }
-  //   })
-  // }
+  handleArchiveClick(e) {
+    // debugger
 
-  // handleCompleteClick() {
-  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-  //   const checked = Object.keys(checkedCompleteIds)
-  //                     .filter((taskId) => checkedCompleteIds[taskId]);
-  //   checked.forEach((taskId) => {
-  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
-  //   if (findTask.completed) {
-  //     alert(`${findTask.title} is already completed`)
-  //   } else {
-  //     findTask.completed = !findTask.completed
-  //     this.props.updateTask(findTask)
-  //     this.toggleCompleteModal();
-  //   }
-  //   })
-
-
-  // };
-
-  handleArchiveClick() {
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     const checked = Object.keys(checkedArchiveIds)
+
     checked.forEach((archiveId) => {
-    const findTask = this.props.tasks.find((task) => task._id === archiveId)
-    if (!findTask.archived) {
-      findTask.archived = !findTask.archived
-      this.props.updateTask(findTask)
-    }
+      const findTask = this.props.tasks.find((task) => task._id === archiveId)
+      if (!findTask.archived) {
+        // debugger
+        
+        findTask.archived = true
+        this.props.updateTask(findTask)
+      } else {
+        // debugger
+
+        findTask.archived = false
+        this.props.updateTask(findTask)
+      }
     })
   };
 
@@ -417,8 +387,16 @@ class TaskIndex extends React.Component {
   }
 
   render() {
-    const { user, tasks, createTask, errors, clearErrors } = this.props;
+    const { user, createTask, errors, clearErrors } = this.props;
     const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
+
+    const tasks = this.props.tasks.filter(task => task.archived !== true)
+    const archivedTasks = this.props.tasks.filter(task => task.archived === true)
+    const archivedTasksList = archivedTasks.map(task => {
+      return(
+        task.title
+      )
+    })
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -503,11 +481,49 @@ class TaskIndex extends React.Component {
         <div 
           class="tab-content"
           style={{display: "none"}}>
+
           <span>I am Are-Kaive</span>
-            {tasks.map((task) => {
-              if(task.archived) return( <h1>{task.title}</h1> )
-            })}
+
+          <ul className="task-index__list">
+            {archivedTasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
+
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+                {/* <label class="switch">
+                  <input 
+                    type="checkbox" 
+                    id={task._id} 
+                    onChange={this.handleComplete} 
+                    defaultChecked={task.completed} />
+                  <span class="slider round"></span>
+                </label> */}
+
+              {/* { user.household.length === 0 ? 
+                this.p21(task) : 
+                this.p22(task) } */}
+              
+              </li>
+            )}
+          </ul>
+
+          <button 
+            onClick={this.handleArchiveClick}
+            type="button"
+            className="task-index__list-button button">
+            Unarchive
+          </button>
         </div>
+
+
 
       </div>
     )
