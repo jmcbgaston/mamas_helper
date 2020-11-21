@@ -266,13 +266,13 @@ class TaskIndex extends React.Component {
           className="task-index__list-item-link">
           {task.title}
         </Link>
-        <label class="switch">
+        <label className="switch">
           <input
             type="checkbox"
             id={task._id}
             onChange={this.handleComplete}
             defaultChecked={task.completed} />
-          <span class="slider round"></span>
+          <span className="slider round"></span>
         </label>
       </li>
       )}
@@ -289,13 +289,13 @@ class TaskIndex extends React.Component {
           className="task-index__list-item-link">
           {task.title}
         </Link>
-        <label class="switch">
+        <label className="switch">
           <input
             type="checkbox"
             id={task._id}
             onChange={this.handleComplete}
             defaultChecked={task.completed} />
-          <span class="slider round"></span>
+          <span className="slider round"></span>
         </label>
       </>
     )
@@ -386,7 +386,8 @@ class TaskIndex extends React.Component {
             <button type="button"
             className="task-index__instruction-button button"
             onClick={this.handleInstructionClick}>
-              <InfoIcon />&nbsp;Help
+              <InfoIcon />
+              <div className="task-index__list-button-label">&nbsp;Help</div>
             </button>
         </div>
 
