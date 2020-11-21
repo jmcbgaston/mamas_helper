@@ -55,6 +55,27 @@ class TaskShow extends React.Component {
           </div>
         </>
       )
+    } else if (task.archived) {
+      return (
+        <>
+          <div className="task-show__container">
+            <h2 className="task-show__title">{task.title}</h2>
+            { requirements.length ?
+              <TaskShowRequirements requirements={requirements} />
+              :
+              <p className="task-show__no-requirements">
+                This task does not have any requirements.
+              </p>
+            }
+          </div>
+          <p className="task-show__no-requirements">
+            You cannot edit an archived task.
+          </p>
+          <div className="task-show__options task-show__options--assigned-back">
+            <Back history={history} />
+          </div>
+        </>
+      )
     } else {
       return (
         <>
