@@ -171,8 +171,8 @@ class TaskIndex extends React.Component {
       this.props.updateTask(findTask)
   }
 
-  handleArchiveClick(e) {
-    // debugger
+  handleArchiveClick() {
+    debugger
 
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     const checked = Object.keys(checkedArchiveIds)
@@ -180,12 +180,12 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-        // debugger
+        debugger
         
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
-        // debugger
+        debugger
 
         findTask.archived = false
         this.props.updateTask(findTask)
@@ -208,17 +208,17 @@ class TaskIndex extends React.Component {
     this.setState({ checkedArchiveIds })
   }
 
-  handleArchiveClick() {
-    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-    const checked = Object.keys(checkedArchiveIds)
-    checked.forEach((archiveId) => {
-    const findTask = this.props.tasks.find((task) => task._id === archiveId)
-    if (!findTask.archived) {
-      findTask.archived = !findTask.archived
-      this.props.updateTask(findTask)
-    }
-    })
-  };
+  // handleArchiveClick() {
+  //   const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+  //   const checked = Object.keys(checkedArchiveIds)
+  //   checked.forEach((archiveId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === archiveId)
+  //   if (!findTask.archived) {
+  //     findTask.archived = !findTask.archived
+  //     this.props.updateTask(findTask)
+  //   }
+  //   })
+  // };
 
   handleTaskClick(e) {
     this.setState({
