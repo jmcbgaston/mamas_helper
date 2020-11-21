@@ -62,7 +62,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -421,7 +421,13 @@ class TaskIndex extends React.Component {
     for(let i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
     }
-    
+
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+        .forEach((checkbox) => checkbox.checked = false );
+    this.setState({
+      checkedTasksIds: {}
+    });
+
     return tabContents[e.currentTarget.id].style.display = "block";
   }
 
