@@ -589,11 +589,6 @@ class TaskIndex extends React.Component {
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Archive</h2>
-              <button type="button"
-              className="task-index__instruction-button button"
-              onClick={this.handleInstructionClick}>
-                <InfoIcon />&nbsp; {/* Help */}
-              </button>
           </div>
 
           <br/>
