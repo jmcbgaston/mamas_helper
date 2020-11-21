@@ -34,7 +34,7 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       checkedTasksIds: {},
       checkedCompleteIds: {},
-      showCompleteModal: false, 
+      showCompleteModal: false,
       checkedArchiveIds: {},
     }
     this.taskId = ""
@@ -174,7 +174,7 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-        
+
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
@@ -410,7 +410,7 @@ class TaskIndex extends React.Component {
 
   showContent = (e) => {
     const tabContents = document.getElementsByClassName("tab-content");
-    
+
     for(let i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
     }
@@ -421,7 +421,19 @@ class TaskIndex extends React.Component {
       checkedTasksIds: {}
     });
 
-    return tabContents[e.currentTarget.id].style.display = "block";
+    tabContents[e.currentTarget.id].style.display = "block";
+
+    // change tab color
+    const tabButtons = document.querySelectorAll('.tab-button');
+    // debugger
+    tabButtons.forEach((tabButton, i) => {
+      // debugger
+      tabButtons[i].style.zIndex = 0;
+      tabButtons[i].style.backgroundColor = '#F3F3F3';
+    })
+
+    tabButtons[e.currentTarget.id].style.zIndex = 99;
+    tabButtons[e.currentTarget.id].style.backgroundColor = '#DBDBD6';
   }
 
   render() {
@@ -450,14 +462,19 @@ class TaskIndex extends React.Component {
     }
 
     return (
-      <div class="tab-container">
+      <div className="tab-container">
 
-        <div class="tab-content">
+        <div className="button-container">
+          <button onClick={this.showContent} className="tab-button" id="0" style={{zIndex: "99", backgroundColor:"#DBDBD6"}}>Index</button>
+          <button onClick={this.showContent} className="tab-button" id="1" style={{zIndex: "0"}}>Archive</button>
+        </div>
 
-          <div class="button-container">
-            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
-            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
-          </div>
+        <div className="tab-content">
+
+          {/* <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0" style={{zIndex: "99", backgroundColor:"red"}}>Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1" style={{zIndex: "0"}}>Archive</button>
+          </div> */}
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
@@ -482,20 +499,20 @@ class TaskIndex extends React.Component {
                 onClick={this.handleCheck}
                 />
 
-              { user.household.length === 0 ? 
-                this.p21(task) : 
+              { user.household.length === 0 ?
+                this.p21(task) :
                 this.p22(task) }
-              
+
               </li>
             )}
           </ul>
 
-          <TaskIndexCreate 
-            tasks={tasks} 
-            createTask={createTask} 
-            errors={errors} 
+          <TaskIndexCreate
+            tasks={tasks}
+            createTask={createTask}
+            errors={errors}
             clearErrors={clearErrors}/>
-          
+
           <div className="task-index__buttons-container">
             <button
                 type="button"
@@ -522,21 +539,21 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Clear selected</div>
             </button>
           </div>
-        
-          { !user.isLimitedUser ? 
-            this.p31(showModal, showInstructions, checkedTasksIds) : 
-            this.p32(showModal, showInstructions, checkedTasksIds) }   
+
+          { !user.isLimitedUser ?
+            this.p31(showModal, showInstructions, checkedTasksIds) :
+            this.p32(showModal, showInstructions, checkedTasksIds) }
 
         </div>
-        
-        <div 
+
+        <div
           className="tab-content"
           style={{display: "none"}}>
-
-          <div class="button-container">
-            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
-            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
-          </div>
+{/*
+          <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1">Archive</button>
+          </div> */}
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Archive</h2>
@@ -576,7 +593,7 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Unarchive selected</div>
             </button>
           </div>
-  
+
         </div>
 
       </div>
