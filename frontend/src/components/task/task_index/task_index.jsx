@@ -95,9 +95,10 @@ class TaskIndex extends React.Component {
   }
 
   handleAssigneeDropdown() {
-    const assignees = this.props.user.household.map((assignee) => {
+    const assignees = this.props.user.household.map((assignee, idx) => {
       return(
         <option
+          key={idx}
           value={assignee.handle}
           className="options"
           id={assignee._id}>
