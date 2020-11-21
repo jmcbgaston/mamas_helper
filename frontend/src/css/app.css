@@ -110,7 +110,7 @@ body,
 
 .content {
   border-radius: 5%;
-  width: 100%;
+  width: 140%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -182,6 +182,7 @@ body,
 
 .input-add-on__field {
   flex: 1;
+  margin-right: -19px;
 }
 
 .box__no-bottom-border {

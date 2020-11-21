@@ -63,7 +63,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    // debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -309,35 +309,35 @@ class TaskIndex extends React.Component {
 
   p11() {
     return(
-      <>
-      <label>Assigned tasks:</label>
-      <ul className="task-index__list">
-      {this.props.user.assignedTasks.map((task) =>
-      <li
-        className="task-index__list-item"
-        key={task._id}>
-        <input
-          type="checkbox"
-          id={task._id}
-          className="task-index__list-item-checkbox"
-          onClick={this.handleCheck}/>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-          {task.title}
-        </Link>
-        <label className="switch">
+      <div>
+        <label>Assigned tasks:</label>
+        <ul className="task-index__list">
+        {this.props.user.assignedTasks.map((task) =>
+        <li
+          className="task-index__list-item"
+          key={task._id}>
           <input
             type="checkbox"
             id={task._id}
-            onChange={this.handleComplete}
-            defaultChecked={task.completed} />
-          <span className="slider round"></span>
-        </label>
-      </li>
-      )}
-      </ul>
-      <label>Your tasks:</label>
-      </>
+            className="task-index__list-item-checkbox"
+            onClick={this.handleCheck}/>
+          <Link to={`/tasks/${task._id}`}
+            className="task-index__list-item-link">
+            {task.title}
+          </Link>
+          <label className="switch">
+            <input
+              type="checkbox"
+              id={task._id}
+              onChange={this.handleComplete}
+              defaultChecked={task.completed} />
+            <span className="slider round"></span>
+          </label>
+        </li>
+        )}
+        </ul>
+        <label>Your tasks:</label>
+      </div>
     )
   }
 
@@ -434,7 +434,13 @@ class TaskIndex extends React.Component {
     for(let i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
     }
-    
+
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+        .forEach((checkbox) => checkbox.checked = false );
+    this.setState({
+      checkedTasksIds: {}
+    });
+
     return tabContents[e.currentTarget.id].style.display = "block";
   }
 
@@ -467,21 +473,23 @@ class TaskIndex extends React.Component {
     return (
       <div class="tab-container">
 
-        <div class="button-container">
+        <div class="tab-content">
+
+          <div class="button-container">
             <button onClick={this.showContent} class="tab-button" id="0">Index</button>
             <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
-        </div>
-
-        <div class="tab-content">
+          </div>
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
               <button type="button"
               className="task-index__instruction-button button"
               onClick={this.handleInstructionClick}>
-                <InfoIcon />&nbsp;Help
+                <InfoIcon />&nbsp; {/* Help */}
               </button>
           </div>
+
+          <br/>
 
           { user.isLimitedUser ? this.p11() : null }
 
@@ -539,12 +547,28 @@ class TaskIndex extends React.Component {
           { !user.isLimitedUser ? 
             this.p31(showModal, showInstructions, checkedTasksIds) : 
             this.p32(showModal, showInstructions, checkedTasksIds) }   
-            
+
         </div>
         
         <div 
-          class="tab-content"
+          className="tab-content"
           style={{display: "none"}}>
+
+          <div class="button-container">
+            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
+          </div>
+
+          <div className="task-index__instruction-container">
+            <h2 className="task-index__instruction-header">Unarchived Tasks</h2>
+              <button type="button"
+              className="task-index__instruction-button button"
+              onClick={this.handleInstructionClick}>
+                <InfoIcon />&nbsp; {/* Help */}
+              </button>
+          </div>
+
+          <br/>
 
           <ul className="task-index__list">
             {archivedTasks.map((task) =>
@@ -563,15 +587,19 @@ class TaskIndex extends React.Component {
             )}
           </ul>
 
-          <button
-            type="button"
-            className="task-index__list-button task-index__list-button--not-first button"
-            onClick={this.handleArchiveClick}
-            disabled={is_task_selected()}>
-            <ArchiveIcon />
-            <div className="task-index__list-button-label">Unarchive selected</div>
-          </button>
+          <div className="task-index__buttons-container">
+            <button
+              type="button"
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleArchiveClick}
+              disabled={is_task_selected()}>
+              <ArchiveIcon />
+              <div className="task-index__list-button-label">Unarchive selected</div>
+            </button>
+          </div>
+  
         </div>
+
       </div>
     )
   }

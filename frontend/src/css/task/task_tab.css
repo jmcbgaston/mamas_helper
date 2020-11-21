@@ -4,15 +4,24 @@
 }
 
 .button-container {
-    height: 15%;
+        /* height: 9%; */
+    /* background-color: lightcoral; */
+    width: 105%;
+    /* margin: 3% 0 0 17%; */
+    /* margin-top: -16px; */
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
 }
 
 .tab-button {
-    width: 25%;
-    height: 100%;
-    float: left; 
+    /* width: 25%; */
+    /* height: 100%; */
+    /* float: left; */
     border: none;
     cursor: pointer;
+    background-color: #f2f2f2;
+    /* border: solid;
 }
 
 .tab-content {
