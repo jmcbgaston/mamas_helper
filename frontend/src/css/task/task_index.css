@@ -1,11 +1,21 @@
 .task-index__list {
   margin: 0 auto;
   padding: 1rem 0 2rem 0;
+  /* width: 100%; */
+  /* background-color: lightblue; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .task-index__list-item {
   align-items: center;
   display: flex;
+  width: 70%;
+  /* align-items: center; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  justify-content: space-between;
 }
 
 /* .task-index__list-item-checkbox {
@@ -40,7 +50,7 @@
 .task-index__list-item-link {
   align-items: center;
   display: flex;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 }
 
 .task-index__list-item:not(:first-child) {
@@ -85,6 +95,11 @@
 
 .task-index__buttons-container {
   display: flex;
+}
+
+.task-index__buttons-container-unarchive {
+  display: flex;
+  border-left: none;
 }
 
 .task-index__list-button {
