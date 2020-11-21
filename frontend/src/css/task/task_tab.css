@@ -1,0 +1,29 @@
+.tab-container {
+    width: 100%;
+    height: fit-content;
+}
+
+.button-container {
+    height: 15%;
+}
+
+.tab-button {
+    width: 25%;
+    height: 100%;
+    float: left; 
+    border: none;
+    cursor: pointer;
+}
+
+.tab-content {
+    /* display: none; */
+    
+}
+
+#0 {
+    display: block;
+}
+
+#1 {
+    display: none;
+}

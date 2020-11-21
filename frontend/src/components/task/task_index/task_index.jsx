@@ -37,7 +37,8 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       checkedTasksIds: {},
       checkedCompleteIds: {},
-      showCompleteModal: false
+      showCompleteModal: false, 
+      checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -48,6 +49,8 @@ class TaskIndex extends React.Component {
     this.p22 = this.p22.bind(this)
     this.p31 = this.p31.bind(this)
     this.p32 = this.p32.bind(this)
+
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
   }
 
   componentDidMount() {
@@ -81,9 +84,17 @@ class TaskIndex extends React.Component {
   setupLocalStorage() {
     let oldLocal = localStorage.selectedOptionsArr
 
-    this.selectedOptionsArr = new Array(this.props.tasks.length)
+    // debugger
+
+    const tasks = this.props.tasks.filter(task => task.archived === false)
+
+    // debugger
+
+    this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
+          // debugger
+
           this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
         }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
@@ -159,6 +170,28 @@ class TaskIndex extends React.Component {
       this.props.updateTask(findTask)
   }
 
+  handleArchiveClick(e) {
+    // debugger
+
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    const checked = Object.keys(checkedArchiveIds)
+
+    checked.forEach((archiveId) => {
+      const findTask = this.props.tasks.find((task) => task._id === archiveId)
+      if (!findTask.archived) {
+        // debugger
+        
+        findTask.archived = true
+        this.props.updateTask(findTask)
+      } else {
+        // debugger
+
+        findTask.archived = false
+        this.props.updateTask(findTask)
+      }
+    })
+  };
+
   toggleCompleteModal() {
     this.setState({ showCompleteModal: !this.state.showCompleteModal})
   }
@@ -168,6 +201,10 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
+
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    checkedArchiveIds[taskId] = e.currentTarget.checked;
+    this.setState({ checkedArchiveIds })
   }
 
   handleTaskClick(e) {
@@ -370,9 +407,27 @@ class TaskIndex extends React.Component {
     )
   }
 
+  showContent = (e) => {
+    const tabContents = document.getElementsByClassName("tab-content");
+    
+    for(let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+    
+    return tabContents[e.currentTarget.id].style.display = "block";
+  }
+
   render() {
-    const { user, tasks, createTask, errors, clearErrors } = this.props;
+    const { user, createTask, errors, clearErrors } = this.props;
     const { showModal, showInstructions, checkedTasksIds } = this.state;
+
+    const tasks = this.props.tasks.filter(task => task.archived !== true)
+    const archivedTasks = this.props.tasks.filter(task => task.archived === true)
+    const archivedTasksList = archivedTasks.map(task => {
+      return(
+        task.title
+      )
+    })
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -381,75 +436,120 @@ class TaskIndex extends React.Component {
     };
 
     return (
-      <>
-        <div className="task-index__instruction-container">
-          <h2 className="task-index__instruction-header">Tasks</h2>
-            <button type="button"
-            className="task-index__instruction-button button"
-            onClick={this.handleInstructionClick}>
-              <InfoIcon />
-              <div className="task-index__list-button-label">&nbsp;Help</div>
+      <div class="tab-container">
+
+        <div class="button-container">
+            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
+        </div>
+
+        <div class="tab-content">
+
+          <div className="task-index__instruction-container">
+            <h2 className="task-index__instruction-header">Tasks</h2>
+              <button type="button"
+              className="task-index__instruction-button button"
+              onClick={this.handleInstructionClick}>
+                <InfoIcon />&nbsp;Help
+              </button>
+          </div>
+
+          { user.isLimitedUser ? this.p11() : null }
+
+          <ul className="task-index__list">
+            {tasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
+
+              { user.household.length === 0 ? 
+                this.p21(task) : 
+                this.p22(task) }
+              
+              </li>
+            )}
+          </ul>
+
+          <TaskIndexCreate 
+            tasks={tasks} 
+            createTask={createTask} 
+            errors={errors} 
+            clearErrors={clearErrors}/>
+          
+          <div className="task-index__buttons-container">
+            <button
+                type="button"
+                className="task-index__list-button button"
+                onClick={this.handleTaskClick}
+                disabled={is_task_selected()}>
+                <VisibilityIcon />
+                <div className="task-index__list-button-label">View selected</div>
             </button>
-        </div>
-
-        { user.isLimitedUser ? this.p11() : null }
-
-        <ul className="task-index__list">
-          {tasks.map((task) =>
-          <li className="task-index__list-item" key={task._id}>
-            <input
-            type="checkbox"
-            id={task._id}
-            className="task-index__list-item-checkbox"
-            onClick={this.handleCheck}
-            />
-
-          { user.household.length === 0 ?
-          this.p21(task) :
-          this.p22(task) }
-
-          </li>
-          )}
-        </ul>
-
-        <TaskIndexCreate
-          tasks={tasks}
-          createTask={createTask}
-          errors={errors}
-          clearErrors={clearErrors}/>
-
-        <div className="task-index__buttons-container">
-          <button
+            <button
               type="button"
-              className="task-index__list-button button"
-              onClick={this.handleTaskClick}
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleClear}
               disabled={is_task_selected()}>
-              <VisibilityIcon />
-              <div className="task-index__list-button-label">View selected</div>
-          </button>
-          <button
+              <ArchiveIcon />
+              <div className="task-index__list-button-label">Archive selected</div>
+            </button>
+            <button
+              type="button"
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleClear}
+              disabled={is_task_selected()}>
+              <ClearAllIcon />
+              <div className="task-index__list-button-label">Clear selected</div>
+            </button>
+          </div>
+          <!--
+          <button 
+            onClick={this.handleArchiveClick}
             type="button"
-            className="task-index__list-button task-index__list-button--not-first button"
-            onClick={this.handleClear}
-            disabled={is_task_selected()}>
-            <ArchiveIcon />
-            <div className="task-index__list-button-label">Archive selected</div>
-          </button>
-          <button
+            className="task-index__list-button button">
+            Archive
+          </button> -->
+        
+          { !user.isLimitedUser ? 
+            this.p31(showModal, showInstructions, checkedTasksIds) : 
+            this.p32(showModal, showInstructions, checkedTasksIds) }   
+        </div>
+        
+        <div 
+          class="tab-content"
+          style={{display: "none"}}>
+
+          <span>I am Are-Kaive</span>
+
+          <ul className="task-index__list">
+            {archivedTasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+              </li>
+            )}
+          </ul>
+
+          <button 
+            onClick={this.handleArchiveClick}
             type="button"
-            className="task-index__list-button task-index__list-button--not-first button"
-            onClick={this.handleClear}
-            disabled={is_task_selected()}>
-            <ClearAllIcon />
-            <div className="task-index__list-button-label">Clear selected</div>
+            className="task-index__list-button button">
+            Unarchive
           </button>
         </div>
-
-        { !user.isLimitedUser ?
-          this.p31(showModal, showInstructions, checkedTasksIds) :
-          this.p32(showModal, showInstructions, checkedTasksIds) }
-
-      </>
+      </div>
     )
   }
 }
