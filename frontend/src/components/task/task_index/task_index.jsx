@@ -83,9 +83,10 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
+
     let oldLocal = localStorage.selectedOptionsArr
 
-    // debugger
+    debugger
 
     const tasks = this.props.tasks.filter(task => task.archived === false)
 
@@ -94,7 +95,7 @@ class TaskIndex extends React.Component {
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
-          // debugger
+          debugger
 
           this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
         }
@@ -255,6 +256,9 @@ class TaskIndex extends React.Component {
   }
 
   handleClear() {
+
+    debugger
+
     const { tasks, user, updateTask } = this.props;
     const allTasks = tasks.concat(user.assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
@@ -273,6 +277,8 @@ class TaskIndex extends React.Component {
       task.completed = false;
       updateTask(task);
 
+      debugger
+
       // set assigned status to none
       let selectElements = Array.from(document.getElementsByTagName('select'));
       selectElements.forEach((selectElement) => {
@@ -281,10 +287,24 @@ class TaskIndex extends React.Component {
         }
       })
 
-      this.setupLocalStorage();
-      this.handleFillAssignedTasks();
-      this.updateChildTasks();
+      if (user.household.length !== 0) {
+        this.setupLocalStorage();
+        this.handleFillAssignedTasks();
+        this.updateChildTasks();
+      } else {
+        debugger
 
+        let switches = document.getElementsByClassName('switch')
+
+        for (let i = 0; i < switches.length; i++) {
+          switches[i].firstElementChild.checked = false
+          debugger
+        }
+
+        // let input = switches.closest('input')
+
+        debugger
+      }
 
       // reset checked status in state
       this.setState({
