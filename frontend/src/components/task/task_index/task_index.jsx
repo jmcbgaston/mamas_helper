@@ -492,7 +492,7 @@ class TaskIndex extends React.Component {
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
-              onClick={this.handleClear}
+              onClick={this.handleArchiveClick}
               disabled={is_task_selected()}>
               <ArchiveIcon />
               <div className="task-index__list-button-label">Archive selected</div>
@@ -506,24 +506,16 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Clear selected</div>
             </button>
           </div>
-          <!--
-          <button 
-            onClick={this.handleArchiveClick}
-            type="button"
-            className="task-index__list-button button">
-            Archive
-          </button> -->
         
           { !user.isLimitedUser ? 
             this.p31(showModal, showInstructions, checkedTasksIds) : 
             this.p32(showModal, showInstructions, checkedTasksIds) }   
+            
         </div>
         
         <div 
           class="tab-content"
           style={{display: "none"}}>
-
-          <span>I am Are-Kaive</span>
 
           <ul className="task-index__list">
             {archivedTasks.map((task) =>
@@ -542,11 +534,13 @@ class TaskIndex extends React.Component {
             )}
           </ul>
 
-          <button 
-            onClick={this.handleArchiveClick}
+          <button
             type="button"
-            className="task-index__list-button button">
-            Unarchive
+            className="task-index__list-button task-index__list-button--not-first button"
+            onClick={this.handleArchiveClick}
+            disabled={is_task_selected()}>
+            <ArchiveIcon />
+            <div className="task-index__list-button-label">Unarchive selected</div>
           </button>
         </div>
       </div>
