@@ -16,14 +16,5 @@
 }
 
 .tab-content {
-    /* display: none; */
-    
-}
-
-#0 {
-    display: block;
-}
-
-#1 {
     display: none;
 }

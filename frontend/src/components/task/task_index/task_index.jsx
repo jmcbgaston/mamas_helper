@@ -26,6 +26,7 @@ class TaskIndex extends React.Component {
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
@@ -34,6 +35,7 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       checkedTasksIds: {},
       checkedCompleteIds: {},
+      checkedArchiveIds: {},
       showCompleteModal: false
     }
     this.taskId = ""
@@ -213,10 +215,22 @@ class TaskIndex extends React.Component {
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
 
-    // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-    // checkedCompleteIds[taskId] = e.currentTarget.checked;
-    // this.setState({ checkedCompleteIds })
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    checkedArchiveIds[taskId] = e.currentTarget.checked;
+    this.setState({ checkedArchiveIds })
   }
+
+  handleArchiveClick() {
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    const checked = Object.keys(checkedArchiveIds)
+    checked.forEach((archiveId) => {
+    const findTask = this.props.tasks.find((task) => task._id === archiveId)
+    if (!findTask.archived) {
+      findTask.archived = !findTask.archived
+      this.props.updateTask(findTask)
+    }
+    })
+  };
 
   handleTaskClick(e) {
     this.setState({
