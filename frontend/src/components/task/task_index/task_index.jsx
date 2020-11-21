@@ -183,11 +183,11 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-          
+
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
-        
+
 
         findTask.archived = false
         this.props.updateTask(findTask)
@@ -428,7 +428,7 @@ class TaskIndex extends React.Component {
 
   showContent = (e) => {
     const tabContents = document.getElementsByClassName("tab-content");
-    
+
     for(let i = 0; i < tabContents.length; i++) {
         tabContents[i].style.display = "none";
     }
@@ -444,7 +444,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { user, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds, handleEmailClick} = this.state;
+    const { showModal, showInstructions, checkedTasksIds} = this.state;
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
@@ -501,20 +501,20 @@ class TaskIndex extends React.Component {
                 onClick={this.handleCheck}
                 />
 
-              { user.household.length === 0 ? 
-                this.p21(task) : 
+              { user.household.length === 0 ?
+                this.p21(task) :
                 this.p22(task) }
-              
+
               </li>
             )}
           </ul>
 
-          <TaskIndexCreate 
-            tasks={tasks} 
-            createTask={createTask} 
-            errors={errors} 
+          <TaskIndexCreate
+            tasks={tasks}
+            createTask={createTask}
+            errors={errors}
             clearErrors={clearErrors}/>
-          
+
           <div className="task-index__buttons-container">
             <button
                 type="button"
@@ -541,14 +541,14 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Clear selected</div>
             </button>
           </div>
-        
-          { !user.isLimitedUser ? 
-            this.p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) : 
-            this.p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) }
+
+          { !user.isLimitedUser ?
+            this.p31(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) :
+            this.p32(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) }
 
         </div>
-        
-        <div 
+
+        <div
           className="tab-content"
           style={{display: "none"}}>
 
@@ -595,7 +595,7 @@ class TaskIndex extends React.Component {
               <div className="task-index__list-button-label">Unarchive selected</div>
             </button>
           </div>
-  
+
         </div>
 
       </div>
