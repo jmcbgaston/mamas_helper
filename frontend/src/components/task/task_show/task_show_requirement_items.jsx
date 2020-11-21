@@ -8,7 +8,7 @@ const TaskShowRequirementItems = ({ requirement }) => {
       <li className="requirements-list-item">
         <h3>
           <CheckIcon style={{color: green[500]}}/>
-          {requirement.description}
+          &nbsp;{requirement.description}
         </h3>
         { requirement.reusable ? <Reusable /> : null }
       </li>
