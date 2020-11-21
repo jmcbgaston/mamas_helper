@@ -2,6 +2,9 @@ import React from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
 const TaskIndexListItem = ({task, requirements}) => {
+
+  // debugger
+
   return (
     <li>
       <p className="task-index__task-list-item-header">{task.title}</p>
@@ -26,9 +29,13 @@ const TaskIndexListItem = ({task, requirements}) => {
 }
 
 export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
+
+  // debugger
   
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
+
+  // debugger
 
   return (
     <div className="task-index__task-list-container">
@@ -42,6 +49,9 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleClose}) => {
         <ul className="task-index__task-list-items-container">
           {checked.map((taskId, idx) => {
             const task = tasks.find((task) => task._id === taskId);
+
+            // debugger
+
             return (
               <React.Fragment key={task._id}>
                 <TaskIndexListItem task={task} requirements={task.requirements} />
