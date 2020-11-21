@@ -35,7 +35,7 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
 
-  // debugger
+  debugger
 
   return (
     <div className="task-index__task-list-container">

@@ -247,7 +247,7 @@ class TaskIndex extends React.Component {
       const task = allTasks.find((task) => task._id === taskId);
       taskList.push(task);
     })
-
+    debugger
     const data = {
       "tasks": taskList,
       "email": user.email,
@@ -384,7 +384,7 @@ class TaskIndex extends React.Component {
     )
   }
 
-  p31(showModal, showInstructions, checkedTasksIds) {
+  p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
     // debugger
 
     return(
@@ -393,6 +393,7 @@ class TaskIndex extends React.Component {
         <TaskIndexList
           handleClose={this.handleTaskClick}
           tasks={this.props.tasks}
+          handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
 
@@ -404,7 +405,7 @@ class TaskIndex extends React.Component {
       </>
     )
   }
-  p32(showModal, showInstructions, checkedTasksIds) {
+  p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
     // debugger
 
     return(
@@ -413,6 +414,7 @@ class TaskIndex extends React.Component {
         <TaskIndexList
           handleClose={this.handleTaskClick}
           tasks={this.props.tasks.concat(this.props.user.assignedTasks)}
+          handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
 
@@ -442,7 +444,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { user, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds} = this.state;
+    const { showModal, showInstructions, checkedTasksIds, handleEmailClick} = this.state;
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
@@ -541,8 +543,8 @@ class TaskIndex extends React.Component {
           </div>
         
           { !user.isLimitedUser ? 
-            this.p31(showModal, showInstructions, checkedTasksIds) : 
-            this.p32(showModal, showInstructions, checkedTasksIds) }   
+            this.p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) : 
+            this.p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) }
 
         </div>
         
