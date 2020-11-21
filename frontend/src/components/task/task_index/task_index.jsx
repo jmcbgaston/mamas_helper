@@ -62,6 +62,34 @@ class TaskIndex extends React.Component {
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
+
+    this.updateDisableOnButton()
+  }
+
+  updateDisableOnButton() {
+    let checks = document.getElementsByClassName('task-index__list-item-checkbox')
+    
+    let boolean = false
+
+    for (let i = 0; i < checks.length; i++) {
+      if (checks[i].checked) {
+        boolean = true
+        break
+      }
+    }
+
+    let buttons = document.getElementsByClassName('task-index__list-button button')
+    
+    if (!boolean) {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true
+      }
+    } else {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false
+      }
+    }
+
   }
 
   setOptions() {
@@ -81,9 +109,7 @@ class TaskIndex extends React.Component {
   setupLocalStorage() {
 
     let oldLocal = localStorage.selectedOptionsArr
-
     const tasks = this.props.tasks.filter(task => task.archived === false)
-
 
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
@@ -168,8 +194,10 @@ class TaskIndex extends React.Component {
 
   handleArchiveClick(e) {
 
+
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     const checked = Object.keys(checkedArchiveIds)
+
 
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
@@ -183,6 +211,9 @@ class TaskIndex extends React.Component {
         this.props.updateTask(findTask)
       }
     })
+
+    this.setState({checkedArchiveIds: {}})
+
   };
 
   toggleCompleteModal() {
@@ -195,9 +226,11 @@ class TaskIndex extends React.Component {
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
 
+
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     checkedArchiveIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedArchiveIds })
+
   }
 
   handleTaskClick(e) {
@@ -430,24 +463,25 @@ class TaskIndex extends React.Component {
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
-    const archivedTasksList = archivedTasks.map(task => {
-      return(
-        task.title
-      )
-    })
+    // const archivedTasksList = archivedTasks.map(task => {
+    //   return(
+    //     task.title
+    //   )
+    // })
 
     //helper method for if a task is selected
-    const is_task_selected = () =>
-    {
-      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
-    };
+    // const is_task_selected = () =>
+    // {
+    //   return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
+    // };
 
-    const is_assigned_task_selected = () =>
-    {
-      let assignedtaskIds = user.assignedTasks.map(task => task._id);
-      return !!Object.keys(checkedTasksIds).filter(
-        (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
-    }
+    // const is_assigned_task_selected = () =>
+    // {
+    //   let assignedtaskIds = user.assignedTasks.map(task => task._id);
+    //   return !!Object.keys(checkedTasksIds).filter(
+    //     (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
+    // }
+
 
     return (
       <div class="tab-container">
@@ -455,7 +489,7 @@ class TaskIndex extends React.Component {
         <div class="tab-content">
 
           <div class="button-container">
-            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} class="tab-button" id="0" onSelect="">Index</button>
             <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
           </div>
 
@@ -501,23 +535,21 @@ class TaskIndex extends React.Component {
                 type="button"
                 className="task-index__list-button button"
                 onClick={this.handleTaskClick}
-                disabled={is_task_selected()}>
+                >
                 <VisibilityIcon />
                 <div className="task-index__list-button-label">View selected</div>
             </button>
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
-              onClick={this.handleArchiveClick}
-              disabled={is_task_selected() || is_assigned_task_selected()}>
+              onClick={this.handleArchiveClick}>
               <ArchiveIcon />
               <div className="task-index__list-button-label">Archive selected</div>
             </button>
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
-              onClick={this.handleClear}
-              disabled={is_task_selected()}>
+              onClick={this.handleClear}>
               <ClearAllIcon />
               <div className="task-index__list-button-label">Clear selected</div>
             </button>
@@ -570,8 +602,7 @@ class TaskIndex extends React.Component {
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
-              onClick={this.handleArchiveClick}
-              disabled={is_task_selected()}>
+              onClick={this.handleArchiveClick}>
               <ArchiveIcon />
               <div className="task-index__list-button-label">Unarchive selected</div>
             </button>
