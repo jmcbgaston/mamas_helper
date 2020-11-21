@@ -5,8 +5,6 @@ import EmailIcon from '@material-ui/icons/Email';
 
 const TaskIndexListItem = ({task, requirements}) => {
 
-  // debugger
-
   return (
     <li>
       <p className="task-index__task-list-item-header">{task.title}</p>
@@ -35,7 +33,6 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
   const checked = Object.keys(checkedTasksIds)
   .filter((taskId) => checkedTasksIds[taskId]);
 
-  // debugger
 
   return (
     <div className="task-index__task-list-container">
@@ -53,8 +50,6 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
         <ul className="task-index__task-list-items-container">
           {checked.map((taskId, idx) => {
             const task = tasks.find((task) => task._id === taskId);
-
-            // debugger
 
             return (
               <React.Fragment key={task._id}>

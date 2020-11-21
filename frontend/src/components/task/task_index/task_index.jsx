@@ -59,7 +59,6 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
-    // debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -85,12 +84,10 @@ class TaskIndex extends React.Component {
 
     const tasks = this.props.tasks.filter(task => task.archived === false)
 
-    // debugger
 
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
-          debugger
 
           this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
         }
@@ -170,7 +167,6 @@ class TaskIndex extends React.Component {
   }
 
   handleArchiveClick(e) {
-    // debugger
 
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     const checked = Object.keys(checkedArchiveIds)
@@ -178,12 +174,10 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-        // debugger
         
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
-        // debugger
 
         findTask.archived = false
         this.props.updateTask(findTask)
@@ -377,7 +371,6 @@ class TaskIndex extends React.Component {
   }
 
   p31(showModal, showInstructions, checkedTasksIds) {
-    // debugger
 
     return(
       <>
@@ -397,7 +390,6 @@ class TaskIndex extends React.Component {
     )
   }
   p32(showModal, showInstructions, checkedTasksIds) {
-    // debugger
 
     return(
       <>
@@ -452,7 +444,6 @@ class TaskIndex extends React.Component {
 
     const is_assigned_task_selected = () =>
     {
-      // debugger
       let assignedtaskIds = user.assignedTasks.map(task => task._id);
       return !!Object.keys(checkedTasksIds).filter(
         (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;

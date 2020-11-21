@@ -63,10 +63,11 @@ class TaskIndexCreate extends React.Component{
   }
 
   render() {
-    
+
     window.showPopup = this.state.showPopup
     document.addEventListener('keydown', (e) => {
-      if (e.key === "Enter" && window.showPopup) {
+      // if (e.key === "Enter" && window.showPopup) {
+      if (e.key && window.showPopup) {
         e.preventDefault()
       }
     })
