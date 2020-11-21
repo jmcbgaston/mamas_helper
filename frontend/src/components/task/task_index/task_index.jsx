@@ -63,6 +63,7 @@ class TaskIndex extends React.Component {
   }
 
   componentDidUpdate() {
+    debugger
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
@@ -126,6 +127,8 @@ class TaskIndex extends React.Component {
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
         if (e.currentTarget.value === 'none') {
+          task.completed = false;
+          this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
           this.updateChildTasks();
@@ -221,8 +224,12 @@ class TaskIndex extends React.Component {
   // };
 
   handleTaskClick(e) {
+    let checkedTasksIds_ = {};
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+      .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      checkedTasksIds: checkedTasksIds_
     })
   }
 
@@ -267,12 +274,13 @@ class TaskIndex extends React.Component {
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
 
-    checked.forEach((taskId) => {
-      const task = allTasks.find((task) => task._id === taskId);
 
       // uncheck all
       Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
         .forEach((checkbox) => checkbox.checked = false );
+
+    checked.forEach((taskId) => {
+      const task = allTasks.find((task) => task._id === taskId);
 
       // set checked to incomplete
       task.completed = false;
@@ -445,8 +453,16 @@ class TaskIndex extends React.Component {
     //helper method for if a task is selected
     const is_task_selected = () =>
     {
-      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
+      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
     };
+
+    const is_assigned_task_selected = () =>
+    {
+      // debugger
+      let assignedtaskIds = user.assignedTasks.map(task => task._id);
+      return !!Object.keys(checkedTasksIds).filter(
+        (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
+    }
 
     return (
       <div class="tab-container">
@@ -506,7 +522,7 @@ class TaskIndex extends React.Component {
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleArchiveClick}
-              disabled={is_task_selected()}>
+              disabled={is_task_selected() || is_assigned_task_selected()}>
               <ArchiveIcon />
               <div className="task-index__list-button-label">Archive selected</div>
             </button>
