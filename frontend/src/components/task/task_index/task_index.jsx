@@ -94,11 +94,11 @@ class TaskIndex extends React.Component {
 
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
-        for (let i = 0; i < this.selectedOptionsArr.length; i++) {
-          // debugger
+    for (let i = 0; i < this.selectedOptionsArr.length; i++) {
+      // debugger
 
-          this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
-        }
+      this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
+    }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
@@ -247,7 +247,7 @@ class TaskIndex extends React.Component {
       const task = allTasks.find((task) => task._id === taskId);
       taskList.push(task);
     })
-    debugger
+    // debugger
     const data = {
       "tasks": taskList,
       "email": user.email,
@@ -271,9 +271,9 @@ class TaskIndex extends React.Component {
                       .filter((taskId) => checkedTasksIds[taskId]);
 
 
-      // uncheck all
-      Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
-        .forEach((checkbox) => checkbox.checked = false );
+    // uncheck all
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+      .forEach((checkbox) => checkbox.checked = false );
 
     checked.forEach((taskId) => {
       const task = allTasks.find((task) => task._id === taskId);
@@ -448,11 +448,6 @@ class TaskIndex extends React.Component {
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
-    const archivedTasksList = archivedTasks.map(task => {
-      return(
-        task.title
-      )
-    })
 
     //helper method for if a task is selected
     const is_task_selected = () =>
@@ -469,13 +464,13 @@ class TaskIndex extends React.Component {
     }
 
     return (
-      <div class="tab-container">
+      <div className="tab-container">
 
-        <div class="tab-content">
+        <div className="tab-content">
 
-          <div class="button-container">
-            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
-            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
+          <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1">Archive</button>
           </div>
 
           <div className="task-index__instruction-container">
@@ -552,9 +547,9 @@ class TaskIndex extends React.Component {
           className="tab-content"
           style={{display: "none"}}>
 
-          <div class="button-container">
-            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
-            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
+          <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1">Archive</button>
           </div>
 
           <div className="task-index__instruction-container">
