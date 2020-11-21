@@ -6,11 +6,12 @@ import { TaskIndexList } from "./task_index_list";
 import EmailIcon from '@material-ui/icons/Email';
 import InfoIcon from '@material-ui/icons/Info';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { green, red} from '@material-ui/core/colors';
+
 import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
 // import TaskIndexCompleteList from './task_index_complete_list';
-import completed from './green-circle-check.png';
-import notcompleted from './blank-circle.png';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -323,15 +324,6 @@ class TaskIndex extends React.Component {
         <Link to={`/tasks/${task._id}`}
           className="task-index__list-item-link">
             {task.title}
-            { task.completed ? 
-              <img 
-                className = "task-index__completed-image" 
-                src={completed} 
-                title="Complete"/> : 
-              <img 
-                className = "task-index__completed-image" 
-                src={notcompleted} 
-                title="Not complete"/> }
         </Link>
         <div>
           <select
@@ -348,6 +340,9 @@ class TaskIndex extends React.Component {
             {this.handleAssigneeDropdown()}
           </select>
         </div>
+        {task.completed ? 
+        <CheckCircleIcon style={{color: green[500]}}/> : 
+        <CheckCircleIcon style={{color: red[500]}}/>}
       </>
     )
   }
@@ -401,13 +396,9 @@ class TaskIndex extends React.Component {
     {
       return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
     };
-
+    
     return (
       <>
-        <Link to="/completion">
-          <button>Completion page</button>
-        </Link>
-
         <div className="task-index__instruction-container">
           <h2 className="task-index__instruction-header">Tasks</h2>
             <button type="button"

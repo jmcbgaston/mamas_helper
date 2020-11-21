@@ -1,12 +1,13 @@
 import React from 'react';
 import Reusable from '../../reusable/reusable';
-import req from './requirement-marker.png';
+import CheckIcon from '@material-ui/icons/Check';
+import {green} from '@material-ui/core/colors';
 
 const TaskShowRequirementItems = ({ requirement }) => {
     return (
       <li className="requirements-list-item">
         <h3>
-          <img className="list-item__bullet-point" src={req}/>
+          <CheckIcon style={{color: green[500]}}/>
           {requirement.description}
         </h3>
         { requirement.reusable ? <Reusable /> : null }
