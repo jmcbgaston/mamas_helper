@@ -34,7 +34,8 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       checkedTasksIds: {},
       checkedCompleteIds: {},
-      showCompleteModal: false
+      showCompleteModal: false, 
+      checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -45,6 +46,8 @@ class TaskIndex extends React.Component {
     this.p22 = this.p22.bind(this)
     this.p31 = this.p31.bind(this)
     this.p32 = this.p32.bind(this)
+
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
   }
 
   componentDidMount() {
@@ -203,6 +206,18 @@ class TaskIndex extends React.Component {
 
   // };
 
+  handleArchiveClick() {
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    const checked = Object.keys(checkedArchiveIds)
+    checked.forEach((archiveId) => {
+    const findTask = this.props.tasks.find((task) => task._id === archiveId)
+    if (!findTask.archived) {
+      findTask.archived = !findTask.archived
+      this.props.updateTask(findTask)
+    }
+    })
+  };
+
   toggleCompleteModal() {
     this.setState({ showCompleteModal: !this.state.showCompleteModal})
   }
@@ -212,6 +227,10 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
+
+    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+    checkedArchiveIds[taskId] = e.currentTarget.checked;
+    this.setState({ checkedArchiveIds })
 
     // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
     // checkedCompleteIds[taskId] = e.currentTarget.checked;
@@ -409,37 +428,40 @@ class TaskIndex extends React.Component {
     
     return (
       <div class="tab-container">
+
         <div class="button-container">
             <button onClick={this.showContent} class="tab-button" id="0">Index</button>
             <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
         </div>
-        <div class="tab-content">
-            <div className="task-index__instruction-container">
-              <h2 className="task-index__instruction-header">Tasks</h2>
-                <button type="button"
-                className="task-index__instruction-button button"
-                onClick={this.handleInstructionClick}>
-                  <InfoIcon />&nbsp;Help
-                </button>
-            </div>
 
-            { user.isLimitedUser ? this.p11() : null }
+        <div class="tab-content">
+
+          <div className="task-index__instruction-container">
+            <h2 className="task-index__instruction-header">Tasks</h2>
+              <button type="button"
+              className="task-index__instruction-button button"
+              onClick={this.handleInstructionClick}>
+                <InfoIcon />&nbsp;Help
+              </button>
+          </div>
+
+          { user.isLimitedUser ? this.p11() : null }
 
           <ul className="task-index__list">
             {tasks.map((task) =>
-            <li className="task-index__list-item" key={task._id}>
-              <input
-              type="checkbox"
-              id={task._id}
-              className="task-index__list-item-checkbox"
-              onClick={this.handleCheck}
-              />
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
 
-            { user.household.length === 0 ? 
-            this.p21(task) : 
-            this.p22(task) }
-            
-            </li>
+              { user.household.length === 0 ? 
+                this.p21(task) : 
+                this.p22(task) }
+              
+              </li>
             )}
           </ul>
 
@@ -475,17 +497,16 @@ class TaskIndex extends React.Component {
           { !user.isLimitedUser ? 
             this.p31(showModal, showInstructions, checkedTasksIds) : 
             this.p32(showModal, showInstructions, checkedTasksIds) }
+            
         </div>
 
-        <div class="tab-content">
+        <div 
+          class="tab-content"
+          style={{display: "none"}}>
           <span>I am Are-Kaive</span>
-          {tasks.map((task) => {
-            if(task.archived) {
-              return(
-                <h1>{task.title}</h1>
-                )
-            }
-          })}
+            {tasks.map((task) => {
+              if(task.archived) return( <h1>{task.title}</h1> )
+            })}
         </div>
 
       </div>
