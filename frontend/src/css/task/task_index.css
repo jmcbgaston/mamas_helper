@@ -60,9 +60,10 @@
   margin: 3rem auto;
 }
 
-.task-index__email-button {
-  margin-top: 1rem;
+.task-index__task-list-email {
+  margin: 2rem 0 0 0;
 }
+
 
 .task-index__instruction-container {
   display: flex;
@@ -82,6 +83,31 @@
 }
 
 
-/* .options {
-  text-align: center;
-} */
+.task-index__buttons-container {
+  display: flex;
+}
+
+.task-index__list-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-index__list-button-label {
+  display: none;
+}
+
+.task-index__list-button--not-first {
+  border-left: none;
+}
+
+@media only screen
+and (min-width: 992px) {
+  .task-index__list-button {
+    height: 4rem;
+  }
+
+  .task-index__list-button-label {
+    display: block;
+  }
+}
