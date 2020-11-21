@@ -54,6 +54,7 @@ class TaskIndexCreate extends React.Component{
       title: "",
       requirements: []
     });
+    // debugger
   }
 
   addErrorsClass() {

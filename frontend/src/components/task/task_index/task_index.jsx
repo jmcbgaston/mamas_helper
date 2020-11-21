@@ -175,7 +175,7 @@ class TaskIndex extends React.Component {
   }
 
   handleArchiveClick() {
-    debugger
+
 
     const checkedArchiveIds = { ...this.state.checkedArchiveIds };
     const checked = Object.keys(checkedArchiveIds)
@@ -183,12 +183,12 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-        debugger
+        
         
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
-        debugger
+        
 
         findTask.archived = false
         this.props.updateTask(findTask)
@@ -590,7 +590,7 @@ class TaskIndex extends React.Component {
           <div className="task-index__buttons-container">
             <button
               type="button"
-              className="task-index__list-button task-index__list-button--not-first button"
+              className="task-index__list-button button"
               onClick={this.handleArchiveClick}
               disabled={is_task_selected()}>
               <ArchiveIcon />
