@@ -36,10 +36,10 @@ class TaskIndex extends React.Component {
     this.state = {
       showModal: false,
       showInstructions: false,
-      checkedTasksIds: {},
-      checkedCompleteIds: {},
-      checkedArchiveIds: {},
-      showCompleteModal: false
+      showCompleteModal: false,
+      checkedTasksIds: {}
+      // checkedCompleteIds: {},
+      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -177,14 +177,13 @@ class TaskIndex extends React.Component {
   handleArchiveClick() {
 
 
-    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-    const checked = Object.keys(checkedArchiveIds)
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
+    const checked = Object.keys(checkedTasksIds).filter((archiveId) => checkedTasksIds[archiveId])
 
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-        
-        
+          
         findTask.archived = true
         this.props.updateTask(findTask)
       } else {
@@ -194,6 +193,7 @@ class TaskIndex extends React.Component {
         this.props.updateTask(findTask)
       }
     })
+    this.setState({checkedTasksIds: {}})
   };
 
   toggleCompleteModal() {
@@ -205,10 +205,6 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
-
-    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-    checkedArchiveIds[taskId] = e.currentTarget.checked;
-    this.setState({ checkedArchiveIds })
   }
 
   // handleArchiveClick() {
@@ -446,7 +442,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { user, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds } = this.state;
+    const { showModal, showInstructions, checkedTasksIds} = this.state;
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
