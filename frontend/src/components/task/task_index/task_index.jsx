@@ -8,12 +8,9 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
 import ArchiveIcon from '@material-ui/icons/Archive';
-
 import { green, red} from '@material-ui/core/colors';
-
 import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
-// import TaskIndexCompleteList from './task_index_complete_list';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -85,8 +82,6 @@ class TaskIndex extends React.Component {
   setupLocalStorage() {
 
     let oldLocal = localStorage.selectedOptionsArr
-
-    debugger
 
     const tasks = this.props.tasks.filter(task => task.archived === false)
 
@@ -257,18 +252,14 @@ class TaskIndex extends React.Component {
 
   handleClear() {
 
-    debugger
-
     const { tasks, user, updateTask } = this.props;
     const allTasks = tasks.concat(user.assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
-    const checked = Object.keys(checkedTasksIds)
-                      .filter((taskId) => checkedTasksIds[taskId]);
+    const checked = Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]);
 
-
-      // uncheck all
-      Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
-        .forEach((checkbox) => checkbox.checked = false );
+    // uncheck all
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+      .forEach((checkbox) => checkbox.checked = false );
 
     checked.forEach((taskId) => {
       const task = allTasks.find((task) => task._id === taskId);
@@ -276,8 +267,6 @@ class TaskIndex extends React.Component {
       // set checked to incomplete
       task.completed = false;
       updateTask(task);
-
-      debugger
 
       // set assigned status to none
       let selectElements = Array.from(document.getElementsByTagName('select'));
@@ -292,18 +281,10 @@ class TaskIndex extends React.Component {
         this.handleFillAssignedTasks();
         this.updateChildTasks();
       } else {
-        debugger
-
         let switches = document.getElementsByClassName('switch')
-
         for (let i = 0; i < switches.length; i++) {
           switches[i].firstElementChild.checked = false
-          debugger
         }
-
-        // let input = switches.closest('input')
-
-        debugger
       }
 
       // reset checked status in state

@@ -2,6 +2,7 @@ import React from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
 const TaskIndexCreateModal = ({ handleClose }) => {
+  
   return (
     <div className="task-index__task-list-container">
       <div className="task-index__task-list">
