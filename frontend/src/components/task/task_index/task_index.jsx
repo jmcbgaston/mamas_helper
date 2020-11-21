@@ -547,7 +547,7 @@ class TaskIndex extends React.Component {
           </div>
 
           <div className="task-index__instruction-container">
-            <h2 className="task-index__instruction-header">Unarchived Tasks</h2>
+            <h2 className="task-index__instruction-header">Archive</h2>
               <button type="button"
               className="task-index__instruction-button button"
               onClick={this.handleInstructionClick}>
@@ -574,7 +574,7 @@ class TaskIndex extends React.Component {
             )}
           </ul>
 
-          <div className="task-index__buttons-container">
+          <div className="task-index__buttons-container-unarchive">
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"

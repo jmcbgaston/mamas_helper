@@ -15,7 +15,7 @@
   /* align-items: center; */
   /* text-align: center; */
   /* justify-content: center; */
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 /* .task-index__list-item-checkbox {
@@ -99,7 +99,7 @@
 
 .task-index__buttons-container-unarchive {
   display: flex;
-  border-left: none;
+  border-left: 2px solid;
 }
 
 .task-index__list-button {

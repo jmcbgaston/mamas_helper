@@ -121,6 +121,7 @@ body,
   word-break: break-all;
   word-break: break-word;
   hyphens: auto;
+  min-width: 350px;
 }
 
 .input-field, .button {
