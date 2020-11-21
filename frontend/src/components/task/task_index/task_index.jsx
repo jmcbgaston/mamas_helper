@@ -387,6 +387,16 @@ class TaskIndex extends React.Component {
     )
   }
 
+  showContent = (e) => {
+    const tabContents = document.getElementsByClassName("tab-content");
+    
+    for(let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+    
+    return tabContents[e.currentTarget.id].style.display = "block";
+  }
+
   render() {
     const { user, tasks, createTask, errors, clearErrors } = this.props;
     const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
@@ -398,63 +408,87 @@ class TaskIndex extends React.Component {
     };
     
     return (
-      <>
-        <div className="task-index__instruction-container">
-          <h2 className="task-index__instruction-header">Tasks</h2>
-            <button type="button"
-            className="task-index__instruction-button button"
-            onClick={this.handleInstructionClick}>
-              <InfoIcon />&nbsp;Help
-            </button>
+      <div class="tab-container">
+        <div class="button-container">
+            <button onClick={this.showContent} class="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} class="tab-button" id="1">Archive</button>
+        </div>
+        <div class="tab-content">
+            <div className="task-index__instruction-container">
+              <h2 className="task-index__instruction-header">Tasks</h2>
+                <button type="button"
+                className="task-index__instruction-button button"
+                onClick={this.handleInstructionClick}>
+                  <InfoIcon />&nbsp;Help
+                </button>
+            </div>
+
+            { user.isLimitedUser ? this.p11() : null }
+
+          <ul className="task-index__list">
+            {tasks.map((task) =>
+            <li className="task-index__list-item" key={task._id}>
+              <input
+              type="checkbox"
+              id={task._id}
+              className="task-index__list-item-checkbox"
+              onClick={this.handleCheck}
+              />
+
+            { user.household.length === 0 ? 
+            this.p21(task) : 
+            this.p22(task) }
+            
+            </li>
+            )}
+          </ul>
+
+          <TaskIndexCreate 
+            tasks={tasks} 
+            createTask={createTask} 
+            errors={errors} 
+            clearErrors={clearErrors}/>
+
+          <button 
+            type="button"
+            className="task-index__email-button button box__no-bottom-border"
+            onClick={this.handleEmailClick}
+            disabled={is_task_selected()}>
+            <EmailIcon />&nbsp;Email me today's tasks
+          </button>
+
+          <button
+            type="button"
+            className="task-index__list-button button"
+            onClick={this.handleTaskClick}
+            disabled={is_task_selected()}>
+            <VisibilityIcon />&nbsp;Show my tasks
+          </button>
+
+          <button 
+            onClick={this.handleArchiveClick}
+            type="button"
+            className="task-index__list-button button">
+            Archive
+          </button>
+        
+          { !user.isLimitedUser ? 
+            this.p31(showModal, showInstructions, checkedTasksIds) : 
+            this.p32(showModal, showInstructions, checkedTasksIds) }
         </div>
 
-        { user.isLimitedUser ? this.p11() : null }
+        <div class="tab-content">
+          <span>I am Are-Kaive</span>
+          {tasks.map((task) => {
+            if(task.archived) {
+              return(
+                <h1>{task.title}</h1>
+                )
+            }
+          })}
+        </div>
 
-        <ul className="task-index__list">
-          {tasks.map((task) =>
-          <li className="task-index__list-item" key={task._id}>
-            <input
-            type="checkbox"
-            id={task._id}
-            className="task-index__list-item-checkbox"
-            onClick={this.handleCheck}
-            />
-
-          { user.household.length === 0 ? 
-          this.p21(task) : 
-          this.p22(task) }
-          
-          </li>
-          )}
-        </ul>
-
-        <TaskIndexCreate 
-          tasks={tasks} 
-          createTask={createTask} 
-          errors={errors} 
-          clearErrors={clearErrors}/>
-
-        <button 
-          type="button"
-          className="task-index__email-button button box__no-bottom-border"
-          onClick={this.handleEmailClick}
-          disabled={is_task_selected()}>
-          <EmailIcon />&nbsp;Email me today's tasks
-        </button>
-
-        <button
-          type="button"
-          className="task-index__list-button button"
-          onClick={this.handleTaskClick}
-          disabled={is_task_selected()}>
-          <VisibilityIcon />&nbsp;Show my tasks
-        </button>
-
-        { !user.isLimitedUser ? 
-          this.p31(showModal, showInstructions, checkedTasksIds) : 
-          this.p32(showModal, showInstructions, checkedTasksIds) }
-
-      </>
+      </div>
     )
   }
 }
