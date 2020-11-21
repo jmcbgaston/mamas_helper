@@ -58,7 +58,7 @@ const NavBar = ({ user, loggedIn, logout }) => {
   return (
     <nav className="nav-bar">
       <Link to="/" className="nav-bar__app-title">
-        <img className="nav-bar__logo" src={logo} />
+        <img className="nav-bar__logo" src={logo} alt="logo" />
       </Link>
 
       { loggedIn ? <AuthNav user={user} logout={logout}/> :<UnAuthNav /> }
