@@ -27,9 +27,9 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
       res.status(404).json({nouserfound: 'No user found with that ID'}));
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async(req, res) => {
 
-  const updatedChildUser = User.findByIdAndUpdate(req.body._id,
+  const updatedChildUser = await User.findByIdAndUpdate(req.body._id,
     { assignedTasks: req.body.assignedTasks },
     { new: true }
   )
