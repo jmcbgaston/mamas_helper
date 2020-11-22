@@ -25,6 +25,7 @@ class TaskIndex extends React.Component {
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
     this.handleTaskClick = this.handleTaskClick.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
@@ -32,10 +33,10 @@ class TaskIndex extends React.Component {
     this.state = {
       showModal: false,
       showInstructions: false,
-      checkedTasksIds: {},
-      checkedCompleteIds: {},
       showCompleteModal: false,
-      checkedArchiveIds: {},
+      checkedTasksIds: {}
+      // checkedCompleteIds: {},
+      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -120,8 +121,8 @@ class TaskIndex extends React.Component {
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
 
-          this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
-        }
+      this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
+    }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
@@ -198,11 +199,11 @@ class TaskIndex extends React.Component {
       this.props.updateTask(findTask)
   }
 
-  handleArchiveClick(e) {
+  handleArchiveClick() {
 
 
-    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-    const checked = Object.keys(checkedArchiveIds)
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
+    const checked = Object.keys(checkedTasksIds).filter((archiveId) => checkedTasksIds[archiveId])
 
 
     checked.forEach((archiveId) => {
@@ -212,13 +213,13 @@ class TaskIndex extends React.Component {
         findTask.completed = false;
         this.props.updateTask(findTask)
       } else {
+
+
         findTask.archived = false
         this.props.updateTask(findTask)
       }
     })
-
-    this.setState({checkedArchiveIds: {}})
-
+    this.setState({checkedTasksIds: {}})
   };
 
   toggleCompleteModal() {
@@ -230,13 +231,19 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
-
-
-    const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-    checkedArchiveIds[taskId] = e.currentTarget.checked;
-    this.setState({ checkedArchiveIds })
-
   }
+
+  // handleArchiveClick() {
+  //   const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+  //   const checked = Object.keys(checkedArchiveIds)
+  //   checked.forEach((archiveId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === archiveId)
+  //   if (!findTask.archived) {
+  //     findTask.archived = !findTask.archived
+  //     this.props.updateTask(findTask)
+  //   }
+  //   })
+  // };
 
   handleTaskClick(e) {
     let checkedTasksIds_ = {};
@@ -275,7 +282,7 @@ class TaskIndex extends React.Component {
       const task = allTasks.find((task) => task._id === taskId);
       taskList.push(task);
     })
-
+    // debugger
     const data = {
       "tasks": taskList,
       "email": user.email,
@@ -417,13 +424,16 @@ class TaskIndex extends React.Component {
     )
   }
 
-  p31(showModal, showInstructions, checkedTasksIds) {
+  p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
+    // debugger
+
     return(
       <>
       { showModal ?
         <TaskIndexList
           handleClose={this.handleTaskClick}
           tasks={this.props.tasks}
+          handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
 
@@ -435,7 +445,8 @@ class TaskIndex extends React.Component {
       </>
     )
   }
-  p32(showModal, showInstructions, checkedTasksIds) {
+  p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
+    // debugger
 
     return(
       <>
@@ -443,6 +454,7 @@ class TaskIndex extends React.Component {
         <TaskIndexList
           handleClose={this.handleTaskClick}
           tasks={this.props.tasks.concat(this.props.user.assignedTasks)}
+          handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
 
@@ -484,7 +496,7 @@ class TaskIndex extends React.Component {
 
   render() {
     const { user, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds } = this.state;
+    const { showModal, showInstructions, checkedTasksIds} = this.state;
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
@@ -586,8 +598,8 @@ class TaskIndex extends React.Component {
           </div>
 
           { !user.isLimitedUser ?
-            this.p31(showModal, showInstructions, checkedTasksIds) :
-            this.p32(showModal, showInstructions, checkedTasksIds) }
+            this.p31(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) :
+            this.p32(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) }
 
         </div>
 

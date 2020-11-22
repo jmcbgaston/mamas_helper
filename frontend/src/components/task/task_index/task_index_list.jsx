@@ -2,6 +2,8 @@ import React from 'react';
 
 import CloseIcon from '@material-ui/icons/Close';
 import EmailIcon from '@material-ui/icons/Email';
+import CheckIcon from '@material-ui/icons/Check';
+import {green} from '@material-ui/core/colors';
 
 const TaskIndexListItem = ({task, requirements}) => {
 
@@ -13,8 +15,8 @@ const TaskIndexListItem = ({task, requirements}) => {
           requirements.map((requirement) => {
             return (
               <li key={requirement._id} className="task-index__task-list-item-requirement">
-                <span className="list-item__bullet-point">➼</span>
-                {requirement.description}
+                <CheckIcon style={{color: green[500]}}/>
+                &nbsp;{requirement.description}
               </li>
             )
           })
@@ -38,11 +40,13 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
     <div className="task-index__task-list-container">
       <div className="task-index__task-list">
         <div className="task-index__task-list-button-container">
-          <button className="task-index__task-list-button" onClick={() => { 
-      Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
-        .forEach((checkbox) => checkbox.checked = false );
-      handleClose();
-        }}>
+          <button
+            className="task-index__task-list-button"
+            onClick={() => {
+              Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+        .       forEach((checkbox) => checkbox.checked = false );
+              handleClose();
+            }}>
              <CloseIcon/>
           </button>
           <span className="task-index__task-list-header">Task List</span>
