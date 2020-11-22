@@ -75,15 +75,15 @@ router.post('/register', (req, res) => {
                   parentId: req.body.parentId
                 })
 
-                const assignee = {
-                  handle: req.body.handle,
-                  isLimitedUser: req.body.isLimitedUser,
-                  assignedTasks: req.body.assignedTasks,
-                  parentId: req.body.parentId
-                }
+                // const assignee = {
+                //   handle: req.body.handle,
+                //   isLimitedUser: req.body.isLimitedUser,
+                //   assignedTasks: req.body.assignedTasks,
+                //   parentId: req.body.parentId
+                // }
 
                 User.findByIdAndUpdate(req.body.parentId,
-                  { "$push": { "household": assignee } },
+                  { "$push": { "household": newUser } },
                   { new: true, upsert: true }
                 ).then(res => {
                   console.log(res)
