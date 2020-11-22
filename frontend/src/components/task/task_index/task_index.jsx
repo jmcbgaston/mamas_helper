@@ -258,6 +258,8 @@ class TaskIndex extends React.Component {
     } else {
       this.setState({
         showModal: false,
+        checkedTasksIds: {},
+        checkedTasksIds: checkedTasksIds_
       })
     }
 
