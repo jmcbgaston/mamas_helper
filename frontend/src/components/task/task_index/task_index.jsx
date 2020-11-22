@@ -3,15 +3,14 @@ import TaskIndexCreate from "./task_index_create";
 import { createEmail } from "../../../util/email_api_util";
 import { Link } from "react-router-dom";
 import { TaskIndexList } from "./task_index_list";
-import EmailIcon from '@material-ui/icons/Email';
 import InfoIcon from '@material-ui/icons/Info';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ClearAllIcon from '@material-ui/icons/ClearAll';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import { green, red} from '@material-ui/core/colors';
-
 import TaskInstructionBox from "./task_instruction_box";
 import { updateChildUser } from "../../../util/user_api_util"
-// import TaskIndexCompleteList from './task_index_complete_list';
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -26,15 +25,18 @@ class TaskIndex extends React.Component {
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
     this.handleTaskClick = this.handleTaskClick.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
     this.toggleCompleteModal = this.toggleCompleteModal.bind(this);
     this.state = {
       showModal: false,
       showInstructions: false,
-      checkedTasksIds: {},
-      checkedCompleteIds: {},
-      showCompleteModal: false
+      showCompleteModal: false,
+      checkedTasksIds: {}
+      // checkedCompleteIds: {},
+      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -45,6 +47,10 @@ class TaskIndex extends React.Component {
     this.p22 = this.p22.bind(this)
     this.p31 = this.p31.bind(this)
     this.p32 = this.p32.bind(this)
+
+    this.handleArchiveClick = this.handleArchiveClick.bind(this)
+
+    window.showModal = this.state.showModal;
   }
 
   componentDidMount() {
@@ -52,6 +58,8 @@ class TaskIndex extends React.Component {
   }
 
   componentWillUnmount() {
+    // debugger
+    this.updateChildTasks();
     this.props.clearErrors();
   }
 
@@ -59,6 +67,35 @@ class TaskIndex extends React.Component {
     if (!this.props.user.isLimitedUser && this.props.user.household.length > 0) {
       this.setOptions();
     }
+
+    this.updateDisableOnButton()
+  }
+
+  updateDisableOnButton() {
+    // debugger
+    let checks = document.getElementsByClassName('task-index__list-item-checkbox')
+
+    let boolean = false
+
+    for (let i = 0; i < checks.length; i++) {
+      if (checks[i].checked) {
+        boolean = true
+        break
+      }
+    }
+
+    let buttons = document.getElementsByClassName('task-index__list-button button')
+
+    if (!boolean) {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true
+      }
+    } else {
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false
+      }
+    }
+
   }
 
   setOptions() {
@@ -76,13 +113,16 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
-    let oldLocal = localStorage.selectedOptionsArr
 
-    this.selectedOptionsArr = new Array(this.props.tasks.length)
+    let oldLocal = localStorage.selectedOptionsArr
+    const tasks = this.props.tasks.filter(task => task.archived === false)
+
+    this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
         for (let i = 0; i < this.selectedOptionsArr.length; i++) {
-          this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
-        }
+
+      this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
+    }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
@@ -92,9 +132,10 @@ class TaskIndex extends React.Component {
   }
 
   handleAssigneeDropdown() {
-    const assignees = this.props.user.household.map((assignee) => {
+    const assignees = this.props.user.household.map((assignee, idx) => {
       return(
         <option
+          key={idx}
           value={assignee.handle}
           className="options"
           id={assignee._id}>
@@ -108,8 +149,10 @@ class TaskIndex extends React.Component {
   handleSelection(e) {
     this.taskId = e.currentTarget.closest('li').firstElementChild.id
     let task = this.props.tasks.find(task => task._id === this.taskId)
-        
-        if (e.currentTarget.value === 'none') { 
+
+        if (e.currentTarget.value === 'none') {
+          task.completed = false;
+          this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
           this.updateChildTasks();
@@ -146,22 +189,8 @@ class TaskIndex extends React.Component {
       updateChildUser(child)
     })
   }
+
   handleComplete(e) {
-      // debugger
-      // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-      // const taskId = e.currentTarget.id;
-      // checkedCompleteIds[taskId] = e.currentTarget.checked;
-      // this.setState({ checkedCompleteIds })
-
-      // const checked = Object.keys(checkedCompleteIds);
-      //                 // .filter((taskId) => checkedCompleteIds[taskId]);
-      // checked.forEach((taskId) => {
-        // const findTask = this.props.tasks.find((task) => task._id === taskId)
-        //   findTask.completed = !findTask.completed
-        //   this.props.updateTask(findTask)
-        // })
-
-
       const taskId = e.currentTarget.id;
       const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
@@ -170,38 +199,28 @@ class TaskIndex extends React.Component {
       this.props.updateTask(findTask)
   }
 
-  // handleIncompleteClick() {
-  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-  //   const checked = Object.keys(checkedCompleteIds)
-  //                     .filter((taskId) => checkedCompleteIds[taskId]);
-  //   checked.forEach((taskId) => {
-  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
-  //   if (!findTask.completed) {
-  //     alert(`${findTask.title} has not been completed`)
-  //   } else {
-  //     findTask.completed = !findTask.completed
-  //     this.props.updateTask(findTask)
-  //   }
-  //   })
-  // }
-
-  // handleCompleteClick() {
-  //   const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-  //   const checked = Object.keys(checkedCompleteIds)
-  //                     .filter((taskId) => checkedCompleteIds[taskId]);
-  //   checked.forEach((taskId) => {
-  //   const findTask = this.props.tasks.find((task) => task._id === taskId)
-  //   if (findTask.completed) {
-  //     alert(`${findTask.title} is already completed`)
-  //   } else {
-  //     findTask.completed = !findTask.completed
-  //     this.props.updateTask(findTask)
-  //     this.toggleCompleteModal();
-  //   }
-  //   })
+  handleArchiveClick() {
 
 
-  // };
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
+    const checked = Object.keys(checkedTasksIds).filter((archiveId) => checkedTasksIds[archiveId])
+
+
+    checked.forEach((archiveId) => {
+      const findTask = this.props.tasks.find((task) => task._id === archiveId)
+      if (!findTask.archived) {
+        findTask.archived = true
+        findTask.completed = false;
+        this.props.updateTask(findTask)
+      } else {
+
+
+        findTask.archived = false
+        this.props.updateTask(findTask)
+      }
+    })
+    this.setState({checkedTasksIds: {}})
+  };
 
   toggleCompleteModal() {
     this.setState({ showCompleteModal: !this.state.showCompleteModal})
@@ -212,16 +231,39 @@ class TaskIndex extends React.Component {
     const taskId = e.currentTarget.id;
     checkedTasksIds[taskId] = e.currentTarget.checked;
     this.setState({ checkedTasksIds })
-
-    // const checkedCompleteIds = { ...this.state.checkedCompleteIds };
-    // checkedCompleteIds[taskId] = e.currentTarget.checked;
-    // this.setState({ checkedCompleteIds })
   }
 
+  // handleArchiveClick() {
+  //   const checkedArchiveIds = { ...this.state.checkedArchiveIds };
+  //   const checked = Object.keys(checkedArchiveIds)
+  //   checked.forEach((archiveId) => {
+  //   const findTask = this.props.tasks.find((task) => task._id === archiveId)
+  //   if (!findTask.archived) {
+  //     findTask.archived = !findTask.archived
+  //     this.props.updateTask(findTask)
+  //   }
+  //   })
+  // };
+
   handleTaskClick(e) {
-    this.setState({
-      showModal: !this.state.showModal
-    })
+    let checkedTasksIds_ = {};
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+    .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
+    // debugger
+    if (Object.keys(checkedTasksIds_).length) {
+      this.setState({
+        showModal: true,
+        checkedTasksIds: checkedTasksIds_
+      })
+    } else {
+      this.setState({
+        showModal: false,
+        checkedTasksIds: {},
+        checkedTasksIds: checkedTasksIds_
+      })
+    }
+
+    // debugger
   }
 
   handleInstructionClick(e) {
@@ -242,7 +284,7 @@ class TaskIndex extends React.Component {
       const task = allTasks.find((task) => task._id === taskId);
       taskList.push(task);
     })
-
+    // debugger
     const data = {
       "tasks": taskList,
       "email": user.email,
@@ -256,47 +298,84 @@ class TaskIndex extends React.Component {
       .catch((err) => {
         alert("Sorry, email failed to send!");
       })
-      .finally(() => {
-        Array.from(document.getElementsByClassName('task-index__list-item-checkbox'))
-                      .forEach((checkbox) => checkbox.checked = false );
-        this.setState({
-          showModal: false,
-          checkedTasksIds: {}
-        });
+  }
+
+  handleClear() {
+
+    const { tasks, user, updateTask } = this.props;
+    const allTasks = tasks.concat(user.assignedTasks);
+    const checkedTasksIds = { ...this.state.checkedTasksIds };
+    const checked = Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]);
+
+    // uncheck all
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+      .forEach((checkbox) => checkbox.checked = false );
+
+    checked.forEach((taskId) => {
+      const task = allTasks.find((task) => task._id === taskId);
+
+      // set checked to incomplete
+      task.completed = false;
+      updateTask(task);
+
+      // set assigned status to none
+      let selectElements = Array.from(document.getElementsByTagName('select'));
+      selectElements.forEach((selectElement) => {
+        if (selectElement.id === taskId) {
+          selectElement.value = 'none';
+        }
       })
+
+      if (user.household.length !== 0) {
+        this.setupLocalStorage();
+        this.handleFillAssignedTasks();
+        this.updateChildTasks();
+      } else {
+        let switches = document.getElementsByClassName('switch')
+        for (let i = 0; i < switches.length; i++) {
+          switches[i].firstElementChild.checked = false
+        }
+      }
+
+      // reset checked status in state
+      this.setState({
+        checkedTasksIds: {}
+      });
+    })
+
   }
 
   p11() {
     return(
-      <>
-      <label>Assigned tasks:</label>
-      <ul className="task-index__list">
-      {this.props.user.assignedTasks.map((task) =>
-      <li 
-        className="task-index__list-item" 
-        key={task._id}>
-        <input
-          type="checkbox"
-          id={task._id}
-          className="task-index__list-item-checkbox"
-          onClick={this.handleCheck}/>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-          {task.title}
-        </Link>
-        <label class="switch">
-          <input 
-            type="checkbox" 
-            id={task._id} 
-            onChange={this.handleComplete} 
-            defaultChecked={task.completed} />
-          <span class="slider round"></span>
-        </label>
-      </li>
-      )}
-      </ul>
-      <label>Your tasks:</label>
-      </>
+      <div>
+        <label>Assigned tasks:</label>
+        <ul className="task-index__list">
+        {this.props.user.assignedTasks.map((task) =>
+        <li
+          className="task-index__list-item"
+          key={task._id}>
+          <input
+            type="checkbox"
+            id={task._id}
+            className="task-index__list-item-checkbox"
+            onClick={this.handleCheck}/>
+          <Link to={`/tasks/${task._id}`}
+            className="task-index__list-item-link">
+            {task.title}
+          </Link>
+          <label className="switch">
+            <input
+              type="checkbox"
+              id={task._id}
+              onChange={this.handleComplete}
+              defaultChecked={task.completed} />
+            <span className="slider round"></span>
+          </label>
+        </li>
+        )}
+        </ul>
+        <label>Your tasks:</label>
+      </div>
     )
   }
 
@@ -307,13 +386,13 @@ class TaskIndex extends React.Component {
           className="task-index__list-item-link">
           {task.title}
         </Link>
-        <label class="switch">
-          <input 
-            type="checkbox" 
-            id={task._id} 
-            onChange={this.handleComplete} 
+        <label className="switch">
+          <input
+            type="checkbox"
+            id={task._id}
+            onChange={this.handleComplete}
             defaultChecked={task.completed} />
-          <span class="slider round"></span>
+          <span className="slider round"></span>
         </label>
       </>
     )
@@ -340,121 +419,237 @@ class TaskIndex extends React.Component {
             {this.handleAssigneeDropdown()}
           </select>
         </div>
-        {task.completed ? 
-        <CheckCircleIcon style={{color: green[500]}}/> : 
+        {task.completed ?
+        <CheckCircleIcon style={{color: green[500]}}/> :
         <CheckCircleIcon style={{color: red[500]}}/>}
       </>
     )
   }
 
-  p31(showModal, showInstructions, checkedTasksIds) {
+  p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
     // debugger
 
     return(
       <>
-      { showModal ? 
-        <TaskIndexList 
+      { showModal ?
+        <TaskIndexList
           handleClose={this.handleTaskClick}
-          tasks={this.props.tasks} 
-          checkedTasksIds={checkedTasksIds} /> : 
+          tasks={this.props.tasks}
+          handleEmailClick={handleEmailClick}
+          checkedTasksIds={checkedTasksIds} /> :
         null }
 
-      { showInstructions ? 
-        <TaskInstructionBox 
-          handleClose={this.handleInstructionClick} 
-          copyId={this.props.user.id}/> : 
+      { showInstructions ?
+        <TaskInstructionBox
+          handleClose={this.handleInstructionClick}
+          copyId={this.props.user.id}/> :
         null }
       </>
     )
   }
-  p32(showModal, showInstructions, checkedTasksIds) {
+  p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
     // debugger
 
     return(
       <>
-      { showModal ? 
-        <TaskIndexList 
+      { showModal ?
+        <TaskIndexList
           handleClose={this.handleTaskClick}
-          tasks={this.props.tasks.concat(this.props.user.assignedTasks)} 
-          checkedTasksIds={checkedTasksIds} /> : 
+          tasks={this.props.tasks.concat(this.props.user.assignedTasks)}
+          handleEmailClick={handleEmailClick}
+          checkedTasksIds={checkedTasksIds} /> :
         null }
 
-      { showInstructions ? 
-        <TaskInstructionBox 
-          handleClose={this.handleInstructionClick} /> : 
+      { showInstructions ?
+        <TaskInstructionBox
+          handleClose={this.handleInstructionClick} /> :
         null }
       </>
     )
+  }
+
+  showContent = (e) => {
+    const tabContents = document.getElementsByClassName("tab-content");
+
+    for(let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+    }
+
+    Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
+        .forEach((checkbox) => checkbox.checked = false );
+    this.setState({
+      checkedTasksIds: {}
+    });
+
+    tabContents[e.currentTarget.id].style.display = "block";
+
+    // change tab color
+    const tabButtons = document.querySelectorAll('.tab-button');
+    // debugger
+    tabButtons.forEach((tabButton, i) => {
+      // debugger
+      tabButtons[i].style.zIndex = 0;
+      tabButtons[i].style.backgroundColor = '#F3F3F3';
+    })
+
+    tabButtons[e.currentTarget.id].style.zIndex = 99;
+    tabButtons[e.currentTarget.id].style.backgroundColor = '#DBDBD6';
   }
 
   render() {
-    const { user, tasks, createTask, errors, clearErrors } = this.props;
-    const { showModal, showInstructions, checkedTasksIds, checkedCompleteIds, showCompleteModal } = this.state;
+    const { user, createTask, errors, clearErrors } = this.props;
+    const { showModal, showInstructions, checkedTasksIds} = this.state;
+
+    const tasks = this.props.tasks.filter(task => task.archived !== true)
+    const archivedTasks = this.props.tasks.filter(task => task.archived === true)
+    // const archivedTasksList = archivedTasks.map(task => {
+    //   return(
+    //     task.title
+    //   )
+    // })
 
     //helper method for if a task is selected
-    const is_task_selected = () =>
-    {
-      return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length
-    };
-    
+    // const is_task_selected = () =>
+    // {
+    //   return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
+    // };
+
+    // const is_assigned_task_selected = () =>
+    // {
+    //   let assignedtaskIds = user.assignedTasks.map(task => task._id);
+    //   return !!Object.keys(checkedTasksIds).filter(
+    //     (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
+    // }
+
+
     return (
-      <>
-        <div className="task-index__instruction-container">
-          <h2 className="task-index__instruction-header">Tasks</h2>
-            <button type="button"
-            className="task-index__instruction-button button"
-            onClick={this.handleInstructionClick}>
-              <InfoIcon />&nbsp;Help
-            </button>
+      <div className="tab-container">
+
+        <div className="button-container">
+          <button onClick={this.showContent} className="tab-button" id="0" style={{zIndex: "99", backgroundColor:"#DBDBD6"}}>Index</button>
+          <button onClick={this.showContent} className="tab-button" id="1" style={{zIndex: "0"}}>Archive</button>
         </div>
 
-        { user.isLimitedUser ? this.p11() : null }
+        <div className="tab-content">
 
-        <ul className="task-index__list">
-          {tasks.map((task) =>
-          <li className="task-index__list-item" key={task._id}>
-            <input
-            type="checkbox"
-            id={task._id}
-            className="task-index__list-item-checkbox"
-            onClick={this.handleCheck}
-            />
+          {/* <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0" style={{zIndex: "99", backgroundColor:"red"}}>Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1" style={{zIndex: "0"}}>Archive</button>
+          </div> */}
 
-          { user.household.length === 0 ? 
-          this.p21(task) : 
-          this.p22(task) }
-          
-          </li>
-          )}
-        </ul>
+          <div className="task-index__instruction-container">
+            <h2 className="task-index__instruction-header">Tasks</h2>
+              <button type="button"
+              className="task-index__instruction-button button"
+              onClick={this.handleInstructionClick}>
+                <InfoIcon />&nbsp; {/* Help */}
+              </button>
+          </div>
 
-        <TaskIndexCreate 
-          tasks={tasks} 
-          createTask={createTask} 
-          errors={errors} 
-          clearErrors={clearErrors}/>
+          <br/>
 
-        <button 
-          type="button"
-          className="task-index__email-button button box__no-bottom-border"
-          onClick={this.handleEmailClick}
-          disabled={is_task_selected()}>
-          <EmailIcon />&nbsp;Email me today's tasks
-        </button>
+          { user.isLimitedUser ? this.p11() : null }
 
-        <button
-          type="button"
-          className="task-index__list-button button"
-          onClick={this.handleTaskClick}
-          disabled={is_task_selected()}>
-          <VisibilityIcon />&nbsp;Show my tasks
-        </button>
+          <ul className="task-index__list">
+            {tasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
 
-        { !user.isLimitedUser ? 
-          this.p31(showModal, showInstructions, checkedTasksIds) : 
-          this.p32(showModal, showInstructions, checkedTasksIds) }
+              { user.household.length === 0 ?
+                this.p21(task) :
+                this.p22(task) }
 
-      </>
+              </li>
+            )}
+          </ul>
+
+          <TaskIndexCreate
+            tasks={tasks}
+            createTask={createTask}
+            errors={errors}
+            clearErrors={clearErrors}/>
+
+          <div className="task-index__buttons-container">
+            <button
+                type="button"
+                className="task-index__list-button button"
+                onClick={this.handleTaskClick}
+                >
+                <VisibilityIcon />
+                <div className="task-index__list-button-label">View selected</div>
+            </button>
+            <button
+              type="button"
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleArchiveClick}>
+              <ArchiveIcon />
+              <div className="task-index__list-button-label">Archive selected</div>
+            </button>
+            <button
+              type="button"
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleClear}>
+              <ClearAllIcon />
+              <div className="task-index__list-button-label">Clear selected</div>
+            </button>
+          </div>
+
+          { !user.isLimitedUser ?
+            this.p31(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) :
+            this.p32(showModal, showInstructions, checkedTasksIds, this.handleEmailClick) }
+
+        </div>
+
+        <div
+          className="tab-content"
+          style={{display: "none"}}>
+{/*
+          <div className="button-container">
+            <button onClick={this.showContent} className="tab-button" id="0">Index</button>
+            <button onClick={this.showContent} className="tab-button" id="1">Archive</button>
+          </div> */}
+
+          <div className="task-index__instruction-container">
+            <h2 className="task-index__instruction-header">Archive</h2>
+          </div>
+
+          <br/>
+
+          <ul className="task-index__list">
+            {archivedTasks.map((task) =>
+              <li className="task-index__list-item" key={task._id}>
+                <input
+                type="checkbox"
+                id={task._id}
+                className="task-index__list-item-checkbox"
+                onClick={this.handleCheck}
+                />
+                <Link to={`/tasks/${task._id}`}
+                  className="task-index__list-item-link">
+                  {task.title}
+                </Link>
+              </li>
+            )}
+          </ul>
+
+          <div className="task-index__buttons-container-unarchive">
+            <button
+              type="button"
+              className="task-index__list-button task-index__list-button--not-first button"
+              onClick={this.handleArchiveClick}>
+              <ArchiveIcon />
+              <div className="task-index__list-button-label">Unarchive selected</div>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
     )
   }
 }

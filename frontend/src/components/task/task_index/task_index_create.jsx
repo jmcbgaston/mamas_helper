@@ -13,6 +13,7 @@ class TaskIndexCreate extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.togglePopup = this.togglePopup.bind(this);
+    this.handleToggleAction = this.togglePopup.bind(this);
   }
 
   togglePopup() {
@@ -54,6 +55,7 @@ class TaskIndexCreate extends React.Component{
       title: "",
       requirements: []
     });
+    // debugger
   }
 
   addErrorsClass() {
@@ -62,6 +64,15 @@ class TaskIndexCreate extends React.Component{
   }
 
   render() {
+
+    window.showPopup = this.state.showPopup
+    document.addEventListener('keydown', (e) => {
+      // if (e.key === "Enter" && window.showPopup) {
+      if (e.key && window.showPopup) {
+        e.preventDefault()
+      }
+    })
+
     return (
       <>
         <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>

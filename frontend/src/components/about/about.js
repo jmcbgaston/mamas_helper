@@ -12,7 +12,7 @@ const About = (props) => (
   <>
     <div className="about">
       <ul className="about-main-ul">
-        <img className="prof-pic" src={daniel} />
+        <img className="prof-pic" src={daniel} alt="Daniel" />
         <ul className="about-sub-ul">
           <li className="about-name">Daniel Ackroyd-Isales</li>
           <li className="about-role">insert role here</li>
@@ -32,7 +32,7 @@ const About = (props) => (
       </ul>
 
       <ul className="about-main-ul">
-        <img className="prof-pic" src={jose} />
+        <img className="prof-pic" src={jose} alt="Jose" />
         <ul className="about-sub-ul">
           <li className="about-name">Jose Gaston</li>
           <li className="about-role">insert role here</li>
@@ -52,7 +52,7 @@ const About = (props) => (
       </ul>
 
       <ul className="about-main-ul">
-        <img className="prof-pic" src={jason} />
+        <img className="prof-pic" src={jason} alt="Jason" />
         <ul className="about-sub-ul">
           <li className="about-name">Jason Zhen</li>
           <li className="about-role">insert role here</li>
@@ -72,7 +72,7 @@ const About = (props) => (
       </ul>
 
       <ul className="about-main-ul">
-        <img className="prof-pic" src={alvin} />
+        <img className="prof-pic" src={alvin} alt="Alvin" />
         <ul className="about-sub-ul">
           <li className="about-name">Alvin Chong</li>
           <li className="about-role">insert role here</li>

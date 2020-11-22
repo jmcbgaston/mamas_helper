@@ -24,6 +24,7 @@ import '../css/task/task_update.css'
 import '../css/requirements/requirement_show.css'
 import '../css/delete_confirmation.css'
 import '../css/task/task_slider.css'
+import '../css/task/task_tab.css';
 
 const App = () => (
     <>
