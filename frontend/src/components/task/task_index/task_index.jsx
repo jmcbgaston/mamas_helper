@@ -55,6 +55,8 @@ class TaskIndex extends React.Component {
   }
 
   componentWillUnmount() {
+    // debugger
+    this.updateChildTasks();
     this.props.clearErrors();
   }
 
@@ -202,11 +204,10 @@ class TaskIndex extends React.Component {
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
       if (!findTask.archived) {
-
         findTask.archived = true
+        findTask.completed = false;
         this.props.updateTask(findTask)
       } else {
-
         findTask.archived = false
         this.props.updateTask(findTask)
       }
