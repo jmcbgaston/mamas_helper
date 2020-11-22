@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
 
   demoLimitedUser() {
     const user = {
-      email: "child@user.com",
+      email: "child1@user.com",
       password: "password"
     };
 
