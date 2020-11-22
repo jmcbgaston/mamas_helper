@@ -49,13 +49,12 @@ class TaskIndexCreate extends React.Component{
     if(!duplicate && formInputStr.length >= 2) {
       this.togglePopup();
     }
-    
+
     createTask(this.state);
     this.setState({
       title: "",
       requirements: []
     });
-    // debugger
   }
 
   addErrorsClass() {

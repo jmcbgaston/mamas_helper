@@ -58,7 +58,6 @@ class TaskIndex extends React.Component {
   }
 
   componentWillUnmount() {
-    // debugger
     this.updateChildTasks();
     this.props.clearErrors();
   }
@@ -72,7 +71,6 @@ class TaskIndex extends React.Component {
   }
 
   updateDisableOnButton() {
-    // debugger
     let checks = document.getElementsByClassName('task-index__list-item-checkbox')
 
     let boolean = false
@@ -125,7 +123,7 @@ class TaskIndex extends React.Component {
     }
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
-    if (oldLocal && (oldLocal.length > window.localStorage.selectedOptionsArr.length)) {
+    if (oldLocal && (oldLocal.length >= window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
       this.updateChildTasks();
     }
@@ -233,23 +231,11 @@ class TaskIndex extends React.Component {
     this.setState({ checkedTasksIds })
   }
 
-  // handleArchiveClick() {
-  //   const checkedArchiveIds = { ...this.state.checkedArchiveIds };
-  //   const checked = Object.keys(checkedArchiveIds)
-  //   checked.forEach((archiveId) => {
-  //   const findTask = this.props.tasks.find((task) => task._id === archiveId)
-  //   if (!findTask.archived) {
-  //     findTask.archived = !findTask.archived
-  //     this.props.updateTask(findTask)
-  //   }
-  //   })
-  // };
 
   handleTaskClick(e) {
     let checkedTasksIds_ = {};
     Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
     .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
-    // debugger
     if (Object.keys(checkedTasksIds_).length) {
       this.setState({
         showModal: true,
@@ -259,11 +245,9 @@ class TaskIndex extends React.Component {
       this.setState({
         showModal: false,
         checkedTasksIds: {},
-        checkedTasksIds: checkedTasksIds_
       })
     }
 
-    // debugger
   }
 
   handleInstructionClick(e) {
@@ -284,7 +268,7 @@ class TaskIndex extends React.Component {
       const task = allTasks.find((task) => task._id === taskId);
       taskList.push(task);
     })
-    // debugger
+
     const data = {
       "tasks": taskList,
       "email": user.email,
@@ -427,7 +411,6 @@ class TaskIndex extends React.Component {
   }
 
   p31(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
-    // debugger
 
     return(
       <>
@@ -448,7 +431,6 @@ class TaskIndex extends React.Component {
     )
   }
   p32(showModal, showInstructions, checkedTasksIds, handleEmailClick) {
-    // debugger
 
     return(
       <>
@@ -485,9 +467,7 @@ class TaskIndex extends React.Component {
 
     // change tab color
     const tabButtons = document.querySelectorAll('.tab-button');
-    // debugger
     tabButtons.forEach((tabButton, i) => {
-      // debugger
       tabButtons[i].style.zIndex = 0;
       tabButtons[i].style.backgroundColor = '#F3F3F3';
     })
@@ -502,25 +482,6 @@ class TaskIndex extends React.Component {
 
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
-    // const archivedTasksList = archivedTasks.map(task => {
-    //   return(
-    //     task.title
-    //   )
-    // })
-
-    //helper method for if a task is selected
-    // const is_task_selected = () =>
-    // {
-    //   return !Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]).length;
-    // };
-
-    // const is_assigned_task_selected = () =>
-    // {
-    //   let assignedtaskIds = user.assignedTasks.map(task => task._id);
-    //   return !!Object.keys(checkedTasksIds).filter(
-    //     (taskId) => checkedTasksIds[taskId] && assignedtaskIds.includes(taskId)).length;
-    // }
-
 
     return (
       <div className="tab-container">
@@ -531,11 +492,6 @@ class TaskIndex extends React.Component {
         </div>
 
         <div className="tab-content">
-
-          {/* <div className="button-container">
-            <button onClick={this.showContent} className="tab-button" id="0" style={{zIndex: "99", backgroundColor:"red"}}>Index</button>
-            <button onClick={this.showContent} className="tab-button" id="1" style={{zIndex: "0"}}>Archive</button>
-          </div> */}
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Tasks</h2>
@@ -608,11 +564,7 @@ class TaskIndex extends React.Component {
         <div
           className="tab-content"
           style={{display: "none"}}>
-{/*
-          <div className="button-container">
-            <button onClick={this.showContent} className="tab-button" id="0">Index</button>
-            <button onClick={this.showContent} className="tab-button" id="1">Archive</button>
-          </div> */}
+
 
           <div className="task-index__instruction-container">
             <h2 className="task-index__instruction-header">Archive</h2>

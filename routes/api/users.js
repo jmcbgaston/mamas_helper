@@ -27,18 +27,21 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
       res.status(404).json({nouserfound: 'No user found with that ID'}));
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async(req, res) => {
 
-  const updatedChildUser = await User.findByIdAndUpdate(req.params.id,
+  const updatedChildUser = await User.findByIdAndUpdate(req.body._id,
     { assignedTasks: req.body.assignedTasks },
     { new: true }
   )
+  .then(() => console.log(updatedChildUser))
+  .catch(() => console.log('patch error'))
 
-  console.log(updatedChildUser)
+
+  // console.log(updatedChildUser)
 });
 
 router.post('/register', (req, res) => {
- 
+
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -65,15 +68,22 @@ router.post('/register', (req, res) => {
                 const newUser = new User({
                   handle: req.body.handle,
                   email: req.body.email,
-                  password: req.body.password, 
+                  password: req.body.password,
                   household: req.body.household,
                   isLimitedUser: req.body.isLimitedUser,
                   assignedTasks: req.body.assignedTasks,
                   parentId: req.body.parentId
                 })
 
+                const assignee = {
+                  handle: req.body.handle,
+                  isLimitedUser: req.body.isLimitedUser,
+                  assignedTasks: req.body.assignedTasks,
+                  parentId: req.body.parentId
+                }
+
                 User.findByIdAndUpdate(req.body.parentId,
-                  { "$push": { "household": newUser } },
+                  { "$push": { "household": assignee } },
                   { new: true, upsert: true }
                 ).then(res => {
                   console.log(res)
@@ -99,11 +109,9 @@ router.post('/register', (req, res) => {
               const newUser = new User({
                 handle: req.body.handle,
                 email: req.body.email,
-                password: req.body.password, 
+                password: req.body.password,
                 household: req.body.household,
                 isLimitedUser: req.body.isLimitedUser,
-                // assignedTasks: req.body.assignedTasks,
-                // parentId: req.body.parentId
               })
               bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -144,10 +152,10 @@ router.post('/login', (req, res) => {
             const payload = {
               id: user.id,
               email: user.email,
-              handle: user.handle, 
-              household: user.household, 
-              assignedTasks: user.assignedTasks, 
-              isLimitedUser: user.isLimitedUser, 
+              handle: user.handle,
+              household: user.household,
+              assignedTasks: user.assignedTasks,
+              isLimitedUser: user.isLimitedUser,
               parentId: user.parentId
             };
 
