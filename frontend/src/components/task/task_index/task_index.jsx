@@ -48,6 +48,8 @@ class TaskIndex extends React.Component {
     this.p32 = this.p32.bind(this)
 
     this.handleArchiveClick = this.handleArchiveClick.bind(this)
+
+    window.showModal = this.state.showModal;
   }
 
   componentDidMount() {
@@ -69,6 +71,7 @@ class TaskIndex extends React.Component {
   }
 
   updateDisableOnButton() {
+    // debugger
     let checks = document.getElementsByClassName('task-index__list-item-checkbox')
 
     let boolean = false
@@ -185,6 +188,7 @@ class TaskIndex extends React.Component {
       updateChildUser(child)
     })
   }
+
   handleComplete(e) {
       const taskId = e.currentTarget.id;
       const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
@@ -237,11 +241,20 @@ class TaskIndex extends React.Component {
   handleTaskClick(e) {
     let checkedTasksIds_ = {};
     Array.from(document.querySelectorAll('.task-index__list-item-checkbox'))
-      .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
-    this.setState({
-      showModal: !this.state.showModal,
-      checkedTasksIds: checkedTasksIds_
-    })
+    .forEach((checkbox) => {if(checkbox.checked) {checkedTasksIds_[checkbox.id] = true;}});
+    // debugger
+    if (Object.keys(checkedTasksIds_).length) {
+      this.setState({
+        showModal: true,
+        checkedTasksIds: checkedTasksIds_
+      })
+    } else {
+      this.setState({
+        showModal: false,
+      })
+    }
+
+    // debugger
   }
 
   handleInstructionClick(e) {
@@ -405,7 +418,6 @@ class TaskIndex extends React.Component {
   }
 
   p31(showModal, showInstructions, checkedTasksIds) {
-
     return(
       <>
       { showModal ?
