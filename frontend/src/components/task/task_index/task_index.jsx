@@ -483,6 +483,9 @@ class TaskIndex extends React.Component {
     const tasks = this.props.tasks.filter(task => task.archived !== true)
     const archivedTasks = this.props.tasks.filter(task => task.archived === true)
 
+    const root = document.getElementById('root');
+    root.style.backgroundImage = 'url(./backgrounds/index.jpg)'
+
     return (
       <div className="tab-container">
 

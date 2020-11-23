@@ -85,6 +85,9 @@ class SignupForm extends React.Component {
   render() {
     const { user } = this.state;
 
+    const root = document.getElementById('root');
+    root.style.backgroundImage = 'url(./backgrounds/session_forms.webp)';
+
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
         <SessionInstructionBox />
