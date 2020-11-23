@@ -10,7 +10,7 @@ import ClearAllIcon from '@material-ui/icons/ClearAll';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import { green, red} from '@material-ui/core/colors';
 import TaskInstructionBox from "./task_instruction_box";
-import { updateChildUser } from "../../../util/user_api_util"
+// import { updateChildUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -21,7 +21,7 @@ class TaskIndex extends React.Component {
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.setOptions = this.setOptions.bind(this);
-    this.updateChildTasks = this.updateChildTasks.bind(this);
+    // this.updateChildTasks = this.updateChildTasks.bind(this);
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
@@ -58,8 +58,13 @@ class TaskIndex extends React.Component {
   }
 
   componentWillUnmount() {
-    this.updateChildTasks();
+    debugger
+    // this.updateChildTasks();
+    this.props.updateUser(this.props.user)
+
+    debugger
     this.props.clearErrors();
+
   }
 
   componentDidUpdate() {
@@ -125,7 +130,7 @@ class TaskIndex extends React.Component {
 
     if (oldLocal && (oldLocal.length >= window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
-      this.updateChildTasks();
+      // this.updateChildTasks();
     }
   }
 
@@ -153,7 +158,7 @@ class TaskIndex extends React.Component {
           this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
-          this.updateChildTasks();
+          // this.updateChildTasks();
           return
         }
 
@@ -164,7 +169,7 @@ class TaskIndex extends React.Component {
 
     this.setupLocalStorage();
     this.handleFillAssignedTasks();
-    this.updateChildTasks();
+    // this.updateChildTasks();
   }
 
   handleFillAssignedTasks() {
@@ -181,12 +186,12 @@ class TaskIndex extends React.Component {
     }
   }
 
-  updateChildTasks() {
-    // updates childrens tasks based on localStorage
-    this.props.user.household.forEach(child => {
-      updateChildUser(child)
-    })
-  }
+  // updateChildTasks() {
+  //   // updates childrens tasks based on localStorage
+  //   this.props.user.household.forEach(child => {
+  //     updateChildUser(child)
+  //   })
+  // }
 
   handleComplete(e) {
       const taskId = e.currentTarget.id;
@@ -313,7 +318,7 @@ class TaskIndex extends React.Component {
       if (user.household.length !== 0) {
         this.setupLocalStorage();
         this.handleFillAssignedTasks();
-        this.updateChildTasks();
+        // this.updateChildTasks();
       } else {
         let switches = document.getElementsByClassName('switch')
         for (let i = 0; i < switches.length; i++) {

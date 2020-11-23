@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
 import { fetchTasks, fetchTask, createTask, removeTaskErrors, deleteTask, updateTask } from "../../../actions/task_actions";
-import { fetchUser } from "../../../actions/user_actions"
+import { fetchUser, updateUser } from "../../../actions/user_actions"
 
 const mapStateToProps = (state) => {
     const user = state.session.user
@@ -18,23 +18,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return({
-    fetchTasks: (userId) => {
-      return dispatch(fetchTasks(userId));
-    },
-    fetchTask: (taskId) => {
-      return dispatch(fetchTask(taskId));
-    },
-    fetchUser: (userId) => {
-      return dispatch(fetchUser(userId));
-    },
-    createTask: (task) => {
-      return dispatch(createTask(task))
-    },
-    clearErrors: () => {
-      return dispatch(removeTaskErrors());
-    },
+    fetchUser: (userId) => dispatch(fetchUser(userId)), 
+    updateUser: (user) => dispatch(updateUser(user)),
+    fetchTasks: (userId) => dispatch(fetchTasks(userId)), 
+    fetchTask: (taskId) => dispatch(fetchTask(taskId)), 
+    createTask: (task) => dispatch(createTask(task)), 
+    updateTask: (task) => dispatch(updateTask(task)),
     deleteTask: (taskId) => dispatch(deleteTask(taskId)),
-    updateTask: (task) => dispatch(updateTask(task))
+    clearErrors: () => dispatch(removeTaskErrors())
   })
 }
 

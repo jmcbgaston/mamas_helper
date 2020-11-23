@@ -4,6 +4,8 @@ export const getUser = user_id => {
     return axios.get(`/api/users/${user_id}`)
 }
 
-export const updateChildUser = data => {
-    return axios.patch(`/api/users/${data._id}`, data)
+// used for updating parent user's household children's assigned tasks
+export const updateUser = data => {
+    debugger
+    return axios.patch(`/api/users/${data.id}`, data)
 }
