@@ -34,6 +34,10 @@ class TaskShow extends React.Component {
 
     const requirements = task.requirements;
 
+    const root = document.getElementById('root');
+    root.style.backgroundImage = `url(./backgrounds/show.jpg)`;
+    ;
+
     if (this.props.userId !== task.owner_id) {
       return (
         <>

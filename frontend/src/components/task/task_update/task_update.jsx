@@ -61,6 +61,9 @@ class TaskUpdate extends React.Component {
 
       const { requirements } = this.state.task;
 
+      const root = document.getElementById('root');
+      root.style.backgroundImage = `url(./backgrounds/update.jpg)`;
+
       return (
         <>
           <p className="task-update-form__message">Changes are saved automatically</p>

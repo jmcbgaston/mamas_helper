@@ -5,7 +5,6 @@ import NavBarContainer from './nav/navbar_container';
 import TaskShowContainer from './task/task_show/task_show_container'
 import TaskIndexContainer from './task/task_index/task_index_container'
 import TaskUpdateContainer from './task/task_update/task_update_container';
-import TaskCompleteContainer from './task/task_complete/task_complete_container';
 
 import Footer from './footer/footer';
 import About from './about/about';
@@ -38,7 +37,6 @@ const App = () => (
             <AuthRoute exact path='/signup' component={SignupFormContainer} />
             <ProtectedRoute exact path = '/tasks/:taskId' component ={TaskShowContainer} />
             <ProtectedRoute exact path = '/tasks/:taskId/edit' component ={TaskUpdateContainer} />
-            <ProtectedRoute exact path = '/completion' component={TaskCompleteContainer}/>
         </Switch>
         </div>
       </div>

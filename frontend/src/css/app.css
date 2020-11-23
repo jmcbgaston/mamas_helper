@@ -97,7 +97,8 @@ body,
 }
 
 #root {
-  background: linear-gradient(90deg, rgba(192,185,219,1) 0%, rgba(233,183,212,1) 40%, rgba(165,103,142,1) 100%);
+  background-size: cover;
+  background-position: center center;
 }
 
 .content-container {
