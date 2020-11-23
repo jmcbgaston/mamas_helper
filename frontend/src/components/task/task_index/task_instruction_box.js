@@ -15,6 +15,9 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
         </div>
         <div className="task-index__task-list-header">Instructions</div>
         <div className="task-instruction-box">
+          <br />
+          <h3>Getting started</h3>
+          <br />
           <p>
             Getting started is simple. Create a task, then select the task to
             edit it, or add requirements.
@@ -37,7 +40,8 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
           {copyId ? (
             <div>
               <br />
-              <h4>Set up your household</h4>
+              <h3>Set up your household</h3>
+              <br />
               <p>
                 After adding a limited user to your household, Mama's Helper
                 allows you to assign them tasks to complete.
@@ -52,7 +56,7 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
           ) : (
             <div>
               <br />
-              <h4>Receiving assigned tasks</h4>
+              <h3>Receiving assigned tasks</h3>
               <p>
                 As a limited user, you will be assigned tasks from the parent
                 user of your household. Mark them as complete, using the slider button.
