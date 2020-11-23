@@ -63,11 +63,13 @@ export const TaskIndexList = ({tasks, checkedTasksIds, handleEmailClick, handleC
             )
           })}
         </ul>
-        <button type="button"
-          className="task-index__task-list-email button"
-          onClick={handleEmailClick}>
-            <EmailIcon />&nbsp;Email me this list
-        </button>
+        <div className="task-index__task-list-email-container">
+          <button type="button"
+            className="task-index__task-list-email button"
+            onClick={handleEmailClick}>
+              <EmailIcon />&nbsp;Email me this list
+          </button>
+        </div>
       </div>
     </div>
   )

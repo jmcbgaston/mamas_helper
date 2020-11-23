@@ -59,3 +59,8 @@
 .task-index__task-list-item-requirement {
   font-size: 1.25rem;
 }
+
+.task-index__task-list-email-container {
+  display: flex;
+  justify-content: center;
+}
