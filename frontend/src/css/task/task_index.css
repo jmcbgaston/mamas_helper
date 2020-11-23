@@ -15,7 +15,7 @@
 .task-index__list-item {
   align-items: center;
   display: flex;
-  width: 90%;
+  width: 100%;
   /* align-items: center; */
   /* text-align: center; */
   /* justify-content: center; */
@@ -114,10 +114,6 @@
   flex-direction: column;
 }
 
-.task-index__list-button-label {
-  display: none;
-}
-
 .task-index__list-button--not-first {
   border-left: none;
 }
@@ -130,9 +126,5 @@ and (min-width: 992px) {
 
   .task-index__instruction-button {
     position: absolute;
-  }
-
-  .task-index__list-button-label {
-    display: block;
   }
 }

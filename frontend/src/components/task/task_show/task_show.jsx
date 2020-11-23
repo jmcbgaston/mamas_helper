@@ -93,13 +93,15 @@ class TaskShow extends React.Component {
             <button
               className ="task-show__option task-show__option--delete button box__no-bottom-border"
               onClick={this.handleClickDelete}>
-                <DeleteIcon />&nbsp;Delete Task
+                <DeleteIcon />
+                <div className="button-label">&nbsp;Delete Task</div>
             </button>
             <Link to={`/tasks/${params.taskId}/edit`} className="task-show__link">
               <button
                 type="button"
                 className="task-show__option task-show__option--update button">
-                <EditIcon />&nbsp;Edit Task
+                <EditIcon />
+                <div className="button-label">&nbsp;Edit Task</div>
               </button>
             </Link>
             <Back history={history} />

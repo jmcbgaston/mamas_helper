@@ -498,7 +498,7 @@ class TaskIndex extends React.Component {
               <button type="button"
               className="task-index__instruction-button button"
               onClick={this.handleInstructionClick}>
-                <InfoIcon />&nbsp; {/* Help */}
+                <InfoIcon />
               </button>
           </div>
 
@@ -537,21 +537,21 @@ class TaskIndex extends React.Component {
                 onClick={this.handleTaskClick}
                 >
                 <VisibilityIcon />
-                <div className="task-index__list-button-label">View selected</div>
+                <div className="button-label">View selected</div>
             </button>
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleArchiveClick}>
               <ArchiveIcon />
-              <div className="task-index__list-button-label">Archive selected</div>
+              <div className="button-label">Archive selected</div>
             </button>
             <button
               type="button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleClear}>
               <ClearAllIcon />
-              <div className="task-index__list-button-label">Clear selected</div>
+              <div className="button-label">Clear selected</div>
             </button>
           </div>
 
@@ -595,7 +595,7 @@ class TaskIndex extends React.Component {
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleArchiveClick}>
               <ArchiveIcon />
-              <div className="task-index__list-button-label">Unarchive selected</div>
+              <div className="button-label">Unarchive selected</div>
             </button>
           </div>
 
