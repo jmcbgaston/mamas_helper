@@ -15,7 +15,13 @@ Mama's Helper is a mobile optimized app that allows users to make sure they have
    - insert image here
 - Task creation and editing process
    - insert image here
-- Email yourself your lis of tasks
+- Email yourself your list of tasks
+   - insert image here
+- Assign tasks to children
+   - insert image here
+- Mark tasks as complete - assigning user can see when assigned tasks are complete
+   - insert image here
+- Archive tasks to reuse later
    - insert image here
 
 ## Upcoming Features
