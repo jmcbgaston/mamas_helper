@@ -16,7 +16,8 @@ class LoginForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
-    this.demoStandardUser = this.demoStandardUser.bind(this);
+    this.demoDefaultUser = this.demoDefaultUser.bind(this);
+    this.demoParentUser = this.demoParentUser.bind(this);
     this.demoLimitedUser = this.demoLimitedUser.bind(this);
   }
 
@@ -28,7 +29,15 @@ class LoginForm extends React.Component {
     this.props.clearErrors();
   }
 
-  demoStandardUser() {
+  demoDefaultUser(){
+    const user = {
+      email: "danaykroydgames@gmail.com",
+      password: "password",
+    };
+    this.props.login(user);
+  }
+
+  demoParentUser() {
     const user = {
       email: "parent@user.com",
       password: "password"
@@ -74,33 +83,63 @@ class LoginForm extends React.Component {
 
     return (
       <form className="session-form" onSubmit={this.handleSubmit}>
-        <SessionInstructionBox/>
+        <SessionInstructionBox />
         <h2 className="session-form__header">Welcome Back!</h2>
-          <input type="text"
-            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
-            value={user.email}
-            onChange={this.update('email')}
-            placeholder="Email"
-          />
-          <div className='session-form__errors form-errors'>{this.renderErrors('email')}</div>
+        <input
+          type="text"
+          className={`session-form__input-field input-field ${this.addErrorsClass(
+            "email"
+          )}`}
+          value={user.email}
+          onChange={this.update("email")}
+          placeholder="Email"
+        />
+        <div className="session-form__errors form-errors">
+          {this.renderErrors("email")}
+        </div>
 
-          <input type="password"
-            className={`session-form__input-field input-field ${this.addErrorsClass('email')}`}
-            value={user.password}
-            onChange={this.update('password')}
-            placeholder="Password"
-          />
-          <div className='session-form__errors form-errors'>{this.renderErrors('password')}</div>
+        <input
+          type="password"
+          className={`session-form__input-field input-field ${this.addErrorsClass(
+            "email"
+          )}`}
+          value={user.password}
+          onChange={this.update("password")}
+          placeholder="Password"
+        />
+        <div className="session-form__errors form-errors">
+          {this.renderErrors("password")}
+        </div>
 
-          <input className="session-form__submit button" type="submit" value="Login" />
+        <input
+          className="session-form__submit button"
+          type="submit"
+          value="Login"
+        />
 
-          <button className="session-form__demo button" type="button" onClick={this.demoStandardUser}>
-            Demo (Standard User)
-          </button>
+        <button
+          className="session-form__demo button"
+          type="button"
+          onClick={this.demoDefaultUser}
+        >
+          Demo (Standard User)
+        </button>
 
-          <button className="session-form__demo button" type="button" onClick={this.demoLimitedUser}>
-            Demo (Limited User)
-          </button>
+        <button
+          className="session-form__demo button"
+          type="button"
+          onClick={this.demoParentUser}
+        >
+          Demo (Parent User)
+        </button>
+
+        <button
+          className="session-form__demo button"
+          type="button"
+          onClick={this.demoLimitedUser}
+        >
+          Demo (Child User)
+        </button>
       </form>
     );
   }
