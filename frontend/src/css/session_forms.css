@@ -1,14 +1,12 @@
 .session-form {
   display: flex;
   flex-direction: column;
+  min-height: 720px;
+  justify-content: center;
 }
 
 .session-form__header {
   margin: 2rem 0 2rem 0;
-}
-
-.session-form__submit {
-  margin-top: 1rem;
 }
 
 .session-form__demo {
@@ -40,4 +38,11 @@
 
 .tooltip {
   font-size: 3rem;
+}
+
+@media only screen
+and (min-width: 576px) {
+  .session-form {
+    min-height: 675px;
+  }
 }
