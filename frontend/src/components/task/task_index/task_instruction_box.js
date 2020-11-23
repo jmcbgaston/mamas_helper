@@ -43,7 +43,7 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
               <h3>Set up your household</h3>
               <br />
               <p>
-                After adding a limited user to your household, Mama's Helper
+                After adding a child user to your household, Mama's Helper
                 allows you to assign them tasks to complete.
               </p>
               <br/>
@@ -58,7 +58,7 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
               <br />
               <h3>Receiving assigned tasks</h3>
               <p>
-                As a limited user, you will be assigned tasks from the parent
+                As a child user, you will be assigned tasks from the parent
                 user of your household. Mark them as complete, using the slider button.
               </p>
               <p>
