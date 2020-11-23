@@ -114,7 +114,7 @@ body,
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 2rem 3rem;
+  padding: 2rem 2rem;
   background-color: #f3f3f3;
   border: 3px solid #2C353A;
   box-shadow: 5px 5px 10px #2C353A;
@@ -140,6 +140,10 @@ body,
   justify-content: center;
   padding: 0.5rem 0.5rem;
   height: 3rem;
+}
+
+.button-label {
+  display: none;
 }
 
 .button:disabled {
@@ -183,7 +187,8 @@ body,
 
 .input-add-on__field {
   flex: 1;
-  margin-right: -19px;
+  overflow: hidden;
+  padding: 0 .5rem;
 }
 
 .box__no-bottom-border {
@@ -217,5 +222,13 @@ body,
 and (min-width: 576px) {
   .content {
     max-width: 640px;
+    padding: 2rem 3rem;
+  }
+}
+
+@media only screen
+and (min-width: 992px) {
+  .button-label {
+    display: block;
   }
 }
