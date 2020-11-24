@@ -10,18 +10,11 @@ const mapStateToProps = (state) => {
     const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
     let assignedTasks = []
     const errors = state.errors.task
-    // const tasks = Object.values(state.tasks)
-    
-    // debugger
-    if (state.parent.household && user.isLimitedUser) {
-      // debugger
-      const child = state.parent.household.find(user => user.id === user.id)
-      // debugger
-      assignedTasks = child.assignedTasks.filter(task => task.archived === false)
-      // debugger
-    }
 
-    // debugger
+    if (state.parent.household && user.isLimitedUser) {
+      const child = state.parent.household.find(user => user.id === user.id)
+      assignedTasks = child.assignedTasks.filter(task => task.archived === false)
+    }
 
     return({
       user,

@@ -10,7 +10,6 @@ import ClearAllIcon from '@material-ui/icons/ClearAll';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import { green, red} from '@material-ui/core/colors';
 import TaskInstructionBox from "./task_instruction_box";
-// import { updateChildUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -21,7 +20,6 @@ class TaskIndex extends React.Component {
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.setOptions = this.setOptions.bind(this);
-    // this.updateChildTasks = this.updateChildTasks.bind(this);
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
@@ -35,8 +33,6 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       showCompleteModal: false,
       checkedTasksIds: {}
-      // checkedCompleteIds: {},
-      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -61,12 +57,9 @@ class TaskIndex extends React.Component {
       })
     }
 
-    // debugger
-
     this.props.fetchTasks(this.props.user.id)
     .then(() => {
       if (this.props.user.isLimitedUser) {
-        // debugger
         this.props.fetchParent(this.props.user)
       }
     });
@@ -74,39 +67,22 @@ class TaskIndex extends React.Component {
   }
 
   componentWillUnmount() {
-    
-    // this.updateChildTasks();
     if (this.props.user.household.length > 0) {
-      // debugger
       this.props.updateUser(this.props.user)
-      // debugger
     }
 
-    if (this.props.user.isLimitedUser) {
-      debugger
-      this.props.parent.household.find(child => {
-        if (child._id === this.props.user.id) {
-          debugger
-          child.assignedTasks = this.props.assignedTasks
-          debugger
-        } 
-      })
+    // if (this.props.user.isLimitedUser) {
+    //   this.props.parent.household.find(child => {
+    //     if (child._id === this.props.user.id) {
+    //       child.assignedTasks = this.props.assignedTasks
+    //     } 
+    //   })
 
-      let newParent = this.props.parent
-
-      debugger
-
-      this.props.updateUser(newParent)
-
-      debugger
-    }
+    //   let newParent = this.props.parent
+    //   this.props.updateUser(newParent)
+    // }
     
-    debugger
-
     this.props.clearErrors();
-
-    // debugger
-
   }
 
   componentDidUpdate() {
@@ -176,21 +152,20 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
-
     let oldLocal = localStorage.selectedOptionsArr
     const tasks = this.props.tasks.filter(task => task.archived === false)
 
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
-        for (let i = 0; i < this.selectedOptionsArr.length; i++) {
 
+    for (let i = 0; i < this.selectedOptionsArr.length; i++) {
       this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
     }
+
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal && (oldLocal.length >= window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
-      // this.updateChildTasks();
     }
   }
 
@@ -218,107 +193,40 @@ class TaskIndex extends React.Component {
           this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
-          // this.updateChildTasks();
           return
         }
 
-    // update assignee assignedTasks
-    // this.assigneeId = e.currentTarget.selectedOptions[0].id
-    // let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
-    // assignee.assignedTasks.push(task)
-
     this.setupLocalStorage();
     this.handleFillAssignedTasks();
-    // this.updateChildTasks();
   }
 
   handleFillAssignedTasks() {
     // fixes any differences between localStorage and children assigned tasks
     let lsOpts = window.localStorage.selectedOptionsArr.split(',')
-    // debugger
 
     for (let i = 0; i < lsOpts.length; i++) {
-      // debugger
-
       if (i % 2 !== 0 && lsOpts[i] !== '0') {
-        // debugger
-
         let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
         let child = this.props.user.household[parseInt(lsOpts[i]-1)]
-        // debugger
 
         if (!child.assignedTasks.includes(task)) {
           child.assignedTasks.push(task)
         }
 
-        // debugger
-
       } else if (i % 2 !== 0 && lsOpts[i] === '0') {
-        // debugger
-
         let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
-        // debugger
-
         let child = this.props.user.household[parseInt(lsOpts[i])]
-        // debugger
-
         let newAssignedTasks = child.assignedTasks.filter(fTask => fTask !== task)
+
         child.assignedTasks = newAssignedTasks
-        // debugger
+
       } else {
 
       }
     }
-    // debugger
   }
 
-  // handleParentFill() {
-  //   let lsOpts = window.localStorage.selectedOptionsArr.split(',')
-  //   // debugger
-
-  //   for (let i = 0; i < lsOpts.length; i++) {
-  //     // debugger
-
-  //     if (i % 2 !== 0 && lsOpts[i] !== '0') {
-  //       // debugger
-
-  //       let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
-  //       let childInParentArr = this.props.parent.household[parseInt(lsOpts[i]-1)]
-
-  //       // debugger
-
-  //       if (!childInParentArr.assignedTasks.includes(task)) {
-  //         childInParentArr.assignedTasks.push(task)
-  //       }
-  //       debugger
-
-  //     } else if (i % 2 !== 0 && lsOpts[i] === '0') {
-  //       // debugger
-
-  //       let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
-  //       // debugger
-
-  //       let childInParentArr = this.props.parent.household[parseInt(lsOpts[i]-1)]
-  //       // debugger
-
-  //       let newAssignedTasksParent = childInParentArr.assignedTasks.filter(fTask => fTask !== task)
-  //       childInParentArr.assignedTasks = newAssignedTasksParent
-  //     } else {
-
-  //     }
-  //   }
-  // }
-
-  // updateChildTasks() {
-  //   // updates childrens tasks based on localStorage
-  //   this.props.user.household.forEach(child => {
-  //     updateChildUser(child)
-  //   })
-  // }
-
   handleComplete(e) {
-      // debugger
-
       const taskId = e.currentTarget.id;
 
       let tasks = this.props.tasks
@@ -327,10 +235,21 @@ class TaskIndex extends React.Component {
       const allTasks = tasks.concat(aTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
 
-      // debugger
-
       findTask.completed = !findTask.completed
       this.props.updateTask(findTask)
+      .then(() => {
+        if (this.props.user.isLimitedUser) {
+          this.props.parent.household.find(child => {
+            if (child._id === this.props.user.id) {
+              child.assignedTasks = this.props.assignedTasks
+            } 
+          })
+    
+          let newParent = this.props.parent
+          this.props.updateUser(newParent)
+        }
+      })
+
   }
 
   handleArchiveClick() {

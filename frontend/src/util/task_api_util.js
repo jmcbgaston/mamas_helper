@@ -2,12 +2,10 @@
 import axios from 'axios';
 
 export const getUserTasks = user_id => {
-    // debugger
     return axios.get(`/api/tasks/user/${user_id}`)
 }
 
 export const getParent = child_user => {
-    // debugger
     return axios.get(`/api/tasks/user/${child_user.parentId}`, { 
         params: {
             childId: child_user.id, 

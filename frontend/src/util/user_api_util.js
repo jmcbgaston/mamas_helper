@@ -6,8 +6,6 @@ export const getUser = user_id => {
 
 // used for updating parent user's household children's assigned tasks
 export const updateUser = data => {
-    debugger
-
     if (data.id) {
         return axios.patch(`/api/users/${data.id}`, data)
     } else {

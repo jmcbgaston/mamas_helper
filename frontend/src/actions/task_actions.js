@@ -8,8 +8,6 @@ export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
 export const REMOVE_TASK_ERRORS = "REMOVE_TASK_ERRORS";
 
 export const receiveTasks = (tasks) => {
-    // debugger
-
     return {
         type: RECEIVE_TASKS,
         tasks
@@ -18,8 +16,6 @@ export const receiveTasks = (tasks) => {
 
 export const receiveParent = (parent) => {
     let parentUser = parent.data[0]
-    // debugger
-
     return {
         type: RECEIVE_PARENT, 
         parentUser
@@ -46,7 +42,6 @@ export const removeTaskErrors = () => ({
 });
 
 export const fetchTasks = user_id => dispatch => {
-    // debugger
     return (
         TaskAPIUtil.getUserTasks(user_id)
         .then((tasks) => dispatch(receiveTasks(tasks)))
@@ -55,7 +50,6 @@ export const fetchTasks = user_id => dispatch => {
 };
 
 export const fetchParent = child_user => dispatch => {
-    // debugger
     return (
         TaskAPIUtil.getParent(child_user)
         .then((parent) => dispatch(receiveParent(parent)))
@@ -64,7 +58,6 @@ export const fetchParent = child_user => dispatch => {
 };
 
 export const fetchTask = taskId => dispatch => {
-
     return (
         TaskAPIUtil.getUserTask(taskId)
         .then(task => dispatch(receiveTask(task)))
