@@ -4,19 +4,11 @@ import {withRouter} from 'react-router-dom';
 import Back from '../../back';
 
 class TaskComplete extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     componentDidMount() {
-        
         this.props.fetchTasks(this.props.user.id)
-      
-      
     }
 
     render() {
-        
         return(
             <div>
                 <h1>Task Completed List</h1>
@@ -29,7 +21,6 @@ class TaskComplete extends React.Component {
                 </ul>
                 < Back history={this.props.history}/>
             </div>
-
         )
     }
 };

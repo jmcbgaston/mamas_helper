@@ -35,8 +35,6 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       showCompleteModal: false,
       checkedTasksIds: {}
-      // checkedCompleteIds: {},
-      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -366,10 +364,6 @@ class TaskIndex extends React.Component {
   p21(task) {
     return(
       <>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-          {task.title}
-        </Link>
         <label className="switch">
           <input
             type="checkbox"
@@ -384,10 +378,6 @@ class TaskIndex extends React.Component {
   p22(task) {
     return(
       <>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-            {task.title}
-        </Link>
         <div>
           <select
             name="assignees"
@@ -486,6 +476,11 @@ class TaskIndex extends React.Component {
     const root = document.getElementById('root');
     root.style.backgroundImage = 'url(./backgrounds/index.jpg)'
 
+    const highlightTask = (task) => {
+      return (Date.now() - new Date(task.createdAt) < 30000) ?
+        ' task-index__list-item--highlight' : ''
+    }
+
     return (
       <div className="tab-container">
 
@@ -518,6 +513,11 @@ class TaskIndex extends React.Component {
                 className="task-index__list-item-checkbox"
                 onClick={this.handleCheck}
                 />
+
+                <Link to={`/tasks/${task._id}`}
+                  className={`task-index__list-item-link${highlightTask(task)}`}>
+                    {task.title}
+                </Link>
 
               { user.household.length === 0 ?
                 this.p21(task) :
