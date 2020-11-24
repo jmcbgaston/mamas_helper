@@ -365,6 +365,8 @@ class TaskIndex extends React.Component {
         }
       })
 
+
+
       // set assigned status to none
       let selectElements = Array.from(document.getElementsByTagName('select'));
       selectElements.forEach((selectElement) => {
@@ -380,7 +382,7 @@ class TaskIndex extends React.Component {
       } else {
         let switches = document.getElementsByClassName('switch')
         for (let i = 0; i < switches.length; i++) {
-          if(checkedTasksIds[switches[i].id])
+          if(checkedTasksIds[switches[i].firstElementChild.id])
           {
             switches[i].firstElementChild.checked = false
           }
