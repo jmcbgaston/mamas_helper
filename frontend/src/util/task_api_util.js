@@ -1,8 +1,14 @@
 
 import axios from 'axios';
 
-export const getUserTasks = owner_id => {
-    return axios.get(`/api/tasks/user/${owner_id}`)
+export const getUserTasks = user => {
+    debugger
+    return axios.get(`/api/tasks/user/${user.id}`, user)
+}
+
+export const getUserAssignedTasks = child_user => {
+    debugger
+    return axios.get(`/api/tasks/user/${child_user.parentId}`, child_user)
 }
 
 export const getUserTask = task_id => {

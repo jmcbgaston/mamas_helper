@@ -5,12 +5,54 @@ const passport = require('passport');
 const validateTaskInput = require('../../validation/tasks/new');
 
 router.get('/user/:user_id', (req, res) => {
-  Task.find({owner_id: req.params.user_id})
-  .then(tasks => res.json(tasks))
-  .catch(err =>
-    res.status(404).json({ notasksfound: 'No tasks found from that user' })
-  );
+
+  // console.log(req.body.constructor === Object && Object.keys(req.body).length === 0)
+
+  // finds all tasks with owner_id matching current user id
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+
+    console.log("ONE")
+
+    Task.find({owner_id: req.params.user_id })
+    .then(tasks => res.json(tasks))
+    .catch(err =>
+      res.status(404).json({ notasksfound: 'No tasks found from that user' })
+    );
+  } else {
+
+    console.log("TWO")
+
+    User.find({ _id: req.body.parentId })
+    .then(parent => {
+        let child = parent.household.find(child => child._id === req.body._id)
+        console.log(child)
+        let assignedTasks = child.assignedTasks
+        res.json(assignedTasks)
+
+        // console.log(assignedTasks)
+    })
+    .catch(err => {
+      res.status(404).json({ nouserfound: 'No user found with that ID ' })
+    })
+  }
 });
+
+// router.get('/user/:parent_id', (req, res) => {
+
+//   User.find({ _id: req.params.parent_id })
+//   .then(parent => {
+//       let child = parent.household.find(child => child._id === req.body._id)
+//       console.log(child)
+//       let assignedTasks = child.assignedTasks
+//       res.json(assignedTasks)
+
+//       // console.log(assignedTasks)
+//   })
+//   .catch(err => {
+//     res.status(404).json({ nouserfound: 'No user found with that ID ' })
+//   })
+
+// })
 
 router.post('/new', passport.authenticate('jwt', {session: false}), (req, res) => {
   

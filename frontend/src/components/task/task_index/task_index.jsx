@@ -54,15 +54,24 @@ class TaskIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTasks(this.props.user.id);
+    this.props.fetchTasks(this.props.user)
+    .then(() => {
+      if (this.props.user.isLimitedUser) {
+        debugger
+        this.props.fetchAssignedTasks(this.props.user)
+      }
+    });
   }
 
   componentWillUnmount() {
-    debugger
+    
     // this.updateChildTasks();
-    this.props.updateUser(this.props.user)
+    if (this.props.user.household.length > 0) {
+      debugger
+      this.props.updateUser(this.props.user)
+      debugger
+    }
 
-    debugger
     this.props.clearErrors();
 
   }

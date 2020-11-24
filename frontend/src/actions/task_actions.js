@@ -1,15 +1,29 @@
 import * as TaskAPIUtil from '../util/task_api_util';
 
 export const RECEIVE_TASKS = "RECEIVE_TASKS";
+export const RECEIVE_ASSIGNED_TASKS = "RECEIVE_ASSIGNED_TASKS";
 export const RECEIVE_TASK = "RECEIVE_TASK";
 export const REMOVE_TASK = "REMOVE_TASK";
 export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
 export const REMOVE_TASK_ERRORS = "REMOVE_TASK_ERRORS";
 
-export const receiveTasks = tasks => ({
-    type: RECEIVE_TASKS,
-    tasks
-});
+export const receiveTasks = (tasks) => {
+    debugger
+
+    return {
+        type: RECEIVE_TASKS,
+        tasks
+    }
+};
+
+export const receiveAssignedTasks = (assignedTasks) => {
+    debugger
+
+    return {
+        type: RECEIVE_ASSIGNED_TASKS, 
+        assignedTasks
+    }
+}
 
 export const receiveTask = task => ({
     type: RECEIVE_TASK,
@@ -30,10 +44,20 @@ export const removeTaskErrors = () => ({
     type: REMOVE_TASK_ERRORS
 });
 
-export const fetchTasks = owner_id => dispatch => {
+export const fetchTasks = user => dispatch => {
+    debugger
     return (
-        TaskAPIUtil.getUserTasks(owner_id)
-        .then(tasks => dispatch(receiveTasks(tasks)))
+        TaskAPIUtil.getUserTasks(user)
+        .then((tasks) => dispatch(receiveTasks(tasks)))
+        .catch(errors => dispatch(receiveTaskErrors(errors)))
+    );
+};
+
+export const fetchAssignedTasks = child_user => dispatch => {
+    debugger
+    return (
+        TaskAPIUtil.getUserAssignedTasks(child_user)
+        .then((assignedTasks) => dispatch(receiveAssignedTasks(assignedTasks)))
         .catch(errors => dispatch(receiveTaskErrors(errors)))
     );
 };
