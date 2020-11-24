@@ -29,29 +29,13 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 });
 
 router.patch('/:id', async(req, res) => {
-
   let household = req.body.household
-
   const updatedUser = await User.findByIdAndUpdate(req.params.id, 
     { household: household }, 
     { new: true }
   );
-
   if (!updatedUser) return res.status(404).json({ nouserfound: 'No user found with that ID' });
-
-  // updates the parent user's pojo
   res.send(updatedUser)
-
-  // console.log(updatedUser)
-
-  // const updatedChildUser = await User.findByIdAndUpdate(req.body._id,
-  //   { assignedTasks: req.body.assignedTasks },
-  //   { new: true }
-  // )
-  // .then(() => console.log(updatedChildUser))
-  // .catch(() => console.log('patch error'))
-
-  // console.log(updatedChildUser)
 });
 
 router.post('/register', (req, res) => {

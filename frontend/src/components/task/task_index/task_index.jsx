@@ -189,6 +189,7 @@ class TaskIndex extends React.Component {
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
         if (e.currentTarget.value === 'none') {
+          task.completed = false
           this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
@@ -253,7 +254,6 @@ class TaskIndex extends React.Component {
 
   handleArchiveClick() {
 
-
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds).filter((archiveId) => checkedTasksIds[archiveId])
 
@@ -265,8 +265,6 @@ class TaskIndex extends React.Component {
         findTask.completed = false;
         this.props.updateTask(findTask)
       } else {
-
-
         findTask.archived = false
         this.props.updateTask(findTask)
       }
