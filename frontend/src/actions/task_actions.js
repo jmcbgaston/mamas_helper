@@ -8,7 +8,7 @@ export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
 export const REMOVE_TASK_ERRORS = "REMOVE_TASK_ERRORS";
 
 export const receiveTasks = (tasks) => {
-    debugger
+    // debugger
 
     return {
         type: RECEIVE_TASKS,
@@ -17,7 +17,7 @@ export const receiveTasks = (tasks) => {
 };
 
 export const receiveAssignedTasks = (assignedTasks) => {
-    debugger
+    // debugger
 
     return {
         type: RECEIVE_ASSIGNED_TASKS, 
@@ -44,17 +44,17 @@ export const removeTaskErrors = () => ({
     type: REMOVE_TASK_ERRORS
 });
 
-export const fetchTasks = user => dispatch => {
-    debugger
+export const fetchTasks = user_id => dispatch => {
+    // debugger
     return (
-        TaskAPIUtil.getUserTasks(user)
+        TaskAPIUtil.getUserTasks(user_id)
         .then((tasks) => dispatch(receiveTasks(tasks)))
         .catch(errors => dispatch(receiveTaskErrors(errors)))
     );
 };
 
 export const fetchAssignedTasks = child_user => dispatch => {
-    debugger
+    // debugger
     return (
         TaskAPIUtil.getUserAssignedTasks(child_user)
         .then((assignedTasks) => dispatch(receiveAssignedTasks(assignedTasks)))

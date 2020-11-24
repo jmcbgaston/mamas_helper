@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     const tasks = Object.values(state.tasks)
     const fetchedUser = state.fetchedUser
 
-    debugger
+    // debugger
     const assignedTasks = Object.values(state.assignedTasks)
 
     return({
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
   return({
     fetchUser: (userId) => dispatch(fetchUser(userId)), 
     updateUser: (user) => dispatch(updateUser(user)),
-    fetchTasks: (user) => dispatch(fetchTasks(user)), 
+    fetchTasks: (userId) => dispatch(fetchTasks(userId)), 
     fetchAssignedTasks: (child_user) => dispatch(fetchAssignedTasks(child_user)), 
     fetchTask: (taskId) => dispatch(fetchTask(taskId)), 
     createTask: (task) => dispatch(createTask(task)), 

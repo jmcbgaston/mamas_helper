@@ -24,12 +24,13 @@ router.get('/user/:user_id', (req, res) => {
 
     User.find({ _id: req.body.parentId })
     .then(parent => {
+        console.log(parent)
         let child = parent.household.find(child => child._id === req.body._id)
         console.log(child)
         let assignedTasks = child.assignedTasks
         res.json(assignedTasks)
 
-        // console.log(assignedTasks)
+        console.log(assignedTasks)
     })
     .catch(err => {
       res.status(404).json({ nouserfound: 'No user found with that ID ' })

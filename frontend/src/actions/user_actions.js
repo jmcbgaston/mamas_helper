@@ -23,7 +23,7 @@ export const fetchUser = userId => dispatch => {
 
 // updates parent user
 export const updateUser = user => dispatch => {
-    debugger
+    // debugger
     return (
         UserAPIUtil.updateUser(user)
         .then(updatedUser => dispatch(receiveUser(updatedUser)))
