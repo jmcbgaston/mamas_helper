@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
       // debugger
       const child = state.parent.household.find(user => user.id === user.id)
       // debugger
-      assignedTasks = child.assignedTasks
+      assignedTasks = child.assignedTasks.filter(task => task.archived === false)
       // debugger
     }
 
