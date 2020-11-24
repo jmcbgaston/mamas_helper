@@ -367,7 +367,6 @@ class TaskIndex extends React.Component {
         }
       })
 
-      debugger
 
 
       // set assigned status to none
