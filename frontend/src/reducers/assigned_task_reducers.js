@@ -8,7 +8,7 @@ const assignedTaskReducer = (oldState = {}, action) => {
         case RECEIVE_ASSIGNED_TASKS: 
           debugger
           newState = {};
-          action.assignedTasks.config.assignedTasks.forEach(assignedTask => {
+          action.assignedTasks.data.forEach(assignedTask => {
             debugger
             newState[assignedTask._id] = assignedTask
             debugger

@@ -54,6 +54,15 @@ class TaskIndex extends React.Component {
   }
 
   componentDidMount() {
+
+    if (this.props.user.household.length > 0) {
+      this.props.user.household.forEach(child => {
+        child.assignedTasks = []
+      })
+    }
+
+    debugger
+
     this.props.fetchTasks(this.props.user)
     .then(() => {
       if (this.props.user.isLimitedUser) {
@@ -172,9 +181,9 @@ class TaskIndex extends React.Component {
         }
 
     // update assignee assignedTasks
-    this.assigneeId = e.currentTarget.selectedOptions[0].id
-    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
-    assignee.assignedTasks.push(task)
+    // this.assigneeId = e.currentTarget.selectedOptions[0].id
+    // let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
+    // assignee.assignedTasks.push(task)
 
     this.setupLocalStorage();
     this.handleFillAssignedTasks();
@@ -191,8 +200,11 @@ class TaskIndex extends React.Component {
         if (!child.assignedTasks.includes(task)) {
           child.assignedTasks.push(task)
         }
+        debugger
       }
     }
+
+    debugger
   }
 
   // updateChildTasks() {
@@ -204,7 +216,7 @@ class TaskIndex extends React.Component {
 
   handleComplete(e) {
       const taskId = e.currentTarget.id;
-      const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
+      const allTasks = this.props.tasks.concat(this.props.assignedTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
 
       findTask.completed = !findTask.completed
@@ -271,9 +283,9 @@ class TaskIndex extends React.Component {
   }
 
   handleEmailClick(e) {
-    const { tasks, user } = this.props;
+    const { tasks, assignedTasks, user } = this.props;
     const taskList = [];
-    const allTasks = tasks.concat(user.assignedTasks);
+    const allTasks = tasks.concat(assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
@@ -300,8 +312,8 @@ class TaskIndex extends React.Component {
 
   handleClear() {
 
-    const { tasks, user, updateTask } = this.props;
-    const allTasks = tasks.concat(user.assignedTasks);
+    const { tasks, assignedTasks, user, updateTask } = this.props;
+    const allTasks = tasks.concat(assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]);
 
@@ -348,7 +360,7 @@ class TaskIndex extends React.Component {
       <div>
         <label>Assigned tasks:</label>
         <ul className="task-index__list">
-        {this.props.user.assignedTasks.map((task) =>
+        {this.props.assignedTasks.map((task) =>
         <li
           className="task-index__list-item"
           key={task._id}>
@@ -451,7 +463,7 @@ class TaskIndex extends React.Component {
       { showModal ?
         <TaskIndexList
           handleClose={this.handleTaskClick}
-          tasks={this.props.tasks.concat(this.props.user.assignedTasks)}
+          tasks={this.props.tasks.concat(this.props.assignedTasks)}
           handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
