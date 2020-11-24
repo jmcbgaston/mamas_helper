@@ -1,5 +1,8 @@
 import React from "react";
 import CloseIcon from '@material-ui/icons/Close';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import ClearAllIcon from '@material-ui/icons/ClearAll';
 
 const TaskInstructionBox = ({ handleClose, copyId }) => {
   return (
@@ -19,23 +22,15 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
           <h3>Getting started</h3>
           <br />
           <p>
-            Getting started is simple. Create a task, then select the task to
-            edit it, or add requirements.
+            Getting started is simple. Create a task, then click the task name to
+            edit it and add requirements.
           </p>
           <br />
-          <p>Task: Jesse's soccer game</p>
-          <br />
-          <p>Requirements:</p>
-          <p>- car keys</p>
-          <p>- wallet</p>
-          <p>- soccer</p>
-          <p>- ball</p>
-          <p>- orange slices for the team</p>
-          <br />
           <p>
-            Once your tasks are set up, get your day started by choosing the
-            tasks on your to-do list so that you can make sure that you have
-            everything you need to get things done.
+            Select tasks to view all your tasks and requirements in one simple
+            list <VisibilityIcon />, archive your tasks for later use
+            <ArchiveIcon />, or clearing the assigned user(s) & completion
+            status <ClearAllIcon />.
           </p>
           {copyId ? (
             <div>

@@ -64,3 +64,24 @@
   display: flex;
   justify-content: center;
 }
+
+@media only screen
+and (min-width: 768px) {
+  .task-index__task-list {
+    width: 80%;
+  }
+}
+
+@media only screen
+and (min-width: 992px) {
+  .task-index__task-list {
+    width: 60%;
+  }
+}
+
+@media only screen
+and (min-width: 1200px) {
+  .task-index__task-list {
+    width: 40%;
+  }
+}
