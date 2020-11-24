@@ -354,7 +354,19 @@ class TaskIndex extends React.Component {
 
       // set checked to incomplete
       task.completed = false;
-      updateTask(task);
+      updateTask(task)
+      .then(() => {
+        if (this.props.user.isLimitedUser) {
+          this.props.parent.household.find(child => {
+            if (child._id === this.props.user.id) {
+              child.assignedTasks = this.props.assignedTasks
+            } 
+          })
+    
+          let newParent = this.props.parent
+          this.props.updateUser(newParent)
+        }
+      })
 
       // set assigned status to none
       let selectElements = Array.from(document.getElementsByTagName('select'));
