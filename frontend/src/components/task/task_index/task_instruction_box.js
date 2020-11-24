@@ -60,7 +60,7 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
               </p>
               <p>
                 <br />
-                You cannot edit tasks that you are assigned, but you are free to
+                You cannot edit, delete, or archive tasks that you are assigned, but you are free to
                 create and edit your own tasks.
               </p>
             </div>
