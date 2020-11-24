@@ -6,7 +6,7 @@ const taskReducer = (oldState = {}, action) => {
 
     switch (action.type) {
         case RECEIVE_TASKS:
-          debugger
+          // debugger
           newState = {};
           action.tasks.data.forEach(task => newState[task._id] = task);
           // debugger
