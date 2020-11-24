@@ -75,13 +75,13 @@ class TaskIndex extends React.Component {
     //   this.props.parent.household.find(child => {
     //     if (child._id === this.props.user.id) {
     //       child.assignedTasks = this.props.assignedTasks
-    //     } 
+    //     }
     //   })
 
     //   let newParent = this.props.parent
     //   this.props.updateUser(newParent)
     // }
-    
+
     this.props.clearErrors();
   }
 
@@ -242,9 +242,9 @@ class TaskIndex extends React.Component {
           this.props.parent.household.find(child => {
             if (child._id === this.props.user.id) {
               child.assignedTasks = this.props.assignedTasks
-            } 
+            }
           })
-    
+
           let newParent = this.props.parent
           this.props.updateUser(newParent)
         }
@@ -253,6 +253,12 @@ class TaskIndex extends React.Component {
   }
 
   handleArchiveClick() {
+    const archiveButton = document.getElementById("archive-button");
+
+    if (archiveButton.disabled) {
+      return;
+    }
+
 
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds).filter((archiveId) => checkedTasksIds[archiveId])
@@ -357,9 +363,9 @@ class TaskIndex extends React.Component {
           this.props.parent.household.find(child => {
             if (child._id === this.props.user.id) {
               child.assignedTasks = this.props.assignedTasks
-            } 
+            }
           })
-    
+
           let newParent = this.props.parent
           this.props.updateUser(newParent)
         }
