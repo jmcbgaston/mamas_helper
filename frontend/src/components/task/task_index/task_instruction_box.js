@@ -46,12 +46,14 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
                 Copy the User ID below to your clipboard. A new user can assign
                 themselves to your household while registering.
               </p>
+              <br/>
               <p> User ID: {copyId}</p>
             </div>
           ) : (
             <div>
               <br />
               <h3>Receiving assigned tasks</h3>
+              <br />
               <p>
                 As a child user, you will be assigned tasks from the parent
                 user of your household. Mark them as complete, using the slider button.
