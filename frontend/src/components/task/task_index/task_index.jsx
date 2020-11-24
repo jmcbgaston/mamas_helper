@@ -337,7 +337,6 @@ class TaskIndex extends React.Component {
   }
 
   handleClear() {
-
     const { tasks, assignedTasks, user, updateTask } = this.props;
     const allTasks = tasks.concat(assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
@@ -381,7 +380,10 @@ class TaskIndex extends React.Component {
       } else {
         let switches = document.getElementsByClassName('switch')
         for (let i = 0; i < switches.length; i++) {
-          switches[i].firstElementChild.checked = false
+          if(checkedTasksIds[switches[i].id])
+          {
+            switches[i].firstElementChild.checked = false
+          }
         }
       }
 
