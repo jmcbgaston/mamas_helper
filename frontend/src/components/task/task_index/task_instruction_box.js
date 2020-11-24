@@ -1,5 +1,8 @@
 import React from "react";
 import CloseIcon from '@material-ui/icons/Close';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import ClearAllIcon from '@material-ui/icons/ClearAll';
 
 const TaskInstructionBox = ({ handleClose, copyId }) => {
   return (
@@ -19,23 +22,15 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
           <h3>Getting started</h3>
           <br />
           <p>
-            Getting started is simple. Create a task, then select the task to
-            edit it, or add requirements.
+            Getting started is simple. Create a task, then click the task name to
+            edit it and add requirements.
           </p>
           <br />
-          <p>Task: Jesse's soccer game</p>
-          <br />
-          <p>Requirements:</p>
-          <p>- car keys</p>
-          <p>- wallet</p>
-          <p>- soccer</p>
-          <p>- ball</p>
-          <p>- orange slices for the team</p>
-          <br />
           <p>
-            Once your tasks are set up, get your day started by choosing the
-            tasks on your to-do list so that you can make sure that you have
-            everything you need to get things done.
+            Select tasks to view all your tasks and requirements in one simple
+            list <VisibilityIcon />, archive your tasks for later use
+            <ArchiveIcon />, or clearing the assigned user(s) & completion
+            status <ClearAllIcon />.
           </p>
           {copyId ? (
             <div>
@@ -43,7 +38,7 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
               <h3>Set up your household</h3>
               <br />
               <p>
-                After adding a limited user to your household, Mama's Helper
+                After adding a child user to your household, Mama's Helper
                 allows you to assign them tasks to complete.
               </p>
               <br/>
@@ -51,19 +46,21 @@ const TaskInstructionBox = ({ handleClose, copyId }) => {
                 Copy the User ID below to your clipboard. A new user can assign
                 themselves to your household while registering.
               </p>
+              <br/>
               <p> User ID: {copyId}</p>
             </div>
           ) : (
             <div>
               <br />
               <h3>Receiving assigned tasks</h3>
+              <br />
               <p>
-                As a limited user, you will be assigned tasks from the parent
+                As a child user, you will be assigned tasks from the parent
                 user of your household. Mark them as complete, using the slider button.
               </p>
               <p>
                 <br />
-                You cannot edit tasks that you are assigned, but you are free to
+                You cannot edit, delete, or archive tasks that you are assigned, but you are free to
                 create and edit your own tasks.
               </p>
             </div>

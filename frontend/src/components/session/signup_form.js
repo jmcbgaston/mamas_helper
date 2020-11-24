@@ -148,18 +148,19 @@ class SignupForm extends React.Component {
           <label className="session-form__limited-user-label">
             <input type="checkbox" onClick={this.handleLimited} />
             <div className="session-form__limit-user-header">
-              Limited user?&nbsp;
+              Child user?&nbsp;
             </div>
           </label>
           <Tooltip
             placement="top"
             title={
-              <span style={{ fontSize: "1rem" }}>
-                Limited users: Select this option and enter your household's
-                parent ID, in order to receive tasks from your parent user.<br/>
-                Regular users: Provide your user ID to a new user, in order to add them
-                to your household.  <br/>
-                Both types of users have the ability to create and use their own tasks.
+              <span style={{ fontSize: "1.1rem" }}>
+                Child users: Select this option and enter your household's
+                parent ID in order to receive tasks from your parent user.
+                <br/>
+                <br/>
+                Standard users: Provide your user ID to a new child user in
+                order to add them to your household.
               </span>
             }
           >

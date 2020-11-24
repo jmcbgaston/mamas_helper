@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SessionInstructionBox from "./session_instruction_box";
+import { Tooltip } from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/Help';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -126,7 +128,18 @@ class LoginForm extends React.Component {
           type="button"
           onClick={this.demoDefaultUser}
         >
-          Demo (Standard User)
+          Demo (Standard User)&nbsp;
+          <Tooltip
+            placement="top"
+            title={
+              <span style={{ fontSize: "1.1rem" }}>
+                A standard user can create and complete personal tasks,
+                but cannot delegate tasks to others or receive tasks from others.
+              </span>
+            }
+          >
+            <HelpIcon />
+          </Tooltip>
         </button>
 
         <button
@@ -134,7 +147,19 @@ class LoginForm extends React.Component {
           type="button"
           onClick={this.demoParentUser}
         >
-          Demo (Parent User)
+          Demo (Parent User)&nbsp;
+          <Tooltip
+            placement="top"
+            title={
+              <span style={{ fontSize: "1.1rem" }}>
+                A parent user is only used to delegate tasks to a child user
+                and cannot complete tasks. A standard user turns into a parent
+                user once a child user is included into the household.
+              </span>
+            }
+          >
+            <HelpIcon />
+          </Tooltip>
         </button>
 
         <button
@@ -142,7 +167,18 @@ class LoginForm extends React.Component {
           type="button"
           onClick={this.demoLimitedUser}
         >
-          Demo (Child User)
+          Demo (Child User)&nbsp;
+          <Tooltip
+            placement="top"
+            title={
+              <span style={{ fontSize: "1.1rem" }}>
+                A child user can receive and complete assigned tasks from a
+                parent user and can create & complete additional personal tasks.
+              </span>
+            }
+          >
+            <HelpIcon />
+          </Tooltip>
         </button>
       </form>
     );

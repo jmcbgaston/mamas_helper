@@ -35,8 +35,6 @@ class TaskIndex extends React.Component {
       showInstructions: false,
       showCompleteModal: false,
       checkedTasksIds: {}
-      // checkedCompleteIds: {},
-      // checkedArchiveIds: {},
     }
     this.taskId = ""
     this.assigneeId = ""
@@ -332,7 +330,11 @@ class TaskIndex extends React.Component {
   p11() {
     return(
       <div>
-        <label>Assigned tasks:</label>
+        <div className="task-index__list-headers">
+          <div className="task-index__list-selection-header">Select</div>
+          <div className="task-index__list-tasks-header">Assigned:</div>
+          <div className="task-index__list-completion-header">Completed?</div>
+        </div>
         <ul className="task-index__list">
         {this.props.user.assignedTasks.map((task) =>
         <li
@@ -358,7 +360,6 @@ class TaskIndex extends React.Component {
         </li>
         )}
         </ul>
-        <label>Your tasks:</label>
       </div>
     )
   }
@@ -366,10 +367,6 @@ class TaskIndex extends React.Component {
   p21(task) {
     return(
       <>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-          {task.title}
-        </Link>
         <label className="switch">
           <input
             type="checkbox"
@@ -384,10 +381,6 @@ class TaskIndex extends React.Component {
   p22(task) {
     return(
       <>
-        <Link to={`/tasks/${task._id}`}
-          className="task-index__list-item-link">
-            {task.title}
-        </Link>
         <div>
           <select
             name="assignees"
@@ -486,6 +479,11 @@ class TaskIndex extends React.Component {
     const root = document.getElementById('root');
     root.style.backgroundImage = 'url(./backgrounds/index.jpg)'
 
+    const highlightTask = (task) => {
+      return (Date.now() - new Date(task.createdAt) < 40000) ?
+        ' task-index__list-item--highlight' : ''
+    }
+
     return (
       <div className="tab-container">
 
@@ -509,6 +507,20 @@ class TaskIndex extends React.Component {
 
           { user.isLimitedUser ? this.p11() : null }
 
+          { user.household.length === 0 ?
+            <div className="task-index__list-headers">
+              <div className="task-index__list-selection-header">Select</div>
+              <div className="task-index__list-tasks-header">Personal:</div>
+              <div className="task-index__list-completion-header">Complete?</div>
+            </div>
+            :
+            <div className="task-index__list-headers">
+              <div className="task-index__list-selection-header">Select</div>
+              <div className="task-index__list-tasks-header">Delegated:</div>
+              <div className="task-index__list-completion-header">Complete?</div>
+            </div>
+          }
+
           <ul className="task-index__list">
             {tasks.map((task) =>
               <li className="task-index__list-item" key={task._id}>
@@ -518,6 +530,11 @@ class TaskIndex extends React.Component {
                 className="task-index__list-item-checkbox"
                 onClick={this.handleCheck}
                 />
+
+                <Link to={`/tasks/${task._id}`}
+                  className={`task-index__list-item-link${highlightTask(task)}`}>
+                    {task.title}
+                </Link>
 
               { user.household.length === 0 ?
                 this.p21(task) :

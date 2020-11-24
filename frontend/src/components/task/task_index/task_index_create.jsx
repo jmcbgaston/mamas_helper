@@ -12,12 +12,6 @@ class TaskIndexCreate extends React.Component{
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.togglePopup = this.togglePopup.bind(this);
-    this.handleToggleAction = this.togglePopup.bind(this);
-  }
-
-  togglePopup() {
-      this.setState({ showPopup: !this.state.showPopup})
   }
 
   renderErrors() {
@@ -42,13 +36,7 @@ class TaskIndexCreate extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    const { tasks, createTask } = this.props;
-
-    const formInputStr = e.currentTarget[0].value;
-    const duplicate = tasks.find((task) => task.title === formInputStr);
-    if(!duplicate && formInputStr.length >= 2) {
-      this.togglePopup();
-    }
+    const { createTask } = this.props;
 
     createTask(this.state);
     this.setState({
@@ -63,15 +51,6 @@ class TaskIndexCreate extends React.Component{
   }
 
   render() {
-
-    window.showPopup = this.state.showPopup
-    document.addEventListener('keydown', (e) => {
-      // if (e.key === "Enter" && window.showPopup) {
-      if (e.key && window.showPopup) {
-        e.preventDefault()
-      }
-    })
-
     return (
       <>
         <form className={`input-add-on ${this.addErrorsClass()}`} onSubmit={this.handleSubmit}>
