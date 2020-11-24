@@ -260,7 +260,7 @@ class TaskIndex extends React.Component {
 
     checked.forEach((archiveId) => {
       const findTask = this.props.tasks.find((task) => task._id === archiveId)
-      if (!findTask.archived) {
+      if (findTask && !findTask.archived) {
         findTask.archived = true
         findTask.completed = false;
         this.props.updateTask(findTask)
