@@ -20,16 +20,17 @@ Homepage
 
 Mobile view
 
-  <img src="./frontend/images/homepage_mobile.png" width=138px height=300px/>
+  <img src="./frontend/images/homepage_mobile.png" width=193px height=300px/>
 
 
-Create and edit tasks
+Create, view and edit tasks
 
   <img src="./frontend/images/task_edit.png" width=500px height=240px/>
 
 Mobile view
 
-  <img src="./frontend/images/task_edit_mobile.png" width=138px height=300px/>
+  <img src="./frontend/images/task_show_mobile.png" width=193px height=320px/>
+
 
 View selected tasks
 
