@@ -10,10 +10,10 @@ const assignedTaskReducer = (oldState = {}, action) => {
           newState = {};
           newState = action.parentUser
           // action.parent.data.forEach(assignedTask => {
-          //   // debugger
+            // debugger
           //   newState[assignedTask._id] = assignedTask
           // })
-          debugger
+          // debugger
           return newState
         case RECEIVE_TASK:
           newState[action.task.data._id] = action.task.data;

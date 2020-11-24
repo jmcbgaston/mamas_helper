@@ -66,7 +66,7 @@ class TaskIndex extends React.Component {
     this.props.fetchTasks(this.props.user.id)
     .then(() => {
       if (this.props.user.isLimitedUser) {
-        debugger
+        // debugger
         this.props.fetchParent(this.props.user)
       }
     });
@@ -84,7 +84,7 @@ class TaskIndex extends React.Component {
 
     this.props.clearErrors();
 
-    debugger
+    // debugger
 
   }
 
@@ -197,49 +197,49 @@ class TaskIndex extends React.Component {
     // fixes any differences between localStorage and children assigned tasks
     let lsOpts = window.localStorage.selectedOptionsArr.split(',')
 
-    debugger
+    // debugger
 
     for (let i = 0; i < lsOpts.length; i++) {
 
-      debugger
+      // debugger
 
       if (i % 2 !== 0 && lsOpts[i] !== '0') {
 
-        debugger
+        // debugger
 
         let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
         let child = this.props.user.household[parseInt(lsOpts[i]-1)]
 
-        debugger
+        // debugger
 
         if (!child.assignedTasks.includes(task)) {
           child.assignedTasks.push(task)
         }
 
-        debugger
+        // debugger
 
       } else if (i % 2 !== 0 && lsOpts[i] === '0') {
 
-        debugger
+        // debugger
 
         let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
 
-        debugger
+        // debugger
 
         let child = this.props.user.household[parseInt(lsOpts[i])]
 
-        debugger
+        // debugger
 
         let newAssignedTasks = child.assignedTasks.filter(fTask => fTask !== task)
         child.assignedTasks = newAssignedTasks
 
-        debugger
+        // debugger
       } else {
 
       }
     }
 
-    debugger
+    // debugger
   }
 
   // updateChildTasks() {
@@ -250,11 +250,17 @@ class TaskIndex extends React.Component {
   // }
 
   handleComplete(e) {
-    debugger
-    
+      debugger
+
       const taskId = e.currentTarget.id;
-      const allTasks = this.props.tasks.concat(this.props.assignedTasks)
+
+      let tasks = this.props.tasks
+      let aTasks = this.props.assignedTasks
+
+      const allTasks = tasks.concat(aTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
+
+      debugger
 
       findTask.completed = !findTask.completed
       this.props.updateTask(findTask)

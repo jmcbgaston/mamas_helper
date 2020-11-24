@@ -5,22 +5,22 @@ import { fetchUser, updateUser } from "../../../actions/user_actions"
 
 const mapStateToProps = (state) => {
     const user = state.session.user
-    // const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
-    const tasks = Object.values(state.tasks)
+    const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
+    // const tasks = Object.values(state.tasks)
     const fetchedUser = state.fetchedUser
     
     let assignedTasks = []
 
-    debugger
+    // debugger
     if (state.parent.household && user.isLimitedUser) {
-      debugger
+      // debugger
       const child = state.parent.household.find(user => user.id === user.id)
-      debugger
+      // debugger
       assignedTasks = child.assignedTasks
-      debugger
+      // debugger
     }
 
-    debugger
+    // debugger
 
     return({
       user: user,
