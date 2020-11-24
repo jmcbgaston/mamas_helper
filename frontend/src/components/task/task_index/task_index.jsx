@@ -120,6 +120,24 @@ class TaskIndex extends React.Component {
       }
     }
 
+
+    //reverse of above logic - disable archive button if any of the checked tasks are assigned
+    let archive_boolean_reverse = true;
+    for (let i = 0; i < checks.length; i++) {
+      let assignedTask = this.props.assignedTasks.find((task) => task._id === checks[i].id);
+      if (assignedTask && checks[i].checked) {
+        archive_boolean_reverse = false;
+        break;
+      }
+    }
+
+    let archive_button = document.getElementById("archive-button");
+    if(!archive_boolean_reverse)
+    {
+      archive_button.disabled = true;
+    }
+
+
   }
 
   setOptions() {
@@ -604,6 +622,7 @@ class TaskIndex extends React.Component {
             </button>
             <button
               type="button"
+              id="archive-button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleArchiveClick}>
               <ArchiveIcon />
