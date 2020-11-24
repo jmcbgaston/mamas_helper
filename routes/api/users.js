@@ -7,6 +7,7 @@ const validateLoginInput = require('../../validation/login');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
+// const { updateUser } = require("../../frontend/src/util/user_api_util");
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
     res.json({
@@ -29,13 +30,26 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) =>
 
 router.patch('/:id', async(req, res) => {
 
-  const updatedChildUser = await User.findByIdAndUpdate(req.body._id,
-    { assignedTasks: req.body.assignedTasks },
-    { new: true }
-  )
-  .then(() => console.log(updatedChildUser))
-  .catch(() => console.log('patch error'))
+  let household = req.body.household
 
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, 
+    { household: household }, 
+    { new: true }
+  );
+
+  if (!updatedUser) return res.status(404).json({ nouserfound: 'No user found with that ID' });
+
+  // updates the parent user's pojo
+  res.send(updatedUser)
+
+  // console.log(updatedUser)
+
+  // const updatedChildUser = await User.findByIdAndUpdate(req.body._id,
+  //   { assignedTasks: req.body.assignedTasks },
+  //   { new: true }
+  // )
+  // .then(() => console.log(updatedChildUser))
+  // .catch(() => console.log('patch error'))
 
   // console.log(updatedChildUser)
 });
@@ -75,15 +89,16 @@ router.post('/register', (req, res) => {
                   parentId: req.body.parentId
                 })
 
-                // const assignee = {
-                //   handle: req.body.handle,
-                //   isLimitedUser: req.body.isLimitedUser,
-                //   assignedTasks: req.body.assignedTasks,
-                //   parentId: req.body.parentId
-                // }
+                const assignee = {
+                  _id: newUser._id, 
+                  handle: req.body.handle,
+                  isLimitedUser: req.body.isLimitedUser,
+                  assignedTasks: req.body.assignedTasks,
+                  parentId: req.body.parentId
+                }
 
                 User.findByIdAndUpdate(req.body.parentId,
-                  { "$push": { "household": newUser } },
+                  { "$push": { "household": assignee } },
                   { new: true, upsert: true }
                 ).then(res => {
                   console.log(res)

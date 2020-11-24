@@ -20,3 +20,12 @@ export const fetchUser = userId => dispatch => {
         .catch(errors => dispatch(receiveUserErrors(errors)))
     );
 };
+
+// updates parent user
+export const updateUser = user => dispatch => {
+    return (
+        UserAPIUtil.updateUser(user)
+        .then(updatedUser => dispatch(receiveUser(updatedUser)))
+        .catch(errors => dispatch(receiveUserErrors(errors)))
+    );
+}

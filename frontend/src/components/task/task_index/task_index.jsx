@@ -10,7 +10,6 @@ import ClearAllIcon from '@material-ui/icons/ClearAll';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import { green, red} from '@material-ui/core/colors';
 import TaskInstructionBox from "./task_instruction_box";
-import { updateChildUser } from "../../../util/user_api_util"
 
 class TaskIndex extends React.Component {
   constructor() {
@@ -21,7 +20,6 @@ class TaskIndex extends React.Component {
     this.handleAssigneeDropdown = this.handleAssigneeDropdown.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.setOptions = this.setOptions.bind(this);
-    this.updateChildTasks = this.updateChildTasks.bind(this);
     this.setupLocalStorage = this.setupLocalStorage.bind(this);
     this.handleInstructionClick = this.handleInstructionClick.bind(this);
 
@@ -52,11 +50,38 @@ class TaskIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchTasks(this.props.user.id);
+
+    if (this.props.user.household.length > 0) {
+      this.props.user.household.forEach(child => {
+        child.assignedTasks = []
+      })
+    }
+
+    this.props.fetchTasks(this.props.user.id)
+    .then(() => {
+      if (this.props.user.isLimitedUser) {
+        this.props.fetchParent(this.props.user)
+      }
+    });
+
   }
 
   componentWillUnmount() {
-    this.updateChildTasks();
+    if (this.props.user.household.length > 0) {
+      this.props.updateUser(this.props.user)
+    }
+
+    // if (this.props.user.isLimitedUser) {
+    //   this.props.parent.household.find(child => {
+    //     if (child._id === this.props.user.id) {
+    //       child.assignedTasks = this.props.assignedTasks
+    //     } 
+    //   })
+
+    //   let newParent = this.props.parent
+    //   this.props.updateUser(newParent)
+    // }
+    
     this.props.clearErrors();
   }
 
@@ -92,6 +117,24 @@ class TaskIndex extends React.Component {
       }
     }
 
+
+    //reverse of above logic - disable archive button if any of the checked tasks are assigned
+    let archive_boolean_reverse = true;
+    for (let i = 0; i < checks.length; i++) {
+      let assignedTask = this.props.assignedTasks.find((task) => task._id === checks[i].id);
+      if (assignedTask && checks[i].checked) {
+        archive_boolean_reverse = false;
+        break;
+      }
+    }
+
+    let archive_button = document.getElementById("archive-button");
+    if(!archive_boolean_reverse)
+    {
+      archive_button.disabled = true;
+    }
+
+
   }
 
   setOptions() {
@@ -109,21 +152,20 @@ class TaskIndex extends React.Component {
   }
 
   setupLocalStorage() {
-
     let oldLocal = localStorage.selectedOptionsArr
     const tasks = this.props.tasks.filter(task => task.archived === false)
 
     this.selectedOptionsArr = new Array(tasks.length)
     let selectElements = document.getElementsByTagName('select')
-        for (let i = 0; i < this.selectedOptionsArr.length; i++) {
 
+    for (let i = 0; i < this.selectedOptionsArr.length; i++) {
       this.selectedOptionsArr[i] = ([selectElements[i].id, selectElements[i].selectedIndex])
     }
+
     window.localStorage.selectedOptionsArr = this.selectedOptionsArr
 
     if (oldLocal && (oldLocal.length >= window.localStorage.selectedOptionsArr.length)) {
       this.handleFillAssignedTasks()
-      this.updateChildTasks();
     }
   }
 
@@ -147,52 +189,66 @@ class TaskIndex extends React.Component {
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
         if (e.currentTarget.value === 'none') {
-          task.completed = false;
           this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
-          this.updateChildTasks();
           return
         }
 
-    // update assignee assignedTasks
-    this.assigneeId = e.currentTarget.selectedOptions[0].id
-    let assignee = this.props.user.household.find(user => user._id === this.assigneeId)
-    assignee.assignedTasks.push(task)
-
     this.setupLocalStorage();
     this.handleFillAssignedTasks();
-    this.updateChildTasks();
   }
 
   handleFillAssignedTasks() {
     // fixes any differences between localStorage and children assigned tasks
     let lsOpts = window.localStorage.selectedOptionsArr.split(',')
+
     for (let i = 0; i < lsOpts.length; i++) {
       if (i % 2 !== 0 && lsOpts[i] !== '0') {
         let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
         let child = this.props.user.household[parseInt(lsOpts[i]-1)]
+
         if (!child.assignedTasks.includes(task)) {
           child.assignedTasks.push(task)
         }
+
+      } else if (i % 2 !== 0 && lsOpts[i] === '0') {
+        let task = this.props.tasks.find(task => task._id === lsOpts[i-1])
+        let child = this.props.user.household[parseInt(lsOpts[i])]
+        let newAssignedTasks = child.assignedTasks.filter(fTask => fTask !== task)
+
+        child.assignedTasks = newAssignedTasks
+
+      } else {
+
       }
     }
   }
 
-  updateChildTasks() {
-    // updates childrens tasks based on localStorage
-    this.props.user.household.forEach(child => {
-      updateChildUser(child)
-    })
-  }
-
   handleComplete(e) {
       const taskId = e.currentTarget.id;
-      const allTasks = this.props.tasks.concat(this.props.user.assignedTasks)
+
+      let tasks = this.props.tasks
+      let aTasks = this.props.assignedTasks
+
+      const allTasks = tasks.concat(aTasks)
       const findTask = allTasks.find((task) => task._id === taskId)
 
       findTask.completed = !findTask.completed
       this.props.updateTask(findTask)
+      .then(() => {
+        if (this.props.user.isLimitedUser) {
+          this.props.parent.household.find(child => {
+            if (child._id === this.props.user.id) {
+              child.assignedTasks = this.props.assignedTasks
+            } 
+          })
+    
+          let newParent = this.props.parent
+          this.props.updateUser(newParent)
+        }
+      })
+
   }
 
   handleArchiveClick() {
@@ -255,9 +311,9 @@ class TaskIndex extends React.Component {
   }
 
   handleEmailClick(e) {
-    const { tasks, user } = this.props;
+    const { tasks, assignedTasks, user } = this.props;
     const taskList = [];
-    const allTasks = tasks.concat(user.assignedTasks);
+    const allTasks = tasks.concat(assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds)
                       .filter((taskId) => checkedTasksIds[taskId]);
@@ -284,8 +340,8 @@ class TaskIndex extends React.Component {
 
   handleClear() {
 
-    const { tasks, user, updateTask } = this.props;
-    const allTasks = tasks.concat(user.assignedTasks);
+    const { tasks, assignedTasks, user, updateTask } = this.props;
+    const allTasks = tasks.concat(assignedTasks);
     const checkedTasksIds = { ...this.state.checkedTasksIds };
     const checked = Object.keys(checkedTasksIds).filter((taskId) => checkedTasksIds[taskId]);
 
@@ -298,7 +354,19 @@ class TaskIndex extends React.Component {
 
       // set checked to incomplete
       task.completed = false;
-      updateTask(task);
+      updateTask(task)
+      .then(() => {
+        if (this.props.user.isLimitedUser) {
+          this.props.parent.household.find(child => {
+            if (child._id === this.props.user.id) {
+              child.assignedTasks = this.props.assignedTasks
+            } 
+          })
+    
+          let newParent = this.props.parent
+          this.props.updateUser(newParent)
+        }
+      })
 
       // set assigned status to none
       let selectElements = Array.from(document.getElementsByTagName('select'));
@@ -311,7 +379,7 @@ class TaskIndex extends React.Component {
       if (user.household.length !== 0) {
         this.setupLocalStorage();
         this.handleFillAssignedTasks();
-        this.updateChildTasks();
+        // this.updateChildTasks();
       } else {
         let switches = document.getElementsByClassName('switch')
         for (let i = 0; i < switches.length; i++) {
@@ -336,7 +404,7 @@ class TaskIndex extends React.Component {
           <div className="task-index__list-completion-header">Completed?</div>
         </div>
         <ul className="task-index__list">
-        {this.props.user.assignedTasks.map((task) =>
+        {this.props.assignedTasks.map((task) =>
         <li
           className="task-index__list-item"
           key={task._id}>
@@ -430,7 +498,7 @@ class TaskIndex extends React.Component {
       { showModal ?
         <TaskIndexList
           handleClose={this.handleTaskClick}
-          tasks={this.props.tasks.concat(this.props.user.assignedTasks)}
+          tasks={this.props.tasks.concat(this.props.assignedTasks)}
           handleEmailClick={handleEmailClick}
           checkedTasksIds={checkedTasksIds} /> :
         null }
@@ -561,6 +629,7 @@ class TaskIndex extends React.Component {
             </button>
             <button
               type="button"
+              id="archive-button"
               className="task-index__list-button task-index__list-button--not-first button"
               onClick={this.handleArchiveClick}>
               <ArchiveIcon />
