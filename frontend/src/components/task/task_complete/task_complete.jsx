@@ -14,9 +14,10 @@ class TaskComplete extends React.Component {
                 <h1>Task Completed List</h1>
                 <ul>
                     {this.props.tasks.map((task, i) => {
-                        if(task.completed === true) {
-                            return < TaskCompleteItem task={task} key={i} />
-                        }
+                        return task.completed ?
+                          <TaskCompleteItem task={task} key={i} />
+                          :
+                          null
                     })}
                 </ul>
                 < Back history={this.props.history}/>
