@@ -63,13 +63,14 @@ class TaskIndex extends React.Component {
 
     // debugger
 
-    // this.props.fetchTasks(this.props.user.id)
-    // .then(() => {
-    //   if (this.props.user.isLimitedUser) {
-    //     // debugger
-        this.props.fetchAssignedTasks(this.props.user)
-      // }
-    // });
+    this.props.fetchTasks(this.props.user.id)
+    .then(() => {
+      if (this.props.user.isLimitedUser) {
+        debugger
+        this.props.fetchParent(this.props.user)
+      }
+    });
+
   }
 
   componentWillUnmount() {
@@ -229,7 +230,8 @@ class TaskIndex extends React.Component {
 
         debugger
 
-        child.assignedTasks.filter(fTask => fTask !== task)
+        let newAssignedTasks = child.assignedTasks.filter(fTask => fTask !== task)
+        child.assignedTasks = newAssignedTasks
 
         debugger
       } else {
@@ -248,6 +250,8 @@ class TaskIndex extends React.Component {
   // }
 
   handleComplete(e) {
+    debugger
+    
       const taskId = e.currentTarget.id;
       const allTasks = this.props.tasks.concat(this.props.assignedTasks)
       const findTask = allTasks.find((task) => task._id === taskId)

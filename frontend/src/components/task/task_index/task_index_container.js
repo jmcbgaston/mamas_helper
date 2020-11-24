@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import TaskIndex from "./task_index"
-import { fetchTasks, fetchAssignedTasks, fetchTask, createTask, removeTaskErrors, deleteTask, updateTask } from "../../../actions/task_actions";
+import { fetchTasks, fetchParent, fetchTask, createTask, removeTaskErrors, deleteTask, updateTask } from "../../../actions/task_actions";
 import { fetchUser, updateUser } from "../../../actions/user_actions"
 
 const mapStateToProps = (state) => {
@@ -8,16 +8,26 @@ const mapStateToProps = (state) => {
     // const tasks = Object.values(state.tasks).filter(task => task.owner_id === user.id)
     const tasks = Object.values(state.tasks)
     const fetchedUser = state.fetchedUser
+    
+    let assignedTasks = []
 
-    // debugger
-    const assignedTasks = Object.values(state.assignedTasks)
+    debugger
+    if (state.parent.household && user.isLimitedUser) {
+      debugger
+      const child = state.parent.household.find(user => user.id === user.id)
+      debugger
+      assignedTasks = child.assignedTasks
+      debugger
+    }
+
+    debugger
 
     return({
-        user: user,
-        fetchedUser: fetchedUser,
-        tasks,
-        assignedTasks,
-        errors: state.errors.task
+      user: user,
+      fetchedUser: fetchedUser,
+      tasks,
+      assignedTasks,
+      errors: state.errors.task
     })
 }
 
@@ -26,7 +36,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchUser: (userId) => dispatch(fetchUser(userId)), 
     updateUser: (user) => dispatch(updateUser(user)),
     fetchTasks: (userId) => dispatch(fetchTasks(userId)), 
-    fetchAssignedTasks: (child_user) => dispatch(fetchAssignedTasks(child_user)), 
+    fetchParent: (child_user) => dispatch(fetchParent(child_user)), 
     fetchTask: (taskId) => dispatch(fetchTask(taskId)), 
     createTask: (task) => dispatch(createTask(task)), 
     updateTask: (task) => dispatch(updateTask(task)),

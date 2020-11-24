@@ -8,39 +8,47 @@ router.get('/user/:user_id', (req, res) => {
 
   // console.log(req.body.constructor === Object && Object.keys(req.body).length === 0)
 
-  // console.log(req.body)
-  // console.log(Object.keys(req.body).length === 0)
+  // console.log(req.params.user_id === req.query.childId)
+  console.log(req.params.user_id)
+  console.log(req.query.childId)
 
   // finds all tasks with owner_id matching current user id
-  // if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+  if (!req.query.childId) {
 
-  //   console.log("ONE")
+    // console.log("ONE")
 
-  //   Task.find({owner_id: req.params.user_id })
-  //   .then(tasks => res.json(tasks))
-  //   .catch(err =>
-  //     res.status(404).json({ notasksfound: 'No tasks found from that user' })
-  //   );
-  // } else {
+    Task.find({owner_id: req.params.user_id })
+    .then(tasks => res.json(tasks))
+    .catch(err =>
+      res.status(404).json({ notasksfound: 'No tasks found from that user' })
+    );
 
-    // console.log(req.data)
+    // console.log(tasks)
 
-  // debugger
+  } else {
+
+    // console.log("TWO")
 
     User.find({ _id: req.params.user_id })
     .then(parent => {
-        console.log(parent.household)
-        let child = parent.household.find(child => child._id === req.params._id)
-        // console.log(child)
-        let assignedTasks = child.assignedTasks
-        // res.json(assignedTasks)
+
+        // let child = ""
+
+        // parent.findOne({ household: { _id: req.query.childId }})
+        // .then(childRes => child = childRes)
+
+        // // let child = parent.household.find(child => child._id === req.body._id)
+        // console.log(childRes)
+
+        // let assignedTasks = child.assignedTasks
+        res.json(parent)
 
         // console.log(assignedTasks)
     })
     .catch(err => {
       res.status(404).json({ nouserfound: 'No user found with that ID ' })
     })
-  // }
+  }
 });
 
 // router.get('/user/:parent_id', (req, res) => {

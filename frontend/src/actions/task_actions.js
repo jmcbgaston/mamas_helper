@@ -1,7 +1,7 @@
 import * as TaskAPIUtil from '../util/task_api_util';
 
 export const RECEIVE_TASKS = "RECEIVE_TASKS";
-export const RECEIVE_ASSIGNED_TASKS = "RECEIVE_ASSIGNED_TASKS";
+export const RECEIVE_PARENT = "RECEIVE_PARENT";
 export const RECEIVE_TASK = "RECEIVE_TASK";
 export const REMOVE_TASK = "REMOVE_TASK";
 export const RECEIVE_TASK_ERRORS = "RECEIVE_TASK_ERRORS";
@@ -16,12 +16,13 @@ export const receiveTasks = (tasks) => {
     }
 };
 
-export const receiveAssignedTasks = (assignedTasks) => {
-    // debugger
+export const receiveParent = (parent) => {
+    let parentUser = parent.data[0]
+    debugger
 
     return {
-        type: RECEIVE_ASSIGNED_TASKS, 
-        assignedTasks
+        type: RECEIVE_PARENT, 
+        parentUser
     }
 }
 
@@ -45,7 +46,7 @@ export const removeTaskErrors = () => ({
 });
 
 export const fetchTasks = user_id => dispatch => {
-    // debugger
+    debugger
     return (
         TaskAPIUtil.getUserTasks(user_id)
         .then((tasks) => dispatch(receiveTasks(tasks)))
@@ -53,11 +54,11 @@ export const fetchTasks = user_id => dispatch => {
     );
 };
 
-export const fetchAssignedTasks = child_user => dispatch => {
+export const fetchParent = child_user => dispatch => {
     debugger
     return (
-        TaskAPIUtil.getUserAssignedTasks(child_user)
-        .then((assignedTasks) => dispatch(receiveAssignedTasks(assignedTasks)))
+        TaskAPIUtil.getParent(child_user)
+        .then((parent) => dispatch(receiveParent(parent)))
         .catch(errors => dispatch(receiveTaskErrors(errors)))
     );
 };

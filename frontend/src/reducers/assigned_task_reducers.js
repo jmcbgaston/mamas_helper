@@ -1,19 +1,19 @@
-import { RECEIVE_ASSIGNED_TASKS, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_actions'
+import { RECEIVE_PARENT, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_actions'
 
 const assignedTaskReducer = (oldState = {}, action) => {
     Object.freeze(oldState);
     let newState = Object.assign({}, oldState);
 
     switch (action.type) {
-        case RECEIVE_ASSIGNED_TASKS: 
+        case RECEIVE_PARENT: 
         //   debugger
           newState = {};
-          action.assignedTasks.data.forEach(assignedTask => {
-            // debugger
-            newState[assignedTask._id] = assignedTask
-            // debugger
-          })
-        //   debugger
+          newState = action.parentUser
+          // action.parent.data.forEach(assignedTask => {
+          //   // debugger
+          //   newState[assignedTask._id] = assignedTask
+          // })
+          debugger
           return newState
         case RECEIVE_TASK:
           newState[action.task.data._id] = action.task.data;
