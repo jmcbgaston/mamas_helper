@@ -54,7 +54,7 @@ export const fetchTasks = user_id => dispatch => {
 };
 
 export const fetchAssignedTasks = child_user => dispatch => {
-    // debugger
+    debugger
     return (
         TaskAPIUtil.getUserAssignedTasks(child_user)
         .then((assignedTasks) => dispatch(receiveAssignedTasks(assignedTasks)))
