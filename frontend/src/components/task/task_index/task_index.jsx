@@ -189,7 +189,6 @@ class TaskIndex extends React.Component {
     let task = this.props.tasks.find(task => task._id === this.taskId)
 
         if (e.currentTarget.value === 'none') {
-          task.completed = false;
           this.props.updateTask(task);
           this.setupLocalStorage();
           this.handleFillAssignedTasks();
