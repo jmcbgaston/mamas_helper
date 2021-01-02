@@ -1,12 +1,12 @@
 # Mama's Helper
 ![MH_Logo_Banner](https://user-images.githubusercontent.com/6326660/103383520-dfd1e200-4aa7-11eb-939d-3fac97c470fa.png)
 
-# &#128105; [Check out the website!](https://mamashelper.herokuapp.com/)
-
 A management assistance web app that provides users all the tools necessary to
 keep track of their daily tasks.
 
-# &#128295; Technologies and Tools
+# 👩 [Check out the website!](https://mamashelper.herokuapp.com/)
+
+# 🔧 Technologies and Tools
 
 ## Back-end
 
@@ -30,7 +30,7 @@ keep track of their daily tasks.
 ![Webpack](https://img.shields.io/badge/-Webpack-informational?style=flat&logo=Webpack&logoColor=black&color=8DD6F9)
 ![Nodemon](https://img.shields.io/badge/-Nodemon-informational?style=flat&logo=Nodemon&logoColor=black&color=76D04B)
 
-# &#128187; Demo
+# 💻 Demo
 ## Responsive design
 | Desktop | Mobile |
 |--|--|
@@ -42,12 +42,12 @@ keep track of their daily tasks.
 ## Receive an email of your task list
 ![email](https://user-images.githubusercontent.com/6326660/103400725-0bca8300-4afb-11eb-8311-d57e261238c4.gif)
 
-## Archive tasks to reuse them later
+## Archive tasks for later reuse
 ![archive](https://user-images.githubusercontent.com/6326660/103400707-f81f1c80-4afa-11eb-961a-dde8400b48ae.gif)
 
-# &#128269; Code Samples
+# 🔍 Code Samples
 
-## Email functionality
+## Email
 Implementing email functionality involved using [Express.js](https://expressjs.com/)
 as a route handler to pass each email field as data in JSON format to
 [Twilio's Sendgrid API](https://sendgrid.com/), which then sends a **custom
@@ -55,6 +55,6 @@ dynamic email** to the user based on the requested data.
 ![email](https://user-images.githubusercontent.com/6326660/103384667-127dd980-4aac-11eb-9cf8-e1b76c8173e6.png)
 
 ## localStorage
-Incoporated localStorage to populate task delegation and compeletion fields with
+Incorporated  localStorage to populate task delegation and completion fields with
 **up to date, realtime** data.
 ![localstorage](https://user-images.githubusercontent.com/6326660/103389730-8678ab80-4ac5-11eb-9a1f-d618105877cf.png)
