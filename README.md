@@ -4,7 +4,7 @@
 A management assistance web app that provides users all the tools necessary to
 keep track of their daily tasks.
 
-# 👩 [Check out the website!](https://mamashelper.herokuapp.com/)
+# 👩 [Check out the website!](https://mamas-helper.herokuapp.com/) 
 
 # 🔧 Technologies and Tools
 
